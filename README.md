@@ -66,3 +66,12 @@ npm run open:android   # abre Android Studio: elige un emulador o tu teléfono y
 
 El mapa de Apple (MapKit) se incrusta en la app de iPhone y no necesita llave ni cuenta de pago. En Android y en la vista web se usa un mapa esquemático y el botón abre el mapa del sistema (un mapa incrustado en Android requiere una llave de Google Maps).
 Facebook Marketplace no ofrece conexión pública: Habi lee el anuncio que el usuario pega en el chat.
+
+## Versión de la app para Expoandes (v4)
+
+- Navegación: **Explorar · Mi casa · Publicar**. Inversión y Obra gris ya no son secciones: Obra gris es un tipo de vivienda y el análisis financiero vive en *Propiedad → Más información*.
+- Buscador con IA: se escribe en lenguaje natural y se convierte en filtros editables (“Esto entendí”).
+- Cuestionario inicial de 6 preguntas, editable en *Mi casa → Mi plan*, que alimenta el porcentaje de compatibilidad de cada vivienda.
+- Tipos: Apartamento, Casa, Apartaestudio, Habitación (con datos propios) y Obra gris.
+- *Mi casa → Mis opciones*: ranking por compatibilidad, revisión de presupuesto, ubicación en el mapa y comparador.
+- Demo web de la app: `/app/` (por ejemplo https://jeroruiz23.github.io/habita-web/app/).

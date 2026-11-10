@@ -40,6 +40,7 @@
   color-scheme:dark;
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 html{scroll-behavior:smooth}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.5;padding-top:env(safe-area-inset-top,0px);padding-bottom:var(--navh)}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:30}
@@ -356,7 +357,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .radial .ico{stroke:var(--brand)}
 .radial .home{fill:var(--brand)}
 .scoreRow{display:flex;align-items:center;gap:14px;margin-bottom:12px}
-.scoreRow b{font-family:var(--display);font-size:30px;line-height:1}
+.scoreRow b{font-family:var(--display);font-size:30px;line-height:1;display:block;margin-bottom:3px}
 .scoreRow span{color:var(--muted);font-size:13.5px;max-width:34ch}
 .envlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
 .envlist li{display:flex;gap:10px;align-items:center;background:var(--surface-2);border-radius:10px;padding:8px 10px;min-width:0}
@@ -437,6 +438,88 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 /* logo grande en la portada del asistente */
 .src-tag{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--muted)}
 
+
+/* ---- v4: buscador con IA, compatibilidad, cuestionario ---- */
+.sbar .go{flex:none;height:34px;padding:0 14px;border-radius:10px}
+.aiex{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:1px 16px}
+.aiex::-webkit-scrollbar{display:none}
+.aiex[hidden],.aipanel[hidden]{display:none}
+.exb{flex:none;border:1px solid var(--line);background:var(--surface);color:var(--muted);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:600;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.exb:hover{border-color:var(--brand);color:var(--brand)}
+.aipanel{background:var(--brand-soft);border-radius:14px;padding:10px 12px;display:grid;gap:4px}
+.ai-h{display:flex;align-items:center;gap:6px;margin:0;color:var(--brand);font-size:13px}
+.ai-h .ai-x{margin-left:auto;background:none;border:0;color:var(--muted);font-size:12px;font-weight:600;text-decoration:underline;padding:0}
+.ai-p{margin:0;font-size:14px}
+.aipanel .understood{margin:2px 0 0;gap:6px}
+.aipanel .tag{background:var(--surface);padding:3px 4px 3px 10px}
+.aipanel .tag button{border:0;background:var(--surface-2);color:var(--muted);width:18px;height:18px;border-radius:50%;display:inline-grid;place-items:center;padding:0}
+.aipanel .tag button:hover{background:var(--brand);color:var(--brand-ink)}
+.aipanel .tag:not(:has(button)){padding-right:10px}
+.aipanel .imp{background:var(--surface);border-radius:12px;padding:10px 12px}
+.xsel .sel{padding:7px 6px 7px 10px;font-size:13.5px;font-weight:600;border-radius:999px}
+.xsel .chip{padding:7px 13px}
+.cnt{background:var(--brand);color:var(--brand-ink);border-radius:99px;font-size:11px;min-width:18px;height:18px;display:inline-grid;place-items:center;padding:0 5px}
+.chip[aria-pressed="true"] .cnt,.chip[aria-expanded="true"] .cnt{background:var(--brand-ink);color:var(--brand)}
+.fpanel .fp-t,.fpanel .fp-s{grid-column:1/-1}
+.planline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px 8px;padding:7px 12px;background:var(--surface-2);border-radius:12px;font-size:13px}
+.planline span{display:inline-flex;align-items:center;gap:6px;min-width:0}
+.planline button{border:0;background:none;color:var(--brand);font-weight:700;font-size:13px;white-space:nowrap;padding:0}
+.cmp-box{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);display:grid;gap:3px}
+.cmp-line{margin:0;font-size:13.5px;color:var(--muted);display:flex;align-items:baseline;gap:6px}
+.cmp-line b{font-family:var(--display);font-size:18px;color:var(--brand)}
+.cmp-line.big{font-size:16px}.cmp-line.big b{font-size:34px}
+.why-t{background:none;border:0;padding:0;color:var(--brand);font-weight:600;font-size:12.5px;text-align:left;justify-self:start}
+.why-t::after{content:" ▾"}.why-t[aria-expanded="true"]::after{content:" ▴"}
+.cmp-list{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:3px;font-size:13.5px}
+.cmp-list[hidden]{display:none}
+.cmp-list li{display:flex;gap:7px;line-height:1.35}
+.cmp-list li::before{content:"✓";color:var(--good);font-weight:800}
+.cmp-list li.no::before{content:"✕";color:var(--warn)}
+.cmp-list.open{font-size:15px;gap:5px}
+.more{border:1px solid var(--line);border-radius:14px;padding:0}
+.more summary{cursor:pointer;padding:13px 16px;font-weight:700;font-family:var(--display);font-size:17px;list-style:none;display:flex;justify-content:space-between}
+.more summary::-webkit-details-marker{display:none}
+.more summary::after{content:"+";color:var(--brand);font-size:22px;line-height:1}
+.more[open] summary::after{content:"–"}
+.more-b{padding:0 16px 16px;display:grid;gap:14px}
+.rank{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:18px}
+.rank-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;margin-bottom:8px}
+.rank-h h3{font-size:20px}
+.rank-l{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.rank-l button{width:100%;display:flex;align-items:center;gap:12px;background:var(--surface-2);border:0;border-radius:12px;padding:9px 12px;text-align:left}
+.rank-l button:hover{box-shadow:0 0 0 2px var(--brand)}
+.rank-l .rn{width:26px;height:26px;border-radius:50%;background:var(--brand);color:var(--brand-ink);display:grid;place-items:center;font-weight:800;font-size:13px;flex:none}
+.rank-l .rt{flex:1;min-width:0;display:grid}
+.rank-l .rt b{font-size:14.5px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank-l .rt span{font-size:12.5px;color:var(--muted)}
+.rank-l .rt i{font-style:normal;font-weight:600}
+.rank-l .rp{font-family:var(--display);font-weight:800;font-size:20px;color:var(--brand)}
+.bud{margin:2px 0 0;font-size:13px;font-weight:600}.bud.ok{color:var(--good)}.bud.no{color:var(--warn)}
+.fcard .frow{flex-wrap:wrap}
+.planlist{display:grid;gap:8px;margin:12px 0}
+.planlist div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;background:var(--surface-2);border-radius:10px;padding:9px 12px}
+.planlist dt{color:var(--muted);font-size:13px;font-weight:600}.planlist dd{margin:0;font-weight:700}
+.scrim.qz{align-items:center;padding:16px}
+.qzp{background:var(--surface);width:100%;max-width:640px;max-height:calc(100dvh - 32px);overflow-y:auto;border-radius:24px;padding:22px 22px calc(22px + env(safe-area-inset-bottom,0px));display:grid;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
+.qzp h3{font-size:clamp(24px,4vw,32px);letter-spacing:-.02em}
+.qz-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.qz-dots{display:flex;gap:6px;flex:1;max-width:240px}
+.qz-dots i{flex:1;height:5px;border-radius:99px;background:var(--surface-2)}
+.qz-dots i.done{background:var(--brand)}.qz-dots i.cur{background:var(--brand);opacity:.5}
+.qz-skip{border:0;background:none;color:var(--muted);font-weight:600;font-size:14px;padding:4px 0}
+.qz-sub{margin:-6px 0 0;color:var(--muted);font-size:14px}
+.qz-h{margin:6px 0 -4px;font-size:13px;color:var(--muted);font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-family:var(--body)}
+.qgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.qgrid.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.qgrid.c4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.qopt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;min-height:84px;padding:12px 8px;border:1.5px solid var(--line);background:var(--surface);border-radius:16px;font-weight:700;color:var(--ink)}
+.qopt svg{color:var(--brand)}
+.qopt:hover{border-color:var(--brand)}
+.qopt[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft);box-shadow:0 0 0 1.5px var(--brand)}
+.qchips{display:flex;flex-wrap:wrap;gap:8px}
+.qchips.big .chip{padding:9px 15px;font-size:15px}
+.qzp .navrow{margin-top:4px}
+@media (max-width:999px){.aipanel .understood{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-12px}.aipanel .understood::-webkit-scrollbar{display:none}.aipanel .tag{flex:none}}
+@media (max-width:560px){.qgrid,.qgrid.c3{grid-template-columns:repeat(2,minmax(0,1fr))}.qgrid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}.planlist div{grid-template-columns:1fr}.exb{max-width:240px}}
 @media (min-width:1000px){
   .xp{display:grid;grid-template-columns:minmax(430px,520px) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"tools map" "sheet map"}
   .xtools{grid-area:tools;border-right:1px solid var(--line)}
@@ -491,8 +574,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
     <button class="brand" data-act="view" data-v="explorar" aria-label="Habita, inicio"><span id="logoH"></span><span>habita</span></button>
     <nav class="nav" id="nav" aria-label="Secciones"></nav>
     <span class="spacer"></span>
-    <label class="citysel"><span id="cityIc"></span><span class="sr">Ciudad</span><select id="fCity"><option value="bog">Bogotá</option><option value="med">Medellín</option><option value="cal">Cali</option></select></label>
-    <button class="iconbtn" id="favBtn" data-act="favfilter" aria-label="Casas guardadas"><span id="favIc"></span><b id="favN">0</b></button>
+    <button class="iconbtn" id="favBtn" data-act="favfilter" aria-label="Mis opciones"><span id="favIc"></span><b id="favN">0</b></button>
     <button class="iconbtn" id="setBtn" data-act="settings" aria-label="Apariencia"><span id="setIc"></span></button>
   </div>
 </header>
@@ -503,10 +585,12 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
     <div class="xtools" id="xtools">
       <form class="sbar" id="searchForm" role="search">
         <span id="sIc"></span>
-        <label class="sr" for="q">Buscar vivienda</label>
-        <input id="q" type="search" placeholder="Barrio, universidad o tipo de vivienda" autocomplete="off">
-        <button type="button" class="iconbtn" data-act="fpanel" id="fBtn" aria-label="Más filtros" aria-expanded="false"><span id="fIc"></span></button>
+        <label class="sr" for="q">Cuéntanos qué buscas</label>
+        <input id="q" type="search" placeholder="Cuéntame qué buscas…" autocomplete="off" enterkeyhint="search">
+        <button type="submit" class="btn sm2 go" id="qGo">Buscar</button>
       </form>
+      <div class="aiex" id="aiEx"></div>
+      <div class="aipanel" id="aiPanel" hidden aria-live="polite"></div>
       <div class="xrow" id="xrow">
         <div class="seg" role="group" aria-label="Operación">
           <button data-act="op" data-v="venta" aria-pressed="true">Comprar</button>
@@ -514,10 +598,23 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
         </div>
         <span id="typeChips" class="chips" style="flex-wrap:nowrap" role="group" aria-label="Tipo de vivienda"></span>
       </div>
-      <div class="fpanel" id="fpanel" hidden>
+      <div class="xrow xsel">
+        <label class="sr" for="fCity">Ciudad</label><select class="sel" id="fCity"><option value="bog">Bogotá</option><option value="med">Medellín</option><option value="cal">Cali</option></select>
         <label class="sr" for="fPrice">Precio máximo</label><select class="sel" id="fPrice"></select>
-        <label class="sr" for="fBeds">Habitaciones</label><select class="sel" id="fBeds"><option value="0">Habitaciones (todas)</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option></select>
-        <label class="sr" for="fSort">Ordenar</label><select class="sel" id="fSort"><option value="rel">Relevancia</option><option value="near">Más cerca de mí</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="ar">Mayor área</option><option value="yi">Mayor rentabilidad</option></select>
+        <label class="sr" for="fBeds">Habitaciones</label><select class="sel" id="fBeds"><option value="0">Hab.</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option></select>
+        <button type="button" class="chip" data-act="fpanel" id="fBtn" aria-expanded="false"><span id="fIc"></span>Más filtros<b id="fCnt" class="cnt" hidden></b></button>
+      </div>
+      <div class="fpanel" id="fpanel" hidden>
+        <label class="sr" for="fArea">Área mínima</label><select class="sel" id="fArea"><option value="0">Área</option><option value="30">30 m² o más</option><option value="50">50 m² o más</option><option value="80">80 m² o más</option><option value="120">120 m² o más</option></select>
+        <label class="sr" for="fBaths">Baños</label><select class="sel" id="fBaths"><option value="0">Baños</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option></select>
+        <label class="sr" for="fPeople">Personas</label><select class="sel" id="fPeople"><option value="0">Personas</option><option value="1">Para 1</option><option value="2">Para 2</option><option value="3">Para 3</option><option value="4">Para 4 o más</option></select>
+        <div class="chips fp-t" role="group" aria-label="Características">
+          <button type="button" class="chip" data-act="ftog" data-v="furn" aria-pressed="false">Amoblado</button>
+          <button type="button" class="chip" data-act="ftog" data-v="pets" aria-pressed="false">Acepta mascotas</button>
+          <button type="button" class="chip" data-act="ftog" data-v="inc" aria-pressed="false">Servicios incluidos</button>
+          <button type="button" class="chip" data-act="ftog" data-v="park" aria-pressed="false">Parqueadero</button>
+        </div>
+        <label class="sr" for="fSort">Ordenar</label><select class="sel fp-s" id="fSort"><option value="rel">Ordenar: mejor para ti</option><option value="near">Más cerca de mí</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="ar">Mayor área</option></select>
       </div>
     </div>
     <div class="xmap" id="mapslot"></div>
@@ -527,6 +624,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
         <div><h2 id="count">Viviendas</h2><p id="countSub"></p></div>
         <button class="btn alt sm2" data-act="locate" id="locBtn"><span id="locIc"></span>Cerca de mí</button>
       </div>
+      <div class="planline" id="planLine"></div>
       <div class="sh-list" id="shlist"><div class="grid" id="grid"></div></div>
     </div>
   </div>
@@ -535,9 +633,10 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   <div class="wrap page">
     <div class="page-h">
       <div>
-        <p class="kicker" style="color:var(--brand)">Oportunidades de inversión</p>
-        <h2>Compra bien. Mira el retorno antes.</h2>
-        <p>Cada inmueble en venta muestra su rentabilidad por arriendo, su valorización estimada y cómo se compara su precio por m² con el promedio de la zona.</p>
+        <p class="kicker" style="color:var(--brand)">Análisis financiero</p>
+        <h2>Simulador de crédito y retorno.</h2>
+        <p>Información complementaria para viviendas en venta: rentabilidad por arriendo, valorización estimada y simulación de crédito.</p>
+        <p style="margin-top:12px"><button class="btn alt sm2" data-act="invback">← Volver a Explorar</button></p>
       </div>
       <div class="chips" id="invSort" role="group" aria-label="Ordenar oportunidades"></div>
     </div>
@@ -548,60 +647,13 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   </div>
 </section>
 
-<section id="v-obras" class="view" hidden>
-  <div class="wrap page">
-    <div class="page-h">
-      <div>
-        <p class="kicker" style="color:var(--brand)">Obras en gris</p>
-        <h2>Compra la estructura. Termínala a tu medida.</h2>
-        <p>Proyectos que se entregan en obra gris, con avance de obra, plan de pagos y un cotizador que suma el costo de los acabados que elijas.</p>
-      </div>
-    </div>
-    <div class="explain">
-      <div><h3>Qué es una obra en gris</h3><p>Entrega con estructura, muros, placas y redes principales. Sin pisos, enchapes, pintura ni carpintería.</p></div>
-      <div><h3>Por qué conviene</h3><p>El precio de entrada es menor y tú decides materiales y diseño. Muchos compradores terminan con un inmueble que vale más que el costo total.</p></div>
-      <div><h3>Cómo se paga</h3><p>Separas con un valor fijo, pagas la cuota inicial en cuotas mensuales durante la construcción y el saldo al escriturar.</p></div>
-    </div>
-    <div class="obras" id="obras"></div>
-  </div>
-</section>
-
-<section id="v-asistente" class="view" hidden>
-  <div class="wrap page">
-    <div class="page-h">
-      <div>
-        <p class="kicker" style="color:var(--brand)">Habi, tu asistente</p>
-        <h2>Cuéntale qué buscas.</h2>
-        <p>Escribe como si le hablaras a un amigo. Habi busca en Habita y en los anuncios que traigas de otras fuentes.</p>
-      </div>
-    </div>
-    <div class="chatwrap">
-      <div class="chatcol">
-        <div class="chat" id="chat" aria-live="polite"></div>
-        <form class="composer" id="aiForm">
-          <div class="qr" id="aiEx"></div>
-          <div class="cmp-row">
-            <label class="sr" for="aiText">Mensaje para Habi</label>
-            <textarea id="aiText" rows="1" placeholder="Ej: apartamento de 2 hab. para arrendar hasta 3 millones, cerca de un parque"></textarea>
-            <button class="send" type="submit" aria-label="Enviar"><span id="sendIc"></span></button>
-          </div>
-        </form>
-      </div>
-      <aside class="srcs" aria-label="Fuentes conectadas">
-        <h3>Fuentes conectadas</h3>
-        <p>Habi busca en estas fuentes. Lo que no se puede conectar de forma directa, lo traes tú con un clic.</p>
-        <ul class="srclist" id="srcList"></ul>
-      </aside>
-    </div>
-  </div>
-</section>
 <section id="v-micasa" class="view" hidden>
   <div class="wrap page">
     <div class="page-h">
       <div>
         <p class="kicker" style="color:var(--brand)">Mi casa</p>
-        <h2>Tu casa soñada, con fecha.</h2>
-        <p>Guarda las casas que te gustan, compáralas y ponles una meta de ahorro. Te mostramos cuánto falta y cuándo llegas.</p>
+        <h2>Tus opciones, tu plan y tus metas.</h2>
+        <p>Compara lo que guardaste, revisa si entra en tu presupuesto y mira qué tan compatible es con lo que buscas.</p>
       </div>
       <div class="seg" id="mcTabs" role="group" aria-label="Secciones de Mi casa"></div>
     </div>
@@ -624,11 +676,12 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 </section>
 </main>
 
-<footer class="foot"><div class="wrap">Prototipo para Expoandes. Viviendas, precios, distancias y proyectos son datos de ejemplo. En iPhone el mapa es Apple Maps; en la vista web es esquemático. Las proyecciones de inversión son ilustrativas y no son asesoría financiera.</div></footer>
+<footer class="foot"><div class="wrap">Prototipo para Expoandes. Viviendas, precios, distancias y proyectos son datos de ejemplo. En iPhone el mapa es Apple Maps; en la vista web es esquemático. Los análisis financieros son ilustrativos y no son asesoría financiera.</div></footer>
 
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Detalle de la vivienda">
   <div class="panel" id="panel"></div>
 </div>
+<div class="scrim qz" id="quiz" hidden role="dialog" aria-modal="true" aria-label="Cuestionario de Habita"><div class="qzp" id="qzp"></div></div>
 <div class="toast" id="toast" hidden></div>
 
 <div class="scrim" id="settings" hidden>
@@ -674,7 +727,8 @@ var IC={
   casa:'<path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10M10 20v-6h4v6"/>',
   apto:'<rect x="6" y="3" width="12" height="18" rx="1.5"/><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/>',
   apartaestudio:'<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M4 11h16M10 11v8"/>',
-  residencia:'<path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 00-3-3h-7v5"/><circle cx="7" cy="11" r="1.8"/>',
+  habitacion:'<path d="M3 18V8M3 14h18v4M21 14v-2a3 3 0 00-3-3h-7v5"/><circle cx="7" cy="11" r="1.8"/>',
+  obra:'<path d="M3 21h18"/><path d="M6 21V10h12v11M6 14h12M10 10v11"/>',
   todos:'<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/>',
   explorar:'<circle cx="11" cy="11" r="6"/><path d="M20 20l-4.500-4.500"/>',
   inversion:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
@@ -717,8 +771,8 @@ var CATS={transporte:'Transporte',supermercado:'Supermercado',parque:'Parque',un
 var BASE={transporte:450,supermercado:500,parque:550,universidad:1800,salud:1300,gimnasio:600,restaurantes:350,colegio:700};
 var DEF={supermercado:'Supermercado',gimnasio:'Gimnasio',restaurantes:'Zona de restaurantes',colegio:'Colegio',transporte:'Parada de transporte',parque:'Parque',universidad:'Universidad',salud:'Centro de salud'};
 var CITY={bog:'Bogotá',med:'Medellín',cal:'Cali'};
-var TL={casa:'Casa',apto:'Apartamento',apartaestudio:'Apartaestudio',residencia:'Residencia estudiantil'};
-var TLP={casa:'Casas',apto:'Apartamentos',apartaestudio:'Apartaestudios',residencia:'Residencias estudiantiles'};
+var TL={apto:'Apartamento',casa:'Casa',apartaestudio:'Apartaestudio',habitacion:'Habitación',obra:'Obra gris'};
+var TLP={apto:'Apartamentos',casa:'Casas',apartaestudio:'Apartaestudios',habitacion:'Habitaciones',obra:'Obra gris'};
 
 /* m2: precio promedio por m2 de la zona en millones de COP (ejemplo) */
 var Z={
@@ -743,11 +797,11 @@ var CITYKW={bog:['bogota'],med:['medellin','antioquia'],cal:['cali','valle del c
 var P=[
  {id:'p1',z:'chico',t:'apto',op:'venta',title:'Apartamento con vista abierta en Chicó Reservado',price:890e6,area:78,beds:2,baths:2,park:1,est:6,x:60,y:25,rent:4.2e6,g:6.1,tags:['vista','seguridad','zonas comunes'],d:'Piso 9 con balcón, cocina integral y portería 24 horas. El edificio tiene gimnasio y salón social.'},
  {id:'p2',z:'candelaria',t:'apartaestudio',op:'arriendo',title:'Apartaestudio amoblado a 5 minutos de Los Andes',price:2.1e6,area:32,beds:1,baths:1,park:0,est:3,x:61,y:55,tags:['amoblado','wifi','cerca a universidad','seguridad'],d:'Cama doble, escritorio, cocineta y lavadora compartida en el edificio. Administración incluida.'},
- {id:'p3',z:'candelaria',t:'residencia',op:'arriendo',title:'Residencia Las Aguas, habitación individual',price:1.35e6,area:14,beds:1,baths:0,park:0,est:3,x:57,y:60,tags:['servicios incluidos','wifi','amoblado','cerca a universidad','zonas comunes'],d:'Habitación con escritorio y closet. Baño compartido, cocina común, sala de estudio y lavandería. Servicios y wifi incluidos.'},
+ {id:'p3',z:'candelaria',t:'habitacion',room:'privada',bath:'compartido',inc:1,furn:1,rules:['No fumar','Visitas hasta las 10 p. m.'],op:'arriendo',title:'Habitación en Residencia Las Aguas',price:1.35e6,area:14,beds:1,baths:0,park:0,est:3,x:57,y:60,tags:['servicios incluidos','wifi','amoblado','cerca a universidad','zonas comunes'],d:'Habitación con escritorio y closet. Baño compartido, cocina común, sala de estudio y lavandería. Servicios y wifi incluidos.'},
  {id:'p4',z:'usaquen',t:'casa',op:'venta',title:'Casa de tres niveles cerca al Parque de Usaquén',price:1980e6,area:220,beds:4,baths:4,park:2,est:5,x:63,y:11,rent:7e6,g:5.2,tags:['mascotas','tranquilo','patio','seguridad'],d:'Casa con estudio, terraza y patio interior. Conjunto cerrado con vigilancia y zonas verdes.'},
  {id:'p5',z:'cedritos',t:'apto',op:'venta',title:'Apartamento remodelado en Cedritos',price:440e6,area:64,beds:2,baths:2,park:1,est:4,x:68,y:20,rent:2.6e6,g:4.8,tags:['mascotas','tranquilo','zonas comunes'],d:'Cocina abierta, piso en madera laminada y depósito. Conjunto con parque infantil y salón comunal.'},
  {id:'p6',z:'teusaquillo',t:'apto',op:'arriendo',title:'Apartamento luminoso en Teusaquillo, pet friendly',price:2.9e6,area:58,beds:2,baths:1,park:0,est:4,x:44,y:43,tags:['mascotas','tranquilo','cerca a universidad'],d:'Edificio de ladrillo con ascensor, balcón y cocina integral. Se aceptan mascotas pequeñas.'},
- {id:'p7',z:'chapinero',t:'residencia',op:'arriendo',title:'Residencia universitaria Chapinero con baño privado',price:1.6e6,area:16,beds:1,baths:1,park:0,est:4,x:55,y:36,tags:['servicios incluidos','wifi','amoblado','cerca a universidad','seguridad'],d:'Habitación individual con baño privado, desayuno incluido y terraza de estudio. A pocas cuadras de la Javeriana.'},
+ {id:'p7',z:'chapinero',t:'habitacion',room:'privada',bath:'privado',inc:1,furn:1,rules:['Solo estudiantes','No se admiten mascotas'],op:'arriendo',title:'Habitación con baño privado en Chapinero',price:1.6e6,area:16,beds:1,baths:1,park:0,est:4,x:55,y:36,tags:['servicios incluidos','wifi','amoblado','cerca a universidad','seguridad'],d:'Habitación individual con baño privado, desayuno incluido y terraza de estudio. A pocas cuadras de la Javeriana.'},
  {id:'p8',z:'salitre',t:'apartaestudio',op:'venta',title:'Apartaestudio para inversión en Ciudad Salitre',price:235e6,area:36,beds:1,baths:1,park:1,est:4,x:34,y:50,rent:1.35e6,g:5.8,tags:['seguridad','zonas comunes'],d:'Ideal para arriendo a ejecutivos. Edificio con recepción, gimnasio y lavandería.'},
  {id:'p9',z:'suba',t:'casa',op:'venta',title:'Casa con jardín en conjunto cerrado de Suba',price:780e6,area:180,beds:3,baths:3,park:2,est:4,x:30,y:11,rent:3.8e6,g:4.5,tags:['mascotas','tranquilo','patio','seguridad'],d:'Dos pisos, jardín propio y zona de ropas. Conjunto con piscina, cancha y vigilancia las 24 horas.'},
  {id:'p10',z:'chapinero',t:'apto',op:'venta',title:'Apartamento en Chapinero Alto con vista a los cerros',price:720e6,area:82,beds:2,baths:2,park:1,est:5,x:57,y:35,rent:3.5e6,g:5.9,tags:['vista','seguridad'],d:'Último piso con terraza, chimenea y doble altura en la sala. Cerca de restaurantes y de la Javeriana.'},
@@ -756,10 +810,14 @@ var P=[
  {id:'p13',z:'kennedy',t:'apto',op:'venta',title:'Apartamento nuevo en Kennedy cerca a Portal Américas',price:195e6,area:52,beds:2,baths:1,park:0,est:3,x:25,y:66,rent:1.1e6,g:5.4,tags:['zonas comunes','seguridad'],d:'Edificio nuevo con ascensor y salón social. Elegible para subsidio de vivienda.'},
  {id:'p14',z:'poblado',t:'apto',op:'venta',title:'Apartamento en El Poblado a una cuadra de Provenza',price:980e6,area:85,beds:2,baths:2,park:1,est:6,x:62,y:58,rent:5e6,g:6.4,tags:['vista','seguridad','zonas comunes','gimnasio'],d:'Balcón con vista a la ciudad, edificio con piscina, gimnasio y coworking.'},
  {id:'p15',z:'laureles',t:'apartaestudio',op:'arriendo',title:'Apartaestudio en Laureles cerca a la UPB',price:2.4e6,area:34,beds:1,baths:1,park:0,est:4,x:37,y:45,tags:['amoblado','wifi','cerca a universidad'],d:'Amoblado con escritorio y balcón. A dos cuadras del Metro Estadio.'},
- {id:'p16',z:'laureles',t:'residencia',op:'arriendo',title:'Residencia estudiantil en Laureles, habitación doble',price:1.1e6,area:18,beds:2,baths:0,park:0,est:4,x:36,y:51,tags:['servicios incluidos','wifi','amoblado','cerca a universidad','zonas comunes'],d:'Habitación para dos con baño compartido, cocina común y terraza. Servicios incluidos.'},
+ {id:'p16',z:'laureles',t:'habitacion',room:'compartida',bath:'compartido',inc:1,furn:1,rules:['Silencio después de las 10 p. m.','No se admiten mascotas'],op:'arriendo',title:'Habitación compartida en Laureles',price:1.1e6,area:18,beds:2,baths:0,park:0,est:4,x:36,y:51,tags:['servicios incluidos','wifi','amoblado','cerca a universidad','zonas comunes'],d:'Habitación para dos con baño compartido, cocina común y terraza. Servicios incluidos.'},
  {id:'p17',z:'envigado',t:'casa',op:'venta',title:'Casa en Envigado con zona social y jardín',price:1450e6,area:190,beds:4,baths:3,park:2,est:5,x:60,y:84,rent:6e6,g:5.1,tags:['mascotas','tranquilo','patio','seguridad'],d:'Casa de esquina con zona BBQ, estudio y jardín. Barrio residencial cerca al parque principal.'},
  {id:'p18',z:'cjardin',t:'apto',op:'venta',title:'Apartamento en Ciudad Jardín con balcón',price:620e6,area:88,beds:3,baths:2,park:2,est:5,x:42,y:79,rent:3e6,g:5.3,tags:['mascotas','seguridad','zonas comunes'],d:'Tres alcobas, cuarto de servicio y dos parqueaderos. Conjunto con piscina y zonas verdes.'},
- {id:'p19',z:'sanfernando',t:'apartaestudio',op:'arriendo',title:'Apartaestudio moderno en San Fernando',price:1.7e6,area:30,beds:1,baths:1,park:0,est:4,x:36,y:49,tags:['amoblado','wifi','seguridad'],d:'Piso alto con aire acondicionado, cocineta y acceso con control biométrico.'}
+ {id:'p19',z:'sanfernando',t:'apartaestudio',op:'arriendo',title:'Apartaestudio moderno en San Fernando',price:1.7e6,area:30,beds:1,baths:1,park:0,est:4,x:36,y:49,tags:['amoblado','wifi','seguridad'],d:'Piso alto con aire acondicionado, cocineta y acceso con control biométrico.'},
+ {id:'p20',z:'chapinero',t:'habitacion',room:'privada',bath:'compartido',inc:0,furn:1,rules:['Se aceptan mascotas pequeñas','Dos compañeros más en el apartamento'],op:'arriendo',title:'Habitación en apartamento compartido, Chapinero',price:1.25e6,area:13,beds:1,baths:0,park:0,est:4,x:58,y:40,tags:['amoblado','wifi','mascotas','cerca a universidad'],d:'Habitación con cama doble, closet y escritorio en un apartamento de tres. Cocina, sala y lavadora compartidas. Servicios se dividen entre los tres.'},
+ {id:'p21',z:'teusaquillo',t:'habitacion',room:'privada',bath:'privado',inc:0,furn:0,rules:['Contrato mínimo de 6 meses','Se aceptan mascotas'],op:'arriendo',title:'Habitación sin amoblar con baño propio, Teusaquillo',price:1.05e6,area:15,beds:1,baths:1,park:0,est:3,x:46,y:47,tags:['mascotas','tranquilo','cerca a universidad'],d:'Habitación luminosa en casa antigua con entrada independiente. Puedes traer tus muebles. Cerca de la Universidad Nacional.'},
+ {id:'p22',z:'poblado',t:'habitacion',room:'privada',bath:'compartido',inc:1,furn:1,rules:['No fumar','Visitas hasta las 9 p. m.'],op:'arriendo',title:'Habitación con servicios incluidos en El Poblado',price:1.7e6,area:14,beds:1,baths:0,park:0,est:5,x:63,y:62,tags:['servicios incluidos','wifi','amoblado','seguridad'],d:'Habitación amoblada en apartamento con portería 24 horas. Wifi, agua y luz incluidos. Gimnasio y piscina del edificio.'},
+ {id:'p23',z:'cjardin',t:'habitacion',room:'compartida',bath:'compartido',inc:1,furn:1,rules:['Solo estudiantes','Silencio después de las 10 p. m.'],op:'arriendo',title:'Habitación compartida cerca a Icesi',price:0.85e6,area:16,beds:2,baths:0,park:0,est:4,x:43,y:82,tags:['servicios incluidos','wifi','amoblado','cerca a universidad'],d:'Habitación doble en residencia de estudiantes. Servicios y wifi incluidos, sala de estudio y cocina común.'}
 ];
 
 var OBRAS=[
@@ -768,6 +826,10 @@ var OBRAS=[
  {id:'o3',name:'Alameda Laureles',z:'laureles',city:'med',builder:'Habitat Paisa (ejemplo)',pm2:5.6e6,areas:[54,70],progress:81,deliv:'mar. 2027',sep:4e6,ini:30,cuotas:12,roi:'6,8%',desc:'Edificio de apartamentos a dos cuadras del Metro, con zona de coworking y bicicletero.'},
  {id:'o4',name:'Reserva del Río',z:'cjardin',city:'cal',builder:'Valle Construye (ejemplo)',pm2:4.9e6,areas:[66,84,102],progress:22,deliv:'nov. 2028',sep:5e6,ini:20,cuotas:30,roi:'5,9%',desc:'Proyecto con piscina, zonas verdes y senderos, cerca de universidades y clínicas.'}
 ];
+OBRAS.forEach(function(o){
+  var z=Z[o.z],a0=o.areas[0];
+  P.push({id:o.id,obra:o,t:'obra',op:'venta',z:o.z,title:o.name,price:o.pm2*a0,area:a0,beds:a0>100?3:2,baths:2,park:1,est:5,x:z.x+3,y:z.y+4,g:parseFloat(o.roi.replace(',','.')),tags:['obra gris','entrega '+o.deliv,'zonas comunes'],d:o.desc});
+});
 var LEVELS={gris:{l:'Solo obra gris',c:0,d:'Estructura, muros y redes principales. Sin pisos, enchapes, pintura ni carpintería.'},basico:{l:'Acabado básico',c:850e3,d:'Pisos en cerámica, pintura, enchape de baños y puertas sencillas.'},medio:{l:'Acabado medio',c:1.5e6,d:'Piso laminado o porcelanato, cocina integral, closets y griferías de gama media.'},premium:{l:'Acabado premium',c:2.7e6,d:'Porcelanato grande, carpintería a medida, domótica básica y grifería de diseño.'}};
 
 /* ---------- estado ---------- */
@@ -797,11 +859,13 @@ function inv(p){
   return {m2:m2,avg:avg,diff:diff,yld:p.rent?p.rent*12/p.price*100:0,opp:diff<=-0.08};
 }
 function pct(v,d){return (d===undefined?1:d)===0?N0.format(v)+'%':N1.format(v)+'%'}
+function capOf(p){return p.t==='habitacion'?p.beds:p.t==='apartaestudio'?2:p.beds*2}
 function specLine(p){
-  if(p.t==='residencia')return p.area+' m² · '+(p.baths?'Baño privado':'Baño compartido')+(p.beds>1?' · Para '+p.beds:'');
-  return p.beds+(p.beds===1?' hab':' hab')+' · '+p.baths+(p.baths===1?' baño':' baños')+' · '+p.area+' m²';
+  if(p.t==='habitacion')return (p.room==='compartida'?'Compartida':'Privada')+' · Baño '+(p.bath==='privado'?'privado':'compartido')+' · '+(p.inc?'Servicios incluidos':'Servicios aparte');
+  if(p.t==='obra')return 'Desde '+p.area+' m² · Entrega '+p.obra.deliv;
+  return p.beds+' hab · '+p.baths+(p.baths===1?' baño':' baños')+' · '+p.area+' m²';
 }
-function priceHTML(p){return money(p.price)+(p.op==='arriendo'?'<small> /mes</small>':'')}
+function priceHTML(p){return (p.t==='obra'?'<small>Desde </small>':'')+money(p.price)+(p.op==='arriendo'?'<small> /mes</small>':'')}
 
 /* ---------- ilustraciones ---------- */
 /* paleta: cielo, muro, tejado/oscuro, ventana encendida, pasto */
@@ -837,7 +901,7 @@ function art(p){
     for(j=0;j<3;j++)for(i=0;i<3;i++){var wx=98+i*42,wy=76+j*30;s+=win(wx,wy,26,18,r('a'+i+j)>.4)+'<rect x="'+(wx-3)+'" y="'+(wy+19)+'" width="32" height="3" fill="'+roof+'" opacity=".6"/>'}
     s+='<rect x="146" y="140" width="30" height="32" fill="'+roof+'"/><path d="M140 140h42l-4 8h-34z" fill="'+lit+'"/>';
     s+=tree(276,134,.8);
-  }else if(p.t==='residencia'){
+  }else if(p.t==='habitacion'){
     s+='<rect x="52" y="82" width="96" height="90" fill="'+wall+'"/><rect x="172" y="82" width="96" height="90" fill="'+wall+'"/><rect x="132" y="58" width="56" height="114" fill="'+wall+'"/><rect x="128" y="52" width="64" height="9" fill="'+roof+'"/><rect x="46" y="76" width="108" height="8" fill="'+roof+'"/><rect x="166" y="76" width="108" height="8" fill="'+roof+'"/>';
     for(j=0;j<3;j++){for(i=0;i<3;i++){s+=win(62+i*30,92+j*25,18,14,r('r'+i+j)>.4)+win(182+i*30,92+j*25,18,14,r('q'+i+j)>.4)}s+=win(150,68+j*25,20,14,r('m'+j)>.4)}
     s+='<rect x="148" y="144" width="24" height="28" fill="'+roof+'"/><rect x="144" y="140" width="32" height="5" fill="'+lit+'"/>';
@@ -869,6 +933,7 @@ function mapBg(city){
   return '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'+g+'</svg>';
 }
 /* ---------- estado extra ---------- */
+S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.minArea=0;S.baths=0;S.aiText='';S.quiet=false;S.cr=null;S.ainotes=[];S.helpMsg='';S.qz=null;
 S.me=null;S.sel=null;S.only=null;S.sheet='half';S.theme=null;S.accent='cobalto';S.sortUser=false;S.items=[];
 var CITYC={bog:[4.65,-74.08],med:[6.24,-75.58],cal:[3.42,-76.53]};
 function hav(a,b,c,d){var R=6371,t=Math.PI/180,dl=(c-a)*t,dn=(d-b)*t,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a*t)*Math.cos(c*t)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.asin(Math.sqrt(x))}
@@ -878,48 +943,157 @@ function noop(){}
 
 /* ---------- filtros de exploracion ---------- */
 function priceOptions(){
-  var opts=S.op==='venta'?[[0,'Precio (todos)'],[300e6,'Hasta $300 M'],[500e6,'Hasta $500 M'],[800e6,'Hasta $800 M'],[1200e6,'Hasta $1.200 M']]:[[0,'Precio (todos)'],[1.5e6,'Hasta $1,5 M/mes'],[2.5e6,'Hasta $2,5 M/mes'],[4e6,'Hasta $4 M/mes']];
+  var arr=S.op==='venta';
+  var opts=arr?[[0,'Precio'],[300e6,'Hasta $300 M'],[500e6,'Hasta $500 M'],[800e6,'Hasta $800 M'],[1200e6,'Hasta $1.200 M']]:[[0,'Precio'],[1.5e6,'Hasta $1,5 M/mes'],[2.5e6,'Hasta $2,5 M/mes'],[4e6,'Hasta $4 M/mes']];
+  if(S.max&&!opts.some(function(o){return o[0]===S.max}))opts.push([S.max,'Hasta '+(arr?'$'+N0.format(S.max/1e6)+' M':'$'+N1.format(S.max/1e6)+' M/mes')]);
+  opts.sort(function(a,b){return a[0]-b[0]});
   $('#fPrice').innerHTML=opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===S.max?' selected':'')+'>'+o[1]+'</option>'}).join('');
 }
 function renderChips(){
   var list=[['todos','Todos']].concat(Object.keys(TLP).map(function(k){return [k,TLP[k]]}));
-  var h=(S.only?'<button class="chip" data-act="onlyclear" aria-pressed="true">'+ic('asistente',15)+'Resultados de Habi '+ic('x',13)+'</button>':'')+
+  var h=(S.only?'<button class="chip" data-act="onlyclear" aria-pressed="true">Selección '+ic('x',13)+'</button>':'')+
     list.map(function(o){return '<button class="chip" data-act="type" data-v="'+o[0]+'" aria-pressed="'+(S.type===o[0])+'">'+(o[0]==='todos'?'':ic(o[0],16))+o[1]+'</button>'}).join('');
   $('#typeChips').innerHTML=h;
 }
+function syncFilters(){
+  $('#fCity').value=S.city;
+  $('#fBeds').value=String(S.beds||0);
+  $('#fArea').value=String(S.minArea||0);
+  $('#fBaths').value=String(S.baths||0);
+  $('#fPeople').value=String(S.people||0);
+  $('#fSort').value=S.sort;
+  $$('[data-act=ftog]').forEach(function(b){b.setAttribute('aria-pressed',String(!!S.f[b.dataset.v]))});
+  var n=(S.minArea?1:0)+(S.baths?1:0)+(S.people?1:0)+Object.keys(S.f).filter(function(k){return S.f[k]}).length;
+  var c=$('#fCnt');c.textContent=n;c.hidden=!n;
+}
+function zoneKm(p,z){var c=coords(p),k=ZC[z];return hav(c[0],c[1],k[0],k[1])}
 function filtered(){
   var q=norm(S.q).trim();
   var out=P.filter(function(p){
     if(Z[p.z].c!==S.city||p.op!==S.op)return false;
     if(S.only&&S.only.indexOf(p.id)<0)return false;
-    if(S.type!=='todos'&&p.t!==S.type)return false;
+    if(S.type!=='todos'){if(p.t!==S.type)return false}
+    else if(S.typeSet.length&&S.typeSet.indexOf(p.t)<0)return false;
     if(S.max&&p.price>S.max)return false;
-    if(S.beds&&p.beds<S.beds)return false;
+    if(S.beds&&p.t!=='habitacion'&&p.beds<S.beds)return false;
+    if(S.minArea&&p.t!=='habitacion'&&p.area<S.minArea)return false;
+    if(S.baths&&p.t!=='habitacion'&&p.baths<S.baths)return false;
+    if(S.people&&capOf(p)<S.people)return false;
+    if(S.zones.length&&S.zones.indexOf(p.z)<0)return false;
+    if(S.nearZone&&zoneKm(p,S.nearZone)>9)return false;
+    if(S.f.pets&&p.tags.indexOf('mascotas')<0)return false;
+    if(S.f.furn&&!(p.tags.indexOf('amoblado')>-1||p.furn))return false;
+    if(S.f.inc&&!(p.tags.indexOf('servicios incluidos')>-1||p.inc))return false;
+    if(S.f.park&&!p.park)return false;
     if(S.onlyFav&&!S.fav[p.id])return false;
     if(q){var hay=norm(p.title+' '+Z[p.z].n+' '+TL[p.t]+' '+TLP[p.t]+' '+p.tags.join(' ')+' '+Z[p.z].kw.join(' '));if(!q.split(/\s+/).every(function(w){return hay.indexOf(w)>-1}))return false}
     return true;
   });
+  S.cr=crit();
+  if(S.sort==='rel'&&S.cr.has){
+    var sc={};out.forEach(function(p){sc[p.id]=compat(p,S.cr).pct});
+    out.sort(function(a,b){return sc[b.id]-sc[a.id]});
+  }
   if(S.sort==='pa')out.sort(function(a,b){return a.price-b.price});
   if(S.sort==='pd')out.sort(function(a,b){return b.price-a.price});
   if(S.sort==='ar')out.sort(function(a,b){return b.area-a.area});
-  if(S.sort==='yi')out.sort(function(a,b){return inv(b).yld-inv(a).yld});
   if(S.sort==='near'&&S.me)out.sort(function(a,b){return distKm(a)-distKm(b)});
   return out;
 }
 function badgeFor(p){
-  if(p.op==='venta'&&inv(p).opp)return '<span class="badge sun">Oportunidad</span>';
+  if(p.t==='obra')return '<span class="badge sun">Entrega '+p.obra.deliv+'</span>';
   if(p.src)return '<span class="badge">Importado</span>';
+  if(p.t==='habitacion')return '<span class="badge">'+(p.room==='compartida'?'Compartida':'Privada')+'</span>';
   if(p.tags.indexOf('servicios incluidos')>-1)return '<span class="badge">Servicios incluidos</span>';
   if(p.tags.indexOf('amoblado')>-1)return '<span class="badge">Amoblado</span>';
   if(p.tags.indexOf('vista')>-1)return '<span class="badge">Con vista</span>';
   return '';
 }
+/* ---------- personalizacion: cuestionario, plan y compatibilidad ---------- */
+var UNIS=[['andes','Universidad de los Andes','candelaria',/\b(los andes|uniandes|andes)\b/],['javeriana','Universidad Javeriana','chapinero',/javeriana/],['nacional','Universidad Nacional','teusaquillo',/universidad nacional|\bnacional\b|\bunal\b/],['rosario','Universidad del Rosario','candelaria',/rosario/],['eafit','EAFIT','poblado',/eafit/],['upb','UPB','laureles',/\bupb\b|bolivariana/],['icesi','Universidad Icesi','cjardin',/icesi/],['univalle','Univalle','sanfernando',/univalle/]];
+var UNIKW=/uniandes|andes|rosario|externado|javeriana|nacional|eafit|upb|bolivariana|icesi|univalle/;
+var IMPS=[['transporte','Transporte cerca'],['universidad','Universidad cerca'],['mascotas','Acepta mascotas'],['amoblado','Amoblado'],['seguridad','Seguridad'],['servicios','Servicios incluidos'],['comercial','Zona comercial'],['parque','Parques'],['gimnasio','Gimnasio'],['salud','Salud cerca'],['colegio','Colegios'],['tranquilo','Tranquilidad']];
+var RENTR=[[0,1.5e6,'Hasta $1,5 M'],[1.5e6,2.5e6,'$1,5 – 2,5 M'],[2.5e6,4e6,'$2,5 – 4 M'],[4e6,0,'Más de $4 M']];
+var BUYR=[[0,300e6,'Hasta $300 M'],[300e6,500e6,'$300 – 500 M'],[500e6,800e6,'$500 – 800 M'],[800e6,1200e6,'$800 M – 1.200 M'],[1200e6,0,'Más de $1.200 M']];
+var PREF=null;
+function defPref(){return {done:false,types:[],tu:false,op:'ambas',rent:null,buy:null,city:S.city||'bog',where:'',zone:'',near:null,beds:0,imp:[]}}
+function loadPref(){try{var r=JSON.parse(localStorage.getItem('habita.pref')||'null');if(r&&typeof r==='object')PREF=Object.assign(defPref(),r)}catch(e){PREF=null}}
+function savePref(){try{localStorage.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
+function hasPlan(){return !!(PREF&&PREF.done)}
+function crit(op){
+  op=op||S.op;
+  var c={op:op,types:[],budget:0,beds:0,zones:[],near:null,needs:[],pets:false,furn:false,inc:false,quiet:false,safe:false,people:0,park:false,has:false};
+  function need(k){if(c.needs.indexOf(k)<0)c.needs.push(k)}
+  if(hasPlan()){
+    c.types=PREF.types.slice();
+    var b=op==='arriendo'?PREF.rent:PREF.buy;c.budget=(b&&b[1])||0;
+    c.beds=PREF.beds||0;
+    if(PREF.where==='zona'&&PREF.zone)c.zones=[PREF.zone];
+    if(PREF.where==='near'&&PREF.near)c.near=PREF.near;
+    PREF.imp.forEach(function(k){
+      if(k==='transporte'||k==='universidad'||k==='parque'||k==='gimnasio'||k==='salud'||k==='colegio')need(k);
+      else if(k==='comercial'){need('restaurantes');need('supermercado')}
+      else if(k==='mascotas')c.pets=true;else if(k==='amoblado')c.furn=true;else if(k==='servicios')c.inc=true;
+      else if(k==='seguridad')c.safe=true;else if(k==='tranquilo')c.quiet=true;
+    });
+  }
+  if(op===S.op){
+    if(S.type!=='todos')c.types=[S.type];else if(S.typeSet.length)c.types=S.typeSet.slice();
+    if(S.max)c.budget=S.max;
+    if(S.beds)c.beds=S.beds;
+    if(S.zones.length)c.zones=S.zones.slice();
+    if(S.nearZone)c.near={z:S.nearZone,n:S.nearName};
+    S.needs.forEach(need);
+    if(S.f.pets)c.pets=true;if(S.f.furn)c.furn=true;if(S.f.inc)c.inc=true;if(S.f.park)c.park=true;
+    if(S.people)c.people=S.people;
+    if(S.quiet)c.quiet=true;
+  }
+  var groups=[c.types.length,c.budget,c.beds,c.zones.length||c.near,c.needs.length,c.pets||c.furn||c.inc||c.quiet||c.safe||c.park,c.people].filter(Boolean).length;
+  c.has=hasPlan()?groups>0:groups>=2;
+  return c;
+}
+function compat(p,c){
+  c=c||crit(p.op);
+  if(!c.has)return null;
+  var W=0,E=0,pros=[],cons=[],n=nearOf(p);
+  function add(w,e,pro,con){W+=w;E+=w*e;if(e>=.75&&pro)pros.push([w*e,pro]);else if(e<.6&&con)cons.push([w*(1-e),con])}
+  var has=function(t){return p.tags.indexOf(t)>-1};
+  if(c.budget){var r=p.price/c.budget;add(22,r<=1?1:r<=1.1?.6:r<=1.25?.25:0,'Dentro de tu presupuesto','Supera tu presupuesto en '+Math.round((r-1)*100)+'%')}
+  if(c.types.length){var ok=c.types.indexOf(p.t)>-1;add(14,ok?1:0,'Es el tipo de vivienda que buscas','Es '+TL[p.t].toLowerCase()+', no lo que buscas')}
+  if(c.beds&&p.t!=='habitacion'){add(10,p.beds>=c.beds?1:p.beds===c.beds-1?.4:0,'Tiene las '+c.beds+(c.beds===1?' habitación':' habitaciones')+' que necesitas','Tiene '+p.beds+(p.beds===1?' habitación':' habitaciones')+' y necesitas '+c.beds)}
+  if(c.people){var cp=capOf(p);add(8,cp>=c.people?1:0,'Cabe para '+c.people+(c.people===1?' persona':' personas'),'Está pensada para '+cp+(cp===1?' persona':' personas'))}
+  if(c.near){var km=zoneKm(p,c.near.z);add(18,km<=1.5?1:km<=3?.75:km<=6?.35:0,'A '+distTxt(km)+' de '+c.near.n,'Queda a '+distTxt(km)+' de '+c.near.n)}
+  if(c.zones.length){var inz=c.zones.indexOf(p.z)>-1;add(14,inz?1:.2,'Está en '+Z[p.z].n,'Está fuera de tu zona ('+Z[p.z].n+')')}
+  var nw=Math.min(8,24/Math.max(1,c.needs.length));
+  c.needs.forEach(function(k){var m=n[k].m;add(nw,clamp(1-(m-300)/1500,0,1),CATS[k]+' a '+walk(m)+' min a pie',CATS[k]+' lejos ('+walk(m)+' min a pie)')});
+  if(c.pets)add(12,has('mascotas')?1:0,'Acepta mascotas','No indica que acepte mascotas');
+  if(c.furn)add(8,(has('amoblado')||p.furn)?1:0,'Viene amoblado','Sin amoblar');
+  if(c.inc)add(8,(has('servicios incluidos')||p.inc)?1:0,'Servicios incluidos','Servicios aparte');
+  if(c.safe)add(6,has('seguridad')?1:.3,'Cuenta con seguridad','No indica vigilancia');
+  if(c.quiet)add(6,has('tranquilo')?1:.4,'Zona tranquila',null);
+  if(c.park)add(5,p.park?1:0,'Incluye parqueadero','No tiene parqueadero');
+  if(!W)return null;
+  pros.sort(function(a,b){return b[0]-a[0]});cons.sort(function(a,b){return b[0]-a[0]});
+  return {pct:clamp(Math.round(E/W*100),35,99),pros:pros.map(function(x){return x[1]}),cons:cons.map(function(x){return x[1]})};
+}
+function whyList(r,nPro,nCon){
+  return r.pros.slice(0,nPro).map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+r.cons.slice(0,nCon).map(function(t){return '<li class="no">'+esc(t)+'</li>'}).join('');
+}
+function compatCard(p){
+  var r=compat(p,S.cr||crit());
+  if(!r)return '';
+  return '<div class="cmp-box"><p class="cmp-line"><b>'+r.pct+'%</b> compatible contigo</p><button type="button" class="why-t" data-act="why" aria-expanded="false">¿Por qué te la recomendamos?</button><ul class="cmp-list" hidden>'+whyList(r,3,2)+'</ul></div>';
+}
+function nearTxt(p){
+  if(S.nearZone){return ' · a '+distTxt(zoneKm(p,S.nearZone))+' de '+S.nearName}
+  var dk=distKm(p);return dk!==null?' · a '+distTxt(dk):'';
+}
 function card(p){
-  var fav=!!S.fav[p.id],dk=distKm(p);
+  var fav=!!S.fav[p.id];
   return '<article class="card'+(S.sel===p.id?' on':'')+'" data-act="open" data-id="'+p.id+'" data-card="'+p.id+'"><div class="art">'+art(p)+badgeFor(p)+
-    '<button class="fav" data-act="fav" data-id="'+p.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de favoritos':'Guardar en favoritos')+'">'+ic('heart',18)+'</button></div>'+
-    '<div class="cb"><p class="price">'+priceHTML(p)+'</p><p class="spec">'+specLine(p)+'</p>'+
-    '<p class="loc">'+esc(Z[p.z].n)+', '+CITY[Z[p.z].c]+(dk!==null?' · a '+distTxt(dk):'')+'</p></div></article>';
+    '<button class="fav" data-act="fav" data-id="'+p.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de Mis opciones':'Guardar en Mis opciones')+'">'+ic('heart',18)+'</button></div>'+
+    '<div class="cb"><p class="price">'+priceHTML(p)+'</p>'+
+    '<p class="loc">'+esc(Z[p.z].n)+', '+CITY[Z[p.z].c]+nearTxt(p)+'</p><p class="spec">'+specLine(p)+'</p>'+compatCard(p)+'</div></article>';
 }
 
 /* ---------- mapa: esquematico (web/Android) y nativo (iPhone) ---------- */
@@ -1043,10 +1217,10 @@ function renderExplore(keep){
   var items=filtered();S.items=items;
   var where=S.me?' cerca de ti':' en '+CITY[S.city];
   $('#count').textContent=items.length+(items.length===1?' vivienda':' viviendas')+(S.op==='venta'?' en venta':' en arriendo');
-  $('#countSub').textContent=S.only?'Resultados de Habi':S.onlyFav?'Solo tus favoritos':S.me?'Cerca de ti, en '+CITY[S.city]:'En '+CITY[S.city];
-  $('#grid').innerHTML=items.length?items.map(card).join(''):'<div class="empty"><h3>No hay resultados con esos filtros</h3><p>Quita el límite de precio o cambia el tipo de vivienda para ver más opciones.</p><p style="margin-top:14px"><button class="btn" data-act="clear">Limpiar filtros</button></p></div>';
+  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo Mis opciones':S.me?'Cerca de ti, en '+CITY[S.city]:(S.sort==='rel'&&S.cr&&S.cr.has?'Ordenadas por compatibilidad contigo · ':'')+CITY[S.city];
+  $('#grid').innerHTML=items.length?items.map(card).join(''):'<div class="empty"><h3>No hay viviendas con esos filtros</h3><p>Quita el límite de precio, cambia el tipo de vivienda o prueba otra ciudad.</p><p style="margin-top:14px"><button class="btn" data-act="clear">Limpiar filtros</button></p></div>';
   $('#favN').textContent=Object.keys(S.fav).length;
-  $('#fCity').value=S.city;
+  syncFilters();
   if(S.sel&&!items.some(function(p){return p.id===S.sel}))S.sel=null;
   renderMap(!keep);
   sheetSet();
@@ -1070,7 +1244,7 @@ function locateStart(manual){
     Object.keys(CITYC).forEach(function(k){var d=hav(c.latitude,c.longitude,CITYC[k][0],CITYC[k][1]);if(d<bd){bd=d;best=k}});
     if(bd>80){if(manual)toast('Estás lejos de las ciudades de la demo (Bogotá, Medellín y Cali)');return}
     S.me={lat:c.latitude,lng:c.longitude};S.city=best;
-    if(!S.sortUser){S.sort='near';$('#fSort').value='near'}
+    if(!S.sortUser&&!(S.cr&&S.cr.has)){S.sort='near';$('#fSort').value='near'}
     var nm=nmPlugin();if(nm&&nm.setUserLocation)nm.setUserLocation({enabled:true}).catch(noop);
     renderExplore();
     if(manual)toast('Mostrando viviendas cerca de ti');
@@ -1093,30 +1267,81 @@ function ring(v){
   return '<svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="26" fill="none" stroke="var(--surface-2)" stroke-width="7"/><circle cx="32" cy="32" r="26" fill="none" stroke="var(--brand)" stroke-width="7" stroke-linecap="round" stroke-dasharray="'+d+' '+c.toFixed(1)+'" transform="rotate(-90 32 32)"/></svg>';
 }
 function scoreWord(v){return v>=80?'Muy completo: casi todo queda a pocos minutos a pie.':v>=60?'Buen entorno: lo esencial queda cerca.':'Entorno más tranquilo: algunos servicios requieren transporte.'}
-function detail(p){
-  var z=Z[p.z],n=nearOf(p),sc=envScore(p),iv=inv(p),fav=!!S.fav[p.id];
-  var h='<button class="xbtn" data-act="close" aria-label="Cerrar">'+ic('x',20)+'</button><div class="m-art">'+art(p)+'</div><div class="m-body">';
-  h+='<div class="m-top"><div><p class="kicker" style="color:var(--brand)">'+TL[p.t]+' · '+(p.op==='venta'?'En venta':'En arriendo')+'</p><h2>'+esc(p.title)+'</h2><p class="loc" style="margin-top:6px">'+z.n+', '+CITY[z.c]+' · Estrato '+p.est+'</p></div><p class="price">'+priceHTML(p)+'</p></div>';
-  h+='<div class="specs"><div><span>Área</span><b>'+p.area+' m²</b></div><div><span>Habitaciones</span><b>'+p.beds+'</b></div><div><span>Baños</span><b>'+(p.t==='residencia'&&!p.baths?'Compartido':p.baths)+'</b></div><div><span>Parqueadero</span><b>'+(p.park?p.park:'No')+'</b></div></div>';
-  h+='<div><p>'+esc(p.d)+'</p><ul class="near" style="margin-top:10px">'+p.tags.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>'+(p.src?'<p class="fine" style="margin-top:10px">Fuente: '+esc(p.src)+(p.url?' · <a href="'+esc(p.url)+'" target="_blank" rel="noopener" data-map="1" style="color:var(--brand)">Ver anuncio original</a>':'')+'</p>':'')+'</div>';
-  h+='<section class="m-sec"><h3>Lo que hay a tu alrededor</h3><div class="env"><div>'+radial(p)+'</div><div><div class="scoreRow">'+ring(sc)+'<div><b>'+sc+'/100</b><span>'+scoreWord(sc)+'</span></div></div><ul class="envlist">';
-  Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).forEach(function(c){h+='<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie · '+N0.format(n[c].m)+' m</span></div></li>'});
-  h+='</ul></div></div></section>';
-  if(p.op==='venta'){
-    h+='<section class="invbox"><h3 style="font-size:20px">Mirada de inversión</h3><div class="mets"><div class="met"><b class="good">'+pct(iv.yld)+'</b><span>Rentabilidad bruta anual</span></div><div class="met"><b>'+pct(p.g)+'</b><span>Valorización anual estimada</span></div><div class="met"><b>'+N1.format(iv.m2/1e6)+' M/m²</b><span>Precio por m²</span></div><div class="met"><b class="'+(iv.diff<=0?'good':'warn')+'">'+(iv.diff>0?'+':'')+N0.format(iv.diff*100)+'%</b><span>Frente al promedio de la zona ('+N1.format(z.m2)+' M/m²)</span></div></div></section>';
+function specsHTML(p){
+  function sp(l,v){return '<div><span>'+l+'</span><b>'+v+'</b></div>'}
+  if(p.t==='habitacion')return '<div class="specs">'+sp('Tipo',p.room==='compartida'?'Compartida':'Privada')+sp('Baño',p.bath==='privado'?'Privado':'Compartido')+sp('Servicios',p.inc?'Incluidos':'Aparte')+sp('Amoblada',p.furn?'Sí':'No')+'</div>';
+  if(p.t==='obra')return '<div class="specs">'+sp('Desde',p.area+' m²')+sp('Entrega',p.obra.deliv)+sp('Avance',p.obra.progress+'%')+sp('Por m² en gris',N1.format(p.obra.pm2/1e6)+' M')+'</div>';
+  return '<div class="specs">'+sp('Área',p.area+' m²')+sp('Habitaciones',p.beds)+sp('Baños',p.baths)+sp('Parqueadero',p.park?p.park:'No')+'</div>';
+}
+function roomHTML(p){
+  return '<section class="m-sec"><h3>Sobre la habitación</h3><dl class="facts"><div><dt>Tipo</dt><dd>'+(p.room==='compartida'?'Compartida (para '+p.beds+')':'Privada')+'</dd></div><div><dt>Baño</dt><dd>'+(p.bath==='privado'?'Privado':'Compartido')+'</dd></div><div><dt>Servicios</dt><dd>'+(p.inc?'Incluidos':'No incluidos')+'</dd></div><div><dt>Amoblada</dt><dd>'+(p.furn?'Sí':'No')+'</dd></div></dl>'+
+    (p.rules&&p.rules.length?'<h4 class="sec-h" style="margin-top:14px">Reglas de la casa</h4><ul class="near">'+p.rules.map(function(r){return '<li>'+esc(r)+'</li>'}).join('')+'</ul>':'')+'</section>';
+}
+function costsHTML(p){
+  function f(l,v){return '<div><dt>'+l+'</dt><dd>'+v+'</dd></div>'}
+  var h='';
+  if(p.op==='arriendo'){
+    h+=f('Arriendo mensual',money(p.price));
+    h+=f('Para entrar (depósito + primer mes)',money(p.price*2));
+    if(p.t!=='habitacion')h+=f('Precio por m²',money(p.price/p.area));
+    else h+=f('Servicios',p.inc?'Incluidos':'Se pagan aparte');
+  }else{
+    var iv=inv(p);
+    h+=f('Precio',money(p.price));
+    h+=f('Precio por m²',money(iv.m2));
+    h+=f('Frente a la zona',(iv.diff>0?'+':'')+N0.format(iv.diff*100)+'% ('+N1.format(Z[p.z].m2)+' M/m²)');
+    h+=f('Cuota inicial (30%)',money(p.price*.3));
   }
-  h+='<div class="cta"><button class="btn" data-act="visit" data-id="'+p.id+'">Agendar visita</button><button class="btn alt" data-act="fav" data-id="'+p.id+'" data-keep="1">'+(fav?'Quitar de favoritos':'Guardar en favoritos')+'</button>'+(p.op==='venta'?'<button class="btn sun" data-act="simulate" data-id="'+p.id+'">Simular inversión</button>':'')+'<button class="btn alt" data-act="mgoal" data-id="'+p.id+'">Crear meta de ahorro</button>'+mapBtn(coords(p)[0],coords(p)[1],p.title)+'</div><p class="fine" style="margin:0">Ubicación aproximada: '+coords(p)[0]+', '+coords(p)[1]+'. La dirección exacta se comparte al agendar la visita.</p></div>';
+  return '<section class="m-sec"><h3>Costos básicos</h3><dl class="facts">'+h+'</dl></section>';
+}
+function obraBody(o){
+  var q=S.Q[o.id],lv=LEVELS[q.l],gris=o.pm2*q.a,fin=lv.c*q.a,tot=gris+fin;
+  var cur=Math.min(4,Math.floor(o.progress/20)),names=['Cimentación','Estructura','Mampostería','Entrega en gris','Acabados'];
+  var st=names.map(function(n,i){var f=clamp((o.progress-i*20)/20,0,1)*100;return '<div class="stage'+(i===cur?' cur':'')+'"><i><b style="width:'+f.toFixed(0)+'%"></b></i><span>'+n+'</span></div>'}).join('');
+  var ini=gris*o.ini/100;
+  var h='<section class="m-sec"><h3>Obra gris: avance y cotizador</h3><div class="o-main" style="padding:0"><p class="loc">'+o.builder+'</p>';
+  h+='<div><p class="qdesc" style="margin-bottom:6px"><b style="color:var(--ink)">'+o.progress+'% de avance.</b> Etapa actual: '+names[cur]+'.</p><div class="stages">'+st+'</div></div>';
+  h+='<dl class="facts"><div><dt>Desde (en gris)</dt><dd>'+mm(o.pm2*o.areas[0])+'</dd></div><div><dt>Áreas</dt><dd>'+o.areas.join(' · ')+' m²</dd></div><div><dt>Precio por m² en gris</dt><dd>'+N1.format(o.pm2/1e6)+' M</dd></div><div><dt>Entrega</dt><dd>'+o.deliv+'</dd></div></dl>';
+  h+='<div class="quote"><h4>Cotiza tu apartamento</h4><div class="qrow"><span>Área</span>'+o.areas.map(function(a){return '<button class="chip" data-act="oarea" data-id="'+o.id+'" data-v="'+a+'" aria-pressed="'+(q.a===a)+'">'+a+' m²</button>'}).join('')+'</div>';
+  h+='<div class="qrow"><span>Acabados</span>'+Object.keys(LEVELS).map(function(k){return '<button class="chip" data-act="olevel" data-id="'+o.id+'" data-v="'+k+'" aria-pressed="'+(q.l===k)+'">'+LEVELS[k].l+'</button>'}).join('')+'</div><p class="qdesc">'+lv.d+'</p>';
+  h+='<div class="qtab"><div><span>Obra gris ('+q.a+' m²)</span><b>'+money(gris)+'</b></div><div><span>Acabados ('+(lv.c?N1.format(lv.c/1e6)+' M/m²':'sin acabados')+')</span><b>'+money(fin)+'</b></div><div><span>Separación</span><b>'+money(o.sep)+'</b></div><div><span>Cuota inicial '+o.ini+'% en '+o.cuotas+' cuotas</span><b>'+money(Math.max(0,ini-o.sep)/o.cuotas)+' /mes</b></div><div class="tot" style="grid-column:1/-1"><span>Costo total estimado (obra gris + acabados)</span><b>'+money(tot)+'</b></div></div>';
+  return h+'<div class="cta"><button class="btn" data-act="quote" data-id="'+o.id+'">Solicitar asesoría</button></div></div></div></section>';
+}
+function financeHTML(p){
+  var z=Z[p.z],iv=inv(p);
+  if(p.t==='obra')return '<h4 class="sec-h">Análisis financiero</h4><div class="invbox"><div class="mets"><div class="met"><b class="good">'+p.obra.roi+'</b><span>Rentabilidad estimada al entregar</span></div><div class="met"><b>'+N1.format(p.obra.pm2/1e6)+' M/m²</b><span>Precio por m² en gris</span></div></div></div>';
+  if(p.op!=='venta'||!p.rent)return '';
+  return '<h4 class="sec-h">Análisis financiero</h4><div class="invbox"><div class="mets"><div class="met"><b class="good">'+pct(iv.yld)+'</b><span>Rentabilidad bruta anual</span></div><div class="met"><b>'+pct(p.g)+'</b><span>Valorización anual estimada</span></div><div class="met"><b>'+N1.format(iv.m2/1e6)+' M/m²</b><span>Precio por m²</span></div><div class="met"><b class="'+(iv.diff<=0?'good':'warn')+'">'+(iv.diff>0?'+':'')+N0.format(iv.diff*100)+'%</b><span>Frente al promedio de la zona ('+N1.format(z.m2)+' M/m²)</span></div></div><div class="cta"><button class="btn sm2" data-act="simulate" data-id="'+p.id+'">Abrir simulador de crédito</button></div></div>';
+}
+function detail(p){
+  var z=Z[p.z],n=nearOf(p),sc=envScore(p),fav=!!S.fav[p.id],r=compat(p,crit(p.op));
+  var h='<button class="xbtn" data-act="close" aria-label="Cerrar">'+ic('x',20)+'</button><div class="m-art">'+art(p)+'</div><div class="m-body">';
+  h+='<div class="m-top"><div><p class="kicker" style="color:var(--brand)">'+TL[p.t]+' · '+(p.t==='obra'?'Entrega '+p.obra.deliv:p.op==='venta'?'En venta':'En arriendo')+'</p><h2>'+esc(p.title)+'</h2><p class="loc" style="margin-top:6px">'+z.n+', '+CITY[z.c]+' · Estrato '+p.est+'</p></div><p class="price">'+priceHTML(p)+'</p></div>';
+  h+=specsHTML(p);
+  h+='<div><p>'+esc(p.d)+'</p><ul class="near" style="margin-top:10px">'+p.tags.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>'+(p.src?'<p class="fine" style="margin-top:10px">Fuente: '+esc(p.src)+(p.url?' · <a href="'+esc(p.url)+'" target="_blank" rel="noopener" data-map="1" style="color:var(--brand)">Ver anuncio original</a>':'')+'</p>':'')+'</div>';
+  if(r)h+='<section class="m-sec why-sec"><h3>¿Por qué te la recomendamos?</h3><p class="cmp-line big"><b>'+r.pct+'%</b> compatible contigo</p><ul class="cmp-list open">'+whyList(r,6,4)+'</ul></section>';
+  else h+='<section class="m-sec why-sec"><h3>¿Es para ti?</h3><p style="color:var(--muted)">Responde 6 preguntas rápidas y te mostramos qué tan compatible es cada vivienda con lo que buscas.</p><div class="cta" style="margin-top:10px"><button class="btn sm2" data-act="qzopen">Personalizar Habita</button></div></section>';
+  if(p.t==='habitacion')h+=roomHTML(p);
+  if(p.t==='obra')h+=obraBody(p.obra);
+  h+='<section class="m-sec"><h3>Qué hay cerca</h3><div class="scoreRow">'+ring(sc)+'<div><b>'+sc+'/100</b><span>'+scoreWord(sc)+'</span></div></div><ul class="envlist">';
+  Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).slice(0,6).forEach(function(c){h+='<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie · '+N0.format(n[c].m)+' m</span></div></li>'});
+  h+='</ul></section>';
+  if(p.t!=='obra')h+=costsHTML(p);
+  var fin=financeHTML(p);
+  h+='<details class="more"><summary>Más información</summary><div class="more-b"><h4 class="sec-h">Mapa de comodidades</h4><div class="env"><div>'+radial(p)+'</div><ul class="envlist" style="grid-template-columns:minmax(0,1fr)">'+Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).map(function(c){return '<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie</span></div></li>'}).join('')+'</ul></div>'+fin+'</div></details>';
+  h+='<div class="cta"><button class="btn" data-act="visit" data-id="'+p.id+'">Agendar visita</button><button class="btn alt" data-act="fav" data-id="'+p.id+'" data-keep="1">'+(fav?'Quitar de Mis opciones':'Guardar en Mis opciones')+'</button><button class="btn alt" data-act="mgoal" data-id="'+p.id+'">Crear meta de ahorro</button>'+mapBtn(coords(p)[0],coords(p)[1],p.title)+'</div><p class="fine" style="margin:0">Ubicación aproximada: '+coords(p)[0]+', '+coords(p)[1]+'. La dirección exacta se comparte al agendar la visita.</p></div>';
   return h;
 }
 var lastFocus=null;
-function openDetail(id){
+function openDetail(id,keep){
   var p=P.filter(function(x){return x.id===id})[0];if(!p)return;
-  lastFocus=document.activeElement;
+  var m=$('#modal'),top=m.scrollTop;
+  if(!keep)lastFocus=document.activeElement;
   $('#panel').innerHTML=detail(p);
-  $('#modal').hidden=false;$('#modal').scrollTop=0;
+  m.hidden=false;m.scrollTop=keep?top:0;
   document.body.style.overflow='hidden';nmSync();
-  var b=$('.xbtn');if(b)b.focus();
-  $('#modal').dataset.id=id;
+  if(!keep){var b=$('.xbtn');if(b)b.focus()}
+  m.dataset.id=id;
 }
 function closeDetail(){
   $('#modal').hidden=true;document.body.style.overflow='';nmSync();
@@ -1127,7 +1352,7 @@ function toast(m){var t=$('#toast');t.textContent=m;t.hidden=false;clearTimeout(
 
 /* ---------- inversion ---------- */
 function invItems(){
-  var l=P.filter(function(p){return p.op==='venta'});
+  var l=P.filter(function(p){return p.op==='venta'&&p.rent});
   var key=S.invSort;
   l.sort(function(a,b){
     if(key==='yield')return inv(b).yld-inv(a).yld;
@@ -1190,30 +1415,13 @@ function fillSim(){
     '<p class="fine">Rentabilidad bruta '+pct(iv.yld)+', retorno sobre tu cuota inicial '+(isFinite(coc)?pct(coc):'—')+' al año. Proyección con valorización de '+pct(p.g)+' anual. Es una estimación ilustrativa.</p>';
 }
 
-/* ---------- obras en gris ---------- */
-function obraCard(o){
-  var q=S.Q[o.id],lv=LEVELS[q.l],gris=o.pm2*q.a,fin=lv.c*q.a,tot=gris+fin;
-  var cur=Math.min(4,Math.floor(o.progress/20)),names=['Cimentación','Estructura','Mampostería','Entrega en gris','Acabados'];
-  var st=names.map(function(n,i){var f=clamp((o.progress-i*20)/20,0,1)*100;return '<div class="stage'+(i===cur?' cur':'')+'"><i><b style="width:'+f.toFixed(0)+'%"></b></i><span>'+n+'</span></div>'}).join('');
-  var ini=gris*o.ini/100;
-  var h='<article class="obra"><div class="art">'+art({id:o.id,t:'obra'})+'<span class="badge sun">Entrega '+o.deliv+'</span></div><div class="o-main"><div><h3>'+o.name+'</h3><p class="loc">'+Z[o.z].n+', '+CITY[o.city]+' · '+o.builder+'</p><p style="margin-top:6px">'+o.desc+'</p></div>';
-  h+='<div><p class="qdesc" style="margin-bottom:6px"><b style="color:var(--ink)">'+o.progress+'% de avance.</b> Etapa actual: '+names[cur]+'.</p><div class="stages">'+st+'</div></div>';
-  h+='<dl class="facts"><div><dt>Desde (en gris)</dt><dd>'+mm(o.pm2*o.areas[0])+'</dd></div><div><dt>Áreas</dt><dd>'+o.areas.join(' · ')+' m²</dd></div><div><dt>Precio por m² en gris</dt><dd>'+N1.format(o.pm2/1e6)+' M</dd></div><div><dt>Rentabilidad estimada</dt><dd>'+o.roi+'</dd></div></dl>';
-  h+='<div class="quote"><h4>Cotiza tu apartamento</h4><div class="qrow"><span>Área</span>'+o.areas.map(function(a){return '<button class="chip" data-act="oarea" data-id="'+o.id+'" data-v="'+a+'" aria-pressed="'+(q.a===a)+'">'+a+' m²</button>'}).join('')+'</div>';
-  h+='<div class="qrow"><span>Acabados</span>'+Object.keys(LEVELS).map(function(k){return '<button class="chip" data-act="olevel" data-id="'+o.id+'" data-v="'+k+'" aria-pressed="'+(q.l===k)+'">'+LEVELS[k].l+'</button>'}).join('')+'</div><p class="qdesc">'+lv.d+'</p>';
-  h+='<div class="qtab"><div><span>Obra gris ('+q.a+' m²)</span><b>'+money(gris)+'</b></div><div><span>Acabados ('+(lv.c?N1.format(lv.c/1e6)+' M/m²':'sin acabados')+')</span><b>'+money(fin)+'</b></div><div><span>Separación</span><b>'+money(o.sep)+'</b></div><div><span>Cuota inicial '+o.ini+'% en '+o.cuotas+' cuotas</span><b>'+money(Math.max(0,ini-o.sep)/o.cuotas)+' /mes</b></div><div class="tot" style="grid-column:1/-1"><span>Inversión total estimada (obra gris + acabados)</span><b>'+money(tot)+'</b></div></div>';
-  h+='<div class="cta"><button class="btn" data-act="quote" data-id="'+o.id+'">Solicitar asesoría</button></div></div></div></article>';
-  return h;
-}
-function renderObras(){$('#obras').innerHTML=OBRAS.map(obraCard).join('')}
-
 /* ---------- asistente IA (reglas locales) ---------- */
 function parseNum(s){
   if(/^\d{1,3}(\.\d{3})+(,\d+)?$/.test(s))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(',','.');
   return parseFloat(s);
 }
 function parsePrompt(text){
-  var t=norm(text),it={op:null,budget:null,beds:null,types:[],city:null,zones:[],needs:[],pets:false,park:false,quiet:false,furn:false,view:false,invest:false,obra:false,student:false,uni:null,near:false},m;
+  var t=norm(text),it={op:null,budget:null,beds:null,types:[],city:null,zones:[],needs:[],pets:false,park:false,quiet:false,furn:false,view:false,invest:false,obra:false,student:false,uni:null,near:false,people:0},m;
   if(/arrend|alquil|rentar|mensual|al mes|por mes/.test(t))it.op='arriendo';
   if(/compr|venta|adquirir|invert|inversion|rentabil/.test(t))it.op='venta';
   m=t.match(/(\d+(?:[.,]\d+)*)\s*mil millones/);
@@ -1229,13 +1437,18 @@ function parsePrompt(text){
   if(/\bcasa/.test(t))it.types.push('casa');
   if(/apartamento|\bapto|\bapt\b/.test(t))it.types.push('apto');
   if(/apartaestudio|\bestudio\b|\bloft\b/.test(t))it.types.push('apartaestudio');
-  if(/residencia|estudiantil|compartid/.test(t))it.types.push('residencia');
+  if(/(busco|quiero|necesito|arrendar|alquilar|rentar|tomar|encontrar)\s+(una\s+)?(habitacion|pieza|cuarto)\b|habitacion\s+(individual|privada|compartida|amoblada|en\s+(un|una)|con\s+bano|para)|\bresidencia|estudiantil|compartid|\bpieza\b|cuarto\s+en|\bcuarto\s+(amoblado|privado)/.test(t))it.types.push('habitacion');
+  var pw={un:1,uno:1,una:1,dos:2,tres:3,cuatro:4,cinco:5};
+  m=t.match(/\b(?:para|somos|con)\s+(\d+|un|uno|una|dos|tres|cuatro|cinco)\s+(?:personas|adultos|estudiantes|amigos|companeros)/);
+  if(m)it.people=pw[m[1]]||parseInt(m[1],10)||0;
+  else if(/para mi y (?:mi )?(?:pareja|novia|novio|esposa|esposo|amigo|amiga)|en pareja|mi pareja y yo/.test(t))it.people=2;
+  else if(/vivir sol[oa]|vivo sol[oa]|para mi sol[oa]|una persona/.test(t))it.people=1;
   if(/estudiante|universitari|universidad|semestre|clases/.test(t))it.student=true;
-  if(it.student&&!it.types.length)it.types=['residencia','apartaestudio'];
+  if(it.student&&!it.types.length)it.types=['habitacion','apartaestudio'];
   if(it.student&&!it.op)it.op='arriendo';
   Object.keys(CITYKW).forEach(function(c){CITYKW[c].forEach(function(k){if(new RegExp('\\b'+k+'\\b').test(t))it.city=c})});
   Object.keys(Z).forEach(function(k){Z[k].kw.forEach(function(w){if(new RegExp('\\b'+w+'\\b').test(t)){if(it.zones.indexOf(k)<0)it.zones.push(k);if(!it.city)it.city=Z[k].c;if(/andes|uniandes|javeriana|nacional|rosario|eafit|upb|icesi|univalle|externado/.test(w)||/universidad|uni\b/.test(w))it.uni=w}})});
-  var needs={transporte:/transmilenio|transporte|\bbus\b|metro|sitp|mio\b/,supermercado:/supermercado|mercado|compras|tiendas?/,parque:/parque|verde|trotar|correr|caminar|naturaleza|perro|gato|mascota/,salud:/hospital|clinica|salud|medic/,gimnasio:/gimnasio|\bgym\b|ejercicio|deporte/,restaurantes:/restaurante|comer|rumba|bares|cafes?\b|vida nocturna/,colegio:/colegio|hijos|ninos|ninas|escuela|familia/,universidad:/universidad|campus|clases|estudiar|estudiante/};
+  var needs={transporte:/transmilenio|transporte|\bbus\b|metro|sitp|mio\b/,supermercado:/supermercado|mercado|compras|tiendas?/,parque:/parque|verde|trotar|correr|caminar|naturaleza|perro|gato/,salud:/hospital|clinica|salud|medic/,gimnasio:/gimnasio|\bgym\b|ejercicio|deporte/,restaurantes:/restaurante|comer|rumba|bares|cafes?\b|vida nocturna/,colegio:/colegio|hijos|ninos|ninas|escuela|familia/,universidad:/universidad|campus|clases|estudiar|estudiante/};
   Object.keys(needs).forEach(function(c){if(needs[c].test(t))it.needs.push(c)});
   it.pets=/perro|gato|mascota/.test(t);
   it.park=/parqueadero|garaje|carro|vehiculo|camioneta/.test(t);
@@ -1244,59 +1457,11 @@ function parsePrompt(text){
   it.view=/vista|cerros|panoram/.test(t);
   it.invest=/invert|inversion|rentabil|valoriz|retorno|ganancia|renta/.test(t);
   it.obra=/obra gris|en gris|obra negra|construir|acabados|preventa|sobre planos/.test(t);
+  if(it.types.indexOf('habitacion')>-1&&it.beds===1)it.beds=null;
   it.near=/cerca de mi|cerca de donde|mi ubicacion|a mi alrededor|por aqui|cerca de aqui|alrededor de mi/.test(t);
   if(it.invest&&!it.op)it.op='venta';
   if(!it.op&&it.budget)it.op=it.budget<20e6?'arriendo':'venta';
   return it;
-}
-function runAI(text){
-  var it=parsePrompt(text),notes=[],level=0,res=[],budgetK=1;
-  if(it.near&&S.me&&!it.city)it.city=S.city;
-  if(it.near&&!S.me)notes.push('Activa tu ubicación (botón “Cerca de mí” en Explorar) para ordenar por cercanía.');
-  function pass(p){
-    if(it.op&&p.op!==it.op)return false;
-    if(it.city&&Z[p.z].c!==it.city)return false;
-    if(it.types.length&&level<3&&it.types.indexOf(p.t)<0)return false;
-    if(it.zones.length&&level<4&&it.zones.indexOf(p.z)<0){
-      /* una universidad nombrada amplia a la ciudad si no hay coincidencias */
-      return false;
-    }
-    if(it.budget&&p.price>it.budget*budgetK)return false;
-    if(level<1){
-      if(it.beds&&p.t!=='residencia'&&p.beds<it.beds)return false;
-      if(it.pets&&p.tags.indexOf('mascotas')<0&&p.t!=='residencia')return false;
-      if(it.park&&p.t!=='residencia'&&!p.park)return false;
-      if(it.quiet&&p.tags.indexOf('tranquilo')<0)return false;
-    }
-    return true;
-  }
-  var tries=[
-    function(){level=0;budgetK=1},
-    function(){level=1;budgetK=1;notes.push('Relajé habitaciones, mascotas, parqueadero y tranquilidad para encontrar más opciones.')},
-    function(){level=1;budgetK=1.25;notes.push('Amplié el presupuesto un 25% para mostrar opciones cercanas a tu rango.')},
-    function(){level=4;budgetK=1.25;notes.push('Abrí la búsqueda a otras zonas de la ciudad.')}
-  ];
-  for(var k=0;k<tries.length&&!res.length;k++){tries[k]();res=P.filter(pass)}
-  var scored=res.map(function(p){
-    var n=nearOf(p),sc=50,why=[];
-    it.needs.forEach(function(c){
-      var s=clamp(1-(n[c].m-150)/2200,0,1);sc+=s*(40/Math.max(1,it.needs.length));
-      if(n[c].m<=1000)why.push(CATS[c]+': '+n[c].name+', a '+walk(n[c].m)+' min a pie');
-    });
-    if(!it.needs.length)sc+=envScore(p)*0.3;
-    if(it.budget){var r=p.price/it.budget;if(r<=1){sc+=6;why.unshift('Dentro de tu presupuesto ('+money(it.budget)+')')}else why.unshift('Un poco por encima del presupuesto, pero vale la pena mirarla')}
-    if(it.pets&&p.tags.indexOf('mascotas')>-1)why.push('Admite mascotas');
-    if(it.quiet&&p.tags.indexOf('tranquilo')>-1)why.push('Zona tranquila');
-    if(it.furn&&p.tags.indexOf('amoblado')>-1){sc+=5;why.push('Viene amoblada')}
-    if(it.view&&p.tags.indexOf('vista')>-1){sc+=5;why.push('Tiene vista')}
-    if(it.park&&p.park){sc+=3;why.push('Incluye parqueadero')}
-    if(it.uni&&p.tags.indexOf('cerca a universidad')>-1){sc+=6;why.push('Cerca a tu universidad')}
-    if(it.invest&&p.op==='venta'){var iv=inv(p);sc+=clamp(iv.yld-4,0,4)*3;why.push('Rentabilidad bruta '+pct(iv.yld)+(iv.opp?' y precio por debajo de la zona':''))}
-    if(it.near&&S.me){var dk=distKm(p);sc+=clamp(8-dk,0,8)*1.2;why.unshift('A '+distTxt(dk)+' de ti')}
-    return {p:p,score:Math.round(clamp(sc,40,99)),why:why.slice(0,4)};
-  }).sort(function(a,b){return b.score-a.score}).slice(0,4);
-  var obras=(it.invest||it.obra)?OBRAS.filter(function(o){return !it.city||o.city===it.city}):[];
-  return {it:it,res:scored,notes:notes,obras:obras};
 }
 /* ---------- apariencia: tema y paleta ---------- */
 var ACC=[['cobalto','Cobalto','#2159F3','#1239B8'],['coral','Coral','#D93F28','#A5260F'],['esmeralda','Esmeralda','#0B7A5A','#055039'],['violeta','Violeta','#6A3FE0','#4521A8']];
@@ -1331,40 +1496,118 @@ function toggleSettings(){
   if(open){renderSettings();var b=el.querySelector('.iconbtn');if(b)b.focus()}
   nmSync();
 }
-/* ---------- Habi: asistente en chat y fuentes ---------- */
-var SRC=[
- ['db','Catálogo de Habita','Viviendas del catálogo de esta app','ok','Conectado'],
- ['user','Anuncios de propietarios','Lo que se publica con la guía de fotos','ok','Conectado'],
- ['map','Mapas y alrededores','Apple Maps en iPhone y el mapa del sistema en Android','ok','Conectado'],
- ['link','Facebook Marketplace','Facebook no permite leer sus anuncios desde otras apps. Copia el anuncio, pégalo en el chat y Habi lo lee.','man','Traer anuncio'],
- ['store','Fincaraíz, Metrocuadrado y otros portales','Se conectan con un convenio con cada portal','soon','Próximamente']
-];
-S.chat=[];S.imp=null;S.busy=false;
+/* ---------- buscador con IA (reglas locales) ---------- */
 var EXAMPLES=[
- 'Soy estudiante de Los Andes, busco algo para arrendar hasta 2 millones, con transporte y gimnasio cerca.',
- 'Apartamento de 2 habitaciones para comprar por menos de 600 millones, con parque cerca para mi perro.',
- 'Familia con dos hijos, casa en Bogotá hasta 2.000 millones, con colegio y parque cerca, tranquila.',
- 'Quiero invertir en Medellín con 1.000 millones y buen retorno mensual.'
+ 'Apartamento hasta 3 millones, cerca de Los Andes, para dos personas y que acepten mascotas',
+ 'Habitación amoblada con servicios incluidos, máximo 1,5 millones',
+ 'Casa para comprar en Bogotá con 3 habitaciones y parque cerca',
+ 'Obra gris para comprar en Medellín'
 ];
-function renderSources(){
-  $('#srcList').innerHTML=SRC.map(function(s){
-    var imp=P.filter(function(p){return p.src}).length;
-    var d=s[0]==='link'&&imp?s[2]+' Ya traes '+imp+'.':s[2];
-    var tag=s[0]==='link'?'<button class="st man" data-act="importhelp">'+s[4]+'</button>':'<span class="st '+s[3]+'">'+s[4]+'</span>';
-    return '<li><span class="si">'+ic(s[0],18)+'</span><div><b>'+s[1]+'</b><span class="d">'+d+'</span></div>'+tag+'</li>';
-  }).join('');
+S.imp=null;
+function findUni(t){for(var i=0;i<UNIS.length;i++){if(UNIS[i][3].test(t))return UNIS[i]}return null}
+function applyIntent(it,text){
+  var t=norm(text),notes=[];
+  var uni=findUni(t),zones=it.zones.filter(function(z){
+    return Z[z].kw.some(function(w){return !UNIKW.test(w)&&new RegExp('\\b'+w+'\\b').test(t)});
+  });
+  if(it.obra&&it.types.indexOf('obra')<0)it.types.push('obra');
+  if(it.types.length===1&&it.types[0]==='obra'&&!it.op)it.op='venta';
+  if(it.types.length&&it.types.every(function(x){return x==='habitacion'})&&!it.op)it.op='arriendo';
+  S.q='';S.only=null;S.sel=null;S.imp=null;
+  S.aiText=text;
+  S.op=it.op||S.op;
+  S.city=it.city||(uni?Z[uni[2]].c:S.city);
+  S.type=it.types.length===1?it.types[0]:'todos';
+  S.typeSet=it.types.length>1?it.types.slice():[];
+  S.max=it.budget||0;
+  S.beds=(it.beds&&it.types.indexOf('habitacion')<0)?it.beds:0;
+  S.people=it.people||0;
+  S.zones=zones;
+  S.nearZone=uni?uni[2]:null;S.nearName=uni?uni[1]:'';
+  S.needs=it.needs.slice();
+  S.quiet=it.quiet;
+  S.f={pets:it.pets,furn:it.furn,inc:/servicios incluidos|todo incluido/.test(t),park:it.park};
+  Object.keys(S.f).forEach(function(k){if(!S.f[k])delete S.f[k]});
+  S.minArea=0;S.baths=0;S.sort='rel';
+  var understood=it.op||it.types.length||it.budget||it.beds||it.people||it.city||zones.length||uni||it.needs.length||it.pets||it.furn||S.f.inc||it.park||it.quiet;
+  if(!understood){S.q=text;notes.push('No reconocí criterios concretos; busqué esas palabras en los títulos.')}
+  /* si no hay resultados, se relaja de lo menos a lo más importante */
+  var steps=[
+    function(){if(S.zones.length){S.zones=[];return 'Amplié la búsqueda a toda la ciudad.'}},
+    function(){if(S.f.park){delete S.f.park;return 'Quité el parqueadero como requisito.'}},
+    function(){if(S.beds){S.beds=0;return 'Quité el mínimo de habitaciones.'}},
+    function(){if(S.people){S.people=0;return 'Quité el número de personas.'}},
+    function(){if(S.max){S.max=Math.round(S.max*1.25);return 'Subí el presupuesto un 25% para mostrarte opciones cercanas.'}},
+    function(){if(S.f.pets){delete S.f.pets;return 'Mostré también las que no indican mascotas (revisa la compatibilidad).'}},
+    function(){if(S.f.furn||S.f.inc){delete S.f.furn;delete S.f.inc;return 'Quité amoblado y servicios incluidos como requisitos.'}}
+  ];
+  for(var k=0;k<steps.length&&!filtered().length;k++){var n=steps[k]();if(n)notes.push(n)}
+  S.ainotes=notes;
 }
-function logoMini(){return logo(30,'m'+S.chat.length)}
-function renderChat(scroll){
-  $('#chat').innerHTML=S.chat.map(function(m,i){
-    return '<div class="msg '+m.r+'">'+(m.r==='b'?'<span class="av">'+logo(30,'c'+i)+'</span>':'')+'<div class="bub">'+m.h+'</div></div>';
-  }).join('');
-  if(scroll){var last=$('#chat').lastElementChild;if(last&&last.scrollIntoView)try{last.scrollIntoView({block:'end',behavior:'smooth'})}catch(e){}}
+function smartSearch(text){
+  text=(text||'').trim();
+  if(!text){clearSearch();return}
+  var hasUrl=/https?:\/\/\S+/i.test(text),rest=stripUrls(text),mk=/marketplace|facebook|fb\.com|fincaraiz|metrocuadrado|ciencuadras|mercadolibre|mercado libre/i.test(text);
+  if((hasUrl&&rest.length<25)||(mk&&rest.length<25)){
+    S.aiText=text;S.imp=null;S.ainotes=[];S.helpMsg='Vi el enlace, pero '+(/facebook|fb\.com|marketplace/i.test(text)?'Facebook no me deja abrir sus anuncios desde otras apps':'no puedo abrir páginas de otros sitios desde aquí')+'. Abre el anuncio, copia el texto (título, precio y descripción) y pégalo aquí junto al enlace. Yo lo leo y lo agrego a Explorar.';
+    renderAIPanel();return;
+  }
+  S.helpMsg='';
+  if(hasUrl||looksLikeListing(text)){S.aiText=text;S.imp=parseListing(text);S.ainotes=[];renderAIPanel();return}
+  applyIntent(parsePrompt(text),text);
+  syncUI();
 }
-function say(r,h,scroll){S.chat.push({r:r,h:h});renderChat(scroll!==false)}
-function aiHello(){
-  say('b','<p>Hola, soy <b>Habi</b>. Cuéntame qué necesitas y busco entre las viviendas de Habita.</p><p>Puedes hablar de presupuesto, zona, universidad, mascotas o lo que quieras tener cerca. Si viste algo en Facebook Marketplace u otro sitio, pega el anuncio aquí y lo sumo a la búsqueda.</p>',false);
+function clearSearch(){
+  S.aiText='';S.q='';S.imp=null;S.helpMsg='';S.ainotes=[];S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.quiet=false;S.minArea=0;S.baths=0;S.max=0;S.beds=0;S.type='todos';
+  syncUI();
 }
+function syncUI(){
+  setOpButtons(S.op);priceOptions();renderChips();syncFilters();renderAIPanel();renderPlanLine();renderExplore();
+}
+function activeTags(){
+  var t=[];
+  t.push(['Operación',S.op==='venta'?'Comprar':'Arrendar',null]);
+  if(S.type!=='todos')t.push(['Tipo',TL[S.type],'type']);else if(S.typeSet.length)t.push(['Tipo',S.typeSet.map(function(k){return TL[k]}).join(' o '),'type']);
+  if(S.max)t.push(['Precio','hasta '+money(S.max)+(S.op==='arriendo'?' /mes':''),'max']);
+  if(S.beds)t.push(['Habitaciones',S.beds+' o más','beds']);
+  if(S.people)t.push(['Personas',String(S.people),'people']);
+  t.push(['Ciudad',CITY[S.city],null]);
+  if(S.nearZone)t.push(['Cerca de',S.nearName,'near']);
+  if(S.zones.length)t.push(['Zona',S.zones.map(function(z){return Z[z].n}).join(', '),'zones']);
+  if(S.f.pets)t.push(['Mascotas','sí','f.pets']);
+  if(S.f.furn)t.push(['Amoblado','sí','f.furn']);
+  if(S.f.inc)t.push(['Servicios','incluidos','f.inc']);
+  if(S.f.park)t.push(['Parqueadero','sí','f.park']);
+  S.needs.forEach(function(c){t.push(['Cerca',CATS[c],'need:'+c])});
+  return t;
+}
+function renderAIPanel(){
+  var el=$('#aiPanel'),ex=$('#aiEx');
+  if(!S.aiText){el.hidden=true;ex.hidden=false;return}
+  ex.hidden=true;el.hidden=false;
+  var h='';
+  if(S.helpMsg){h='<p class="ai-h">'+ic('asistente',15)+'<b>Habi</b></p><p class="ai-p">'+esc(S.helpMsg)+'</p>'}
+  else if(S.imp){h=impHTML(S.imp)}
+  else{
+    var n=S.items?S.items.length:0;
+    h='<p class="ai-h">'+ic('asistente',15)+'<b>Esto entendí</b><button type="button" class="ai-x" data-act="aiclear">Borrar búsqueda</button></p><div class="understood">'+activeTags().map(function(x){return '<span class="tag"><em>'+x[0]+'</em> '+esc(x[1])+(x[2]?'<button type="button" data-act="untag" data-k="'+x[2]+'" aria-label="Quitar '+esc(x[0])+'">'+ic('x',12)+'</button>':'')+'</span>'}).join('')+'</div>';
+    (S.ainotes||[]).forEach(function(x){h+='<p class="fine" style="margin:4px 0 0">'+esc(x)+'</p>'});
+  }
+  el.innerHTML=h;
+}
+function untag(k){
+  if(k==='type'){S.type='todos';S.typeSet=[]}
+  else if(k==='max')S.max=0;
+  else if(k==='beds')S.beds=0;
+  else if(k==='people')S.people=0;
+  else if(k==='near'){S.nearZone=null;S.nearName=''}
+  else if(k==='zones')S.zones=[];
+  else if(k.indexOf('f.')===0)delete S.f[k.slice(2)];
+  else if(k.indexOf('need:')===0)S.needs=S.needs.filter(function(c){return c!==k.slice(5)});
+  S.ainotes=[];
+  syncUI();
+}
+
 function looksLikeListing(t){
   var n=norm(t);
   if(/\b(busco|quiero|necesito|me gustaria|estoy buscando|quisiera|hasta|maximo|presupuesto|menos de|por debajo|cerca de)\b/.test(n))return false;
@@ -1384,7 +1627,7 @@ function parseListing(text){
   op=op||'arriendo';
   var ty='apto';
   if(/apartaestudio|\bestudio\b|\bloft\b/.test(t))ty='apartaestudio';
-  else if(/habitacion en|residencia|cuarto en|pieza/.test(t)&&!/\d\s*habitaciones/.test(t))ty='residencia';
+  else if(/habitacion en|residencia|cuarto en|pieza|habitacion (?:individual|privada|compartida)/.test(t)&&!/\d\s*habitaciones/.test(t))ty='habitacion';
   else if(/\bcasa\b/.test(t)&&!/apartamento/.test(t))ty='casa';
   var beds=(t.match(/(\d+)\s*(?:habitaciones|habitacion|hab\b|alcobas|alcoba|cuartos)/)||[])[1];
   var baths=(t.match(/(\d+)\s*(?:banos|bano)/)||[])[1];
@@ -1401,7 +1644,8 @@ function parseListing(text){
   title=title.charAt(0).toUpperCase()+title.slice(1);
   var fb=/facebook|fb\.com|marketplace/i.test(text);
   var z=Z[zone];
-  var p={id:'m'+Date.now(),z:zone,t:ty,op:op,title:title,price:price||0,area:parseInt(area,10)||(ty==='casa'?120:ty==='apto'?60:ty==='apartaestudio'?32:15),beds:parseInt(beds,10)||(ty==='casa'?3:ty==='apto'?2:1),baths:baths===undefined?1:parseInt(baths,10),park:/parqueadero|garaje/.test(t)?1:0,est:4,x:clamp(z.x+(rnd(title)-.5)*8,4,96),y:clamp(z.y+(rnd(title+'y')-.5)*8,6,94),tags:tags.length?tags:['nuevo'],d:body.slice(0,260)||'Anuncio importado.',src:fb?'Facebook Marketplace':'Anuncio importado',url:url};
+  var p={id:'m'+Date.now(),z:zone,t:ty,op:op,title:title,price:price||0,area:parseInt(area,10)||(ty==='casa'?120:ty==='apto'?60:ty==='apartaestudio'?32:14),beds:parseInt(beds,10)||(ty==='casa'?3:ty==='apto'?2:1),baths:baths===undefined?1:parseInt(baths,10),park:/parqueadero|garaje/.test(t)?1:0,est:4,x:clamp(z.x+(rnd(title)-.5)*8,4,96),y:clamp(z.y+(rnd(title+'y')-.5)*8,6,94),tags:tags.length?tags:['nuevo'],d:body.slice(0,260)||'Anuncio importado.',src:fb?'Facebook Marketplace':'Anuncio importado',url:url};
+  if(ty==='habitacion'){p.room=/compartid/.test(t)?'compartida':'privada';p.bath=/bano privado|con bano/.test(t)?'privado':'compartido';p.baths=p.bath==='privado'?1:0;p.inc=/servicios incluidos|todo incluido/.test(t)?1:0;p.furn=/amoblad/.test(t)?1:0;p.rules=[]}
   if(op==='venta'&&price){p.rent=Math.round(price*0.0045);p.g=5}
   p._approx=approx;
   return p;
@@ -1410,80 +1654,141 @@ function impHTML(p){
   var rows=[['Tipo',TL[p.t]],['Operación',p.op==='venta'?'Venta':'Arriendo'],['Precio',p.price?money(p.price)+(p.op==='arriendo'?' /mes':''):'No encontré el precio'],['Zona',Z[p.z].n+', '+CITY[Z[p.z].c]+(p._approx?' (aproximada)':'')],['Habitaciones y baños',p.beds+' hab · '+p.baths+' baños'],['Área',p.area+' m²']];
   return '<p>Esto fue lo que leí del anuncio'+(p.src==='Facebook Marketplace'?' de Facebook Marketplace':'')+':</p><div class="imp"><b>'+esc(p.title)+'</b><dl>'+rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl>'+(p.price?'':'<p class="fine" style="margin:0">Sin precio no puedo mostrarlo en el mapa. Pega el anuncio completo.</p>')+'<p class="fine" style="margin:0">Revisa que todo esté bien. Sin foto se ve una ilustración; luego puedes publicar uno propio con fotos desde “Publicar”.</p>'+(p.price?'<div><button class="btn sm2" data-act="impadd">Agregar a Explorar</button></div>':'')+'</div>';
 }
-function aiHTML(out){
-  var it=out.it,tags=[];
-  if(it.op)tags.push(['Operación',it.op==='venta'?'Comprar':'Arrendar']);
-  if(it.types.length)tags.push(['Tipo',it.types.map(function(t){return TL[t]}).join(' o ')]);
-  if(it.budget)tags.push(['Presupuesto','hasta '+money(it.budget)]);
-  if(it.beds)tags.push(['Habitaciones',it.beds+' o más']);
-  if(it.city)tags.push(['Ciudad',CITY[it.city]]);
-  if(it.zones.length)tags.push(['Zona',it.zones.map(function(z){return Z[z].n}).join(', ')]);
-  it.needs.forEach(function(c){tags.push(['Cerca',CATS[c]])});
-  if(it.pets)tags.push(['Mascotas','sí']);
-  if(it.park)tags.push(['Parqueadero','sí']);
-  if(it.quiet)tags.push(['Ambiente','tranquilo']);
-  if(it.invest)tags.push(['Objetivo','inversión']);
-  var n=out.res.length,h='';
-  h+='<p>'+(n?'Encontré '+n+(n===1?' opción que encaja.':' opciones que encajan.'):'No encontré viviendas con eso.')+(tags.length?' Esto entendí:':'')+'</p>';
-  if(tags.length)h+='<div class="understood">'+tags.map(function(t){return '<span class="tag"><em>'+t[0]+'</em> '+esc(t[1])+'</span>'}).join('')+'</div>';
-  out.notes.forEach(function(x){h+='<p class="fine" style="margin-top:6px">'+x+'</p>'});
-  if(!n)h+='<p>Prueba con otra ciudad, un presupuesto mayor o menos requisitos.</p>';
-  out.res.forEach(function(r){
-    var p=r.p;
-    h+='<button class="res" data-act="open" data-id="'+p.id+'"><div class="art">'+art(p)+'</div><div class="res-b"><h3>'+esc(p.title)+'</h3><p class="price" style="font-size:18px">'+priceHTML(p)+'</p><p class="loc">'+specLine(p)+'</p><div class="aff"><i><b style="width:'+r.score+'%"></b></i><span>'+r.score+'%</span></div><ul class="why">'+r.why.slice(0,2).map(function(w){return '<li>'+esc(w)+'</li>'}).join('')+'</ul></div></button>';
-  });
-  if(n)h+='<p style="margin-top:12px"><button class="btn sm2" data-act="aimap">'+ic('map',16)+'Ver en el mapa</button></p>';
-  if(out.obras.length){
-    h+='<p class="fine" style="margin:12px 0 4px">También en obra gris:</p>';
-    out.obras.forEach(function(o){h+='<button class="obmini" data-act="view" data-v="obras"><div class="art">'+art({id:o.id,t:'obra'})+'</div><div><b>'+o.name+' · '+Z[o.z].n+'</b><span>Desde '+money(o.pm2*o.areas[0])+' en gris · entrega '+o.deliv+'</span></div></button>'});
-  }
-  var imp=P.filter(function(p){return p.src}).length;
-  h+='<p class="src-tag" style="margin-top:10px">'+ic('db',13)+'Fuentes: Habita, anuncios de propietarios'+(imp?' y '+imp+(imp===1?' anuncio importado':' anuncios importados'):'')+'</p>';
-  return h;
-}
-function habiReply(text){
-  var hasUrl=/https?:\/\/\S+/i.test(text),rest=stripUrls(text),mk=/marketplace|facebook|fb\.com|fincaraiz|metrocuadrado|ciencuadras|mercadolibre|mercado libre/i.test(text);
-  if((hasUrl&&rest.length<25)||(mk&&rest.length<25)){
-    return '<p>Vi el enlace, pero '+(/facebook|fb\.com|marketplace/i.test(text)?'Facebook no me deja abrir sus anuncios desde otras apps':'no puedo abrir páginas de otros sitios desde aquí')+'.</p><p>Abre el anuncio, copia el texto (título, precio y descripción) y pégalo aquí junto al enlace. Yo lo leo y lo agrego a Explorar.</p>';
-  }
-  if(hasUrl||looksLikeListing(text)){
-    var p=parseListing(text);S.imp=p;return impHTML(p);
-  }
-  var out=runAI(text);S.lastAI=out;return aiHTML(out);
-}
-function doAI(text){
-  text=(text||'').trim();
-  if(!text){toast('Escribe qué estás buscando');$('#aiText').focus();return}
-  if(S.busy)return;
-  S.busy=true;
-  say('u',esc(text));
-  say('b','<span class="typing"><i></i><i></i><i></i></span>');
-  $('#aiText').value='';autoGrow();
-  setTimeout(function(){
-    var h;
-    try{h=habiReply(text)}catch(e){h='<p>Tuve un problema leyendo eso. Prueba de nuevo con otras palabras.</p>'}
-    S.chat[S.chat.length-1]={r:'b',h:h};S.busy=false;renderChat(true);renderSources();
-  },650);
-}
-function autoGrow(){var t=$('#aiText');t.style.height='auto';t.style.height=Math.min(130,t.scrollHeight)+'px'}
-function renderEx(){$('#aiEx').innerHTML=EXAMPLES.map(function(e,i){return '<button type="button" data-act="ex" data-i="'+i+'">'+esc(e)+'</button>'}).join('')}
-function savedImports(){try{return JSON.parse(localStorage.getItem('habita.imp')||'[]')}catch(e){return []}}
+
+function renderEx(){$('#aiEx').innerHTML=EXAMPLES.map(function(e,i){return '<button type="button" class="exb" data-act="ex" data-i="'+i+'">'+esc(e)+'</button>'}).join('')}
+function savedImports(){try{return JSON.parse(localStorage.getItem('habita.imp')||'[]').filter(function(p){return TL[p.t]&&Z[p.z]})}catch(e){return []}}
 function saveImports(){try{localStorage.setItem('habita.imp',JSON.stringify(P.filter(function(p){return p.src}).slice(0,30)))}catch(e){}}
+/* ---------- cuestionario inicial (editable desde Mi plan) ---------- */
+var QN=6;
+function openQuiz(edit){
+  var a=hasPlan()?JSON.parse(JSON.stringify(PREF)):defPref();
+  a.city=a.city||S.city;
+  S.qz={i:0,edit:!!edit,a:a};
+  $('#quiz').hidden=false;document.body.style.overflow='hidden';nmSync();
+  renderQuiz();
+}
+function closeQuiz(){
+  $('#quiz').hidden=true;
+  if($('#modal').hidden)document.body.style.overflow='';
+  nmSync();
+}
+function qOpt(k,v,label,on,extra){
+  return '<button type="button" class="qopt" data-act="qpick" data-k="'+k+'" data-v="'+v+'" aria-pressed="'+!!on+'">'+(extra||'')+label+'</button>';
+}
+function renderQuiz(){
+  var q=S.qz,a=q.a,i=q.i,h='';
+  var dots='';for(var k=0;k<QN;k++)dots+='<i class="'+(k<i?'done':k===i?'cur':'')+'"></i>';
+  h+='<div class="qz-top"><div class="qz-dots" aria-hidden="true">'+dots+'</div><button type="button" class="qz-skip" data-act="qskip">'+(q.edit?'Cerrar':'Saltar por ahora')+'</button></div>';
+  h+='<p class="kicker" style="color:var(--brand)">Pregunta '+(i+1)+' de '+QN+'</p>';
+  if(i===0){
+    h+='<h3>¿Qué estás buscando?</h3><p class="qz-sub">Puedes elegir más de una.</p><div class="qgrid">';
+    Object.keys(TL).forEach(function(k){h+=qOpt('type',k,TL[k],a.types.indexOf(k)>-1,ic(k,22))});
+    h+=qOpt('type','nose','No estoy seguro',!a.types.length&&a.tu,ic('todos',22))+'</div>';
+  }else if(i===1){
+    h+='<h3>¿Qué quieres hacer?</h3><div class="qgrid c3">'+qOpt('op','arriendo','Arrendar',a.op==='arriendo')+qOpt('op','venta','Comprar',a.op==='venta')+qOpt('op','ambas','Ambas / todavía no sé',a.op==='ambas')+'</div>';
+  }else if(i===2){
+    h+='<h3>¿Cuál es tu presupuesto aproximado?</h3><p class="qz-sub">Elige un rango. Solo lo usamos para ordenar lo que ves.</p>';
+    if(a.op!=='venta'){h+='<h4 class="qz-h">Arriendo al mes</h4><div class="qchips">'+RENTR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="rent" data-v="'+j+'" aria-pressed="'+!!(a.rent&&a.rent[0]===r[0]&&a.rent[1]===r[1])+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="rent" data-v="x" aria-pressed="'+(a.rent===null?'false':'false')+'">Sin límite</button></div>'}
+    if(a.op!=='arriendo'){h+='<h4 class="qz-h">Compra</h4><div class="qchips">'+BUYR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="buy" data-v="'+j+'" aria-pressed="'+!!(a.buy&&a.buy[0]===r[0]&&a.buy[1]===r[1])+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="buy" data-v="x" aria-pressed="false">Sin límite</button></div>'}
+  }else if(i===3){
+    h+='<h3>¿Dónde te gustaría vivir?</h3><h4 class="qz-h">Ciudad</h4><div class="qchips">'+Object.keys(CITY).map(function(c){return '<button type="button" class="chip" data-act="qpick" data-k="city" data-v="'+c+'" aria-pressed="'+(a.city===c)+'">'+CITY[c]+'</button>'}).join('')+'</div>';
+    h+='<h4 class="qz-h">¿Algo más específico?</h4><div class="qgrid c3">'+qOpt('where','',   'Toda la ciudad',!a.where)+qOpt('where','zona','Una zona o barrio',a.where==='zona')+qOpt('where','near','Cerca de universidad o trabajo',a.where==='near')+'</div>';
+    var zs=Object.keys(Z).filter(function(k){return Z[k].c===a.city});
+    if(a.where==='zona')h+='<div class="qchips" style="margin-top:12px">'+zs.map(function(k){return '<button type="button" class="chip" data-act="qpick" data-k="zone" data-v="'+k+'" aria-pressed="'+(a.zone===k)+'">'+Z[k].n+'</button>'}).join('')+'</div>';
+    if(a.where==='near'){
+      h+='<p class="qz-sub" style="margin-top:12px">Universidad</p><div class="qchips">'+UNIS.filter(function(u){return Z[u[2]].c===a.city}).map(function(u){return '<button type="button" class="chip" data-act="qpick" data-k="near" data-v="'+u[0]+'" aria-pressed="'+!!(a.near&&a.near.id===u[0])+'">'+u[1]+'</button>'}).join('')+'</div>';
+      h+='<p class="qz-sub" style="margin-top:12px">O la zona de tu trabajo</p><div class="qchips">'+zs.map(function(k){return '<button type="button" class="chip" data-act="qpick" data-k="nearz" data-v="'+k+'" aria-pressed="'+!!(a.near&&a.near.id==='z'+k)+'">'+Z[k].n+'</button>'}).join('')+'</div>';
+    }
+  }else if(i===4){
+    h+='<h3>¿Cuántas habitaciones necesitas?</h3><div class="qgrid c4">'+[1,2,3,4].map(function(n){return qOpt('beds',n,n===4?'4 o más':String(n),a.beds===n)}).join('')+'</div><div class="qchips" style="margin-top:10px">'+'<button type="button" class="chip" data-act="qpick" data-k="beds" data-v="0" aria-pressed="'+(!a.beds)+'">Me da igual</button></div><p class="qz-sub" style="margin-top:10px">Si buscas una habitación, esto no aplica.</p>';
+  }else{
+    h+='<h3>¿Qué cosas son importantes para ti?</h3><p class="qz-sub">Elige las que quieras. Con esto calculamos qué tan compatible es cada vivienda.</p><div class="qchips big">'+IMPS.map(function(x){return '<button type="button" class="chip" data-act="qpick" data-k="imp" data-v="'+x[0]+'" aria-pressed="'+(a.imp.indexOf(x[0])>-1)+'">'+x[1]+'</button>'}).join('')+'</div>';
+  }
+  h+='<div class="navrow">'+(i>0?'<button type="button" class="btn alt" data-act="qback">Atrás</button>':'<span></span>')+'<button type="button" class="btn" data-act="qnext">'+(i===QN-1?(q.edit?'Guardar mi plan':'Ver mis viviendas'):'Siguiente')+'</button></div>';
+  $('#qzp').innerHTML=h;
+  var f=$('#qzp .qopt[aria-pressed=true],#qzp .chip[aria-pressed=true]');
+}
+function qPick(k,v){
+  var a=S.qz.a;
+  if(k==='type'){
+    if(v==='nose'){a.types=[];a.tu=true}
+    else{a.tu=false;var j=a.types.indexOf(v);if(j>-1)a.types.splice(j,1);else a.types.push(v)}
+    /* Habitación y Obra gris solo existen en una operación */
+    if(a.types.length&&a.types.every(function(t){return t==='habitacion'}))a.op=a.op==='ambas'?'arriendo':a.op;
+    if(a.types.length&&a.types.every(function(t){return t==='obra'}))a.op='venta';
+  }
+  else if(k==='op')a.op=v;
+  else if(k==='rent'){a.rent=v==='x'?[0,0]:RENTR[+v].slice(0,2)}
+  else if(k==='buy'){a.buy=v==='x'?[0,0]:BUYR[+v].slice(0,2)}
+  else if(k==='city'){a.city=v;a.zone='';a.near=null}
+  else if(k==='where'){a.where=v;a.zone='';a.near=null}
+  else if(k==='zone')a.zone=v;
+  else if(k==='near'){var u=UNIS.filter(function(x){return x[0]===v})[0];a.near={id:u[0],z:u[2],n:u[1]}}
+  else if(k==='nearz'){a.near={id:'z'+v,z:v,n:Z[v].n}}
+  else if(k==='beds')a.beds=+v;
+  else if(k==='imp'){var m=a.imp.indexOf(v);if(m>-1)a.imp.splice(m,1);else a.imp.push(v)}
+  renderQuiz();
+}
+function qFinish(){
+  var a=S.qz.a;
+  a.done=true;
+  if(a.where==='zona'&&!a.zone)a.where='';
+  if(a.where==='near'&&!a.near)a.where='';
+  PREF=a;savePref();
+  closeQuiz();
+  applyPref();
+  toast(S.qz.edit?'Plan actualizado':'Listo, ahora ves primero lo que mejor encaja contigo');
+}
+function qSkip(){
+  if(!hasPlan()){PREF=Object.assign(defPref(),{done:false,skipped:true});try{localStorage.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
+  closeQuiz();
+}
+function applyPref(){
+  var pf=PREF;if(!hasPlan())return;
+  clearSearch();
+  S.city=pf.city;
+  if(pf.op!=='ambas')S.op=pf.op;
+  S.type=pf.types.length===1?pf.types[0]:'todos';
+  S.typeSet=pf.types.length>1?pf.types.slice():[];
+  /* si lo elegido solo existe en la otra operación, cambia */
+  var okOp=function(op){return P.some(function(p){return p.op===op&&Z[p.z].c===S.city&&(S.type==='todos'?(!S.typeSet.length||S.typeSet.indexOf(p.t)>-1):p.t===S.type)})};
+  if(!okOp(S.op)&&okOp(S.op==='venta'?'arriendo':'venta'))S.op=S.op==='venta'?'arriendo':'venta';
+  var b=S.op==='arriendo'?pf.rent:pf.buy;S.max=(b&&b[1])||0;
+  S.beds=pf.types.length&&pf.types.every(function(t){return t==='habitacion'})?0:(pf.beds||0);
+  if(pf.where==='zona'&&pf.zone)S.zones=[pf.zone];
+  if(pf.where==='near'&&pf.near){S.nearZone=pf.near.z;S.nearName=pf.near.n}
+  var steps=[function(){if(S.zones.length){S.zones=[]}},function(){if(S.beds)S.beds=0},function(){if(S.max)S.max=Math.round(S.max*1.25)}];
+  for(var k=0;k<steps.length&&!filtered().length;k++)steps[k]();
+  S.sort='rel';S.sortUser=false;
+  setView('explorar');
+  syncUI();
+}
+function renderPlanLine(){
+  var el=$('#planLine');if(!el)return;
+  if(hasPlan()){
+    var pf=PREF,parts=[];
+    parts.push(pf.types.length?pf.types.map(function(k){return TL[k]}).join(' / '):'Cualquier vivienda');
+    parts.push(pf.op==='arriendo'?'Arrendar':pf.op==='venta'?'Comprar':'Arrendar o comprar');
+    el.innerHTML='<span>'+ic('user',15)+'<b>Tu plan:</b> '+esc(parts.join(' · '))+'</span><button type="button" data-act="qzopen">Editar</button>';
+  }else{
+    el.innerHTML='<span>'+ic('user',15)+'Personaliza Habita y ve tu compatibilidad</span><button type="button" data-act="qzopen">Responder (1 min)</button>';
+  }
+}
+
 /* ---------- vistas y navegacion ---------- */
-var VIEWS=[['explorar','Explorar'],['micasa','Mi casa'],['inversion','Inversión'],['obras','Obras'],['asistente','Habi'],['publicar','Publicar']];
+var VIEWS=[['explorar','Explorar'],['micasa','Mi casa'],['publicar','Publicar']];
+var ALLV=['explorar','micasa','publicar','inversion'];
 function renderNav(){
   $('#nav').innerHTML=VIEWS.map(function(v){return '<button data-act="view" data-v="'+v[0]+'"'+(S.view===v[0]?' aria-current="page"':'')+'>'+ic(v[0],20)+'<span>'+v[1]+'</span></button>'}).join('');
 }
 function setOpButtons(op){$$('[data-act=op]').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.v===op))})}
 function setView(v,noScroll){
   S.view=v;document.body.dataset.view=v;
-  VIEWS.forEach(function(x){$('#v-'+x[0]).hidden=x[0]!==v});
+  ALLV.forEach(function(x){$('#v-'+x).hidden=x!==v});
   renderNav();
   if(v==='inversion'){renderInvSort();renderInvList();renderSim()}
-  if(v==='obras')renderObras();
   if(v==='publicar')renderPub();
   if(v==='micasa')renderMiCasa();
-  if(v==='asistente')renderSources();
   if(v==='explorar')renderExplore(true);
   nmSync();
   try{if(location.hash!=='#'+v)history.replaceState(null,'','#'+v)}catch(e){}
@@ -1605,12 +1910,19 @@ function guideCard(g){
 }
 function formCard(){
   var f=S.pub.form,h='<div class="stepcard"><div><p class="kicker" style="color:var(--brand)">Paso '+(NG+1)+' de '+pubTotal()+'</p><h3 style="font-size:clamp(24px,3.4vw,34px);margin-top:4px">Datos y ubicación</h3><p style="color:var(--muted);margin-top:6px">Cuéntanos lo básico y confirma dónde queda en el mapa de tu teléfono.</p></div><div class="frm">';
-  h+='<label for="pf_op">Quiero<select class="inp" id="pf_op"><option value="venta"'+(f.op==='venta'?' selected':'')+'>Vender</option><option value="arriendo"'+(f.op==='arriendo'?' selected':'')+'>Arrendar</option></select></label>';
-  h+='<label for="pf_type">Tipo de vivienda<select class="inp" id="pf_type">'+Object.keys(TL).map(function(k){return '<option value="'+k+'"'+(f.type===k?' selected':'')+'>'+TL[k]+'</option>'}).join('')+'</select></label>';
+  h+='<label for="pf_op">Quiero<select class="inp" id="pf_op"><option value="venta"'+(f.op==='venta'?' selected':'')+(f.type==='habitacion'?' disabled':'')+'>Vender</option><option value="arriendo"'+(f.op==='arriendo'?' selected':'')+'>Arrendar</option></select></label>';
+  h+='<label for="pf_type">Tipo de vivienda<select class="inp" id="pf_type">'+Object.keys(TL).filter(function(k){return k!=='obra'}).map(function(k){return '<option value="'+k+'"'+(f.type===k?' selected':'')+'>'+TL[k]+'</option>'}).join('')+'</select></label>';
+  if(f.type==='habitacion'){
+    h+='<label for="pf_room">Tipo de habitación<select class="inp" id="pf_room"><option value="privada"'+(f.room!=='compartida'?' selected':'')+'>Privada</option><option value="compartida"'+(f.room==='compartida'?' selected':'')+'>Compartida</option></select></label>';
+    h+='<label for="pf_bath">Baño<select class="inp" id="pf_bath"><option value="compartido"'+(f.bath!=='privado'?' selected':'')+'>Compartido</option><option value="privado"'+(f.bath==='privado'?' selected':'')+'>Privado</option></select></label>';
+    h+='<label for="pf_inc">Servicios<select class="inp" id="pf_inc"><option value="0"'+(f.inc!=='1'?' selected':'')+'>No incluidos</option><option value="1"'+(f.inc==='1'?' selected':'')+'>Incluidos</option></select></label>';
+    h+='<label for="pf_furn">Amoblada<select class="inp" id="pf_furn"><option value="1"'+(f.furn!=='0'?' selected':'')+'>Sí</option><option value="0"'+(f.furn==='0'?' selected':'')+'>No</option></select></label>';
+    h+='<label for="pf_rules" class="full">Reglas de la casa (opcional)<input class="inp" id="pf_rules" placeholder="Ej: No fumar, visitas hasta las 10 p. m." value="'+esc(f.rules||'')+'"></label>';
+  }
   h+='<label for="pf_price">Precio en pesos'+(f.op==='arriendo'?' por mes':'')+'<input class="inp" id="pf_price" inputmode="numeric" placeholder="'+(f.op==='arriendo'?'Ej: 2500000':'Ej: 650000000')+'" value="'+esc(f.price)+'"></label>';
   h+='<label for="pf_area">Área en m²<input class="inp" id="pf_area" inputmode="numeric" placeholder="Ej: 64" value="'+esc(f.area)+'"></label>';
-  h+='<label for="pf_beds">Habitaciones<select class="inp" id="pf_beds">'+['1','2','3','4','5'].map(function(n){return '<option'+(f.beds===n?' selected':'')+'>'+n+'</option>'}).join('')+'</select></label>';
-  h+='<label for="pf_baths">Baños<select class="inp" id="pf_baths">'+['1','2','3','4'].map(function(n){return '<option'+(f.baths===n?' selected':'')+'>'+n+'</option>'}).join('')+'</select></label>';
+  if(f.type!=='habitacion')h+='<label for="pf_beds">Habitaciones<select class="inp" id="pf_beds">'+['1','2','3','4','5'].map(function(n){return '<option'+(f.beds===n?' selected':'')+'>'+n+'</option>'}).join('')+'</select></label>';
+  if(f.type!=='habitacion')h+='<label for="pf_baths">Baños<select class="inp" id="pf_baths">'+['1','2','3','4'].map(function(n){return '<option'+(f.baths===n?' selected':'')+'>'+n+'</option>'}).join('')+'</select></label>';
   h+='<label for="pf_zone" class="full">Barrio o zona<select class="inp" id="pf_zone">'+Object.keys(Z).map(function(k){return '<option value="'+k+'"'+(f.zone===k?' selected':'')+'>'+Z[k].n+', '+CITY[Z[k].c]+'</option>'}).join('')+'</select></label>';
   h+='<label for="pf_addr" class="full">Dirección<input class="inp" id="pf_addr" placeholder="Ej: Calle 63 # 10-20" value="'+esc(f.addr)+'"></label></div>';
   var hasC=f.lat&&f.lng,q=(f.addr?f.addr+', ':'')+Z[f.zone].n+', '+CITY[Z[f.zone].c]+', Colombia';
@@ -1688,14 +2000,15 @@ function publishListing(){
   if(!price){toast('Falta el precio');S.pub.i=NG;renderPub();return}
   if(!all.length){toast('Agrega al menos una foto');S.pub.i=1;renderPub();return}
   var z=Z[f.zone],area=parseInt(f.area,10)||50,cover=(photosOf('fach')[0]||all[0]).src;
-  var p={id:'u'+Date.now(),z:f.zone,t:f.type,op:f.op,title:TL[f.type]+' en '+z.n+(f.addr?', '+f.addr:''),price:price,area:area,beds:parseInt(f.beds,10),baths:parseInt(f.baths,10),park:0,est:4,x:z.x+2,y:z.y+3,tags:['nuevo'],d:'Publicación nueva con '+all.length+' fotos. '+(f.addr?'Dirección: '+f.addr+'.':''),photo:cover};
-  if(f.op==='venta'){p.rent=Math.round(price*0.0045);p.g=5}
+  var isR=f.type==='habitacion';
+  var p={id:'u'+Date.now(),z:f.zone,t:f.type,op:isR?'arriendo':f.op,title:TL[f.type]+' en '+z.n+(f.addr?', '+f.addr:''),price:price,area:area,beds:isR?(f.room==='compartida'?2:1):parseInt(f.beds,10),baths:isR?(f.bath==='privado'?1:0):parseInt(f.baths,10),park:0,est:4,x:z.x+2,y:z.y+3,tags:['nuevo'],d:'Publicación nueva con '+all.length+' fotos. '+(f.addr?'Dirección: '+f.addr+'.':''),photo:cover};
+  if(isR){p.room=f.room==='compartida'?'compartida':'privada';p.bath=f.bath==='privado'?'privado':'compartido';p.inc=f.inc==='1'?1:0;p.furn=f.furn==='0'?0:1;p.rules=String(f.rules||'').split(',').map(function(x){return x.trim()}).filter(Boolean);if(p.inc)p.tags.push('servicios incluidos');if(p.furn)p.tags.push('amoblado')}
+  if(p.op==='venta'){p.rent=Math.round(price*0.0045);p.g=5}
   if(f.lat){p.lat=parseFloat(f.lat);p.lng=parseFloat(f.lng)}
   P.unshift(p);
-  S.city=z.c;S.op=f.op;S.type='todos';S.max=0;S.q='';S.sort='rel';
-  $('#fCity').value=z.c;$('#q').value='';$('#fSort').value='rel';
-  $$('[data-act=op]').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.v===f.op))});
-  renderChips();priceOptions();setView('explorar');
+  $('#q').value='';clearSearch();
+  S.city=z.c;S.op=p.op;S.sort='rel';S.sel=p.id;
+  setView('explorar');syncUI();
   toast('Tu propiedad ya aparece en el listado (demo)');
 }
 document.addEventListener('click',function(e){
@@ -1712,7 +2025,8 @@ document.addEventListener('input',function(e){
   var id=e.target.id||'';
   if(id.indexOf('pf_')!==0)return;
   var key=id.slice(3);S.pub.form[key]=e.target.value;
-  if(key==='op'||key==='addr'){if(key==='op')renderPub()}
+  if(key==='type'&&e.target.value==='habitacion')S.pub.form.op='arriendo';
+  if(key==='op'||key==='type'){renderPub()}
   if(key==='zone'){S.pub.form.lat='';S.pub.form.lng='';renderPub()}
 });
 
@@ -1800,37 +2114,85 @@ function confetti(big){
 }
 function renderMiCasa(){
   var nf=P.filter(function(p){return S.fav[p.id]}).length;
-  $('#mcTabs').innerHTML='<button data-act="mtab" data-v="guardadas" aria-pressed="'+(S.mc==='guardadas')+'">Guardadas ('+nf+')</button><button data-act="mtab" data-v="metas" aria-pressed="'+(S.mc==='metas')+'">Metas de ahorro ('+S.goals.length+')</button>';
-  $('#mcBody').innerHTML=S.mc==='guardadas'?boardHTML():goalsHTML();
+  if(['guardadas','plan','metas'].indexOf(S.mc)<0)S.mc='guardadas';
+  $('#mcTabs').innerHTML='<button data-act="mtab" data-v="guardadas" aria-pressed="'+(S.mc==='guardadas')+'">Mis opciones ('+nf+')</button><button data-act="mtab" data-v="plan" aria-pressed="'+(S.mc==='plan')+'">Mi plan</button><button data-act="mtab" data-v="metas" aria-pressed="'+(S.mc==='metas')+'">Metas de ahorro ('+S.goals.length+')</button>';
+  $('#mcBody').innerHTML=S.mc==='guardadas'?boardHTML():S.mc==='plan'?planHTML():goalsHTML();
   $('#favN').textContent=Object.keys(S.fav).length;
   if(S.mc==='metas'&&!S.newGoal&&curGoal())fillGoal(true);
 }
-/* guardadas */
+/* mi plan: resumen del cuestionario */
+function budgetTxt(b,rent){
+  if(!b)return null;
+  var list=rent?RENTR:BUYR;
+  for(var i=0;i<list.length;i++){if(list[i][0]===b[0]&&list[i][1]===b[1])return list[i][2]+(rent?' al mes':'')}
+  return null;
+}
+function planRows(){
+  var pf=PREF,rows=[];
+  rows.push(['Busco',pf.types.length?pf.types.map(function(k){return TL[k]}).join(', '):'Todavía no estoy seguro']);
+  rows.push(['Quiero',pf.op==='arriendo'?'Arrendar':pf.op==='venta'?'Comprar':'Arrendar o comprar']);
+  var bud=[];
+  if(pf.op!=='venta'){var r=budgetTxt(pf.rent,true);bud.push(r||'Arriendo: sin límite')}
+  if(pf.op!=='arriendo'){var b=budgetTxt(pf.buy,false);bud.push(b||'Compra: sin límite')}
+  rows.push(['Presupuesto',bud.join(' · ')]);
+  var wh=CITY[pf.city]+(pf.where==='zona'&&pf.zone?' · '+Z[pf.zone].n:pf.where==='near'&&pf.near?' · cerca de '+pf.near.n:'');
+  rows.push(['Dónde',wh]);
+  rows.push(['Habitaciones',pf.beds?pf.beds+(pf.beds===4?' o más':''):'Me da igual']);
+  rows.push(['Es importante',pf.imp.length?pf.imp.map(function(k){return IMPS.filter(function(x){return x[0]===k})[0][1]}).join(', '):'Sin preferencias']);
+  return rows;
+}
+function planHTML(){
+  if(!hasPlan())return '<div class="empty"><h3>Aún no tienes un plan</h3><p>Responde 6 preguntas rápidas y Habita te muestra primero lo que mejor encaja contigo.</p><p style="margin-top:14px"><button class="btn" data-act="qzopen">Crear mi plan</button></p></div>';
+  return '<div class="stepcard" style="max-width:680px"><h3 style="font-size:24px">Lo que me dijiste que buscas</h3><dl class="planlist">'+planRows().map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl><div class="cta"><button class="btn" data-act="qzopen">Editar mi plan</button><button class="btn alt" data-act="plansee">Ver viviendas para mí</button><button class="chip" data-act="qzreset">Borrar mi plan</button></div><p class="fine" style="margin:0">Tu plan se guarda en este dispositivo y se usa para calcular qué tan compatible es cada vivienda contigo.</p></div>';
+}
+/* mis opciones */
+function budgetState(p){
+  var b=crit(p.op).budget;if(!b)return null;
+  var r=p.price/b;
+  return r<=1?{ok:true,t:'Dentro de tu presupuesto'}:{ok:false,t:'Supera tu presupuesto en '+Math.round((r-1)*100)+'%'};
+}
+function showOnMap(ids,selId){
+  var f=P.filter(function(p){return p.id===(selId||ids[0])})[0];if(!f)return;
+  var same=P.filter(function(p){return ids.indexOf(p.id)>-1&&p.op===f.op&&Z[p.z].c===Z[f.z].c}).map(function(p){return p.id});
+  clearSearch();
+  S.only=same;S.city=Z[f.z].c;S.op=f.op;S.sel=selId||null;
+  setView('explorar');syncUI();
+  if(selId)selectPin(selId,false);
+}
 function boardHTML(){
   var fl=P.filter(function(p){return S.fav[p.id]});
-  if(!fl.length)return '<div class="empty"><h3>Todavía no guardas ninguna casa</h3><p>Toca el corazón en cualquier vivienda y aparecerá aquí para que la compares y le pongas una meta.</p><p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Explorar viviendas</button></p></div>';
-  var h='<div class="board">'+fl.map(function(p){
-    var g=goalForHouse(p.id),c=!!S.cmp[p.id];
-    return '<article class="fcard"><div class="art">'+art(p)+badgeFor(p)+'</div><div class="cb"><p class="price">'+priceHTML(p)+'</p><p class="spec">'+specLine(p)+'</p><h3><button data-act="open" data-id="'+p.id+'">'+esc(p.title)+'</button></h3><p class="loc">'+Z[p.z].n+', '+CITY[Z[p.z].c]+'</p>'+
+  if(!fl.length)return '<div class="empty"><h3>Todavía no guardas ninguna vivienda</h3><p>Toca el corazón en cualquier vivienda y aparecerá aquí para que la compares, revises tu presupuesto y veas cuál encaja mejor contigo.</p><p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Explorar viviendas</button></p></div>';
+  var info=fl.map(function(p){return {p:p,r:compat(p,crit(p.op)),b:budgetState(p)}});
+  var h='';
+  var ranked=info.slice().sort(function(a,b){return (b.r?b.r.pct:0)-(a.r?a.r.pct:0)});
+  h+='<section class="rank"><div class="rank-h"><h3>Tu ranking</h3><div class="cta"><button class="btn sm2" data-act="savedmap">'+ic('map',16)+'Ver en el mapa</button>'+(hasPlan()?'':'<button class="btn alt sm2" data-act="qzopen">Personalizar</button>')+'</div></div>';
+  h+=hasPlan()||ranked.some(function(x){return x.r})?'<ol class="rank-l">'+ranked.map(function(x,i){return '<li><button data-act="open" data-id="'+x.p.id+'"><span class="rn">'+(i+1)+'</span><span class="rt"><b>'+esc(x.p.title)+'</b><span>'+priceHTML(x.p).replace(/<[^>]+>/g,'')+(x.b?' · '+(x.b.ok?'<i class="good">'+x.b.t+'</i>':'<i class="warn">'+x.b.t+'</i>'):'')+'</span></span><span class="rp">'+(x.r?x.r.pct+'%':'—')+'</span></button></li>'}).join('')+'</ol>':'<p style="color:var(--muted);margin:0">Responde el cuestionario para ordenar tus opciones por compatibilidad.</p>';
+  h+='</section>';
+  h+='<div class="board">'+info.map(function(x){
+    var p=x.p,g=goalForHouse(p.id),c=!!S.cmp[p.id];
+    return '<article class="fcard"><div class="art">'+art(p)+badgeFor(p)+'</div><div class="cb"><p class="price">'+priceHTML(p)+'</p><h3><button data-act="open" data-id="'+p.id+'">'+esc(p.title)+'</button></h3><p class="loc">'+Z[p.z].n+', '+CITY[Z[p.z].c]+'</p><p class="spec">'+specLine(p)+'</p>'+
+      (x.r?'<p class="cmp-line"><b>'+x.r.pct+'%</b> compatible contigo</p>':'')+(x.b?'<p class="bud '+(x.b.ok?'ok':'no')+'">'+(x.b.ok?'✓ ':'✕ ')+x.b.t+'</p>':'')+
       '<label class="sr" for="nt_'+p.id+'">Nota sobre '+esc(p.title)+'</label><textarea id="nt_'+p.id+'" placeholder="Anota lo que te gustó o lo que preguntarías en la visita">'+esc(S.notes[p.id]||'')+'</textarea>'+
-      '<div class="frow"><button class="btn" data-act="mgoal" data-id="'+p.id+'">'+(g?'Ver mi meta':'Soñar con esta casa')+'</button><button class="chip" data-act="mcmp" data-id="'+p.id+'" aria-pressed="'+c+'">Comparar</button><button class="chip" data-act="mrm" data-id="'+p.id+'" aria-label="Quitar de guardadas">Quitar</button></div></div></article>';
+      '<div class="frow"><button class="chip" data-act="mcmp" data-id="'+p.id+'" aria-pressed="'+c+'">Comparar</button><button class="chip" data-act="locmap" data-id="'+p.id+'">Ver ubicación</button><button class="chip" data-act="mgoal" data-id="'+p.id+'">'+(g?'Ver mi meta':'Meta de ahorro')+'</button><button class="chip" data-act="mrm" data-id="'+p.id+'" aria-label="Quitar de Mis opciones">Quitar</button></div></div></article>';
   }).join('')+'</div>';
   var ids=Object.keys(S.cmp).filter(function(id){return S.fav[id]}),sel=P.filter(function(p){return ids.indexOf(p.id)>-1});
   h+='<h3 style="font-size:22px;margin:28px 0 4px">Comparar</h3>';
-  if(sel.length<2)return h+'<p style="color:var(--muted)">Toca "Comparar" en dos o tres casas para verlas lado a lado. En verde, el mejor valor de cada fila.</p>';
+  if(sel.length<2)return h+'<p style="color:var(--muted)">Toca "Comparar" en dos o tres viviendas para verlas lado a lado. En verde, el mejor valor de cada fila.</p>';
   var rows=[
+    ['Compatibilidad',function(p){var r=compat(p,crit(p.op));return r?r.pct:null},function(v){return v+'%'},'max'],
     ['Precio',function(p){return p.price},function(v,p){return money(v)+(p.op==='arriendo'?' /mes':'')},'min'],
-    ['Área',function(p){return p.area},function(v){return v+' m²'},'max'],
-    ['Precio por m²',function(p){return p.price/p.area},function(v){return money(v)},'min'],
-    ['Habitaciones',function(p){return p.beds},function(v){return v},'max'],
-    ['Baños',function(p){return p.baths},function(v){return v},'max'],
-    ['Entorno (comodidades cerca)',function(p){return envScore(p)},function(v){return v+'/100'},'max'],
-    ['Rentabilidad bruta',function(p){return p.op==='venta'?inv(p).yld:null},function(v){return pct(v)},'max'],
-    ['Meta de ahorro necesaria',function(p){return goalTarget({kind:p.op,price:p.price,down:30})},function(v){return money(v)},'min']
+    ['Frente a tu presupuesto',function(p){var b=crit(p.op).budget;return b?p.price/b:null},function(v){return v<=1?'Dentro':'+'+Math.round((v-1)*100)+'%'},'min'],
+    ['Área',function(p){return p.t==='habitacion'?null:p.area},function(v){return v+' m²'},'max'],
+    ['Precio por m²',function(p){return p.t==='habitacion'?null:p.price/p.area},function(v){return money(v)},'min'],
+    ['Habitaciones',function(p){return p.t==='habitacion'?null:p.beds},function(v){return v},'max'],
+    ['Baños',function(p){return p.t==='habitacion'?null:p.baths},function(v){return v},'max'],
+    ['Qué hay cerca',function(p){return envScore(p)},function(v){return v+'/100'},'max'],
+    ['Distancia a tu referencia',function(p){var c=crit(p.op);return c.near?zoneKm(p,c.near.z):null},function(v){return distTxt(v)},'min']
   ];
   h+='<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>'+sel.map(function(p){return '<th>'+esc(p.title)+'</th>'}).join('')+'</tr></thead><tbody>';
   rows.forEach(function(r){
     var vals=sel.map(function(p){return r[1](p)}),nums=vals.filter(function(v){return v!==null}),best=nums.length>1?(r[3]==='min'?Math.min.apply(null,nums):Math.max.apply(null,nums)):null;
+    if(!nums.length)return;
     h+='<tr><th scope="row">'+r[0]+'</th>'+sel.map(function(p,i){var v=vals[i];return '<td class="'+(best!==null&&v===best&&nums.some(function(n){return n!==best})?'best':'')+'">'+(v===null?'—':r[2](v,p))+'</td>'}).join('')+'</tr>';
   });
   return h+'</tbody></table></div>';
@@ -1948,8 +2310,13 @@ document.addEventListener('click',function(e){
   }
   var a=b.dataset.act,v=b.dataset.v,id=b.dataset.id;
   if(a==='view')setView(v);
-  else if(a==='op'){S.op=v;S.max=0;setOpButtons(v);priceOptions();renderExplore()}
-  else if(a==='type'){S.type=v;renderChips();renderExplore()}
+  else if(a==='op'){S.op=v;S.max=0;S.only=null;syncUI()}
+  else if(a==='type'){
+    S.type=v;S.typeSet=[];S.only=null;
+    if(v==='habitacion'&&S.op==='venta')S.op='arriendo';
+    if(v==='obra')S.op='venta';
+    syncUI();
+  }
   else if(a==='settings')toggleSettings();
   else if(a==='theme'){S.theme=v;applyTheme();renderSettings()}
   else if(a==='accent'){S.accent=v;applyTheme();renderSettings()}
@@ -1957,48 +2324,53 @@ document.addEventListener('click',function(e){
   else if(a==='sheetcycle')sheetCycle();
   else if(a==='locate')locateStart(true);
   else if(a==='pin')selectPin(id,true);
-  else if(a==='onlyclear'){S.only=null;renderChips();renderExplore()}
+  else if(a==='onlyclear'){S.only=null;syncUI()}
   else if(a==='favfilter'){S.mc='guardadas';setView('micasa')}
   else if(a==='fav'){
     e.stopPropagation();
     if(S.fav[id])delete S.fav[id];else S.fav[id]=1;
     saveFav();
-    if(b.dataset.keep){b.textContent=S.fav[id]?'Quitar de favoritos':'Guardar en favoritos'}
+    if(b.dataset.keep){b.textContent=S.fav[id]?'Quitar de Mis opciones':'Guardar en Mis opciones'}
     renderExplore(true);
-    toast(S.fav[id]?'Guardada en favoritos':'Quitada de favoritos');
+    toast(S.fav[id]?'Guardada en Mis opciones':'Quitada de Mis opciones');
   }
   else if(a==='open')openDetail(id);
   else if(a==='close')closeDetail();
-  else if(a==='clear'){S.type='todos';S.max=0;S.beds=0;S.q='';S.onlyFav=false;S.only=null;$('#q').value='';$('#fBeds').value='0';renderChips();priceOptions();renderExplore()}
+  else if(a==='clear'){S.onlyFav=false;S.only=null;$('#q').value='';clearSearch()}
   else if(a==='visit'){toast('Solicitud de visita enviada (demo)')}
   else if(a==='simulate'){S.invSel=id;closeDetail();setView('inversion')}
+  else if(a==='invback')setView('explorar')
   else if(a==='invsort'){S.invSort=v;renderInvSort();renderInvList()}
   else if(a==='invsel'){S.invSel=id;renderInvList();renderSim()}
-  else if(a==='oarea'){S.Q[id].a=parseInt(v,10);renderObras()}
-  else if(a==='olevel'){S.Q[id].l=v;renderObras()}
+  else if(a==='oarea'){S.Q[id].a=parseInt(v,10);openDetail(id,true)}
+  else if(a==='olevel'){S.Q[id].l=v;openDetail(id,true)}
   else if(a==='quote'){toast('Un asesor te contactará pronto (demo)')}
-  else if(a==='ex')doAI(EXAMPLES[parseInt(b.dataset.i,10)]);
-  else if(a==='aimap'){
-    var o=S.lastAI;
-    if(o&&o.res.length){
-      var f=o.res[0].p;
-      S.only=o.res.map(function(r){return r.p.id});S.city=Z[f.z].c;S.op=f.op;S.type='todos';S.max=0;S.beds=0;S.q='';S.sel=null;$('#q').value='';
-      setOpButtons(f.op);renderChips();priceOptions();setView('explorar');
-    }
+  else if(a==='ex'){var ex=EXAMPLES[parseInt(b.dataset.i,10)];$('#q').value=ex;smartSearch(ex)}
+  else if(a==='why'){
+    var lst=b.parentNode.querySelector('.cmp-list'),opn=lst.hidden;
+    lst.hidden=!opn;b.setAttribute('aria-expanded',String(opn));
+    e.stopPropagation();
   }
-  else if(a==='importhelp'){
-    setView('asistente');
-    say('b','<p>Para traer un anuncio de Facebook Marketplace (o de otro sitio):</p><p>1. Abre el anuncio y copia el título, el precio y la descripción.<br>2. Pégalo en el chat, con el enlace si quieres.<br>3. Habi lo lee y lo agrega a Explorar.</p><p class="fine">Facebook no ofrece una conexión pública para leer Marketplace, por eso este paso lo haces tú.</p>');
-    $('#aiText').focus();
-  }
+  else if(a==='untag')untag(b.dataset.k);
+  else if(a==='aiclear'){$('#q').value='';clearSearch()}
+  else if(a==='ftog'){if(S.f[v])delete S.f[v];else S.f[v]=true;syncUI()}
+  else if(a==='qzopen'){if(!$('#modal').hidden)closeDetail();openQuiz(hasPlan())}
+  else if(a==='qzreset'){PREF=defPref();try{localStorage.removeItem('habita.pref')}catch(x){}renderMiCasa();renderPlanLine();syncUI();toast('Plan borrado')}
+  else if(a==='qpick')qPick(b.dataset.k,b.dataset.v);
+  else if(a==='qnext'){if(S.qz.i<QN-1){S.qz.i++;renderQuiz()}else qFinish()}
+  else if(a==='qback'){S.qz.i=Math.max(0,S.qz.i-1);renderQuiz()}
+  else if(a==='qskip')qSkip();
+  else if(a==='plansee'){applyPref()}
+  else if(a==='savedmap'){var sv=P.filter(function(p){return S.fav[p.id]}).map(function(p){return p.id});if(sv.length)showOnMap(sv,null)}
+  else if(a==='locmap'){var sv2=P.filter(function(p){return S.fav[p.id]}).map(function(p){return p.id});showOnMap(sv2,id)}
   else if(a==='impadd'){
     var q=S.imp;
     if(q&&q.price){
       delete q._approx;P.unshift(q);saveImports();
-      S.city=Z[q.z].c;S.op=q.op;S.type='todos';S.max=0;S.beds=0;S.q='';S.only=null;S.sel=q.id;$('#q').value='';
-      setOpButtons(q.op);renderChips();priceOptions();S.imp=null;
-      say('b','<p>Listo, ya está en Explorar.</p>',false);
-      setView('explorar');toast('Anuncio agregado a Explorar');
+      var qi=q.id,qo=q.op,qc=Z[q.z].c;
+      clearSearch();$('#q').value='';
+      S.city=qc;S.op=qo;S.sel=qi;
+      setView('explorar');syncUI();toast('Anuncio agregado a Explorar');
     }
   }
   else if(a==='pstep'){S.pub.i=parseInt(v,10);renderPub();scrollPub()}
@@ -2024,22 +2396,25 @@ document.addEventListener('click',function(e){
   else if(a==='gquick')addSaving(parseInt(v,10));
 });
 document.addEventListener('keydown',function(e){
-  if(e.key==='Escape'){if(!$('#modal').hidden)closeDetail();else if(!$('#settings').hidden)toggleSettings()}
+  if(e.key==='Escape'){if(!$('#quiz').hidden)qSkip();else if(!$('#modal').hidden)closeDetail();else if(!$('#settings').hidden)toggleSettings()}
 });
 document.addEventListener('mouseover',function(e){
   if(phone())return;
   var c=e.target.closest('[data-card]');$$('.pin.on').forEach(function(x){if(x.dataset.id!==S.sel)x.classList.remove('on')});
   if(c){var pin=$('.pin[data-id="'+c.dataset.card+'"]');if(pin)pin.classList.add('on')}
 });
-$('#searchForm').addEventListener('submit',function(e){e.preventDefault();S.q=$('#q').value;renderExplore()});
-$('#q').addEventListener('input',function(){S.q=this.value;renderExplore()});
+$('#searchForm').addEventListener('submit',function(e){e.preventDefault();smartSearch($('#q').value);$('#q').blur()});
+$('#q').addEventListener('input',function(){if(!this.value&&S.aiText)clearSearch()});
 $('#fCity').addEventListener('change',function(){
-  S.city=this.value;S.only=null;S.sel=null;
+  S.city=this.value;S.only=null;S.sel=null;S.zones=[];S.nearZone=null;S.nearName='';
   if(S.me&&hav(S.me.lat,S.me.lng,CITYC[S.city][0],CITYC[S.city][1])>80){S.me=null;if(S.sort==='near'){S.sort='rel';$('#fSort').value='rel'}}
-  renderChips();renderExplore();
+  syncUI();
 });
-$('#fPrice').addEventListener('change',function(){S.max=parseFloat(this.value);renderExplore()});
-$('#fBeds').addEventListener('change',function(){S.beds=parseInt(this.value,10);renderExplore()});
+$('#fPrice').addEventListener('change',function(){S.max=parseFloat(this.value);syncUI()});
+$('#fBeds').addEventListener('change',function(){S.beds=parseInt(this.value,10);syncUI()});
+$('#fArea').addEventListener('change',function(){S.minArea=parseInt(this.value,10);syncUI()});
+$('#fBaths').addEventListener('change',function(){S.baths=parseInt(this.value,10);syncUI()});
+$('#fPeople').addEventListener('change',function(){S.people=parseInt(this.value,10);syncUI()});
 $('#fSort').addEventListener('change',function(){S.sort=this.value;S.sortUser=true;if(S.sort==='near'&&!S.me)locateStart(true);renderExplore(true)});
 $('#sim').addEventListener('input',function(e){
   var id=e.target.id;
@@ -2049,9 +2424,6 @@ $('#sim').addEventListener('input',function(e){
   else return;
   fillSim();
 });
-$('#aiForm').addEventListener('submit',function(e){e.preventDefault();doAI($('#aiText').value)});
-$('#aiText').addEventListener('input',autoGrow);
-$('#aiText').addEventListener('keydown',function(e){if(e.key==='Enter'&&!e.shiftKey&&!e.isComposing){e.preventDefault();doAI(this.value)}});
 ['grab','shh'].forEach(function(k){
   var el=document.getElementById(k);
   el.addEventListener('pointerdown',dragStart);el.addEventListener('pointermove',dragMove);
@@ -2067,13 +2439,13 @@ if(window.matchMedia){var mq=matchMedia('(prefers-color-scheme: dark)');var onMq
 $('#logoH').innerHTML=logo(34,'h');
 $('#favIc').innerHTML=ic('heart',18);$('#setIc').innerHTML=ic('gear',18);$('#setX').innerHTML=ic('x',18);
 $('#sIc').innerHTML=ic('explorar',18);$('#fIc').innerHTML=ic('filter',18);$('#locIc').innerHTML=ic('locate',16);
-$('#cityIc').innerHTML=ic('pin',16);$('#sendIc').innerHTML=ic('send',20);
 savedImports().forEach(function(p){if(!P.some(function(x){return x.id===p.id}))P.push(p)});
 applyTheme();
-renderChips();priceOptions();renderEx();renderSources();aiHello();
+loadPref();
+renderEx();syncUI();
 var h0=location.hash.replace('#','');
 setView(h0&&document.getElementById('v-'+h0)&&h0!=='undefined'?h0:'explorar',true);
-renderExplore();
 locateStart(false);
+if(!PREF)setTimeout(function(){openQuiz(false)},500);
 })();
 </script>
