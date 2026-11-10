@@ -75,3 +75,10 @@ Facebook Marketplace no ofrece conexión pública: Habi lee el anuncio que el us
 - Tipos: Apartamento, Casa, Apartaestudio, Habitación (con datos propios) y Obra gris.
 - *Mi casa → Mis opciones*: ranking por compatibilidad, revisión de presupuesto, ubicación en el mapa y comparador.
 - Demo web de la app: `/app/` (por ejemplo https://jeroruiz23.github.io/habita-web/app/).
+
+## Mejoras de experiencia (v5)
+
+- Primera pantalla de bienvenida (“Encuentra un lugar que realmente se adapte a ti”) → *Empezar* → el mismo cuestionario de 6 preguntas → pantalla “Estamos usando lo que nos dijiste” → resultados personalizados. Se puede saltar con “Prefiero explorar sin responder”.
+- *Explorar* abre con el buscador con IA como protagonista (“¿Qué estás buscando?”, ejemplos y explicación corta). El mapa ya no se muestra al inicio: aparece con el botón *Ver mapa* y, en escritorio, después de una búsqueda con IA.
+- “Esto entendí” muestra los criterios que Habita leyó (con ✓ y × para quitarlos) y cuántas viviendas encajan.
+- Se agregaron dos apartamentos de arriendo cerca de Los Andes para que los ejemplos de búsqueda devuelvan resultados.

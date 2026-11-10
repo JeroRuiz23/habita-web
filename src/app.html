@@ -85,7 +85,7 @@ button{cursor:pointer}
 
 /* explorar: mapa + hoja */
 .xp{--sh:300px;--shv:0px;position:relative;display:flex;flex-direction:column;height:calc(100vh - var(--hdr) - var(--navh) - env(safe-area-inset-top,0px));height:calc(100dvh - var(--hdr) - var(--navh) - env(safe-area-inset-top,0px));background:var(--map-bg);overflow:hidden}
-.xtools{display:grid;gap:8px;padding:10px max(16px,env(safe-area-inset-left,0px)) 9px;background:var(--surface);border-bottom:1px solid var(--line);z-index:3}
+.xtools{display:grid;grid-template-columns:minmax(0,1fr);gap:8px;padding:10px max(16px,env(safe-area-inset-left,0px)) 9px;background:var(--surface);border-bottom:1px solid var(--line);z-index:3}
 .sbar{display:flex;align-items:center;gap:8px;background:var(--surface-2);border-radius:14px;padding:0 5px 0 13px;height:44px;color:var(--muted)}
 .sbar:focus-within{box-shadow:0 0 0 2px var(--brand)}
 .sbar input{flex:1;min-width:0;border:0;background:none;font-size:16px;color:var(--ink);height:100%}
@@ -499,7 +499,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .planlist{display:grid;gap:8px;margin:12px 0}
 .planlist div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:10px;background:var(--surface-2);border-radius:10px;padding:9px 12px}
 .planlist dt{color:var(--muted);font-size:13px;font-weight:600}.planlist dd{margin:0;font-weight:700}
-.scrim.qz{align-items:center;padding:16px}
+.scrim.qz{align-items:center;justify-content:center;padding:16px}
 .qzp{background:var(--surface);width:100%;max-width:640px;max-height:calc(100dvh - 32px);overflow-y:auto;border-radius:24px;padding:22px 22px calc(22px + env(safe-area-inset-bottom,0px));display:grid;gap:14px;box-shadow:0 20px 60px rgba(0,0,0,.35)}
 .qzp h3{font-size:clamp(24px,4vw,32px);letter-spacing:-.02em}
 .qz-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
@@ -518,8 +518,70 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .qchips{display:flex;flex-wrap:wrap;gap:8px}
 .qchips.big .chip{padding:9px 15px;font-size:15px}
 .qzp .navrow{margin-top:4px}
-@media (max-width:999px){.aipanel .understood{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin-right:-12px}.aipanel .understood::-webkit-scrollbar{display:none}.aipanel .tag{flex:none}}
 @media (max-width:560px){.qgrid,.qgrid.c3{grid-template-columns:repeat(2,minmax(0,1fr))}.qgrid.c4{grid-template-columns:repeat(2,minmax(0,1fr))}.planlist div{grid-template-columns:1fr}.exb{max-width:240px}}
+
+/* ---- v5: bienvenida, buscador con IA como protagonista, mapa secundario ---- */
+@keyframes hup{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes hfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes hpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes htwk{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.55;transform:scale(.82)}}
+.xh-top{display:grid;gap:8px;justify-items:center;text-align:center;padding-top:4px}
+.ai-badge{display:inline-flex;gap:6px;align-items:center;background:var(--brand-soft);color:var(--brand);font-weight:700;font-size:13px;border-radius:999px;padding:5px 12px;margin:0}
+.ai-badge .ic{animation:htwk 2.4s ease-in-out infinite}
+.xh-t{font-size:clamp(28px,5vw,44px);letter-spacing:-.03em;font-weight:800}
+.xh-s{text-align:center;color:var(--muted);font-size:14px;margin:0}
+.sbar>span:first-child{color:var(--brand);display:inline-grid}
+.xtools[data-c="1"] .xh-top,.xtools[data-c="1"] .xh-s{display:none}
+.sh-act{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+.understood{list-style:none;padding:0}
+.aipanel .tag{gap:5px}
+.aipanel .tag>.ic{color:var(--brand)}
+.tag.soft,.aipanel .tag.soft{background:transparent;color:var(--muted);box-shadow:inset 0 0 0 1px var(--line);padding:3px 10px}
+.ai-n{margin-left:6px;color:var(--muted);font-weight:600;font-size:12.5px}
+.ai-hint{margin:2px 0 0;font-size:12px;color:var(--muted)}
+.ai-h b,.ai-h .ai-x{white-space:nowrap;flex:none}.ai-h .ai-n{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+/* mapa oculto al inicio: busqueda, resultados y luego mapa */
+#explore[data-map="off"]{--px:max(16px,calc((100% - 1240px)/2 + 16px));height:auto;min-height:calc(100dvh - var(--hdr) - var(--navh) - env(safe-area-inset-top,0px));overflow:visible;display:block;background:var(--bg)}
+#explore[data-map="off"] .xmap{display:none}
+#explore[data-map="off"] .xtools{background:var(--bg);border:0;padding:22px var(--px) 12px}
+#explore[data-map="off"] .sheet{position:static;height:auto;border-radius:0;box-shadow:none;border:0;transition:none;background:none}
+#explore[data-map="off"] .grab{display:none}
+#explore[data-map="off"] .sh-h{padding:6px var(--px) 10px}
+#explore[data-map="off"] .planline{margin:0 var(--px) 10px}
+#explore[data-map="off"] .sh-list{overflow:visible!important;padding:0 var(--px) 40px}
+#explore[data-map="off"] .sbar{height:58px;border-radius:18px;background:var(--surface);box-shadow:0 0 0 1.5px var(--line),var(--shadow);max-width:780px;width:100%;margin:0 auto}
+#explore[data-map="off"] .sbar:focus-within{box-shadow:0 0 0 2px var(--brand),var(--shadow)}
+#explore[data-map="off"] .sbar input{font-size:17px}
+#explore[data-map="off"] .sbar .go{height:42px;padding:0 20px;font-size:15px}
+#explore[data-map="off"] .xh-s{max-width:56ch;margin:-2px auto 2px}
+#explore[data-map="off"] .aiex{flex-wrap:wrap;justify-content:center;overflow:visible;margin:0 auto;padding:0;max-width:900px}
+#explore[data-map="off"] .exb{max-width:100%;white-space:normal;text-align:left;border-radius:14px}
+#explore[data-map="off"] .aipanel{max-width:780px;width:100%;margin:0 auto}
+#explore[data-map="off"] .xrow{margin:0;padding:1px 0;justify-content:flex-start}
+#explore[data-map="off"] .grid{grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
+@media (min-width:1000px){#explore[data-map="off"] .sheet{border-right:0}#explore[data-map="off"] .xrow{justify-content:center;flex-wrap:wrap;overflow:visible}}
+/* bienvenida y espera del cuestionario */
+.scrim.qz.first{z-index:90;background:var(--bg);background-image:radial-gradient(70% 55% at 85% -5%,var(--brand-soft),transparent 70%),radial-gradient(55% 45% at 0% 105%,color-mix(in srgb,var(--sun) 20%,transparent),transparent 70%)}
+.qzp.welcome,.qzp.wait{background:none;box-shadow:none;text-align:center;justify-items:center;gap:14px;padding:20px;max-width:580px}
+.wl-logo{animation:hfloat 4s ease-in-out infinite}
+.wl-logo svg{border-radius:24px;filter:drop-shadow(0 14px 22px color-mix(in srgb,var(--brand) 38%,transparent))}
+.wl-k{margin:0;animation:hup .6s .05s both}
+.wl-t{font-size:clamp(34px,7vw,56px);letter-spacing:-.035em;font-weight:800;animation:hup .6s .12s both}
+.wl-s{color:var(--muted);font-size:clamp(16px,2.4vw,19px);max-width:42ch;margin:0;animation:hup .6s .2s both}
+.wl-go{padding:15px 42px;font-size:17px;border-radius:16px;margin-top:6px;animation:hup .6s .3s both}
+.wl-steps{list-style:none;display:flex;gap:10px 20px;margin:10px 0 0;padding:0;flex-wrap:wrap;justify-content:center;color:var(--muted);font-size:13.5px;font-weight:600;animation:hup .6s .42s both}
+.wl-steps li{display:flex;align-items:center;gap:8px}
+.wl-steps b{width:24px;height:24px;border-radius:50%;background:var(--brand-soft);color:var(--brand);display:grid;place-items:center;font-size:12px}
+.wl-sk{animation:hup .6s .5s both;text-decoration:underline}
+.qw-logo{animation:hpulse 1.3s ease-in-out infinite}
+.qzp.wait h3{font-size:clamp(26px,5vw,36px)}
+.qw-l{list-style:none;margin:10px 0 4px;padding:0;display:grid;gap:10px;text-align:left}
+.qw-l li{display:flex;gap:10px;align-items:center;font-weight:600;opacity:0;animation:hup .5s var(--d) forwards}
+.qw-l li .ic{color:var(--good)}
+.qz-sum{display:flex;gap:6px;flex-wrap:wrap;margin:-6px 0 0}
+.qz-sum span{display:inline-flex;gap:4px;align-items:center;background:var(--brand-soft);color:var(--brand);border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600}
+@media (max-width:700px){#explore[data-map="off"] .aiex{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -16px;padding:2px 16px}#explore[data-map="off"] .exb{flex:none;white-space:nowrap;max-width:none;border-radius:999px}.sh-h>div:first-child{min-width:0;flex:1}.sh-act{flex-wrap:nowrap;flex:none}.sh-act .btn{white-space:nowrap}}
+@media (max-width:560px){#locBtn{font-size:0;gap:0;padding:8px 10px}#explore[data-map="off"] .sbar{height:54px}}
 @media (min-width:1000px){
   .xp{display:grid;grid-template-columns:minmax(430px,520px) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"tools map" "sheet map"}
   .xtools{grid-area:tools;border-right:1px solid var(--line)}
@@ -581,14 +643,19 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 
 <main>
 <section id="v-explorar" class="view">
-  <div class="xp" id="explore">
+  <div class="xp" id="explore" data-map="off">
     <div class="xtools" id="xtools">
+      <div class="xh-top">
+        <p class="ai-badge"><span id="aiBIc"></span>Busca con IA</p>
+        <h1 class="xh-t">¿Qué estás buscando?</h1>
+      </div>
       <form class="sbar" id="searchForm" role="search">
         <span id="sIc"></span>
-        <label class="sr" for="q">Cuéntanos qué buscas</label>
-        <input id="q" type="search" placeholder="Cuéntame qué buscas…" autocomplete="off" enterkeyhint="search">
+        <label class="sr" for="q">Describe lo que buscas con tus palabras</label>
+        <input id="q" type="search" placeholder="Ej: una habitación cerca de Los Andes por menos de $1.200.000" autocomplete="off" enterkeyhint="search">
         <button type="submit" class="btn sm2 go" id="qGo">Buscar</button>
       </form>
+      <p class="xh-s">Describe lo que necesitas y Habita convertirá tus preferencias en una búsqueda personalizada.</p>
       <div class="aiex" id="aiEx"></div>
       <div class="aipanel" id="aiPanel" hidden aria-live="polite"></div>
       <div class="xrow" id="xrow">
@@ -622,7 +689,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
       <button class="grab" id="grab" data-act="sheetcycle" aria-label="Subir o bajar la lista"><i></i></button>
       <div class="sh-h" id="shh">
         <div><h2 id="count">Viviendas</h2><p id="countSub"></p></div>
-        <button class="btn alt sm2" data-act="locate" id="locBtn"><span id="locIc"></span>Cerca de mí</button>
+        <div class="sh-act"><button class="btn alt sm2" data-act="maptoggle" id="mapBtn"><span id="mapIc"></span><span id="mapTx">Ver mapa</span></button><button class="btn alt sm2" data-act="locate" id="locBtn" aria-label="Cerca de mí"><span id="locIc"></span>Cerca de mí</button></div>
       </div>
       <div class="planline" id="planLine"></div>
       <div class="sh-list" id="shlist"><div class="grid" id="grid"></div></div>
@@ -817,7 +884,9 @@ var P=[
  {id:'p20',z:'chapinero',t:'habitacion',room:'privada',bath:'compartido',inc:0,furn:1,rules:['Se aceptan mascotas pequeñas','Dos compañeros más en el apartamento'],op:'arriendo',title:'Habitación en apartamento compartido, Chapinero',price:1.25e6,area:13,beds:1,baths:0,park:0,est:4,x:58,y:40,tags:['amoblado','wifi','mascotas','cerca a universidad'],d:'Habitación con cama doble, closet y escritorio en un apartamento de tres. Cocina, sala y lavadora compartidas. Servicios se dividen entre los tres.'},
  {id:'p21',z:'teusaquillo',t:'habitacion',room:'privada',bath:'privado',inc:0,furn:0,rules:['Contrato mínimo de 6 meses','Se aceptan mascotas'],op:'arriendo',title:'Habitación sin amoblar con baño propio, Teusaquillo',price:1.05e6,area:15,beds:1,baths:1,park:0,est:3,x:46,y:47,tags:['mascotas','tranquilo','cerca a universidad'],d:'Habitación luminosa en casa antigua con entrada independiente. Puedes traer tus muebles. Cerca de la Universidad Nacional.'},
  {id:'p22',z:'poblado',t:'habitacion',room:'privada',bath:'compartido',inc:1,furn:1,rules:['No fumar','Visitas hasta las 9 p. m.'],op:'arriendo',title:'Habitación con servicios incluidos en El Poblado',price:1.7e6,area:14,beds:1,baths:0,park:0,est:5,x:63,y:62,tags:['servicios incluidos','wifi','amoblado','seguridad'],d:'Habitación amoblada en apartamento con portería 24 horas. Wifi, agua y luz incluidos. Gimnasio y piscina del edificio.'},
- {id:'p23',z:'cjardin',t:'habitacion',room:'compartida',bath:'compartido',inc:1,furn:1,rules:['Solo estudiantes','Silencio después de las 10 p. m.'],op:'arriendo',title:'Habitación compartida cerca a Icesi',price:0.85e6,area:16,beds:2,baths:0,park:0,est:4,x:43,y:82,tags:['servicios incluidos','wifi','amoblado','cerca a universidad'],d:'Habitación doble en residencia de estudiantes. Servicios y wifi incluidos, sala de estudio y cocina común.'}
+ {id:'p23',z:'cjardin',t:'habitacion',room:'compartida',bath:'compartido',inc:1,furn:1,rules:['Solo estudiantes','Silencio después de las 10 p. m.'],op:'arriendo',title:'Habitación compartida cerca a Icesi',price:0.85e6,area:16,beds:2,baths:0,park:0,est:4,x:43,y:82,tags:['servicios incluidos','wifi','amoblado','cerca a universidad'],d:'Habitación doble en residencia de estudiantes. Servicios y wifi incluidos, sala de estudio y cocina común.'},
+ {id:'p24',z:'candelaria',t:'apto',op:'arriendo',title:'Apartamento de dos habitaciones cerca de Los Andes',price:1.9e6,area:54,beds:2,baths:1,park:0,est:3,x:58,y:57,tags:['cerca a universidad','seguridad','zonas comunes'],d:'Edificio con portería y ascensor, a pocas cuadras de la universidad. Dos alcobas, sala-comedor y cocina integral.'},
+ {id:'p25',z:'candelaria',t:'apto',op:'arriendo',title:'Apartamento amoblado para compartir en Las Aguas',price:1.8e6,area:50,beds:2,baths:1,park:0,est:3,x:60,y:56,tags:['amoblado','wifi','cerca a universidad'],d:'Dos alcobas amobladas, ideal para dos estudiantes. Wifi y administración incluidos.'}
 ];
 
 var OBRAS=[
@@ -934,6 +1003,7 @@ function mapBg(city){
 }
 /* ---------- estado extra ---------- */
 S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.minArea=0;S.baths=0;S.aiText='';S.quiet=false;S.cr=null;S.ainotes=[];S.helpMsg='';S.qz=null;
+S.mapOn=false;
 S.me=null;S.sel=null;S.only=null;S.sheet='half';S.theme=null;S.accent='cobalto';S.sortUser=false;S.items=[];
 var CITYC={bog:[4.65,-74.08],med:[6.24,-75.58],cal:[3.42,-76.53]};
 function hav(a,b,c,d){var R=6371,t=Math.PI/180,dl=(c-a)*t,dn=(d-b)*t,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a*t)*Math.cos(c*t)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.asin(Math.sqrt(x))}
@@ -1118,7 +1188,7 @@ function isDark(){
   if(t)return t==='dark';
   return !!(window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
 }
-function nmWanted(){return S.view==='explorar'&&$('#modal').hidden&&$('#settings').hidden}
+function nmWanted(){return S.view==='explorar'&&S.mapOn&&$('#modal').hidden&&$('#settings').hidden&&$('#quiz').hidden}
 function nmSync(){if(NMRAF)return;NMRAF=requestAnimationFrame(function(){NMRAF=0;nmApply()})}
 function nmTrack(ms){var t0=performance.now();(function f(t){nmApply();if(t-t0<ms)requestAnimationFrame(f)})(t0)}
 function nmApply(){
@@ -1176,12 +1246,13 @@ function sheetPx(st){
 function setSheetH(h){var ex=$('#explore');ex.style.setProperty('--sh',h+'px');ex.style.setProperty('--shv',h+'px');nmSync()}
 function sheetSet(st){
   var ex=$('#explore'),sh=$('#sheet');
-  if(!phone()){ex.style.setProperty('--shv','0px');sh.dataset.st='full';nmSync();return}
+  if(!S.mapOn||!phone()){ex.style.setProperty('--shv','0px');sh.dataset.st='full';nmSync();return}
   st=st||S.sheet;S.sheet=st;sh.dataset.st=st;setSheetH(sheetPx(st));nmTrack(360);
 }
 var DRAG=null,LASTDRAG=0;
 function dragStart(e){
-  if(!phone()||e.target.closest('[data-act=locate]'))return;
+  var bt=e.target.closest('[data-act]');
+  if(!phone()||!S.mapOn||(bt&&bt.id!=='grab'))return;
   DRAG={y:e.clientY,h:$('#sheet').offsetHeight,moved:false};
   $('#sheet').classList.add('drag');
   try{e.currentTarget.setPointerCapture(e.pointerId)}catch(x){}
@@ -1215,15 +1286,19 @@ function selectPin(id,fromMap){
 }
 function renderExplore(keep){
   var items=filtered();S.items=items;
-  var where=S.me?' cerca de ti':' en '+CITY[S.city];
+  var ex=$('#explore');
+  ex.dataset.map=S.mapOn?'on':'off';
+  $('#xtools').dataset.c=(S.mapOn||S.aiText)?'1':'';
+  $('#mapTx').textContent=S.mapOn?'Ocultar mapa':'Ver mapa';
   $('#count').textContent=items.length+(items.length===1?' vivienda':' viviendas')+(S.op==='venta'?' en venta':' en arriendo');
   $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo Mis opciones':S.me?'Cerca de ti, en '+CITY[S.city]:(S.sort==='rel'&&S.cr&&S.cr.has?'Ordenadas por compatibilidad contigo · ':'')+CITY[S.city];
   $('#grid').innerHTML=items.length?items.map(card).join(''):'<div class="empty"><h3>No hay viviendas con esos filtros</h3><p>Quita el límite de precio, cambia el tipo de vivienda o prueba otra ciudad.</p><p style="margin-top:14px"><button class="btn" data-act="clear">Limpiar filtros</button></p></div>';
   $('#favN').textContent=Object.keys(S.fav).length;
   syncFilters();
   if(S.sel&&!items.some(function(p){return p.id===S.sel}))S.sel=null;
-  renderMap(!keep);
+  if(S.mapOn)renderMap(!keep);
   sheetSet();
+  nmSync();
 }
 
 /* ---------- ubicacion ---------- */
@@ -1498,8 +1573,8 @@ function toggleSettings(){
 }
 /* ---------- buscador con IA (reglas locales) ---------- */
 var EXAMPLES=[
- 'Apartamento hasta 3 millones, cerca de Los Andes, para dos personas y que acepten mascotas',
- 'Habitación amoblada con servicios incluidos, máximo 1,5 millones',
+ 'Quiero una habitación cerca de Los Andes, por menos de $1.200.000 y cerca de transporte',
+ 'Apartamento de dos habitaciones cerca de la universidad, que no pase de 2 millones',
  'Casa para comprar en Bogotá con 3 habitaciones y parque cerca',
  'Obra gris para comprar en Medellín'
 ];
@@ -1510,6 +1585,11 @@ function applyIntent(it,text){
   var uni=findUni(t),zones=it.zones.filter(function(z){
     return Z[z].kw.some(function(w){return !UNIKW.test(w)&&new RegExp('\\b'+w+'\\b').test(t)});
   });
+  if(!uni&&/cerca (de|a) (la |mi |una |el )?(universidad|uni|u)\b/.test(t)){
+    var pn=hasPlan()&&PREF.near&&UNIS.some(function(u){return u[0]===PREF.near.id})?PREF.near:null;
+    var cty=it.city||S.city;
+    uni=pn?[pn.id,pn.n,pn.z]:(UNIS.filter(function(u){return Z[u[2]].c===cty})[0]||UNIS[0]);
+  }
   if(it.obra&&it.types.indexOf('obra')<0)it.types.push('obra');
   if(it.types.length===1&&it.types[0]==='obra'&&!it.op)it.op='venta';
   if(it.types.length&&it.types.every(function(x){return x==='habitacion'})&&!it.op)it.op='arriendo';
@@ -1524,13 +1604,17 @@ function applyIntent(it,text){
   S.people=it.people||0;
   S.zones=zones;
   S.nearZone=uni?uni[2]:null;S.nearName=uni?uni[1]:'';
-  S.needs=it.needs.slice();
+  S.needs=it.needs.filter(function(c){return !(uni&&c==='universidad')});
   S.quiet=it.quiet;
   S.f={pets:it.pets,furn:it.furn,inc:/servicios incluidos|todo incluido/.test(t),park:it.park};
   Object.keys(S.f).forEach(function(k){if(!S.f[k])delete S.f[k]});
   S.minArea=0;S.baths=0;S.sort='rel';
+  if(/barat|economic|accesible|bajo presupuesto|poco presupuesto/.test(t)&&!S.max){
+    S.max=S.op==='arriendo'?(it.types.length&&it.types.every(function(x){return x==='habitacion'})?1.4e6:it.types.indexOf('habitacion')>-1?2.2e6:3e6):400e6;
+    notes.push('Interpreté “barato” como un presupuesto de hasta '+money(S.max)+(S.op==='arriendo'?' al mes':'')+'. Puedes cambiarlo arriba.');
+  }
   var understood=it.op||it.types.length||it.budget||it.beds||it.people||it.city||zones.length||uni||it.needs.length||it.pets||it.furn||S.f.inc||it.park||it.quiet;
-  if(!understood){S.q=text;notes.push('No reconocí criterios concretos; busqué esas palabras en los títulos.')}
+  if(!understood){S.q=text;notes.push('No reconocí criterios concretos; busqué esas palabras en los títulos.')}else S.mapOn=!phone();
   /* si no hay resultados, se relaja de lo menos a lo más importante */
   var steps=[
     function(){if(S.zones.length){S.zones=[];return 'Amplié la búsqueda a toda la ciudad.'}},
@@ -1562,23 +1646,24 @@ function clearSearch(){
   syncUI();
 }
 function syncUI(){
-  setOpButtons(S.op);priceOptions();renderChips();syncFilters();renderAIPanel();renderPlanLine();renderExplore();
+  setOpButtons(S.op);priceOptions();renderChips();syncFilters();renderExplore();renderAIPanel();renderPlanLine();
 }
+function mny(v){return money(v).replace('$ ','$')}
 function activeTags(){
   var t=[];
-  t.push(['Operación',S.op==='venta'?'Comprar':'Arrendar',null]);
-  if(S.type!=='todos')t.push(['Tipo',TL[S.type],'type']);else if(S.typeSet.length)t.push(['Tipo',S.typeSet.map(function(k){return TL[k]}).join(' o '),'type']);
-  if(S.max)t.push(['Precio','hasta '+money(S.max)+(S.op==='arriendo'?' /mes':''),'max']);
-  if(S.beds)t.push(['Habitaciones',S.beds+' o más','beds']);
-  if(S.people)t.push(['Personas',String(S.people),'people']);
-  t.push(['Ciudad',CITY[S.city],null]);
-  if(S.nearZone)t.push(['Cerca de',S.nearName,'near']);
-  if(S.zones.length)t.push(['Zona',S.zones.map(function(z){return Z[z].n}).join(', '),'zones']);
-  if(S.f.pets)t.push(['Mascotas','sí','f.pets']);
-  if(S.f.furn)t.push(['Amoblado','sí','f.furn']);
-  if(S.f.inc)t.push(['Servicios','incluidos','f.inc']);
-  if(S.f.park)t.push(['Parqueadero','sí','f.park']);
-  S.needs.forEach(function(c){t.push(['Cerca',CATS[c],'need:'+c])});
+  if(S.type!=='todos')t.push([TL[S.type],'type']);else if(S.typeSet.length)t.push([S.typeSet.map(function(k){return TL[k]}).join(' o '),'type']);
+  if(S.beds)t.push([S.beds+(S.beds===1?' habitación':' habitaciones')+(S.beds>1?' o más':''),'beds']);
+  if(S.people)t.push(['Para '+S.people+(S.people===1?' persona':' personas'),'people']);
+  if(S.nearZone)t.push(['Cerca de '+S.nearName,'near']);
+  if(S.zones.length)t.push(['Zona: '+S.zones.map(function(z){return Z[z].n}).join(', '),'zones']);
+  if(S.max)t.push(['Presupuesto máximo: '+mny(S.max)+(S.op==='arriendo'?' al mes':''),'max']);
+  if(S.f.pets)t.push(['Acepta mascotas','f.pets']);
+  if(S.f.furn)t.push(['Amoblado','f.furn']);
+  if(S.f.inc)t.push(['Servicios incluidos','f.inc']);
+  if(S.f.park)t.push(['Parqueadero','f.park']);
+  S.needs.forEach(function(c){t.push(['Cerca de '+CATS[c].toLowerCase(),'need:'+c])});
+  t.push([S.op==='venta'?'Comprar':'Arrendar',null,1]);
+  t.push([CITY[S.city],null,1]);
   return t;
 }
 function renderAIPanel(){
@@ -1586,12 +1671,13 @@ function renderAIPanel(){
   if(!S.aiText){el.hidden=true;ex.hidden=false;return}
   ex.hidden=true;el.hidden=false;
   var h='';
-  if(S.helpMsg){h='<p class="ai-h">'+ic('asistente',15)+'<b>Habi</b></p><p class="ai-p">'+esc(S.helpMsg)+'</p>'}
+  if(S.helpMsg){h='<p class="ai-h">'+ic('asistente',15)+'<b>Habita</b><button type="button" class="ai-x" data-act="aiclear">Cerrar</button></p><p class="ai-p">'+esc(S.helpMsg)+'</p>'}
   else if(S.imp){h=impHTML(S.imp)}
   else{
     var n=S.items?S.items.length:0;
-    h='<p class="ai-h">'+ic('asistente',15)+'<b>Esto entendí</b><button type="button" class="ai-x" data-act="aiclear">Borrar búsqueda</button></p><div class="understood">'+activeTags().map(function(x){return '<span class="tag"><em>'+x[0]+'</em> '+esc(x[1])+(x[2]?'<button type="button" data-act="untag" data-k="'+x[2]+'" aria-label="Quitar '+esc(x[0])+'">'+ic('x',12)+'</button>':'')+'</span>'}).join('')+'</div>';
+    h='<p class="ai-h">'+ic('asistente',15)+'<b>Esto entendí</b><span class="ai-n">'+(n?n+(n===1?' vivienda encaja':' viviendas encajan'):'Sin resultados')+'</span><button type="button" class="ai-x" data-act="aiclear">Borrar búsqueda</button></p><ul class="understood">'+activeTags().map(function(x){return '<li class="tag'+(x[2]?' soft':'')+'">'+(x[2]?'':ic('check',13))+esc(x[0])+(x[1]?'<button type="button" data-act="untag" data-k="'+x[1]+'" aria-label="Quitar: '+esc(x[0])+'">'+ic('x',12)+'</button>':'')+'</li>'}).join('')+'</ul>';
     (S.ainotes||[]).forEach(function(x){h+='<p class="fine" style="margin:4px 0 0">'+esc(x)+'</p>'});
+    h+='<p class="ai-hint">¿Algo no es correcto? Quítalo con la ×.</p>';
   }
   el.innerHTML=h;
 }
@@ -1660,14 +1746,16 @@ function savedImports(){try{return JSON.parse(localStorage.getItem('habita.imp')
 function saveImports(){try{localStorage.setItem('habita.imp',JSON.stringify(P.filter(function(p){return p.src}).slice(0,30)))}catch(e){}}
 /* ---------- cuestionario inicial (editable desde Mi plan) ---------- */
 var QN=6;
-function openQuiz(edit){
+function openQuiz(edit,welcome){
   var a=hasPlan()?JSON.parse(JSON.stringify(PREF)):defPref();
   a.city=a.city||S.city;
-  S.qz={i:0,edit:!!edit,a:a};
+  S.qz={i:welcome&&!edit?-1:0,edit:!!edit,a:a,first:!!welcome&&!edit,t:0};
+  $('#quiz').className='scrim qz'+(S.qz.first?' first':'');
   $('#quiz').hidden=false;document.body.style.overflow='hidden';nmSync();
   renderQuiz();
 }
 function closeQuiz(){
+  if(S.qz&&S.qz.t){clearTimeout(S.qz.t);S.qz.t=0}
   $('#quiz').hidden=true;
   if($('#modal').hidden)document.body.style.overflow='';
   nmSync();
@@ -1675,13 +1763,43 @@ function closeQuiz(){
 function qOpt(k,v,label,on,extra){
   return '<button type="button" class="qopt" data-act="qpick" data-k="'+k+'" data-v="'+v+'" aria-pressed="'+!!on+'">'+(extra||'')+label+'</button>';
 }
+function qSummary(a){
+  var c=[];
+  if(a.types.length)c.push(a.types.map(function(k){return TL[k]}).join(' / '));
+  if(a.op!=='ambas'||a.types.length)c.push(a.op==='arriendo'?'Arrendar':a.op==='venta'?'Comprar':'Arrendar o comprar');
+  var r=a.op!=='venta'?budgetTxt(a.rent,true):null,b=a.op!=='arriendo'?budgetTxt(a.buy,false):null;
+  if(r)c.push(r);if(b)c.push(b);
+  if(S.qz.i>3)c.push(CITY[a.city]+(a.where==='near'&&a.near?' · cerca de '+a.near.n:a.where==='zona'&&a.zone?' · '+Z[a.zone].n:''));
+  return c;
+}
+function renderWelcome(){
+  $('#qzp').className='qzp welcome';
+  $('#qzp').innerHTML='<div class="wl-logo">'+logo(84,'w')+'</div><p class="kicker wl-k">Bienvenido a Habita</p><h2 class="wl-t">Encuentra un lugar que realmente se adapte a ti.</h2><p class="wl-s">Cuéntanos qué estás buscando y Habita encontrará opciones que encajen contigo.</p><button type="button" class="btn wl-go" data-act="qstart">Empezar</button><ol class="wl-steps" aria-label="Cómo funciona"><li><b>1</b>Cuéntanos qué buscas</li><li><b>2</b>Personalizamos Habita</li><li><b>3</b>Ves lo que mejor encaja</li></ol><button type="button" class="qz-skip wl-sk" data-act="qskip">Prefiero explorar sin responder</button>';
+}
+function renderWait(){
+  var a=S.qz.a,items=[];
+  items.push(a.types.length?'Buscando '+a.types.map(function(k){return TL[k].toLowerCase()}).join(' y '):'Revisando todos los tipos de vivienda');
+  var bt=[a.op!=='venta'?budgetTxt(a.rent,true):null,a.op!=='arriendo'?budgetTxt(a.buy,false):null].filter(Boolean);
+  if(bt.length)items.push('Ajustando a tu presupuesto');
+  items.push(a.where==='near'&&a.near?'Midiendo distancias a '+a.near.n:'Mirando '+(a.where==='zona'&&a.zone?Z[a.zone].n:CITY[a.city]));
+  if(a.imp.length)items.push('Priorizando lo que es importante para ti');
+  $('#qzp').className='qzp wait';
+  $('#qzp').innerHTML='<div class="qw-logo">'+logo(64,'q')+'</div><h3>Estamos usando lo que nos dijiste</h3><p class="qz-sub" style="margin:0">para encontrar mejores opciones.</p><ul class="qw-l">'+items.map(function(t,k){return '<li style="--d:'+(0.25+k*0.45).toFixed(2)+'s">'+ic('check',16)+t+'</li>'}).join('')+'</ul><button type="button" class="qz-skip" data-act="qdone">Ver mis viviendas</button>';
+  if(S.qz.t)clearTimeout(S.qz.t);
+  S.qz.t=setTimeout(function(){S.qz.t=0;qFinish()},700+items.length*450+500);
+}
 function renderQuiz(){
   var q=S.qz,a=q.a,i=q.i,h='';
+  if(i<0){renderWelcome();return}
+  if(i>=QN){renderWait();return}
+  $('#qzp').className='qzp';
   var dots='';for(var k=0;k<QN;k++)dots+='<i class="'+(k<i?'done':k===i?'cur':'')+'"></i>';
   h+='<div class="qz-top"><div class="qz-dots" aria-hidden="true">'+dots+'</div><button type="button" class="qz-skip" data-act="qskip">'+(q.edit?'Cerrar':'Saltar por ahora')+'</button></div>';
+  var sm=qSummary(a);
   h+='<p class="kicker" style="color:var(--brand)">Pregunta '+(i+1)+' de '+QN+'</p>';
+  if(sm.length)h+='<div class="qz-sum" aria-label="Lo que llevas">'+sm.map(function(x){return '<span>'+ic('check',12)+esc(x)+'</span>'}).join('')+'</div>';
   if(i===0){
-    h+='<h3>¿Qué estás buscando?</h3><p class="qz-sub">Puedes elegir más de una.</p><div class="qgrid">';
+    h+='<h3>¿Qué tipo de lugar buscas?</h3><p class="qz-sub">Puedes elegir más de una.</p><div class="qgrid">';
     Object.keys(TL).forEach(function(k){h+=qOpt('type',k,TL[k],a.types.indexOf(k)>-1,ic(k,22))});
     h+=qOpt('type','nose','No estoy seguro',!a.types.length&&a.tu,ic('todos',22))+'</div>';
   }else if(i===1){
@@ -1704,7 +1822,7 @@ function renderQuiz(){
   }else{
     h+='<h3>¿Qué cosas son importantes para ti?</h3><p class="qz-sub">Elige las que quieras. Con esto calculamos qué tan compatible es cada vivienda.</p><div class="qchips big">'+IMPS.map(function(x){return '<button type="button" class="chip" data-act="qpick" data-k="imp" data-v="'+x[0]+'" aria-pressed="'+(a.imp.indexOf(x[0])>-1)+'">'+x[1]+'</button>'}).join('')+'</div>';
   }
-  h+='<div class="navrow">'+(i>0?'<button type="button" class="btn alt" data-act="qback">Atrás</button>':'<span></span>')+'<button type="button" class="btn" data-act="qnext">'+(i===QN-1?(q.edit?'Guardar mi plan':'Ver mis viviendas'):'Siguiente')+'</button></div>';
+  h+='<div class="navrow">'+(i>0?'<button type="button" class="btn alt" data-act="qback">Atrás</button>':'<span></span>')+'<button type="button" class="btn" data-act="qnext">'+(i===QN-1?(q.edit?'Guardar mi plan':'Personalizar Habita'):'Siguiente')+'</button></div>';
   $('#qzp').innerHTML=h;
   var f=$('#qzp .qopt[aria-pressed=true],#qzp .chip[aria-pressed=true]');
 }
@@ -1730,6 +1848,7 @@ function qPick(k,v){
   renderQuiz();
 }
 function qFinish(){
+  if(!S.qz||$('#quiz').hidden)return;
   var a=S.qz.a;
   a.done=true;
   if(a.where==='zona'&&!a.zone)a.where='';
@@ -1737,7 +1856,7 @@ function qFinish(){
   PREF=a;savePref();
   closeQuiz();
   applyPref();
-  toast(S.qz.edit?'Plan actualizado':'Listo, ahora ves primero lo que mejor encaja contigo');
+  if(S.qz.edit)toast('Plan actualizado');
 }
 function qSkip(){
   if(!hasPlan()){PREF=Object.assign(defPref(),{done:false,skipped:true});try{localStorage.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
@@ -1759,7 +1878,7 @@ function applyPref(){
   if(pf.where==='near'&&pf.near){S.nearZone=pf.near.z;S.nearName=pf.near.n}
   var steps=[function(){if(S.zones.length){S.zones=[]}},function(){if(S.beds)S.beds=0},function(){if(S.max)S.max=Math.round(S.max*1.25)}];
   for(var k=0;k<steps.length&&!filtered().length;k++)steps[k]();
-  S.sort='rel';S.sortUser=false;
+  S.sort='rel';S.sortUser=false;S.mapOn=false;
   setView('explorar');
   syncUI();
 }
@@ -1769,7 +1888,7 @@ function renderPlanLine(){
     var pf=PREF,parts=[];
     parts.push(pf.types.length?pf.types.map(function(k){return TL[k]}).join(' / '):'Cualquier vivienda');
     parts.push(pf.op==='arriendo'?'Arrendar':pf.op==='venta'?'Comprar':'Arrendar o comprar');
-    el.innerHTML='<span>'+ic('user',15)+'<b>Tu plan:</b> '+esc(parts.join(' · '))+'</span><button type="button" data-act="qzopen">Editar</button>';
+    el.innerHTML='<span>'+ic('user',15)+'<b>Personalizado con tus respuestas:</b> '+esc(parts.join(' · '))+'</span><button type="button" data-act="qzopen">Editar</button>';
   }else{
     el.innerHTML='<span>'+ic('user',15)+'Personaliza Habita y ve tu compatibilidad</span><button type="button" data-act="qzopen">Responder (1 min)</button>';
   }
@@ -2007,7 +2126,7 @@ function publishListing(){
   if(f.lat){p.lat=parseFloat(f.lat);p.lng=parseFloat(f.lng)}
   P.unshift(p);
   $('#q').value='';clearSearch();
-  S.city=z.c;S.op=p.op;S.sort='rel';S.sel=p.id;
+  S.city=z.c;S.op=p.op;S.sort='rel';S.sel=p.id;S.mapOn=true;
   setView('explorar');syncUI();
   toast('Tu propiedad ya aparece en el listado (demo)');
 }
@@ -2155,7 +2274,7 @@ function showOnMap(ids,selId){
   var f=P.filter(function(p){return p.id===(selId||ids[0])})[0];if(!f)return;
   var same=P.filter(function(p){return ids.indexOf(p.id)>-1&&p.op===f.op&&Z[p.z].c===Z[f.z].c}).map(function(p){return p.id});
   clearSearch();
-  S.only=same;S.city=Z[f.z].c;S.op=f.op;S.sel=selId||null;
+  S.only=same;S.city=Z[f.z].c;S.op=f.op;S.sel=selId||null;S.mapOn=true;
   setView('explorar');syncUI();
   if(selId)selectPin(selId,false);
 }
@@ -2322,7 +2441,8 @@ document.addEventListener('click',function(e){
   else if(a==='accent'){S.accent=v;applyTheme();renderSettings()}
   else if(a==='fpanel'){var fp=$('#fpanel');fp.hidden=!fp.hidden;b.setAttribute('aria-expanded',String(!fp.hidden));sheetSet()}
   else if(a==='sheetcycle')sheetCycle();
-  else if(a==='locate')locateStart(true);
+  else if(a==='maptoggle'){S.mapOn=!S.mapOn;renderExplore();if(S.mapOn)window.scrollTo(0,0)}
+  else if(a==='locate'){S.mapOn=true;locateStart(true);renderExplore()}
   else if(a==='pin')selectPin(id,true);
   else if(a==='onlyclear'){S.only=null;syncUI()}
   else if(a==='favfilter'){S.mc='guardadas';setView('micasa')}
@@ -2352,12 +2472,14 @@ document.addEventListener('click',function(e){
     e.stopPropagation();
   }
   else if(a==='untag')untag(b.dataset.k);
-  else if(a==='aiclear'){$('#q').value='';clearSearch()}
+  else if(a==='aiclear'){$('#q').value='';S.mapOn=false;clearSearch()}
   else if(a==='ftog'){if(S.f[v])delete S.f[v];else S.f[v]=true;syncUI()}
   else if(a==='qzopen'){if(!$('#modal').hidden)closeDetail();openQuiz(hasPlan())}
   else if(a==='qzreset'){PREF=defPref();try{localStorage.removeItem('habita.pref')}catch(x){}renderMiCasa();renderPlanLine();syncUI();toast('Plan borrado')}
   else if(a==='qpick')qPick(b.dataset.k,b.dataset.v);
-  else if(a==='qnext'){if(S.qz.i<QN-1){S.qz.i++;renderQuiz()}else qFinish()}
+  else if(a==='qstart'){S.qz.i=0;renderQuiz()}
+  else if(a==='qdone')qFinish();
+  else if(a==='qnext'){if(S.qz.i<QN-1){S.qz.i++;renderQuiz()}else if(S.qz.edit)qFinish();else{S.qz.i=QN;renderQuiz()}}
   else if(a==='qback'){S.qz.i=Math.max(0,S.qz.i-1);renderQuiz()}
   else if(a==='qskip')qSkip();
   else if(a==='plansee'){applyPref()}
@@ -2369,7 +2491,7 @@ document.addEventListener('click',function(e){
       delete q._approx;P.unshift(q);saveImports();
       var qi=q.id,qo=q.op,qc=Z[q.z].c;
       clearSearch();$('#q').value='';
-      S.city=qc;S.op=qo;S.sel=qi;
+      S.city=qc;S.op=qo;S.sel=qi;S.mapOn=true;
       setView('explorar');syncUI();toast('Anuncio agregado a Explorar');
     }
   }
@@ -2404,7 +2526,7 @@ document.addEventListener('mouseover',function(e){
   if(c){var pin=$('.pin[data-id="'+c.dataset.card+'"]');if(pin)pin.classList.add('on')}
 });
 $('#searchForm').addEventListener('submit',function(e){e.preventDefault();smartSearch($('#q').value);$('#q').blur()});
-$('#q').addEventListener('input',function(){if(!this.value&&S.aiText)clearSearch()});
+$('#q').addEventListener('input',function(){if(!this.value&&S.aiText){S.mapOn=false;clearSearch()}});
 $('#fCity').addEventListener('change',function(){
   S.city=this.value;S.only=null;S.sel=null;S.zones=[];S.nearZone=null;S.nearName='';
   if(S.me&&hav(S.me.lat,S.me.lng,CITYC[S.city][0],CITYC[S.city][1])>80){S.me=null;if(S.sort==='near'){S.sort='rel';$('#fSort').value='rel'}}
@@ -2438,14 +2560,18 @@ if(window.matchMedia){var mq=matchMedia('(prefers-color-scheme: dark)');var onMq
 /* ---------- arranque ---------- */
 $('#logoH').innerHTML=logo(34,'h');
 $('#favIc').innerHTML=ic('heart',18);$('#setIc').innerHTML=ic('gear',18);$('#setX').innerHTML=ic('x',18);
-$('#sIc').innerHTML=ic('explorar',18);$('#fIc').innerHTML=ic('filter',18);$('#locIc').innerHTML=ic('locate',16);
+$('#sIc').innerHTML=ic('asistente',20);$('#aiBIc').innerHTML=ic('asistente',14);$('#mapIc').innerHTML=ic('map',16);$('#fIc').innerHTML=ic('filter',18);$('#locIc').innerHTML=ic('locate',16);
 savedImports().forEach(function(p){if(!P.some(function(x){return x.id===p.id}))P.push(p)});
 applyTheme();
 loadPref();
 renderEx();syncUI();
+(function(){
+  var PH=['una habitación cerca de Los Andes por menos de $1.200.000','apartamento de 2 habitaciones cerca de la universidad, hasta 2 millones','casa para comprar en Bogotá con 3 habitaciones y parque cerca','obra gris para comprar en Medellín'],k=0,q=$('#q');
+  setInterval(function(){if(q.value||document.activeElement===q)return;k=(k+1)%PH.length;q.placeholder='Ej: '+PH[k]},4200);
+})();
 var h0=location.hash.replace('#','');
 setView(h0&&document.getElementById('v-'+h0)&&h0!=='undefined'?h0:'explorar',true);
 locateStart(false);
-if(!PREF)setTimeout(function(){openQuiz(false)},500);
+if(!PREF)openQuiz(false,true);
 })();
 </script>
