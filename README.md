@@ -89,3 +89,17 @@ Facebook Marketplace no ofrece conexión pública: Habi lee el anuncio que el us
 - Logo oficial (H con casa y llave) en la app, el sitio, el ícono y la pantalla de inicio del iPhone. Los archivos están en `web/img/`.
 - Al abrir la app aparece el logo (≈1,5 s) y luego el **Home**: qué hace Habita, *Empezar* (cuestionario), *Busca con IA* y un carrusel con cambio automático, flechas, indicadores y deslizamiento. Tocar el logo en cualquier sección vuelve al Home.
 - `npm run build` genera `www/` (la app), copia la app a `web/app/` y publica todo `web/` en `docs/` (GitHub Pages). En `src/app.html` las imágenes se escriben como `@@img/archivo@@` y el build las incrusta.
+
+## MVP: entender, recomendar y decidir (v7)
+
+- **Home:** logo → mensaje → carrusel → *Empezar* (principal) → *o busca con IA*.
+- **Cuestionario:** se presenta como el inicio de la personalización y termina con “Ya entendimos lo que buscas” y el resumen de las respuestas.
+- **Explorar:** buscador con IA; “Esto entendí” con íconos (🛏 tipo, 📍 lugar, 💰 máximo…). Títulos de resultados personalizados (“8 opciones para ti”, “4 viviendas que coinciden contigo”).
+- **Tarjetas:** % de compatibilidad y “¿Por qué te la recomendamos?” (✓/✕) primero; luego precio y su comparación con el promedio de la zona.
+- **Filtros:** Tipo · Precio · Zona · Habitaciones; el resto en *Más filtros* y solo cuando aplica (personas para habitaciones, área/baños/parqueadero para viviendas completas, amoblado/servicios en arriendo).
+- **Lista | Mapa:** la lista es la vista principal. El mapa muestra universidades, transporte, supermercados, parques y hospitales, y para la vivienda elegida responde “¿Qué tan conveniente es vivir aquí?”.
+- **Comparar:** “+ Comparar” en cualquier tarjeta (hasta 3), bandeja para ir a la comparación y recomendación de cuál conviene más.
+- **Precio justo:** promedio estimado de la zona y % por encima o por debajo, en la tarjeta y en el detalle.
+- **Mi plan** (antes Mi casa): progreso, guardadas y mejores opciones, comparar, mis preferencias y metas.
+- **IA en otros portales:** cada búsqueda con IA agrega 2 o 3 viviendas encontradas en Finca Raíz, Metrocuadrado, Ciencuadras, Properati o Facebook Marketplace (generadas a partir de los criterios entendidos, con portal, enlace y código del anuncio). Si se guardan o comparan, se conservan.
+- 16 apartamentos nuevos en Bogotá, Medellín y Cali.

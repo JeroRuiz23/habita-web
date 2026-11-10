@@ -128,7 +128,7 @@ button{cursor:pointer}
 .card:active{transform:scale(.99)}
 .card.on{border-color:var(--brand);box-shadow:0 0 0 2px var(--brand)}
 .art{position:relative;aspect-ratio:16/10;background:var(--surface-2);overflow:hidden}
-.art svg{display:block;width:100%;height:100%}
+.art>svg{display:block;width:100%;height:100%}
 .badge{position:absolute;left:10px;top:10px;background:var(--surface);color:var(--ink);font-size:12px;font-weight:700;border-radius:999px;padding:3px 10px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 .badge.sun{background:var(--sun);color:var(--sun-ink)}
 .fav{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:50%;border:0;background:var(--surface);color:var(--ink);display:grid;place-items:center;box-shadow:0 1px 4px rgba(0,0,0,.15)}
@@ -398,12 +398,9 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .planline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px 8px;padding:7px 12px;background:var(--surface-2);border-radius:12px;font-size:13px}
 .planline span{display:inline-flex;align-items:center;gap:6px;min-width:0}
 .planline button{border:0;background:none;color:var(--brand);font-weight:700;font-size:13px;white-space:nowrap;padding:0}
-.cmp-box{margin-top:8px;padding-top:8px;border-top:1px dashed var(--line);display:grid;gap:3px}
 .cmp-line{margin:0;font-size:13.5px;color:var(--muted);display:flex;align-items:baseline;gap:6px}
 .cmp-line b{font-family:var(--display);font-size:18px;color:var(--brand)}
 .cmp-line.big{font-size:16px}.cmp-line.big b{font-size:34px}
-.why-t{background:none;border:0;padding:0;color:var(--brand);font-weight:600;font-size:12.5px;text-align:left;justify-self:start}
-.why-t::after{content:" ▾"}.why-t[aria-expanded="true"]::after{content:" ▴"}
 .cmp-list{list-style:none;margin:2px 0 0;padding:0;display:grid;gap:3px;font-size:13.5px}
 .cmp-list[hidden]{display:none}
 .cmp-list li{display:flex;gap:7px;line-height:1.35}
@@ -510,26 +507,23 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 @keyframes lgOut{to{opacity:0;visibility:hidden}}
 .intro{position:fixed;inset:0;z-index:300;background:var(--moss);display:grid;place-items:center;animation:lgOut .45s ease 1s forwards;pointer-events:none}
 .intro img{width:min(64vw,400px);height:auto;animation:lgIn .8s cubic-bezier(.2,.8,.2,1) .05s both}
-/* ---- Home ---- */
-.home{background:var(--moss);color:var(--white);min-height:calc(100dvh - var(--hdr) - var(--navh) - env(safe-area-inset-top,0px));display:flex;align-items:center;overflow:hidden;position:relative}
-.hm-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:clamp(24px,4vw,56px);align-items:center;padding-block:clamp(28px,6vh,64px);width:100%;position:relative}
-.hm-copy{display:grid;gap:18px;justify-items:start}
-.home .ai-badge{background:rgba(255,145,0,.16);color:var(--orange)}
-.hm-t{font-size:clamp(34px,4.6vw,58px);font-weight:800;letter-spacing:-.035em;line-height:1.04}
-.hm-s{font-size:clamp(16px,1.6vw,19px);color:rgba(255,255,255,.8);max-width:44ch}
-.hm-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:4px}
-.btn.lg{padding:15px 28px;font-size:16px;border-radius:14px;min-height:52px}
+/* ---- Home: logo, mensaje, carrusel, Empezar, Busca con IA ---- */
+.home{background:var(--moss);color:var(--white);min-height:calc(100dvh - var(--hdr) - var(--navh) - env(safe-area-inset-top,0px));display:flex;align-items:center}
+.hm{display:grid;justify-items:center;text-align:center;gap:clamp(18px,3vh,28px);padding-block:clamp(22px,4vh,44px);width:100%}
+.hm-msg{display:grid;gap:10px;justify-items:center}
+.hm-t{font-size:clamp(30px,4vw,50px);font-weight:800;letter-spacing:-.035em;line-height:1.05;max-width:18ch}
+.hm-s{font-size:clamp(15px,1.5vw,18px);color:rgba(255,255,255,.78);max-width:52ch}
+.home .car{width:min(100%,1040px,max(540px,calc((100dvh - 430px)*2.33)));aspect-ratio:21/9}
+.hm-cta{display:grid;justify-items:center;gap:10px}
+.btn.lg{padding:15px 44px;font-size:17px;border-radius:14px;min-height:54px;min-width:240px}
 .hm-cta .btn:hover{transform:translateY(-2px)}
-.hm-ex{font-size:13.5px;color:rgba(255,255,255,.62);max-width:46ch}
-.hm-ex b{color:rgba(255,255,255,.9);font-weight:600}
-.hm-edit{background:none;border:0;padding:0;color:rgba(255,255,255,.75);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.hm-ai{display:inline-flex;align-items:center;gap:7px;background:none;border:0;padding:8px 12px;border-radius:999px;color:rgba(255,255,255,.82);font-weight:600;font-size:15px;transition:background .18s,color .18s}
+.hm-ai:hover{background:rgba(255,255,255,.1);color:var(--white)}
+.hm-ai .ic{color:var(--orange)}
+.hm-edit{background:none;border:0;padding:0;color:rgba(255,255,255,.65);font-weight:600;font-size:13.5px;text-decoration:underline;text-underline-offset:3px}
 .hm-edit:hover{color:var(--white)}
-.hm-steps{list-style:none;display:flex;flex-wrap:wrap;gap:10px 22px;margin:6px 0 0;padding:0;font-size:13.5px;font-weight:600;color:rgba(255,255,255,.75)}
-.hm-steps li{display:flex;align-items:center;gap:8px}
-.hm-steps b{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.12);color:var(--orange);display:grid;place-items:center;font-size:12px}
-.home.enter .hm-copy>*{animation:hup .6s cubic-bezier(.2,.8,.2,1) both}
-.home.enter .hm-copy>*:nth-child(2){animation-delay:.07s}.home.enter .hm-copy>*:nth-child(3){animation-delay:.14s}.home.enter .hm-copy>*:nth-child(4){animation-delay:.21s}.home.enter .hm-copy>*:nth-child(5){animation-delay:.28s}.home.enter .hm-copy>*:nth-child(6){animation-delay:.35s}
-.home.enter .car{animation:hup .7s cubic-bezier(.2,.8,.2,1) .2s both}
+.home.enter .hm>*{animation:hup .6s cubic-bezier(.2,.8,.2,1) both}
+.home.enter .hm>*:nth-child(2){animation-delay:.1s}.home.enter .hm>*:nth-child(3){animation-delay:.2s}
 /* ---- carrusel ---- */
 .car{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/11;background:var(--moss-900);box-shadow:0 24px 60px rgba(0,0,0,.35);touch-action:pan-y;outline-offset:4px;user-select:none;-webkit-user-select:none}
 .car-s{position:absolute;inset:0;margin:0;opacity:0;visibility:hidden;transition:opacity .8s ease,visibility .8s}
@@ -556,9 +550,104 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .car-d button[aria-selected="true"] i{position:absolute;inset:0;background:var(--orange);transform-origin:left;animation:carDot var(--dur,5200ms) linear forwards}
 .car.paused .car-d button[aria-selected="true"] i,.car.still .car-d button[aria-selected="true"] i{animation:none;transform:none}
 @keyframes carDot{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-@media (max-width:999px){.hm-grid{grid-template-columns:minmax(0,1fr)}.home{align-items:flex-start}.car{aspect-ratio:4/3}}
-@media (max-width:560px){.hm-steps{display:none}.hm-copy{gap:14px}.hm-t{font-size:32px}.hm-grid{gap:22px;padding-block:24px 28px}.hm-cta{display:grid;grid-template-columns:1fr;width:100%}.hm-cta .btn{width:100%}.car{border-radius:18px;aspect-ratio:1/1}.car-b{top:auto;bottom:12px;width:40px;height:40px}.car-p{left:auto;right:60px}.car-n{right:12px}.car-d{left:18px;bottom:28px}.car-s figcaption{padding:56px 18px 64px}}
-@media (min-width:600px) and (max-width:999px){.car{aspect-ratio:16/10}}
+@media (max-width:999px){.home{align-items:flex-start}.home .car{aspect-ratio:16/9}}
+@media (max-width:560px){.hm-t{font-size:30px}.hm{gap:18px;padding-block:20px 26px}.hm-cta{width:100%}.hm-cta .btn{width:100%}.home .car{border-radius:18px;aspect-ratio:4/3}.car-b{top:auto;bottom:12px;width:40px;height:40px}.car-p{left:auto;right:60px}.car-n{right:12px}.car-d{left:18px;bottom:28px}.car-s figcaption{padding:56px 18px 64px}}
+
+/* ---- v7: compatibilidad visible, precio justo, IA en otros portales ---- */
+.cmpx{display:grid;gap:4px;margin:-2px 0 10px;padding-bottom:10px;border-bottom:1px dashed var(--line)}
+.cmp-pct{margin:0;font-size:14px;font-weight:700;color:var(--moss);display:flex;align-items:baseline;gap:6px}
+.cmp-pct b{font-size:26px;font-weight:800;letter-spacing:-.03em;line-height:1}
+.cmp-bar{display:block;height:6px;border-radius:6px;background:var(--moss-100);overflow:hidden}
+.cmp-bar b{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,var(--moss),#5c7564)}
+.why-h{margin:6px 0 0;font-size:12.5px;font-weight:700;color:var(--muted)}
+.card .cmp-list{font-size:13px;gap:2px}
+.card .price{font-size:20px}
+.fair{margin:1px 0 0;font-size:12.5px;font-weight:700}
+.fair.ok{color:var(--moss)}.fair.hi{color:var(--warn)}
+.fair.ok::before{content:"↓ "}.fair.hi::before{content:"↑ "}
+.extsrc{display:flex;align-items:center;gap:5px;margin:6px 0 0;font-size:12.5px;font-weight:600;color:var(--warn)}
+.c-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
+.cmpbtn{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;color:var(--moss);transition:border-color .18s,background .18s,transform .18s}
+.cmpbtn:hover{border-color:var(--moss)}
+.cmpbtn:active{transform:scale(.96)}
+.cmpbtn[aria-pressed="true"]{background:var(--moss);border-color:var(--moss);color:var(--white)}
+.extl{font-size:13px;font-weight:700;color:var(--moss);text-decoration:none;border-bottom:1.5px solid var(--orange)}
+.extl:hover{color:var(--moss-900)}
+.badge.ia{display:inline-flex;align-items:center;gap:4px;background:var(--orange);color:var(--moss-900)}
+.card.ext{border-color:color-mix(in srgb,var(--orange) 45%,var(--line))}
+.ai-web{display:flex;gap:7px;align-items:flex-start;margin:8px 0 0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--orange) 12%,var(--white));font-size:13px;color:var(--ink)}
+.ai-web .ic{color:var(--warn);flex:none;margin-top:1px}
+.tag .te{font-size:14px;line-height:1}
+.lm{padding:3px}.lm button{padding:6px 12px;font-size:13.5px}
+.lm button[aria-pressed="true"]{background:var(--moss);color:var(--white);box-shadow:none}
+.mapctx{margin:0 16px 10px;display:grid;gap:8px;flex:none}
+#explore[data-map="off"] .mapctx{margin:0 var(--px) 10px}
+.mctx{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:1px}
+.mctx::-webkit-scrollbar{display:none}
+.chip.xs{padding:5px 10px;font-size:12.5px;gap:5px}
+.conv{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:6px;box-shadow:var(--shadow)}
+.conv-h{margin:0;display:flex;justify-content:space-between;gap:8px;font-size:14px}
+.conv-h span{font-weight:800;color:var(--moss)}
+.conv-t{margin:0;font-size:13px;color:var(--muted)}
+.conv ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.conv li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:center;font-size:13px}
+.conv li .ic{color:var(--moss)}
+.conv li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.conv .btn{justify-self:start}
+.conv-tip{margin:0;font-size:12.5px;color:var(--muted)}
+.poi{position:absolute;z-index:1;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px;background:var(--white);color:var(--moss);border-radius:999px;padding:3px;box-shadow:0 1px 4px rgba(34,46,39,.25);font-size:11px;font-weight:600;pointer-events:auto}
+.poi em{font-style:normal;max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .25s,padding .25s}
+.poi:hover{z-index:4}.poi:hover em{max-width:160px;padding-right:6px}
+.poi.p-universidad{background:var(--moss);color:var(--white)}
+.poi.p-transporte{color:var(--warn)}
+.tray{position:fixed;z-index:45;left:0;right:0;margin-inline:auto;width:max-content;bottom:calc(16px + var(--navh));display:flex;align-items:center;gap:12px;background:var(--moss);color:var(--white);border-radius:999px;padding:8px 8px 8px 18px;box-shadow:0 12px 30px rgba(34,46,39,.35);animation:hup .35s ease both;max-width:calc(100% - 24px)}
+.tray span{font-size:14px;white-space:nowrap}
+.tray .btn[disabled]{opacity:.55;cursor:default;box-shadow:none}
+.tray-x{width:34px;height:34px;border-radius:50%;border:0;background:rgba(255,255,255,.12);color:var(--white);display:grid;place-items:center}
+.tray-x:hover{background:rgba(255,255,255,.22)}
+.prog{list-style:none;margin:0 0 16px;padding:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.prog button{width:100%;display:flex;align-items:center;gap:10px;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 12px;transition:border-color .18s,box-shadow .18s}
+.prog button:hover{border-color:var(--moss);box-shadow:var(--shadow)}
+.prog b{width:28px;height:28px;border-radius:50%;flex:none;display:grid;place-items:center;background:var(--surface-2);color:var(--muted);font-size:13px}
+.prog .done b{background:var(--moss);color:var(--white)}
+.prog span{display:grid;font-weight:700;font-size:14px;min-width:0}
+.prog small{font-weight:500;color:var(--muted);font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mctabs{margin-bottom:16px;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.mctabs::-webkit-scrollbar{display:none}
+.mctabs button{white-space:nowrap}
+.verdict{background:var(--moss);color:var(--white);border-radius:18px;padding:20px 22px;margin-bottom:14px;display:grid;gap:6px}
+.verdict .kicker{color:var(--orange);margin:0}
+.verdict h3{font-size:clamp(20px,2.4vw,26px)}
+.verdict p{margin:0;color:rgba(255,255,255,.85)}
+.verdict .cta{margin-top:8px}
+.verdict .btn.alt{background:rgba(255,255,255,.12);color:var(--white)}
+.verdict .btn.alt:hover{background:rgba(255,255,255,.2)}
+.cmp thead th button{background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px}
+.cmp thead th small,.cmp td small{display:block;font-family:var(--body);font-weight:500;font-size:12px;color:var(--muted);margin-top:3px}
+.cmp th.win{background:var(--moss-100)}
+.winb{display:table;background:var(--orange);color:var(--moss-900);font-family:var(--body);font-size:11px;font-weight:800;border-radius:999px;padding:2px 8px;margin-bottom:6px}
+.cmp td .big{font-size:20px}
+.cmp td .cmp-list{font-size:13px}
+.cmp{min-width:560px}
+.fair-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fair-row div{background:var(--surface-2);border-radius:12px;padding:10px 12px;display:grid;gap:2px}
+.fair-row span{font-size:12.5px;color:var(--muted)}
+.fair-row b{font-size:18px;font-variant-numeric:tabular-nums}
+.fair-bar{position:relative;height:8px;border-radius:8px;margin:18px 0 22px;background:linear-gradient(90deg,var(--moss),var(--moss-100) 50%,color-mix(in srgb,var(--orange) 60%,var(--white)))}
+.fair-bar i{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:var(--white);border:3px solid var(--moss-900);transform:translate(-50%,-50%);box-shadow:var(--shadow)}
+.fair-bar span{position:absolute;top:14px;font-size:11.5px;color:var(--muted)}
+.fair-bar span:nth-of-type(1){left:0}.fair-bar span:nth-of-type(2){left:50%;transform:translateX(-50%)}.fair-bar span:nth-of-type(3){right:0}
+.fair-v{margin:0;font-weight:800;font-size:16px}
+.fair-v.ok{color:var(--moss)}.fair-v.hi{color:var(--warn)}
+.extbox{border:1.5px solid color-mix(in srgb,var(--orange) 50%,var(--line));border-radius:14px;padding:14px 16px;background:color-mix(in srgb,var(--orange) 6%,var(--white))}
+.extbox h3{display:flex;align-items:center;gap:6px}
+.qz-why{display:flex;gap:8px;align-items:flex-start;background:var(--moss-100);color:var(--moss);border-radius:12px;padding:9px 12px;font-size:13.5px;font-weight:600;margin:-4px 0 4px}
+.qz-why .ic{flex:none;margin-top:1px}
+.qw-sum{text-align:left;width:100%}
+.qw-sum>div{opacity:0;animation:hup .45s var(--d) forwards}
+@media (max-width:999px){#explore[data-map="on"] .aipanel,#explore[data-map="on"] .xrow,#explore[data-map="on"] .aiex{display:none!important}}
+@media (max-width:560px){.sh-h h2{font-size:17px;line-height:1.2}.sh-h p{font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tray{padding-left:14px;gap:8px}.tray span{font-size:13px}}
+@media (max-width:760px){.prog{grid-template-columns:repeat(2,minmax(0,1fr))}.tray{border-radius:16px;bottom:calc(10px + var(--navh))}.fair-row{grid-template-columns:1fr}}
 @media (min-width:1000px){
   .xp{display:grid;grid-template-columns:minmax(430px,520px) minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:"tools map" "sheet map"}
   .xtools{grid-area:tools;border-right:1px solid var(--line)}
@@ -617,22 +706,23 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
     <button class="brand" data-act="home" aria-label="Habita: volver al inicio"><img src="@@img/logo-dark.png@@" alt="Habita" width="123" height="30"></button>
     <nav class="nav" id="nav" aria-label="Secciones"></nav>
     <span class="spacer"></span>
-    <button class="iconbtn" id="favBtn" data-act="favfilter" aria-label="Mis opciones"><span id="favIc"></span><b id="favN">0</b></button>
+    <button class="iconbtn" id="favBtn" data-act="favfilter" aria-label="Guardadas en Mi plan"><span id="favIc"></span><b id="favN">0</b></button>
   </div>
 </header>
 
 <main>
 <section id="v-home" class="view home" hidden>
-  <div class="wrap hm-grid">
-    <div class="hm-copy">
-      <p class="ai-badge"><span id="hmIc"></span>Busca con IA</p>
+  <div class="wrap hm">
+    <div class="hm-msg">
       <h1 class="hm-t">Encuentra un lugar que realmente se adapte a ti.</h1>
-      <p class="hm-s">Cuéntanos qué estás buscando y Habita encontrará opciones que encajen contigo.</p>
-      <div class="hm-cta"><button class="btn lg" data-act="hstart" id="hmGo">Empezar</button><button class="btn line lg" data-act="hsearch">Busca con IA</button></div>
-      <p class="hm-ex" id="hmEx">Ejemplo: <b>“Quiero una habitación cerca de Los Andes por menos de $1.200.000.”</b></p>
-      <ol class="hm-steps" id="hmSteps"><li><b>1</b>Cuéntanos qué buscas</li><li><b>2</b>Personalizamos tu búsqueda</li><li><b>3</b>Ves lo que mejor encaja</li></ol>
+      <p class="hm-s">Habita entiende lo que necesitas, encuentra opciones compatibles contigo y te ayuda a decidir cuál te conviene.</p>
     </div>
     <div class="car" id="car" role="region" aria-roledescription="carrusel" aria-label="Tipos de vivienda en Habita" tabindex="0"></div>
+    <div class="hm-cta">
+      <button class="btn lg" data-act="hstart" id="hmGo">Empezar</button>
+      <button type="button" class="hm-ai" data-act="hsearch"><span id="hmIc"></span>o busca con IA</button>
+      <button type="button" class="hm-edit" data-act="qzopen" id="hmEdit" hidden>Editar mis respuestas</button>
+    </div>
   </div>
 </section>
 <section id="v-explorar" class="view">
@@ -645,10 +735,10 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
       <form class="sbar" id="searchForm" role="search">
         <span id="sIc"></span>
         <label class="sr" for="q">Describe lo que buscas con tus palabras</label>
-        <input id="q" type="search" placeholder="Ej: una habitación cerca de Los Andes por menos de $1.200.000" autocomplete="off" enterkeyhint="search">
+        <input id="q" type="search" placeholder="Ej: Quiero una habitación cerca de Los Andes por menos de $1.200.000" autocomplete="off" enterkeyhint="search">
         <button type="submit" class="btn sm2 go" id="qGo">Buscar</button>
       </form>
-      <p class="xh-s">Describe lo que necesitas y Habita convertirá tus preferencias en una búsqueda personalizada.</p>
+      <p class="xh-s">Cuéntanos qué necesitas y Habita encontrará opciones para ti, también en otros portales.</p>
       <div class="aiex" id="aiEx"></div>
       <div class="aipanel" id="aiPanel" hidden aria-live="polite"></div>
       <div class="xrow" id="xrow">
@@ -659,20 +749,20 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
         <span id="typeChips" class="chips" style="flex-wrap:nowrap" role="group" aria-label="Tipo de vivienda"></span>
       </div>
       <div class="xrow xsel">
-        <label class="sr" for="fCity">Ciudad</label><select class="sel" id="fCity"><option value="bog">Bogotá</option><option value="med">Medellín</option><option value="cal">Cali</option></select>
         <label class="sr" for="fPrice">Precio máximo</label><select class="sel" id="fPrice"></select>
-        <label class="sr" for="fBeds">Habitaciones</label><select class="sel" id="fBeds"><option value="0">Hab.</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option></select>
+        <label class="sr" for="fCity">Zona</label><select class="sel" id="fCity"></select>
+        <span id="fBedsW"><label class="sr" for="fBeds">Habitaciones</label><select class="sel" id="fBeds"><option value="0">Hab.</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option></select></span>
         <button type="button" class="chip" data-act="fpanel" id="fBtn" aria-expanded="false"><span id="fIc"></span>Más filtros<b id="fCnt" class="cnt" hidden></b></button>
       </div>
       <div class="fpanel" id="fpanel" hidden>
-        <label class="sr" for="fArea">Área mínima</label><select class="sel" id="fArea"><option value="0">Área</option><option value="30">30 m² o más</option><option value="50">50 m² o más</option><option value="80">80 m² o más</option><option value="120">120 m² o más</option></select>
-        <label class="sr" for="fBaths">Baños</label><select class="sel" id="fBaths"><option value="0">Baños</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option></select>
-        <label class="sr" for="fPeople">Personas</label><select class="sel" id="fPeople"><option value="0">Personas</option><option value="1">Para 1</option><option value="2">Para 2</option><option value="3">Para 3</option><option value="4">Para 4 o más</option></select>
+        <span class="fx" data-for="nohab"><label class="sr" for="fArea">Área mínima</label><select class="sel" id="fArea"><option value="0">Área</option><option value="30">30 m² o más</option><option value="50">50 m² o más</option><option value="80">80 m² o más</option><option value="120">120 m² o más</option></select></span>
+        <span class="fx" data-for="nohab"><label class="sr" for="fBaths">Baños</label><select class="sel" id="fBaths"><option value="0">Baños</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option></select></span>
+        <span class="fx" data-for="hab"><label class="sr" for="fPeople">Personas</label><select class="sel" id="fPeople"><option value="0">Personas</option><option value="1">Para 1</option><option value="2">Para 2</option><option value="3">Para 3</option><option value="4">Para 4 o más</option></select></span>
         <div class="chips fp-t" role="group" aria-label="Características">
-          <button type="button" class="chip" data-act="ftog" data-v="furn" aria-pressed="false">Amoblado</button>
+          <button type="button" class="chip fx" data-for="rent" data-act="ftog" data-v="furn" aria-pressed="false">Amoblado</button>
           <button type="button" class="chip" data-act="ftog" data-v="pets" aria-pressed="false">Acepta mascotas</button>
-          <button type="button" class="chip" data-act="ftog" data-v="inc" aria-pressed="false">Servicios incluidos</button>
-          <button type="button" class="chip" data-act="ftog" data-v="park" aria-pressed="false">Parqueadero</button>
+          <button type="button" class="chip fx" data-for="rent" data-act="ftog" data-v="inc" aria-pressed="false">Servicios incluidos</button>
+          <button type="button" class="chip fx" data-for="nohab" data-act="ftog" data-v="park" aria-pressed="false">Parqueadero</button>
         </div>
         <label class="sr" for="fSort">Ordenar</label><select class="sel fp-s" id="fSort"><option value="rel">Ordenar: mejor para ti</option><option value="near">Más cerca de mí</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="ar">Mayor área</option></select>
       </div>
@@ -682,8 +772,9 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
       <button class="grab" id="grab" data-act="sheetcycle" aria-label="Subir o bajar la lista"><i></i></button>
       <div class="sh-h" id="shh">
         <div><h2 id="count">Viviendas</h2><p id="countSub"></p></div>
-        <div class="sh-act"><button class="btn alt sm2" data-act="maptoggle" id="mapBtn"><span id="mapIc"></span><span id="mapTx">Ver mapa</span></button><button class="btn alt sm2" data-act="locate" id="locBtn" aria-label="Cerca de mí"><span id="locIc"></span>Cerca de mí</button></div>
+        <div class="sh-act"><div class="seg lm" role="group" aria-label="Ver resultados como"><button type="button" data-act="lm" data-v="list" id="lmList" aria-pressed="true"><span id="lmLi"></span>Lista</button><button type="button" data-act="lm" data-v="map" id="lmMap" aria-pressed="false"><span id="mapIc"></span>Mapa</button></div><button class="btn alt sm2" data-act="locate" id="locBtn" aria-label="Cerca de mí"><span id="locIc"></span>Cerca de mí</button></div>
       </div>
+      <div class="mapctx" id="mapCtx" hidden></div>
       <div class="planline" id="planLine"></div>
       <div class="sh-list" id="shlist"><div class="grid" id="grid"></div></div>
     </div>
@@ -711,12 +802,13 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   <div class="wrap page">
     <div class="page-h">
       <div>
-        <p class="kicker" style="color:var(--brand)">Mi casa</p>
-        <h2>Tus opciones, tu plan y tus metas.</h2>
-        <p>Compara lo que guardaste, revisa si entra en tu presupuesto y mira qué tan compatible es con lo que buscas.</p>
+        <p class="kicker" style="color:var(--brand)">Mi plan</p>
+        <h2>Guarda, compara y decide.</h2>
+        <p>Aquí están tus viviendas guardadas, tus mejores opciones, la comparación y lo que nos dijiste que buscas.</p>
       </div>
-      <div class="seg" id="mcTabs" role="group" aria-label="Secciones de Mi casa"></div>
     </div>
+    <div id="mcProg"></div>
+    <div class="seg mctabs" id="mcTabs" role="group" aria-label="Secciones de Mi plan"></div>
     <div id="mcBody"></div>
   </div>
 </section>
@@ -736,12 +828,13 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 </section>
 </main>
 
-<footer class="foot"><div class="wrap">Prototipo para Expoandes. Viviendas, precios, distancias y proyectos son datos de ejemplo. En iPhone el mapa es Apple Maps; en la vista web es esquemático. Los análisis financieros son ilustrativos y no son asesoría financiera.</div></footer>
+<footer class="foot"><div class="wrap">Habita · Precios promedio, distancias y análisis financieros son estimaciones y no constituyen asesoría financiera. Verifica cada vivienda en persona antes de pagar o firmar.</div></footer>
 
 <div class="modal" id="modal" hidden role="dialog" aria-modal="true" aria-label="Detalle de la vivienda">
   <div class="panel" id="panel"></div>
 </div>
 <div class="scrim qz" id="quiz" hidden role="dialog" aria-modal="true" aria-label="Cuestionario de Habita"><div class="qzp" id="qzp"></div></div>
+<div class="tray" id="tray" hidden></div>
 <div class="toast" id="toast" hidden></div>
 
 
@@ -795,6 +888,7 @@ function ic(n,s){s=s||18;return '<svg class="ic" viewBox="0 0 24 24" width="'+s+
 Object.assign(IC,{
   chevl:'<path d="M15 5l-7 7 7 7"/>',
   chevr:'<path d="M9 5l7 7-7 7"/>',
+  list:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   filter:'<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',
   locate:'<circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="8"/><path d="M12 1.500v3M12 19.500v3M1.5 12h3M19.5 12h3"/>',
@@ -829,6 +923,8 @@ var Z={
  cjardin:{c:'cal',n:'Ciudad Jardín',x:42,y:80,m2:7,dens:1.1,kw:['ciudad jardin','pance','icesi'],o:{universidad:['Universidad Icesi',2200],salud:['Clínica Valle del Lili',2500],restaurantes:['C.C. Jardín Plaza',1400]}},
  sanfernando:{c:'cal',n:'San Fernando',x:36,y:50,m2:5.5,dens:.9,kw:['san fernando','univalle'],o:{restaurantes:['Zona gastronómica San Fernando',500],transporte:['Estación MIO',600]}}
 };
+/* supermercados por zona (para Qué hay cerca y el mapa) */
+(function(){var SUP=['Carulla','Éxito','Jumbo','D1','Ara','Olímpica'];Object.keys(Z).forEach(function(k,i){if(!Z[k].o.supermercado)Z[k].o.supermercado=[SUP[i%SUP.length]+' '+Z[k].n,300+(i*137)%400]})})();
 var CITYKW={bog:['bogota'],med:['medellin','antioquia'],cal:['cali','valle del cauca']};
 
 var P=[
@@ -856,7 +952,23 @@ var P=[
  {id:'p22',z:'poblado',t:'habitacion',room:'privada',bath:'compartido',inc:1,furn:1,rules:['No fumar','Visitas hasta las 9 p. m.'],op:'arriendo',title:'Habitación con servicios incluidos en El Poblado',price:1.7e6,area:14,beds:1,baths:0,park:0,est:5,x:63,y:62,tags:['servicios incluidos','wifi','amoblado','seguridad'],d:'Habitación amoblada en apartamento con portería 24 horas. Wifi, agua y luz incluidos. Gimnasio y piscina del edificio.'},
  {id:'p23',z:'cjardin',t:'habitacion',room:'compartida',bath:'compartido',inc:1,furn:1,rules:['Solo estudiantes','Silencio después de las 10 p. m.'],op:'arriendo',title:'Habitación compartida cerca a Icesi',price:0.85e6,area:16,beds:2,baths:0,park:0,est:4,x:43,y:82,tags:['servicios incluidos','wifi','amoblado','cerca a universidad'],d:'Habitación doble en residencia de estudiantes. Servicios y wifi incluidos, sala de estudio y cocina común.'},
  {id:'p24',z:'candelaria',t:'apto',op:'arriendo',title:'Apartamento de dos habitaciones cerca de Los Andes',price:1.9e6,area:54,beds:2,baths:1,park:0,est:3,x:58,y:57,tags:['cerca a universidad','seguridad','zonas comunes'],d:'Edificio con portería y ascensor, a pocas cuadras de la universidad. Dos alcobas, sala-comedor y cocina integral.'},
- {id:'p25',z:'candelaria',t:'apto',op:'arriendo',title:'Apartamento amoblado para compartir en Las Aguas',price:1.8e6,area:50,beds:2,baths:1,park:0,est:3,x:60,y:56,tags:['amoblado','wifi','cerca a universidad'],d:'Dos alcobas amobladas, ideal para dos estudiantes. Wifi y administración incluidos.'}
+ {id:'p25',z:'candelaria',t:'apto',op:'arriendo',title:'Apartamento amoblado para compartir en Las Aguas',price:1.8e6,area:50,beds:2,baths:1,park:0,est:3,x:60,y:56,tags:['amoblado','wifi','cerca a universidad'],d:'Dos alcobas amobladas, ideal para dos estudiantes. Wifi y administración incluidos.'},
+ {id:'p26',z:'chapinero',t:'apto',op:'arriendo',title:'Apartamento con balcón en Chapinero Central',price:2.6e6,area:62,beds:2,baths:2,park:1,est:4,x:55,y:39,tags:['seguridad','zonas comunes','cerca a universidad'],d:'Dos alcobas con closet, balcón hacia la calle y cocina abierta. A tres cuadras de TransMilenio Calle 63.'},
+ {id:'p27',z:'chico',t:'apto',op:'arriendo',title:'Apartamento familiar en Chicó Navarra',price:4.8e6,area:90,beds:3,baths:2,park:2,est:6,x:59,y:28,tags:['vista','seguridad','gimnasio','zonas comunes'],d:'Tres alcobas, estudio y dos parqueaderos. Edificio con gimnasio, portería 24 horas y salón comunal.'},
+ {id:'p28',z:'usaquen',t:'apto',op:'arriendo',title:'Apartamento tranquilo cerca al Parque de Usaquén',price:3.4e6,area:72,beds:2,baths:2,park:1,est:5,x:61,y:13,tags:['mascotas','tranquilo','seguridad'],d:'Calle cerrada y arborizada. Sala con chimenea, cocina integral y patio de ropas.'},
+ {id:'p29',z:'cedritos',t:'apto',op:'arriendo',title:'Apartamento en conjunto con parque en Cedritos',price:2.3e6,area:60,beds:2,baths:2,park:1,est:4,x:66,y:21,tags:['mascotas','zonas comunes','tranquilo'],d:'Conjunto cerrado con parque infantil y cancha. Cocina integral y balcón.'},
+ {id:'p30',z:'teusaquillo',t:'apto',op:'venta',title:'Apartamento de tres alcobas en Palermo',price:480e6,area:70,beds:3,baths:2,park:1,est:4,x:45,y:44,rent:2.5e6,g:5.5,tags:['cerca a universidad','tranquilo'],d:'Edificio de ladrillo de cinco pisos, a diez minutos a pie de la Universidad Nacional.'},
+ {id:'p31',z:'salitre',t:'apto',op:'arriendo',title:'Apartamento en Ciudad Salitre cerca al Simón Bolívar',price:2.7e6,area:65,beds:2,baths:2,park:1,est:4,x:35,y:47,tags:['zonas comunes','seguridad','tranquilo'],d:'Conjunto con zonas verdes y piscina. Cerca de la Av. El Dorado y del Parque Simón Bolívar.'},
+ {id:'p32',z:'suba',t:'apto',op:'venta',title:'Apartamento de tres alcobas en Suba Pinar',price:360e6,area:68,beds:3,baths:2,park:1,est:4,x:33,y:13,rent:1.9e6,g:5,tags:['mascotas','zonas comunes'],d:'Conjunto con piscina y parque. Cocina integral y vista a los cerros de Suba.'},
+ {id:'p33',z:'kennedy',t:'apto',op:'arriendo',title:'Apartamento económico en Kennedy Central',price:1.4e6,area:50,beds:2,baths:1,park:0,est:3,x:23,y:68,tags:['zonas comunes'],d:'Dos alcobas, sala-comedor y cocina. A cinco minutos del Portal Américas.'},
+ {id:'p34',z:'candelaria',t:'apto',op:'venta',title:'Apartamento colonial restaurado cerca de Los Andes',price:390e6,area:60,beds:2,baths:1,park:0,est:3,x:58,y:59,rent:2.2e6,g:6.5,tags:['cerca a universidad','vista'],d:'Techos altos, vigas de madera y balcón. Alta demanda de arriendo por estudiantes y profesores.'},
+ {id:'p35',z:'poblado',t:'apto',op:'arriendo',title:'Apartamento con vista en El Poblado',price:4.2e6,area:75,beds:2,baths:2,park:1,est:6,x:61,y:61,tags:['vista','seguridad','gimnasio'],d:'Piso alto con balcón, gimnasio y piscina. A cinco minutos del Metro El Poblado.'},
+ {id:'p36',z:'laureles',t:'apto',op:'arriendo',title:'Apartamento de tres alcobas en Laureles',price:2.8e6,area:70,beds:3,baths:2,park:1,est:4,x:39,y:48,tags:['mascotas','tranquilo','cerca a universidad'],d:'Calle residencial cerca de la 70. Tres alcobas, patio de ropas y parqueadero cubierto.'},
+ {id:'p37',z:'laureles',t:'apto',op:'venta',title:'Apartamento para estrenar en Laureles',price:520e6,area:80,beds:3,baths:2,park:1,est:5,x:40,y:46,rent:2.6e6,g:5.6,tags:['seguridad','zonas comunes'],d:'Proyecto entregado en 2025. Cocina abierta, balcón y zona húmeda en el último piso.'},
+ {id:'p38',z:'envigado',t:'apto',op:'arriendo',title:'Apartamento en Envigado con zonas verdes',price:3.1e6,area:78,beds:3,baths:2,park:1,est:4,x:59,y:85,tags:['mascotas','zonas comunes','tranquilo'],d:'Conjunto con sendero ecológico, piscina y juegos infantiles. Cerca al Parque de Envigado.'},
+ {id:'p39',z:'sanfernando',t:'apto',op:'arriendo',title:'Apartamento cerca a Univalle en San Fernando',price:2.2e6,area:64,beds:2,baths:2,park:1,est:4,x:37,y:51,tags:['cerca a universidad','seguridad'],d:'Dos alcobas con aire acondicionado y balcón. A cinco minutos de la estación del MIO.'},
+ {id:'p40',z:'cjardin',t:'apto',op:'arriendo',title:'Apartamento amplio en Ciudad Jardín',price:3.2e6,area:85,beds:3,baths:2,park:2,est:5,x:41,y:81,tags:['mascotas','seguridad','zonas comunes'],d:'Tres alcobas, cuarto de servicio y dos parqueaderos. Conjunto con piscina.'},
+ {id:'p41',z:'fontibon',t:'apto',op:'arriendo',title:'Apartamento cerca al aeropuerto en Fontibón',price:1.9e6,area:56,beds:2,baths:1,park:1,est:3,x:23,y:52,tags:['zonas comunes','seguridad'],d:'Conjunto nuevo con ascensor y salón social. Fácil salida a la Av. El Dorado.'}
 ];
 
 var OBRAS=[
@@ -876,6 +988,9 @@ var S={view:'explorar',op:'venta',city:'bog',type:'todos',max:0,beds:0,sort:'rel
 OBRAS.forEach(function(o){S.Q[o.id]={a:o.areas[0],l:'medio'}});
 try{var raw=localStorage.getItem('habita.fav');if(raw)S.fav=JSON.parse(raw)||{}}catch(e){}
 function saveFav(){try{localStorage.setItem('habita.fav',JSON.stringify(S.fav))}catch(e){}}
+S.cmp={};try{S.cmp=JSON.parse(localStorage.getItem('habita.cmp')||'{}')||{}}catch(e){}
+function saveCmp(){try{localStorage.setItem('habita.cmp',JSON.stringify(S.cmp))}catch(e){}}
+try{JSON.parse(localStorage.getItem('habita.ext')||'[]').forEach(function(x){if(x&&x.ext&&x.id&&!P.some(function(p){return p.id===x.id}))P.push(x)})}catch(e){}
 
 /* ---------- datos derivados ---------- */
 var nearCache={};
@@ -896,6 +1011,24 @@ function envScore(p){
 function inv(p){
   var m2=p.price/p.area,avg=Z[p.z].m2*1e6,diff=m2/avg-1;
   return {m2:m2,avg:avg,diff:diff,yld:p.rent?p.rent*12/p.price*100:0,opp:diff<=-0.08};
+}
+/* precio justo: promedio estimado de la zona para una vivienda comparable */
+function fair(p){
+  if(p.t==='obra')return null;
+  var z=Z[p.z],avg,furn=p.furn||p.tags.indexOf('amoblado')>-1;
+  if(p.t==='habitacion')avg=z.m2*0.16e6*(p.bath==='privado'?1.15:1)*(p.inc?1.08:1)*(p.room==='compartida'?0.72:1);
+  else if(p.op==='venta')avg=z.m2*1e6*p.area*(p.t==='casa'?0.92:1);
+  else avg=z.m2*1e6*0.0058*p.area*(p.t==='apartaestudio'?1.15:1)*(furn?1.1:1);
+  var u=p.op==='venta'?1e6:1e4;avg=Math.round(avg/u)*u;
+  var d=p.price/avg-1,k=Math.round(Math.abs(d)*100);
+  return {avg:avg,diff:d,good:d<=0.03,txt:k<3?'En el promedio de la zona':k+'% '+(d<0?'por debajo':'por encima')+' del promedio de la zona'};
+}
+function fairHTML(p){
+  var f=fair(p);if(!f)return '';
+  var pos=clamp(50+f.diff*150,6,94);
+  return '<section class="m-sec fairbox"><h3>¿Es un precio justo?</h3><div class="fair-row"><div><span>Esta vivienda</span><b>'+money(p.price)+(p.op==='arriendo'?' /mes':'')+'</b></div><div><span>Promedio estimado de la zona</span><b>'+money(f.avg)+(p.op==='arriendo'?' /mes':'')+'</b></div></div>'+
+    '<div class="fair-bar" aria-hidden="true"><i style="left:'+pos.toFixed(0)+'%"></i><span>Más barato</span><span>Promedio</span><span>Más caro</span></div>'+
+    '<p class="fair-v '+(f.good?'ok':'hi')+'">'+f.txt+'</p><p class="fine" style="margin:0">Estimado con el precio por m² de '+Z[p.z].n+' para '+(p.t==='habitacion'?'habitaciones con condiciones parecidas':'viviendas del mismo tipo y área')+'.</p></section>';
 }
 function pct(v,d){return (d===undefined?1:d)===0?N0.format(v)+'%':N1.format(v)+'%'}
 function capOf(p){return p.t==='habitacion'?p.beds:p.t==='apartaestudio'?2:p.beds*2}
@@ -995,8 +1128,25 @@ function renderChips(){
     list.map(function(o){return '<button class="chip" data-act="type" data-v="'+o[0]+'" aria-pressed="'+(S.type===o[0])+'">'+(o[0]==='todos'?'':ic(o[0],16))+o[1]+'</button>'}).join('');
   $('#typeChips').innerHTML=h;
 }
+/* Zona: ciudad completa o un barrio; los filtros secundarios solo aparecen cuando aplican al tipo */
+function zoneOptions(){
+  var h='';
+  Object.keys(CITY).forEach(function(c){
+    h+='<optgroup label="'+CITY[c]+'"><option value="c:'+c+'">Todo '+CITY[c]+'</option>'+Object.keys(Z).filter(function(k){return Z[k].c===c}).map(function(k){return '<option value="z:'+k+'">'+Z[k].n+'</option>'}).join('')+'</optgroup>';
+  });
+  $('#fCity').innerHTML=h;
+}
+function filterCtx(){
+  var ts=S.type!=='todos'?[S.type]:S.typeSet.length?S.typeSet:[];
+  var onlyHab=ts.length&&ts.every(function(t){return t==='habitacion'}),anyHab=!ts.length||ts.indexOf('habitacion')>-1||ts.indexOf('apartaestudio')>-1;
+  return {nohab:!onlyHab,hab:anyHab&&S.op==='arriendo',rent:S.op==='arriendo'};
+}
 function syncFilters(){
-  $('#fCity').value=S.city;
+  if(!$('#fCity').options.length)zoneOptions();
+  $('#fCity').value=S.zones.length===1?'z:'+S.zones[0]:'c:'+S.city;
+  var fc=filterCtx();
+  $('#fBedsW').hidden=!fc.nohab;
+  $$('.fx').forEach(function(x){x.hidden=!fc[x.dataset.for]});
   $('#fBeds').value=String(S.beds||0);
   $('#fArea').value=String(S.minArea||0);
   $('#fBaths').value=String(S.baths||0);
@@ -1011,6 +1161,7 @@ function filtered(){
   var q=norm(S.q).trim();
   var out=P.filter(function(p){
     if(Z[p.z].c!==S.city||p.op!==S.op)return false;
+    if(p.ext&&!S.aiText)return false;
     if(S.only&&S.only.indexOf(p.id)<0)return false;
     if(S.type!=='todos'){if(p.t!==S.type)return false}
     else if(S.typeSet.length&&S.typeSet.indexOf(p.t)<0)return false;
@@ -1042,6 +1193,7 @@ function filtered(){
 }
 function badgeFor(p){
   if(p.t==='obra')return '<span class="badge sun">Entrega '+p.obra.deliv+'</span>';
+  if(p.ext)return '<span class="badge ia">'+ic('asistente',12)+'Encontrada por IA</span>';
   if(p.src)return '<span class="badge">Importado</span>';
   if(p.t==='habitacion')return '<span class="badge">'+(p.room==='compartida'?'Compartida':'Privada')+'</span>';
   if(p.tags.indexOf('servicios incluidos')>-1)return '<span class="badge">Servicios incluidos</span>';
@@ -1122,18 +1274,21 @@ function whyList(r,nPro,nCon){
 function compatCard(p){
   var r=compat(p,S.cr||crit());
   if(!r)return '';
-  return '<div class="cmp-box"><p class="cmp-line"><b>'+r.pct+'%</b> compatible contigo</p><button type="button" class="why-t" data-act="why" aria-expanded="false">¿Por qué te la recomendamos?</button><ul class="cmp-list" hidden>'+whyList(r,3,2)+'</ul></div>';
+  return '<div class="cmpx"><p class="cmp-pct"><b>'+r.pct+'%</b> compatible</p><i class="cmp-bar" aria-hidden="true"><b style="width:'+r.pct+'%"></b></i><p class="why-h">¿Por qué te la recomendamos?</p><ul class="cmp-list">'+whyList(r,3,1)+'</ul></div>';
 }
 function nearTxt(p){
   if(S.nearZone){return ' · a '+distTxt(zoneKm(p,S.nearZone))+' de '+S.nearName}
   var dk=distKm(p);return dk!==null?' · a '+distTxt(dk):'';
 }
 function card(p){
-  var fav=!!S.fav[p.id];
-  return '<article class="card'+(S.sel===p.id?' on':'')+'" data-act="open" data-id="'+p.id+'" data-card="'+p.id+'"><div class="art">'+art(p)+badgeFor(p)+
-    '<button class="fav" data-act="fav" data-id="'+p.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de Mis opciones':'Guardar en Mis opciones')+'">'+ic('heart',18)+'</button></div>'+
-    '<div class="cb"><p class="price">'+priceHTML(p)+'</p>'+
-    '<p class="loc">'+esc(Z[p.z].n)+', '+CITY[Z[p.z].c]+nearTxt(p)+'</p><p class="spec">'+specLine(p)+'</p>'+compatCard(p)+'</div></article>';
+  var fav=!!S.fav[p.id],c=!!S.cmp[p.id],f=fair(p);
+  return '<article class="card'+(S.sel===p.id?' on':'')+(p.ext?' ext':'')+'" data-act="open" data-id="'+p.id+'" data-card="'+p.id+'"><div class="art">'+art(p)+badgeFor(p)+
+    '<button class="fav" data-act="fav" data-id="'+p.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de guardadas':'Guardar')+'">'+ic('heart',18)+'</button></div>'+
+    '<div class="cb">'+compatCard(p)+'<p class="price">'+priceHTML(p)+'</p>'+(f?'<p class="fair '+(f.good?'ok':'hi')+'">'+f.txt+'</p>':'')+
+    '<p class="loc">'+esc(Z[p.z].n)+', '+CITY[Z[p.z].c]+nearTxt(p)+'</p><p class="spec">'+specLine(p)+'</p>'+
+    (p.ext?'<p class="extsrc">'+ic('asistente',13)+'Encontrada por la IA en '+esc(p.ext.portal)+' · '+esc(p.ext.ago)+'</p>':'')+
+    '<div class="c-foot"><button type="button" class="cmpbtn" data-act="ccmp" data-id="'+p.id+'" aria-pressed="'+c+'">'+(c?ic('check',14)+'En comparación':'+ Comparar')+'</button>'+
+    (p.ext?'<a class="extl" href="'+esc(p.ext.url)+'" target="_blank" rel="noopener" data-map="1" data-act="extlink">Ver en '+esc(p.ext.portal)+' ↗</a>':'')+'</div></div></article>';
 }
 
 /* ---------- mapa: esquematico (web/Android) y nativo (iPhone) ---------- */
@@ -1168,7 +1323,8 @@ function nmApply(){
 function nmPins(fit){
   var nm=nmPlugin();if(!nm)return;
   var cs=getComputedStyle(document.documentElement),col=function(n){return cs.getPropertyValue(n).trim()};
-  var pins=S.items.map(function(p){var c=coords(p);return {id:p.id,lat:c[0],lng:c[1],label:pinPrice(p),opp:p.op==='venta'&&inv(p).opp}});
+  var EM={universidad:'🎓',transporte:'🚇',supermercado:'🛒',parque:'🌳',salud:'🏥'};
+  var pins=S.items.map(function(p){var c=coords(p);return {id:p.id,lat:c[0],lng:c[1],label:pinPrice(p),opp:p.op==='venta'&&inv(p).opp}}).concat(pois(S.city).filter(function(o){return S.poi[o.c]}).map(function(o){var c=poiCoords(o);return {id:'poi:'+o.n,lat:c[0],lng:c[1],label:EM[o.c]+' '+o.n.split(' ').slice(0,2).join(' '),opp:false}}));
   var ids=[];
   if(S.me){ids=S.items.slice().sort(function(a,b){return distKm(a)-distKm(b)}).slice(0,6).map(function(p){return p.id})}
   nm.setPins({pins:pins,selected:S.sel||'',fit:!!fit,fitIds:ids,me:S.me?{lat:S.me.lat,lng:S.me.lng}:null,brand:col('--brand'),brandInk:col('--brand-ink'),ink:col('--ink'),surface:col('--surface'),sun:col('--sun')}).catch(nmFail);
@@ -1183,6 +1339,28 @@ function meXY(){
   return [clamp(z.x+(S.me.lng-c[1])/0.0007,4,96),clamp(z.y-(S.me.lat-c[0])/0.0007,6,94)];
 }
 function py(y){return (10+y*0.84).toFixed(1)}
+/* lugares de referencia para decidir: universidad, transporte, mercado, parque, salud */
+var POIK=['universidad','transporte','supermercado','parque','salud'];
+var POIL={universidad:'Universidades',transporte:'Transporte',supermercado:'Supermercados',parque:'Parques',salud:'Hospitales'};
+var POIO={universidad:[2,-5],transporte:[-4,3],supermercado:[4,4],parque:[-5,-4],salud:[5,-2]};
+function pois(city){
+  var seen={},out=[];
+  Object.keys(Z).forEach(function(k){var z=Z[k];if(z.c!==city)return;
+    POIK.forEach(function(c){var o=z.o[c];if(!o||seen[o[0]])return;seen[o[0]]=1;var d=POIO[c];
+      out.push({c:c,n:o[0],z:k,x:clamp(z.x+d[0],3,97),y:clamp(z.y+d[1],3,97)})})});
+  return out;
+}
+S.poi={universidad:1,transporte:1};
+function poiCoords(o){var c=ZC[o.z],z=Z[o.z];return [+(c[0]-(o.y-z.y)*0.0007).toFixed(5),+(c[1]+(o.x-z.x)*0.0007).toFixed(5)]}
+function mapCtxHTML(){
+  var h='<div class="mctx" role="group" aria-label="Lugares en el mapa">'+POIK.map(function(c){return '<button type="button" class="chip xs" data-act="poi" data-v="'+c+'" aria-pressed="'+!!S.poi[c]+'">'+ic(c,14)+POIL[c]+'</button>'}).join('')+'</div>';
+  var p=S.sel&&P.filter(function(x){return x.id===S.sel})[0];
+  if(p){
+    var n=nearOf(p),sc=envScore(p);
+    h+='<div class="conv"><p class="conv-h"><b>¿Qué tan conveniente es vivir aquí?</b><span>'+sc+'/100</span></p><p class="conv-t">'+esc(p.title)+'</p><ul>'+POIK.map(function(c){return '<li>'+ic(c,15)+'<span>'+esc(n[c].name)+'</span><b>'+walk(n[c].m)+' min</b></li>'}).join('')+'</ul><button type="button" class="btn sm2" data-act="open" data-id="'+p.id+'">Ver detalle</button></div>';
+  }else h+='<p class="conv-tip">Toca una vivienda en el mapa para ver qué tan conveniente es vivir allí.</p>';
+  return h;
+}
 function mapHTML(items){
   var s='<div class="sm" id="sm">'+mapBg(S.city);
   Object.keys(Z).forEach(function(k){var z=Z[k];if(z.c===S.city)s+='<span class="zl" style="left:'+z.x+'%;top:'+py(z.y)+'%">'+esc(z.n)+'</span>'});
@@ -1190,6 +1368,7 @@ function mapHTML(items){
     var opp=p.op==='venta'&&inv(p).opp;
     s+='<button class="pin'+(opp?' opp':'')+(S.sel===p.id?' on':'')+'" data-act="pin" data-id="'+p.id+'" style="left:'+p.x+'%;top:'+py(p.y)+'%" aria-label="'+esc(p.title)+', '+pinPrice(p)+'"><span>'+pinPrice(p)+'</span></button>';
   });
+  pois(S.city).forEach(function(o){if(S.poi[o.c])s+='<span class="poi p-'+o.c+'" style="left:'+o.x+'%;top:'+py(o.y)+'%" title="'+esc(o.n)+'">'+ic(o.c,13)+'<em>'+esc(o.n)+'</em></span>'});
   var m=meXY();if(m)s+='<span class="me" style="left:'+m[0]+'%;top:'+py(m[1])+'%" title="Tú estás aquí"></span>';
   return s+'<span class="mnote">Mapa esquemático de '+CITY[S.city]+'</span></div>';
 }
@@ -1240,6 +1419,7 @@ function sheetCycle(){
   sheetSet(S.sheet==='peek'?'half':S.sheet==='half'?'full':'peek');
 }
 function selectPin(id,fromMap){
+  if(String(id).indexOf('poi:')===0)return;
   if(S.sel===id&&fromMap){openDetail(id);return}
   S.sel=id;
   $$('.card.on').forEach(function(x){x.classList.remove('on')});
@@ -1247,6 +1427,7 @@ function selectPin(id,fromMap){
   if(c){c.classList.add('on');if(fromMap){if(phone()&&S.sheet==='peek')sheetSet('half');try{c.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(x){}}}
   $$('.pin.on').forEach(function(x){x.classList.remove('on')});
   var pn=$('.pin[data-id="'+id+'"]');if(pn)pn.classList.add('on');
+  var cx=$('#mapCtx');if(cx&&S.mapOn)cx.innerHTML=mapCtxHTML();
   if(nmPlugin())nmPins(false);
 }
 function renderExplore(keep){
@@ -1254,14 +1435,17 @@ function renderExplore(keep){
   var ex=$('#explore');
   ex.dataset.map=S.mapOn?'on':'off';
   $('#xtools').dataset.c=(S.mapOn||S.aiText)?'1':'';
-  $('#mapTx').textContent=S.mapOn?'Ocultar mapa':'Ver mapa';
-  $('#count').textContent=items.length+(items.length===1?' vivienda':' viviendas')+(S.op==='venta'?' en venta':' en arriendo');
-  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo Mis opciones':S.me?'Cerca de ti, en '+CITY[S.city]:(S.sort==='rel'&&S.cr&&S.cr.has?'Ordenadas por compatibilidad contigo · ':'')+CITY[S.city];
+  $('#lmList').setAttribute('aria-pressed',String(!S.mapOn));$('#lmMap').setAttribute('aria-pressed',String(!!S.mapOn));
+  var n=items.length,nx=items.filter(function(p){return p.ext}).length,pers=S.cr&&S.cr.has;
+  $('#count').textContent=S.only?n+(n===1?' vivienda seleccionada':' viviendas seleccionadas'):S.aiText?n+(n===1?' vivienda que coincide contigo':' viviendas que coinciden contigo'):pers?n+(n===1?' opción para ti':' opciones para ti'):n+(n===1?' vivienda':' viviendas')+(S.op==='venta'?' en venta':' en arriendo');
+  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo guardadas':S.me?'Cerca de ti, en '+CITY[S.city]:S.aiText&&nx?(n-nx)+' en Habita · '+nx+' encontradas por la IA en otros portales':pers?'Elegidas según lo que nos dijiste · de la más a la menos compatible':CITY[S.city]+' · personaliza Habita para ver tu compatibilidad';
   $('#grid').innerHTML=items.length?items.map(card).join(''):'<div class="empty"><h3>No hay viviendas con esos filtros</h3><p>Quita el límite de precio, cambia el tipo de vivienda o prueba otra ciudad.</p><p style="margin-top:14px"><button class="btn" data-act="clear">Limpiar filtros</button></p></div>';
   $('#favN').textContent=Object.keys(S.fav).length;
   syncFilters();
   if(S.sel&&!items.some(function(p){return p.id===S.sel}))S.sel=null;
   if(S.mapOn)renderMap(!keep);
+  var cx=$('#mapCtx');cx.hidden=!S.mapOn;if(S.mapOn)cx.innerHTML=mapCtxHTML();
+  renderTray();
   sheetSet();
   nmSync();
 }
@@ -1282,7 +1466,7 @@ function locateStart(manual){
   getPos().then(function(c){
     var best=null,bd=1e9;
     Object.keys(CITYC).forEach(function(k){var d=hav(c.latitude,c.longitude,CITYC[k][0],CITYC[k][1]);if(d<bd){bd=d;best=k}});
-    if(bd>80){if(manual)toast('Estás lejos de las ciudades de la demo (Bogotá, Medellín y Cali)');return}
+    if(bd>80){if(manual)toast('Por ahora Habita funciona en Bogotá, Medellín y Cali');return}
     S.me={lat:c.latitude,lng:c.longitude};S.city=best;
     if(!S.sortUser&&!(S.cr&&S.cr.has)){S.sort='near';$('#fSort').value='near'}
     var nm=nmPlugin();if(nm&&nm.setUserLocation)nm.setUserLocation({enabled:true}).catch(noop);
@@ -1329,7 +1513,6 @@ function costsHTML(p){
     var iv=inv(p);
     h+=f('Precio',money(p.price));
     h+=f('Precio por m²',money(iv.m2));
-    h+=f('Frente a la zona',(iv.diff>0?'+':'')+N0.format(iv.diff*100)+'% ('+N1.format(Z[p.z].m2)+' M/m²)');
     h+=f('Cuota inicial (30%)',money(p.price*.3));
   }
   return '<section class="m-sec"><h3>Costos básicos</h3><dl class="facts">'+h+'</dl></section>';
@@ -1361,15 +1544,17 @@ function detail(p){
   h+='<div><p>'+esc(p.d)+'</p><ul class="near" style="margin-top:10px">'+p.tags.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>'+(p.src?'<p class="fine" style="margin-top:10px">Fuente: '+esc(p.src)+(p.url?' · <a href="'+esc(p.url)+'" target="_blank" rel="noopener" data-map="1" style="color:var(--brand)">Ver anuncio original</a>':'')+'</p>':'')+'</div>';
   if(r)h+='<section class="m-sec why-sec"><h3>¿Por qué te la recomendamos?</h3><p class="cmp-line big"><b>'+r.pct+'%</b> compatible contigo</p><ul class="cmp-list open">'+whyList(r,6,4)+'</ul></section>';
   else h+='<section class="m-sec why-sec"><h3>¿Es para ti?</h3><p style="color:var(--muted)">Responde 6 preguntas rápidas y te mostramos qué tan compatible es cada vivienda con lo que buscas.</p><div class="cta" style="margin-top:10px"><button class="btn sm2" data-act="qzopen">Personalizar Habita</button></div></section>';
+  h+=fairHTML(p);
+  if(p.ext)h+='<section class="m-sec extbox"><h3>'+ic('asistente',18)+' Encontrada por la IA de Habita</h3><p>No está publicada en Habita. La encontramos en <b>'+esc(p.ext.portal)+'</b> y revisamos que cumple lo que buscas.</p><dl class="facts"><div><dt>Portal</dt><dd>'+esc(p.ext.portal)+'</dd></div><div><dt>Publicada</dt><dd>'+esc(p.ext.ago)+'</dd></div><div><dt>Anunciante</dt><dd>'+esc(p.ext.who)+'</dd></div><div><dt>Código del anuncio</dt><dd>'+esc(p.ext.code)+'</dd></div></dl><p class="fine" style="margin:8px 0 0">Antes de pagar o firmar, verifica la vivienda en persona y confirma la identidad del anunciante.</p></section>';
   if(p.t==='habitacion')h+=roomHTML(p);
-  if(p.t==='obra')h+=obraBody(p.obra);
+  if(p.t==='obra'&&!p.ext)h+=obraBody(p.obra);
   h+='<section class="m-sec"><h3>Qué hay cerca</h3><div class="scoreRow">'+ring(sc)+'<div><b>'+sc+'/100</b><span>'+scoreWord(sc)+'</span></div></div><ul class="envlist">';
   Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).slice(0,6).forEach(function(c){h+='<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie · '+N0.format(n[c].m)+' m</span></div></li>'});
   h+='</ul></section>';
   if(p.t!=='obra')h+=costsHTML(p);
   var fin=financeHTML(p);
   h+='<details class="more"><summary>Más información</summary><div class="more-b"><h4 class="sec-h">Mapa de comodidades</h4><div class="env"><div>'+radial(p)+'</div><ul class="envlist" style="grid-template-columns:minmax(0,1fr)">'+Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).map(function(c){return '<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie</span></div></li>'}).join('')+'</ul></div>'+fin+'</div></details>';
-  h+='<div class="cta"><button class="btn" data-act="visit" data-id="'+p.id+'">Agendar visita</button><button class="btn alt" data-act="fav" data-id="'+p.id+'" data-keep="1">'+(fav?'Quitar de Mis opciones':'Guardar en Mis opciones')+'</button><button class="btn alt" data-act="mgoal" data-id="'+p.id+'">Crear meta de ahorro</button>'+mapBtn(coords(p)[0],coords(p)[1],p.title)+'</div><p class="fine" style="margin:0">Ubicación aproximada: '+coords(p)[0]+', '+coords(p)[1]+'. La dirección exacta se comparte al agendar la visita.</p></div>';
+  h+='<div class="cta">'+(p.ext?'<a class="btn" href="'+esc(p.ext.url)+'" target="_blank" rel="noopener" data-map="1">Ver publicación en '+esc(p.ext.portal)+' ↗</a>':'<button class="btn" data-act="visit" data-id="'+p.id+'">Agendar visita</button>')+'<button class="btn alt" data-act="ccmp" data-id="'+p.id+'" data-keep="1">'+(S.cmp[p.id]?'Quitar de comparar':'Comparar')+'</button><button class="btn alt" data-act="fav" data-id="'+p.id+'" data-keep="1">'+(fav?'Quitar de guardadas':'Guardar')+'</button><button class="btn alt" data-act="mgoal" data-id="'+p.id+'">Crear meta de ahorro</button>'+mapBtn(coords(p)[0],coords(p)[1],p.title)+'</div><p class="fine" style="margin:0">Ubicación aproximada: '+coords(p)[0]+', '+coords(p)[1]+'. La dirección exacta se comparte al agendar la visita.</p></div>';
   return h;
 }
 var lastFocus=null;
@@ -1552,18 +1737,58 @@ function applyIntent(it,text){
   }
   var understood=it.op||it.types.length||it.budget||it.beds||it.people||it.city||zones.length||uni||it.needs.length||it.pets||it.furn||S.f.inc||it.park||it.quiet;
   if(!understood){S.q=text;notes.push('No reconocí criterios concretos; busqué esas palabras en los títulos.')}else S.mapOn=!phone();
-  /* si no hay resultados, se relaja de lo menos a lo más importante */
-  var steps=[
-    function(){if(S.zones.length){S.zones=[];return 'Amplié la búsqueda a toda la ciudad.'}},
-    function(){if(S.f.park){delete S.f.park;return 'Quité el parqueadero como requisito.'}},
-    function(){if(S.beds){S.beds=0;return 'Quité el mínimo de habitaciones.'}},
-    function(){if(S.people){S.people=0;return 'Quité el número de personas.'}},
-    function(){if(S.max){S.max=Math.round(S.max*1.25);return 'Subí el presupuesto un 25% para mostrarte opciones cercanas.'}},
-    function(){if(S.f.pets){delete S.f.pets;return 'Mostré también las que no indican mascotas (revisa la compatibilidad).'}},
-    function(){if(S.f.furn||S.f.inc){delete S.f.furn;delete S.f.inc;return 'Quité amoblado y servicios incluidos como requisitos.'}}
-  ];
-  for(var k=0;k<steps.length&&!filtered().length;k++){var n=steps[k]();if(n)notes.push(n)}
+  var own=filtered().length;
+  var found=understood?extFind(text):[];
+  if(understood&&found.length)S.extN=found.length;else S.extN=0;
+  if(understood&&!own)notes.push('En Habita no hay publicaciones con todo esto. La IA encontró '+found.length+' en otros portales. Si quieres ver más, quita algún criterio con la ×.');
   S.ainotes=notes;
+}
+
+/* ---------- la IA busca tambien en otros portales ----------
+   Cada busqueda con IA arma 2 o 3 hallazgos de portales externos que cumplen los criterios
+   que Habita entendio. Se muestran junto a los resultados propios y se marcan con su portal. */
+var PORTALS=[['Finca Raíz','fincaraiz.com.co'],['Metrocuadrado','metrocuadrado.com'],['Facebook Marketplace','facebook.com/marketplace'],['Ciencuadras','ciencuadras.com'],['Properati','properati.com.co']];
+var AGO=['hoy','ayer','hace 2 días','hace 3 días','hace 5 días','hace 1 semana'];
+var WHO=['Dueño directo','Inmobiliaria','Particular','Administrador del edificio'];
+function saveExt(){try{localStorage.setItem('habita.ext',JSON.stringify(P.filter(function(p){return p.ext&&(S.fav[p.id]||S.cmp[p.id])})))}catch(e){}}
+function extFind(text){
+  P=P.filter(function(p){return !p.ext||S.fav[p.id]||S.cmp[p.id]});
+  var seed=hash(norm(text)+S.city+S.op),R=function(k){return rnd(seed+':'+k)};
+  var types=S.type!=='todos'?[S.type]:S.typeSet.length?S.typeSet.slice():(S.op==='venta'?['apto','casa','apto']:['apto','apartaestudio','apto']);
+  var zs=S.zones.length?S.zones.slice():S.nearZone?[S.nearZone]:Object.keys(Z).filter(function(k){return Z[k].c===S.city});
+  if(S.nearZone&&!S.zones.length)Object.keys(Z).forEach(function(k){if(k!==S.nearZone&&Z[k].c===S.city&&hav(ZC[k][0],ZC[k][1],ZC[S.nearZone][0],ZC[S.nearZone][1])<3.2)zs.push(k)});
+  var n=2+(seed%2),out=[];
+  for(var i=0;i<n;i++){
+    var t=types[(seed+i)%types.length],z=zs[((seed>>>4)+i)%zs.length],zz=Z[z],po=PORTALS[(seed+i*3)%PORTALS.length];
+    if(t==='obra'&&S.op!=='venta')t='apto';
+    var beds=t==='habitacion'?Math.max(1,S.people||1):t==='apartaestudio'?1:Math.max(S.beds||0,t==='casa'?3:(R('b'+i)>.5?2:3),S.people?Math.ceil(S.people/2):0);
+    var area=t==='habitacion'?12+Math.round(R('a'+i)*6):t==='apartaestudio'?28+Math.round(R('a'+i)*12):t==='casa'?120+Math.round(R('a'+i)*80):Math.max(S.minArea||0,beds*20+16+Math.round(R('a'+i)*14));
+    var baths=t==='habitacion'?(R('h'+i)>.6?1:0):t==='apartaestudio'?1:Math.max(S.baths||0,beds>=3?2:(R('h'+i)>.5?2:1));
+    var p={id:'x'+(seed+i*7919).toString(36),z:z,t:t,op:S.op,area:area,beds:beds,baths:baths,park:S.f.park||(t!=='habitacion'&&R('k'+i)>.55)?1:0,est:Math.max(2,Math.min(6,Math.round(zz.m2/2))),
+      x:clamp(zz.x+[-6,6,-1][i%3]+(R('x'+i)-.5)*2,4,96),y:clamp(zz.y+[5,-4,9][i%3]+(R('y'+i)-.5)*2,4,96),tags:[],price:0};
+    if(t==='habitacion'){p.room=beds>1?'compartida':'privada';p.bath=baths?'privado':'compartido';p.inc=S.f.inc||R('i'+i)>.4?1:0;p.furn=S.f.furn||R('f'+i)>.3?1:0;p.rules=['Contrato mínimo de 6 meses',R('r'+i)>.5?'No fumar':'Visitas hasta las 10 p. m.'];if(p.inc)p.tags.push('servicios incluidos');if(p.furn)p.tags.push('amoblado');p.tags.push('wifi')}
+    if(S.f.furn&&p.tags.indexOf('amoblado')<0){p.tags.push('amoblado');p.furn=1}
+    if(S.f.inc&&p.tags.indexOf('servicios incluidos')<0){p.tags.push('servicios incluidos');p.inc=1}
+    if(S.f.pets||R('m'+i)>.6)p.tags.push('mascotas');
+    if(S.nearZone||Z[z].o.universidad&&Z[z].o.universidad[1]<1000)p.tags.push('cerca a universidad');
+    p.tags.push(['seguridad','zonas comunes','tranquilo','vista'][(seed+i)%4]);
+    if(t==='obra'){p.obra={id:p.id,deliv:(2027+i%2)+'-'+(i%2?'I':'II'),progress:20+Math.round(R('o'+i)*40),pm2:zz.m2*0.82e6,roi:'11%',builder:po[0],areas:[area,area+12],ini:30,cuotas:24,sep:5e6};S.Q[p.id]={a:area,l:'medio'}}
+    var avg=fair(Object.assign({},p,{price:1}));
+    var base=avg?avg.avg:zz.m2*0.85e6*area;
+    var price=base*(0.84+R('p'+i)*0.22);
+    if(S.max)price=Math.min(price,S.max*(0.8+R('q'+i)*0.17));
+    var u=S.op==='venta'?1e6:1e4;p.price=Math.max(u,Math.round(price/u)*u);
+    if(S.op==='venta'){p.rent=Math.round(p.price*0.0048/1e4)*1e4;p.g=+(4.5+R('g'+i)*2).toFixed(1)}
+    var adj=['con balcón','recién remodelado','cerca al transporte','en conjunto cerrado','de dueño directo','con buena luz'][(seed+i*5)%6];
+    if(t==='habitacion'||t==='casa'||t==='obra')adj=adj.replace('remodelado','remodelada');
+    p.title=TL[t]+' '+adj+' en '+zz.n;
+    var code=String(100000+(seed+i*104729)%900000);
+    p.ext={portal:po[0],url:po[1].indexOf('facebook')===0?'https://www.facebook.com/marketplace/item/'+code+'48213':'https://www.'+po[1]+'/'+norm(TL[t]).replace(/\s+/g,'-')+'-'+(S.op==='venta'?'en-venta':'en-arriendo')+'/'+norm(CITY[zz.c]).replace(/\s+/g,'-')+'/'+norm(zz.n).replace(/\s+/g,'-')+'/'+code,ago:AGO[(seed+i)%AGO.length],who:WHO[(seed+i*2)%WHO.length],code:code};
+    p.d=(t==='habitacion'?'Habitación '+(p.room==='compartida'?'compartida':'privada')+' con baño '+(p.bath==='privado'?'privado':'compartido')+'. ':beds+(beds===1?' alcoba':' alcobas')+', '+baths+(baths===1?' baño':' baños')+' y '+area+' m². ')+'Publicada en '+po[0]+' '+p.ext.ago+' por '+p.ext.who.toLowerCase()+'.';
+    out.push(p);
+  }
+  out.forEach(function(x){P.push(x)});
+  return out;
 }
 function smartSearch(text){
   text=(text||'').trim();
@@ -1579,26 +1804,29 @@ function smartSearch(text){
   syncUI();
 }
 function clearSearch(){
-  S.aiText='';S.q='';S.imp=null;S.helpMsg='';S.ainotes=[];S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.quiet=false;S.minArea=0;S.baths=0;S.max=0;S.beds=0;S.type='todos';
+  S.aiText='';S.extN=0;S.q='';S.imp=null;S.helpMsg='';S.ainotes=[];S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.quiet=false;S.minArea=0;S.baths=0;S.max=0;S.beds=0;S.type='todos';
   syncUI();
 }
 function syncUI(){
   setOpButtons(S.op);priceOptions();renderChips();syncFilters();renderExplore();renderAIPanel();renderPlanLine();
 }
 function mny(v){return money(v).replace('$ ','$')}
+var NEEDE={transporte:'🚇',supermercado:'🛒',parque:'🌳',universidad:'🎓',salud:'🏥',gimnasio:'🏋️',restaurantes:'🍽️',colegio:'🏫'};
+var TYPEE={habitacion:'🛏',apto:'🏢',apartaestudio:'🏢',casa:'🏠',obra:'🏗️'};
+function shortPlace(n){return n.replace(/^(Pontificia )?(Universidad|U\.)( de)?\s+/i,'').replace(/^los /,'Los ').replace(/^la /,'La ')}
 function activeTags(){
   var t=[];
-  if(S.type!=='todos')t.push([TL[S.type],'type']);else if(S.typeSet.length)t.push([S.typeSet.map(function(k){return TL[k]}).join(' o '),'type']);
-  if(S.beds)t.push([S.beds+(S.beds===1?' habitación':' habitaciones')+(S.beds>1?' o más':''),'beds']);
-  if(S.people)t.push(['Para '+S.people+(S.people===1?' persona':' personas'),'people']);
-  if(S.nearZone)t.push(['Cerca de '+S.nearName,'near']);
-  if(S.zones.length)t.push(['Zona: '+S.zones.map(function(z){return Z[z].n}).join(', '),'zones']);
-  if(S.max)t.push(['Presupuesto máximo: '+mny(S.max)+(S.op==='arriendo'?' al mes':''),'max']);
-  if(S.f.pets)t.push(['Acepta mascotas','f.pets']);
-  if(S.f.furn)t.push(['Amoblado','f.furn']);
-  if(S.f.inc)t.push(['Servicios incluidos','f.inc']);
-  if(S.f.park)t.push(['Parqueadero','f.park']);
-  S.needs.forEach(function(c){t.push(['Cerca de '+CATS[c].toLowerCase(),'need:'+c])});
+  if(S.type!=='todos')t.push([TL[S.type],'type',0,TYPEE[S.type]]);else if(S.typeSet.length)t.push([S.typeSet.map(function(k){return TL[k]}).join(' o '),'type',0,TYPEE[S.typeSet[0]]]);
+  if(S.beds)t.push([S.beds+(S.beds===1?' habitación':' habitaciones')+(S.beds>1?' o más':''),'beds',0,'🛏']);
+  if(S.people)t.push(['Para '+S.people+(S.people===1?' persona':' personas'),'people',0,'👥']);
+  if(S.nearZone)t.push(['Cerca de '+shortPlace(S.nearName),'near',0,'📍']);
+  if(S.zones.length)t.push([S.zones.map(function(z){return Z[z].n}).join(', '),'zones',0,'📍']);
+  if(S.max)t.push(['Máximo '+mny(S.max)+(S.op==='arriendo'?' al mes':''),'max',0,'💰']);
+  if(S.f.pets)t.push(['Acepta mascotas','f.pets',0,'🐾']);
+  if(S.f.furn)t.push(['Amoblado','f.furn',0,'🛋️']);
+  if(S.f.inc)t.push(['Servicios incluidos','f.inc',0,'💡']);
+  if(S.f.park)t.push(['Parqueadero','f.park',0,'🚗']);
+  S.needs.forEach(function(c){t.push(['Cerca de '+CATS[c].toLowerCase(),'need:'+c,0,NEEDE[c]])});
   t.push([S.op==='venta'?'Comprar':'Arrendar',null,1]);
   t.push([CITY[S.city],null,1]);
   return t;
@@ -1612,8 +1840,9 @@ function renderAIPanel(){
   else if(S.imp){h=impHTML(S.imp)}
   else{
     var n=S.items?S.items.length:0;
-    h='<p class="ai-h">'+ic('asistente',15)+'<b>Esto entendí</b><span class="ai-n">'+(n?n+(n===1?' vivienda encaja':' viviendas encajan'):'Sin resultados')+'</span><button type="button" class="ai-x" data-act="aiclear">Borrar búsqueda</button></p><ul class="understood">'+activeTags().map(function(x){return '<li class="tag'+(x[2]?' soft':'')+'">'+(x[2]?'':ic('check',13))+esc(x[0])+(x[1]?'<button type="button" data-act="untag" data-k="'+x[1]+'" aria-label="Quitar: '+esc(x[0])+'">'+ic('x',12)+'</button>':'')+'</li>'}).join('')+'</ul>';
+    h='<p class="ai-h">'+ic('asistente',15)+'<b>Esto entendí</b><span class="ai-n">'+(n?n+(n===1?' opción para ti':' opciones para ti'):'Sin resultados')+'</span><button type="button" class="ai-x" data-act="aiclear">Borrar búsqueda</button></p><ul class="understood">'+activeTags().map(function(x){return '<li class="tag'+(x[2]?' soft':'')+'">'+(x[3]?'<span class="te" aria-hidden="true">'+x[3]+'</span>':'')+esc(x[0])+(x[1]?'<button type="button" data-act="untag" data-k="'+x[1]+'" aria-label="Quitar: '+esc(x[0])+'">'+ic('x',12)+'</button>':'')+'</li>'}).join('')+'</ul>';
     (S.ainotes||[]).forEach(function(x){h+='<p class="fine" style="margin:4px 0 0">'+esc(x)+'</p>'});
+    if(S.extN)h+='<p class="ai-web">'+ic('asistente',14)+'<span>También busqué en Finca Raíz, Metrocuadrado, Ciencuadras y Facebook Marketplace: <b>'+S.extN+(S.extN===1?' opción que no está':' opciones que no están')+' en Habita</b>.</span></p>';
     h+='<p class="ai-hint">¿Algo no es correcto? Quítalo con la ×.</p>';
   }
   el.innerHTML=h;
@@ -1709,16 +1938,12 @@ function qSummary(a){
   return c;
 }
 function renderWait(){
-  var a=S.qz.a,items=[];
-  items.push(a.types.length?'Buscando '+a.types.map(function(k){return TL[k].toLowerCase()}).join(' y '):'Revisando todos los tipos de vivienda');
-  var bt=[a.op!=='venta'?budgetTxt(a.rent,true):null,a.op!=='arriendo'?budgetTxt(a.buy,false):null].filter(Boolean);
-  if(bt.length)items.push('Ajustando a tu presupuesto');
-  items.push(a.where==='near'&&a.near?'Midiendo distancias a '+a.near.n:'Mirando '+(a.where==='zona'&&a.zone?Z[a.zone].n:CITY[a.city]));
-  if(a.imp.length)items.push('Priorizando lo que es importante para ti');
+  var a=S.qz.a,rows=planRows(Object.assign({},a,{where:a.where==='zona'&&!a.zone?'':a.where==='near'&&!a.near?'':a.where}));
   $('#qzp').className='qzp wait';
-  $('#qzp').innerHTML='<div class="qw-logo">'+logo(64,'q')+'</div><h3>Estamos usando lo que nos dijiste</h3><p class="qz-sub" style="margin:0">para encontrar mejores opciones.</p><ul class="qw-l">'+items.map(function(t,k){return '<li style="--d:'+(0.25+k*0.45).toFixed(2)+'s">'+ic('check',16)+t+'</li>'}).join('')+'</ul><button type="button" class="qz-skip" data-act="qdone">Ver mis viviendas</button>';
-  if(S.qz.t)clearTimeout(S.qz.t);
-  S.qz.t=setTimeout(function(){S.qz.t=0;qFinish()},700+items.length*450+500);
+  $('#qzp').innerHTML='<div class="qw-logo">'+logo(56)+'</div><h3>Ya entendimos lo que buscas.</h3><p class="qz-sub" style="margin:0">Con esto elegimos tus opciones y calculamos qué tan compatible es cada vivienda contigo.</p>'+
+    '<dl class="planlist qw-sum">'+rows.map(function(r,k){return '<div style="--d:'+(0.15+k*0.12).toFixed(2)+'s"><dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl>'+
+    '<div class="navrow"><button type="button" class="btn alt" data-act="qback">Cambiar algo</button><button type="button" class="btn" data-act="qdone">'+(S.qz.edit?'Guardar':'Ver mis opciones')+'</button></div>';
+  if(S.qz.t){clearTimeout(S.qz.t);S.qz.t=0}
 }
 function renderQuiz(){
   var q=S.qz,a=q.a,i=q.i,h='';
@@ -1727,7 +1952,8 @@ function renderQuiz(){
   var dots='';for(var k=0;k<QN;k++)dots+='<i class="'+(k<i?'done':k===i?'cur':'')+'"></i>';
   h+='<div class="qz-top"><div class="qz-dots" aria-hidden="true">'+dots+'</div><button type="button" class="qz-skip" data-act="qskip">'+(q.edit?'Cerrar':'Saltar por ahora')+'</button></div>';
   var sm=qSummary(a);
-  h+='<p class="kicker" style="color:var(--brand)">Pregunta '+(i+1)+' de '+QN+'</p>';
+  h+='<p class="kicker" style="color:var(--brand)">Personalizando Habita · '+(i+1)+' de '+QN+'</p>';
+  if(i===0&&!q.edit)h+='<p class="qz-why">'+ic('asistente',15)+'Con tus respuestas elegimos qué viviendas recomendarte y calculamos qué tan compatible es cada una contigo.</p>';
   if(sm.length)h+='<div class="qz-sum" aria-label="Lo que llevas">'+sm.map(function(x){return '<span>'+ic('check',12)+esc(x)+'</span>'}).join('')+'</div>';
   if(i===0){
     h+='<h3>¿Qué tipo de lugar buscas?</h3><p class="qz-sub">Puedes elegir más de una.</p><div class="qgrid">';
@@ -1828,7 +2054,7 @@ function renderPlanLine(){
 }
 
 /* ---------- vistas y navegacion ---------- */
-var VIEWS=[['explorar','Explorar'],['micasa','Mi casa'],['publicar','Publicar']];
+var VIEWS=[['explorar','Explorar'],['micasa','Mi plan'],['publicar','Publicar']];
 var ALLV=['home','explorar','micasa','publicar','inversion'];
 function renderNav(){
   $('#nav').innerHTML=VIEWS.map(function(v){return '<button data-act="view" data-v="'+v[0]+'"'+(S.view===v[0]?' aria-current="page"':'')+'>'+ic(v[0],20)+'<span>'+v[1]+'</span></button>'}).join('');
@@ -1843,6 +2069,7 @@ function setView(v,noScroll){
   if(v==='micasa')renderMiCasa();
   if(v==='explorar')renderExplore(true);
   if(v==='home'){renderHome();carStart()}else carStop();
+  renderTray();
   nmSync();
   try{if(location.hash!=='#'+v)history.replaceState(null,'','#'+v)}catch(e){}
   if(!noScroll)window.scrollTo(0,0);
@@ -1859,11 +2086,8 @@ var CAR={i:0,t:0,ms:5200,after:11000,hover:false,built:false};
 var REDUCE=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 function renderHome(){
   var plan=hasPlan();
-  $('#hmGo').textContent=plan?'Ver mis viviendas':'Empezar';
-  $('#hmSteps').hidden=plan;
-  var ed=$('#hmEdit');
-  if(!ed){ed=document.createElement('button');ed.type='button';ed.id='hmEdit';ed.className='hm-edit';ed.dataset.act='qzopen';ed.textContent='Editar mis respuestas';$('#hmSteps').after(ed)}
-  ed.hidden=!plan;
+  $('#hmGo').textContent=plan?'Ver mis opciones':'Empezar';
+  $('#hmEdit').hidden=!plan;
   var h=$('#v-home');h.classList.remove('enter');void h.offsetWidth;h.classList.add('enter');
 }
 function carBuild(){
@@ -2116,7 +2340,7 @@ function publishListing(){
   $('#q').value='';clearSearch();
   S.city=z.c;S.op=p.op;S.sort='rel';S.sel=p.id;S.mapOn=true;
   setView('explorar');syncUI();
-  toast('Tu propiedad ya aparece en el listado (demo)');
+  toast('¡Publicada! Tu propiedad ya aparece en Explorar');
 }
 document.addEventListener('click',function(e){
   var a=e.target.closest('a[data-map]');if(!a)return;
@@ -2139,7 +2363,7 @@ document.addEventListener('input',function(e){
 
 /* ---------- mi casa: guardadas y metas de ahorro ---------- */
 IC.micasa=IC.heart;
-S.goals=[];S.notes={};S.cmp={};S.mc='guardadas';S.goalSel=null;S.newGoal=false;S.ngSrc='free';S.ngName='';S.ngPrice='';
+S.goals=[];S.notes={};S.mc='guardadas';S.goalSel=null;S.newGoal=false;S.ngSrc='free';S.ngName='';S.ngPrice='';
 function saveGoals(){try{localStorage.setItem('habita.goals',JSON.stringify(S.goals))}catch(e){}}
 function saveNotes(){try{localStorage.setItem('habita.notes',JSON.stringify(S.notes))}catch(e){}}
 (function loadMC(){
@@ -2219,13 +2443,33 @@ function confetti(big){
     if(e<2300)requestAnimationFrame(f);else{x.clearRect(0,0,W,H);c.hidden=true}
   })(t0);
 }
+function cmpIds(){return Object.keys(S.cmp).filter(function(id){return P.some(function(p){return p.id===id})})}
+function toggleCmp(id){
+  if(S.cmp[id])delete S.cmp[id];
+  else if(cmpIds().length>=3){toast('Puedes comparar hasta 3 viviendas');return}
+  else S.cmp[id]=1;
+  saveCmp();saveExt();
+}
+function renderTray(){
+  var t=$('#tray'),ids=cmpIds();
+  if(!ids.length||(S.view!=='explorar')){t.hidden=true;return}
+  t.hidden=false;
+  t.innerHTML='<span><b>'+ids.length+' de 3</b> para comparar</span><button type="button" class="btn sm2" data-act="gocmp"'+(ids.length<2?' disabled':'')+'>'+(ids.length<2?'Elige otra':'Comparar ahora')+'</button><button type="button" class="tray-x" data-act="cmpclear" aria-label="Vaciar comparación">'+ic('x',16)+'</button>';
+}
 function renderMiCasa(){
   var nf=P.filter(function(p){return S.fav[p.id]}).length;
-  if(['guardadas','plan','metas'].indexOf(S.mc)<0)S.mc='guardadas';
-  $('#mcTabs').innerHTML='<button data-act="mtab" data-v="guardadas" aria-pressed="'+(S.mc==='guardadas')+'">Mis opciones ('+nf+')</button><button data-act="mtab" data-v="plan" aria-pressed="'+(S.mc==='plan')+'">Mi plan</button><button data-act="mtab" data-v="metas" aria-pressed="'+(S.mc==='metas')+'">Metas de ahorro ('+S.goals.length+')</button>';
-  $('#mcBody').innerHTML=S.mc==='guardadas'?boardHTML():S.mc==='plan'?planHTML():goalsHTML();
+  if(['guardadas','comparar','plan','metas'].indexOf(S.mc)<0)S.mc='guardadas';
+  var nc=cmpIds().length;
+  $('#mcTabs').innerHTML='<button data-act="mtab" data-v="guardadas" aria-pressed="'+(S.mc==='guardadas')+'">Guardadas ('+nf+')</button><button data-act="mtab" data-v="comparar" aria-pressed="'+(S.mc==='comparar')+'">Comparar ('+nc+')</button><button data-act="mtab" data-v="plan" aria-pressed="'+(S.mc==='plan')+'">Mis preferencias</button><button data-act="mtab" data-v="metas" aria-pressed="'+(S.mc==='metas')+'">Metas de ahorro ('+S.goals.length+')</button>';
+  $('#mcProg').innerHTML=progHTML(nf,nc);
+  $('#mcBody').innerHTML=S.mc==='guardadas'?boardHTML():S.mc==='comparar'?compareHTML():S.mc==='plan'?planHTML():goalsHTML();
   $('#favN').textContent=Object.keys(S.fav).length;
   if(S.mc==='metas'&&!S.newGoal&&curGoal())fillGoal(true);
+}
+/* progreso: te conocemos, guardas, comparas, decides */
+function progHTML(nf,nc){
+  var st=[[hasPlan(),'Te conocemos','plan',hasPlan()?'Preferencias listas':'Responde 6 preguntas'],[nf>0,'Guardas','guardadas',nf?nf+(nf===1?' guardada':' guardadas'):'Toca el corazón'],[nc>=2,'Comparas','comparar',nc>=2?nc+' en comparación':'Elige 2 o 3'],[S.decided?true:false,'Decides','comparar',S.decided?'Ya elegiste':'Mira la recomendación']];
+  return '<ol class="prog">'+st.map(function(x,i){return '<li class="'+(x[0]?'done':'')+'"><button type="button" data-act="mtab" data-v="'+x[2]+'"><b>'+(x[0]?ic('check',14):i+1)+'</b><span>'+x[1]+'<small>'+x[3]+'</small></span></button></li>'}).join('')+'</ol>';
 }
 /* mi plan: resumen del cuestionario */
 function budgetTxt(b,rent){
@@ -2234,8 +2478,8 @@ function budgetTxt(b,rent){
   for(var i=0;i<list.length;i++){if(list[i][0]===b[0]&&list[i][1]===b[1])return list[i][2]+(rent?' al mes':'')}
   return null;
 }
-function planRows(){
-  var pf=PREF,rows=[];
+function planRows(pf){
+  pf=pf||PREF;var rows=[];
   rows.push(['Busco',pf.types.length?pf.types.map(function(k){return TL[k]}).join(', '):'Todavía no estoy seguro']);
   rows.push(['Quiero',pf.op==='arriendo'?'Arrendar':pf.op==='venta'?'Comprar':'Arrendar o comprar']);
   var bud=[];
@@ -2272,7 +2516,7 @@ function boardHTML(){
   var info=fl.map(function(p){return {p:p,r:compat(p,crit(p.op)),b:budgetState(p)}});
   var h='';
   var ranked=info.slice().sort(function(a,b){return (b.r?b.r.pct:0)-(a.r?a.r.pct:0)});
-  h+='<section class="rank"><div class="rank-h"><h3>Tu ranking</h3><div class="cta"><button class="btn sm2" data-act="savedmap">'+ic('map',16)+'Ver en el mapa</button>'+(hasPlan()?'':'<button class="btn alt sm2" data-act="qzopen">Personalizar</button>')+'</div></div>';
+  h+='<section class="rank"><div class="rank-h"><h3>Tus mejores opciones</h3><div class="cta"><button class="btn sm2" data-act="savedmap">'+ic('map',16)+'Ver en el mapa</button>'+(hasPlan()?'':'<button class="btn alt sm2" data-act="qzopen">Personalizar</button>')+'</div></div>';
   h+=hasPlan()||ranked.some(function(x){return x.r})?'<ol class="rank-l">'+ranked.map(function(x,i){return '<li><button data-act="open" data-id="'+x.p.id+'"><span class="rn">'+(i+1)+'</span><span class="rt"><b>'+esc(x.p.title)+'</b><span>'+priceHTML(x.p).replace(/<[^>]+>/g,'')+(x.b?' · '+(x.b.ok?'<i class="good">'+x.b.t+'</i>':'<i class="warn">'+x.b.t+'</i>'):'')+'</span></span><span class="rp">'+(x.r?x.r.pct+'%':'—')+'</span></button></li>'}).join('')+'</ol>':'<p style="color:var(--muted);margin:0">Responde el cuestionario para ordenar tus opciones por compatibilidad.</p>';
   h+='</section>';
   h+='<div class="board">'+info.map(function(x){
@@ -2280,29 +2524,41 @@ function boardHTML(){
     return '<article class="fcard"><div class="art">'+art(p)+badgeFor(p)+'</div><div class="cb"><p class="price">'+priceHTML(p)+'</p><h3><button data-act="open" data-id="'+p.id+'">'+esc(p.title)+'</button></h3><p class="loc">'+Z[p.z].n+', '+CITY[Z[p.z].c]+'</p><p class="spec">'+specLine(p)+'</p>'+
       (x.r?'<p class="cmp-line"><b>'+x.r.pct+'%</b> compatible contigo</p>':'')+(x.b?'<p class="bud '+(x.b.ok?'ok':'no')+'">'+(x.b.ok?'✓ ':'✕ ')+x.b.t+'</p>':'')+
       '<label class="sr" for="nt_'+p.id+'">Nota sobre '+esc(p.title)+'</label><textarea id="nt_'+p.id+'" placeholder="Anota lo que te gustó o lo que preguntarías en la visita">'+esc(S.notes[p.id]||'')+'</textarea>'+
-      '<div class="frow"><button class="chip" data-act="mcmp" data-id="'+p.id+'" aria-pressed="'+c+'">Comparar</button><button class="chip" data-act="locmap" data-id="'+p.id+'">Ver ubicación</button><button class="chip" data-act="mgoal" data-id="'+p.id+'">'+(g?'Ver mi meta':'Meta de ahorro')+'</button><button class="chip" data-act="mrm" data-id="'+p.id+'" aria-label="Quitar de Mis opciones">Quitar</button></div></div></article>';
+      '<div class="frow"><button class="chip" data-act="mcmp" data-id="'+p.id+'" aria-pressed="'+c+'">Comparar</button><button class="chip" data-act="locmap" data-id="'+p.id+'">Ver ubicación</button><button class="chip" data-act="mgoal" data-id="'+p.id+'">'+(g?'Ver mi meta':'Meta de ahorro')+'</button><button class="chip" data-act="mrm" data-id="'+p.id+'" aria-label="Quitar de guardadas">Quitar</button></div></div></article>';
   }).join('')+'</div>';
-  var ids=Object.keys(S.cmp).filter(function(id){return S.fav[id]}),sel=P.filter(function(p){return ids.indexOf(p.id)>-1});
-  h+='<h3 style="font-size:22px;margin:28px 0 4px">Comparar</h3>';
-  if(sel.length<2)return h+'<p style="color:var(--muted)">Toca "Comparar" en dos o tres viviendas para verlas lado a lado. En verde, el mejor valor de cada fila.</p>';
+  if(cmpIds().length)h+='<p class="fine" style="margin-top:18px"><button type="button" class="btn sm2" data-act="mtab" data-v="comparar">Ver comparación ('+cmpIds().length+')</button></p>';
+  return h;
+}
+function compareHTML(){
+  var ids=cmpIds(),sel=P.filter(function(p){return ids.indexOf(p.id)>-1});
+  if(sel.length<2)return '<div class="empty"><h3>Elige 2 o 3 viviendas para comparar</h3><p>Toca “+ Comparar” en cualquier vivienda de Explorar o de tus guardadas. Te decimos cuál te conviene más y por qué.</p><p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Ir a Explorar</button></p>'+(sel.length?'<p class="fine">Ya elegiste: '+esc(sel[0].title)+'</p>':'')+'</div>';
+  var info=sel.map(function(p){var r=compat(p,crit(p.op)),f=fair(p);return {p:p,r:r,f:f,sc:(r?r.pct:60)+(f?clamp(-f.diff*40,-10,10):0)+envScore(p)*0.08}});
+  var best=info.slice().sort(function(a,b){return b.sc-a.sc})[0];
+  var why=[];if(best.r)why.push(best.r.pct+'% compatible contigo');if(best.f)why.push(best.f.txt.toLowerCase());if(best.r&&best.r.pros[0])why.push(best.r.pros[0].toLowerCase());
+  var h='<section class="verdict"><p class="kicker">¿Cuál de estas opciones me conviene más?</p><h3>'+esc(best.p.title)+'</h3><p>Es la que mejor encaja: '+esc(why.join(', '))+'.</p><div class="cta"><button class="btn" data-act="open" data-id="'+best.p.id+'">Ver esta vivienda</button><button class="btn alt" data-act="decide" data-id="'+best.p.id+'">'+(S.decided===best.p.id?ic('check',16)+'Es mi elección':'Elegir esta')+'</button></div></section>';
   var rows=[
-    ['Compatibilidad',function(p){var r=compat(p,crit(p.op));return r?r.pct:null},function(v){return v+'%'},'max'],
-    ['Precio',function(p){return p.price},function(v,p){return money(v)+(p.op==='arriendo'?' /mes':'')},'min'],
-    ['Frente a tu presupuesto',function(p){var b=crit(p.op).budget;return b?p.price/b:null},function(v){return v<=1?'Dentro':'+'+Math.round((v-1)*100)+'%'},'min'],
-    ['Área',function(p){return p.t==='habitacion'?null:p.area},function(v){return v+' m²'},'max'],
-    ['Precio por m²',function(p){return p.t==='habitacion'?null:p.price/p.area},function(v){return money(v)},'min'],
-    ['Habitaciones',function(p){return p.t==='habitacion'?null:p.beds},function(v){return v},'max'],
-    ['Baños',function(p){return p.t==='habitacion'?null:p.baths},function(v){return v},'max'],
-    ['Qué hay cerca',function(p){return envScore(p)},function(v){return v+'/100'},'max'],
-    ['Distancia a tu referencia',function(p){var c=crit(p.op);return c.near?zoneKm(p,c.near.z):null},function(v){return distTxt(v)},'min']
+    ['Compatibilidad',function(x){return x.r?x.r.pct:null},function(v){return '<b class="big">'+v+'%</b>'},'max'],
+    ['Precio',function(x){return x.p.price},function(v,x){return money(v)+(x.p.op==='arriendo'?' /mes':'')},'min'],
+    ['Frente al promedio de la zona',function(x){return x.f?x.f.diff:null},function(v,x){return x.f.txt.replace(' del promedio de la zona','')},'min'],
+    ['Frente a tu presupuesto',function(x){var b=crit(x.p.op).budget;return b?x.p.price/b:null},function(v){return v<=1?'Dentro':'+'+Math.round((v-1)*100)+'%'},'min'],
+    ['Ubicación',function(x){var c=crit(x.p.op);return c.near?zoneKm(x.p,c.near.z):null},function(v,x){var c=crit(x.p.op);return Z[x.p.z].n+'<small>a '+distTxt(v)+' de '+esc(shortPlace(c.near.n))+'</small>'},'min'],
+    ['Habitaciones',function(x){return x.p.t==='habitacion'?null:x.p.beds},function(v){return v},'max'],
+    ['Baños',function(x){return x.p.t==='habitacion'?null:x.p.baths},function(v){return v},'max'],
+    ['Área',function(x){return x.p.t==='habitacion'?null:x.p.area},function(v){return v+' m²'},'max'],
+    ['Qué hay cerca',function(x){return envScore(x.p)},function(v){return v+'/100'},'max']
   ];
-  h+='<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>'+sel.map(function(p){return '<th>'+esc(p.title)+'</th>'}).join('')+'</tr></thead><tbody>';
+  h+='<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>'+info.map(function(x){return '<th'+(x===best?' class="win"':'')+'>'+(x===best?'<span class="winb">Te conviene más</span>':'')+'<button type="button" data-act="open" data-id="'+x.p.id+'">'+esc(x.p.title)+'</button><small>'+TL[x.p.t]+(x.p.ext?' · '+esc(x.p.ext.portal):'')+'</small></th>'}).join('')+'</tr></thead><tbody>';
   rows.forEach(function(r){
-    var vals=sel.map(function(p){return r[1](p)}),nums=vals.filter(function(v){return v!==null}),best=nums.length>1?(r[3]==='min'?Math.min.apply(null,nums):Math.max.apply(null,nums)):null;
+    var vals=info.map(function(x){return r[1](x)}),nums=vals.filter(function(v){return v!==null}),bv=nums.length>1?(r[3]==='min'?Math.min.apply(null,nums):Math.max.apply(null,nums)):null;
     if(!nums.length)return;
-    h+='<tr><th scope="row">'+r[0]+'</th>'+sel.map(function(p,i){var v=vals[i];return '<td class="'+(best!==null&&v===best&&nums.some(function(n){return n!==best})?'best':'')+'">'+(v===null?'—':r[2](v,p))+'</td>'}).join('')+'</tr>';
+    h+='<tr><th scope="row">'+r[0]+'</th>'+info.map(function(x,i){var v=vals[i];return '<td class="'+(bv!==null&&v===bv&&nums.some(function(n){return n!==bv})?'best':'')+'">'+(v===null?'—':r[2](v,x))+'</td>'}).join('')+'</tr>';
   });
-  return h+'</tbody></table></div>';
+  if(info.every(function(x){return x.p.t==='habitacion'}))h+='<tr><th scope="row">Baño</th>'+info.map(function(x){return '<td>'+(x.p.bath==='privado'?'Privado':'Compartido')+'</td>'}).join('')+'</tr>';
+  h+='<tr><th scope="row">Características</th>'+info.map(function(x){return '<td><small>'+esc(x.p.tags.slice(0,5).join(' · '))+'</small></td>'}).join('')+'</tr>';
+  h+='<tr><th scope="row">Ventajas</th>'+info.map(function(x){return '<td><ul class="cmp-list">'+(x.r?x.r.pros.slice(0,3).map(function(t){return '<li>'+esc(t)+'</li>'}).join(''):'<li>'+esc(x.f?x.f.txt:'—')+'</li>')+'</ul></td>'}).join('')+'</tr>';
+  h+='<tr><th scope="row">Desventajas</th>'+info.map(function(x){return '<td><ul class="cmp-list">'+(x.r&&x.r.cons.length?x.r.cons.slice(0,2).map(function(t){return '<li class="no">'+esc(t)+'</li>'}).join(''):'<li>Ninguna importante</li>')+'</ul></td>'}).join('')+'</tr>';
+  h+='<tr><th scope="row"></th>'+info.map(function(x){return '<td><button type="button" class="chip xs" data-act="ccmp" data-id="'+x.p.id+'">Quitar</button></td>'}).join('')+'</tr>';
+  return h+'</tbody></table></div><p class="fine">En verde, el mejor valor de cada fila.</p>';
 }
 /* metas */
 function houseSVG(on){
@@ -2438,7 +2694,7 @@ document.addEventListener('click',function(e){
   }
   else if(a==='fpanel'){var fp=$('#fpanel');fp.hidden=!fp.hidden;b.setAttribute('aria-expanded',String(!fp.hidden));sheetSet()}
   else if(a==='sheetcycle')sheetCycle();
-  else if(a==='maptoggle'){S.mapOn=!S.mapOn;renderExplore();if(S.mapOn)window.scrollTo(0,0)}
+  else if(a==='lm'){S.mapOn=v==='map';renderExplore();if(S.mapOn)window.scrollTo(0,0)}
   else if(a==='locate'){S.mapOn=true;locateStart(true);renderExplore()}
   else if(a==='pin')selectPin(id,true);
   else if(a==='onlyclear'){S.only=null;syncUI()}
@@ -2446,28 +2702,23 @@ document.addEventListener('click',function(e){
   else if(a==='fav'){
     e.stopPropagation();
     if(S.fav[id])delete S.fav[id];else S.fav[id]=1;
-    saveFav();
-    if(b.dataset.keep){b.textContent=S.fav[id]?'Quitar de Mis opciones':'Guardar en Mis opciones'}
+    saveFav();saveExt();
+    if(b.dataset.keep){b.textContent=S.fav[id]?'Quitar de guardadas':'Guardar'}
     renderExplore(true);
-    toast(S.fav[id]?'Guardada en Mis opciones':'Quitada de Mis opciones');
+    toast(S.fav[id]?'Guardada en Mi plan':'Quitada de guardadas');
   }
   else if(a==='open')openDetail(id);
   else if(a==='close')closeDetail();
   else if(a==='clear'){S.onlyFav=false;S.only=null;$('#q').value='';clearSearch()}
-  else if(a==='visit'){toast('Solicitud de visita enviada (demo)')}
+  else if(a==='visit'){toast('Solicitud enviada. El anunciante te contactará para confirmar la visita.')}
   else if(a==='simulate'){S.invSel=id;closeDetail();setView('inversion')}
   else if(a==='invback')setView('explorar')
   else if(a==='invsort'){S.invSort=v;renderInvSort();renderInvList()}
   else if(a==='invsel'){S.invSel=id;renderInvList();renderSim()}
   else if(a==='oarea'){S.Q[id].a=parseInt(v,10);openDetail(id,true)}
   else if(a==='olevel'){S.Q[id].l=v;openDetail(id,true)}
-  else if(a==='quote'){toast('Un asesor te contactará pronto (demo)')}
+  else if(a==='quote'){toast('Solicitud enviada. Un asesor de la constructora te contactará.')}
   else if(a==='ex'){var ex=EXAMPLES[parseInt(b.dataset.i,10)];$('#q').value=ex;smartSearch(ex)}
-  else if(a==='why'){
-    var lst=b.parentNode.querySelector('.cmp-list'),opn=lst.hidden;
-    lst.hidden=!opn;b.setAttribute('aria-expanded',String(opn));
-    e.stopPropagation();
-  }
   else if(a==='untag')untag(b.dataset.k);
   else if(a==='aiclear'){$('#q').value='';S.mapOn=false;clearSearch()}
   else if(a==='ftog'){if(S.f[v])delete S.f[v];else S.f[v]=true;syncUI()}
@@ -2499,8 +2750,18 @@ document.addEventListener('click',function(e){
   else if(a==='plocate')locate();
   else if(a==='ppublish')publishListing();
   else if(a==='mtab'){S.mc=v;S.newGoal=false;renderMiCasa()}
-  else if(a==='mrm'){delete S.fav[id];delete S.cmp[id];saveFav();renderMiCasa();toast('Quitada de guardadas')}
-  else if(a==='mcmp'){if(S.cmp[id])delete S.cmp[id];else if(Object.keys(S.cmp).length>=3){toast('Puedes comparar hasta 3 casas')}else S.cmp[id]=1;renderMiCasa()}
+  else if(a==='mrm'){delete S.fav[id];saveFav();saveExt();renderMiCasa();toast('Quitada de guardadas')}
+  else if(a==='mcmp'){toggleCmp(id);renderMiCasa()}
+  else if(a==='ccmp'){
+    e.stopPropagation();toggleCmp(id);
+    if(b.dataset.keep)b.textContent=S.cmp[id]?'Quitar de comparar':'Comparar';
+    if(S.view==='micasa')renderMiCasa();else renderExplore(true);
+  }
+  else if(a==='gocmp'){S.mc='comparar';setView('micasa')}
+  else if(a==='cmpclear'){S.cmp={};saveCmp();renderExplore(true)}
+  else if(a==='decide'){S.decided=S.decided===id?null:id;renderMiCasa();if(S.decided){confetti(false);toast('¡Listo! La marcamos como tu elección')}}
+  else if(a==='extlink'){e.stopPropagation()}
+  else if(a==='poi'){S.poi[v]=!S.poi[v];renderExplore(true)}
   else if(a==='mgoal'){
     var gg=goalForHouse(id)||createGoal(id);S.goalSel=gg.id;S.mc='metas';S.newGoal=false;
     if(!$('#modal').hidden)closeDetail();
@@ -2524,7 +2785,8 @@ document.addEventListener('mouseover',function(e){
 $('#searchForm').addEventListener('submit',function(e){e.preventDefault();smartSearch($('#q').value);$('#q').blur()});
 $('#q').addEventListener('input',function(){if(!this.value&&S.aiText){S.mapOn=false;clearSearch()}});
 $('#fCity').addEventListener('change',function(){
-  S.city=this.value;S.only=null;S.sel=null;S.zones=[];S.nearZone=null;S.nearName='';
+  var v=this.value.split(':');
+  S.city=v[0]==='z'?Z[v[1]].c:v[1];S.only=null;S.sel=null;S.zones=v[0]==='z'?[v[1]]:[];S.nearZone=null;S.nearName='';
   if(S.me&&hav(S.me.lat,S.me.lng,CITYC[S.city][0],CITYC[S.city][1])>80){S.me=null;if(S.sort==='near'){S.sort='rel';$('#fSort').value='rel'}}
   syncUI();
 });
@@ -2554,13 +2816,13 @@ if(window.ResizeObserver){var ro=new ResizeObserver(function(){nmSync()});ro.obs
 
 /* ---------- arranque ---------- */
 $('#favIc').innerHTML=ic('heart',18);$('#hmIc').innerHTML=ic('asistente',14);
-$('#sIc').innerHTML=ic('asistente',20);$('#aiBIc').innerHTML=ic('asistente',14);$('#mapIc').innerHTML=ic('map',16);$('#fIc').innerHTML=ic('filter',18);$('#locIc').innerHTML=ic('locate',16);
+$('#sIc').innerHTML=ic('asistente',20);$('#aiBIc').innerHTML=ic('asistente',14);$('#mapIc').innerHTML=ic('map',15);$('#lmLi').innerHTML=ic('list',15);$('#fIc').innerHTML=ic('filter',18);$('#locIc').innerHTML=ic('locate',16);
 savedImports().forEach(function(p){if(!P.some(function(x){return x.id===p.id}))P.push(p)});
 applyStatusBar();
 loadPref();
 renderEx();syncUI();
 (function(){
-  var PH=['una habitación cerca de Los Andes por menos de $1.200.000','apartamento de 2 habitaciones cerca de la universidad, hasta 2 millones','casa para comprar en Bogotá con 3 habitaciones y parque cerca','obra gris para comprar en Medellín'],k=0,q=$('#q');
+  var PH=['Quiero una habitación cerca de Los Andes por menos de $1.200.000','apartamento de 2 habitaciones cerca de la universidad, hasta 2 millones','casa para comprar en Bogotá con 3 habitaciones y parque cerca','obra gris para comprar en Medellín'],k=0,q=$('#q');
   setInterval(function(){if(q.value||document.activeElement===q)return;k=(k+1)%PH.length;q.placeholder='Ej: '+PH[k]},4200);
 })();
 /* al abrir: primero el logo, luego el Home */
