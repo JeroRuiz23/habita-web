@@ -58,7 +58,7 @@ npm run open:android   # abre Android Studio: elige un emulador o tu teléfono y
 - **Asistente con IA.** Hoy interpreta el texto con reglas locales. Para entender cualquier frase se conecta a un modelo de lenguaje desde tu servidor, nunca con la clave dentro de la app.
 - **Política de privacidad y términos.** Son obligatorios en ambas tiendas porque la app maneja fotos y ubicación.
 
-## Actualización v3: mapa de Apple, nuevo diseño, tema claro/oscuro
+## Actualización v3: mapa de Apple y nuevo diseño
 
 1. Copia sobre tu carpeta `habita-app` las carpetas `src`, `native`, `scripts` y `resources` de este zip (reemplaza). No reemplaces `package.json` ni `ios`.
 2. En la terminal, dentro de `habita-app`: `bash scripts/install-native-map.sh`
@@ -82,3 +82,10 @@ Facebook Marketplace no ofrece conexión pública: Habi lee el anuncio que el us
 - *Explorar* abre con el buscador con IA como protagonista (“¿Qué estás buscando?”, ejemplos y explicación corta). El mapa ya no se muestra al inicio: aparece con el botón *Ver mapa* y, en escritorio, después de una búsqueda con IA.
 - “Esto entendí” muestra los criterios que Habita leyó (con ✓ y × para quitarlos) y cuántas viviendas encajan.
 - Se agregaron dos apartamentos de arriendo cerca de Los Andes para que los ejemplos de búsqueda devuelvan resultados.
+
+## Identidad visual y Home (v6)
+
+- Colores fijos de marca: verde musgo `#394a3f`, blanco `#ffffff` y naranja `#ff9100`. Se quitaron el tema oscuro y el selector de colores.
+- Logo oficial (H con casa y llave) en la app, el sitio, el ícono y la pantalla de inicio del iPhone. Los archivos están en `web/img/`.
+- Al abrir la app aparece el logo (≈1,5 s) y luego el **Home**: qué hace Habita, *Empezar* (cuestionario), *Busca con IA* y un carrusel con cambio automático, flechas, indicadores y deslizamiento. Tocar el logo en cualquier sección vuelve al Home.
+- `npm run build` genera `www/` (la app), copia la app a `web/app/` y publica todo `web/` en `docs/` (GitHub Pages). En `src/app.html` las imágenes se escriben como `@@img/archivo@@` y el build las incrusta.

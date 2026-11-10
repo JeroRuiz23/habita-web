@@ -5,7 +5,7 @@
   "description": "Habita: app de vivienda para Colombia (iOS y Android con Capacitor)",
   "scripts": {
     "build": "node scripts/build-web.mjs",
-    "assets": "npx capacitor-assets generate --iconBackgroundColor '#2159F3' --iconBackgroundColorDark '#1239B8' --splashBackgroundColor '#F3F5F9' --splashBackgroundColorDark '#0A0E17'",
+    "assets": "npx capacitor-assets generate --iconBackgroundColor '#394a3f' --iconBackgroundColorDark '#394a3f' --splashBackgroundColor '#394a3f' --splashBackgroundColorDark '#394a3f'",
     "add:ios": "npx cap add ios",
     "add:android": "npx cap add android",
     "sync": "npm run build && npx cap sync && bash scripts/patch-native.sh",

@@ -2,20 +2,20 @@
   "appId": "co.habita.app",
   "appName": "Habita",
   "webDir": "www",
-  "backgroundColor": "#F3F5F9",
+  "backgroundColor": "#394a3f",
   "ios": {
     "contentInset": "never",
     "scheme": "Habita"
   },
   "plugins": {
     "SplashScreen": {
-      "launchShowDuration": 1200,
-      "backgroundColor": "#0B6B66",
+      "launchShowDuration": 300,
+      "backgroundColor": "#394a3f",
       "showSpinner": false
     },
     "StatusBar": {
       "style": "DARK",
-      "backgroundColor": "#0B6B66"
+      "backgroundColor": "#394a3f"
     }
   }
 }

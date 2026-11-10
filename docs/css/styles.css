@@ -37,9 +37,6 @@ body.guarded{visibility:hidden}
 
 /* logo */
 .wm{display:inline-flex;align-items:flex-end;font-family:var(--logo);font-weight:700;font-size:var(--wm,28px);line-height:1;color:var(--white);letter-spacing:-.01em;text-decoration:none}
-.wm .h{height:.74em;width:auto;margin-right:.04em}
-.wm .k{height:.98em;width:auto;margin:0 .02em;align-self:flex-end}
-.wm span{display:block;padding-bottom:.02em}
 .wm img{height:calc(var(--wm,28px)*1.2);width:auto;display:block;user-select:none}
 .wm.dark{color:var(--moss)}
 
@@ -69,19 +66,13 @@ body.guarded{visibility:hidden}
 .intro.done{opacity:0;visibility:hidden}
 .intro-inner{display:grid;justify-items:center;gap:22px}
 .intro .wm{--wm:clamp(70px,16vw,150px)}
-.intro .wm img{animation:pop .8s cubic-bezier(.2,.9,.3,1.2) .15s both}
-.intro .wm .h{animation:pop .7s cubic-bezier(.2,.9,.3,1.2) .1s both}
-.intro .wm span{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
-.intro .wm span.l1{animation-delay:.45s}.intro .wm span.l2{animation-delay:.55s}.intro .wm span.l3{animation-delay:.8s}.intro .wm span.l4{animation-delay:.9s}
-.intro .wm .k{animation:drop .75s cubic-bezier(.3,1.4,.5,1) .65s both}
-.intro .tag{color:rgba(255,255,255,.75);letter-spacing:.28em;text-transform:uppercase;font-size:12px;font-weight:600;animation:fade .6s ease 1.25s both}
+.intro .wm img{animation:pop .8s cubic-bezier(.2,.8,.2,1) .05s both}
+.intro .tag{color:rgba(255,255,255,.75);letter-spacing:.28em;text-transform:uppercase;font-size:12px;font-weight:600;animation:fade .5s ease .45s both}
 .intro .bar{width:120px;height:3px;border-radius:3px;background:rgba(255,255,255,.18);overflow:hidden}
-.intro .bar i{display:block;height:100%;background:var(--orange);transform-origin:left;animation:fill 1.9s ease-out both}
+.intro .bar i{display:block;height:100%;background:var(--orange);transform-origin:left;animation:fill 1.2s ease-out both}
 .intro .skip{position:absolute;right:20px;bottom:20px;background:none;border:1px solid rgba(255,255,255,.35);color:var(--white);border-radius:999px;padding:8px 16px;font:600 13px var(--font);cursor:pointer}
 .intro .skip:hover{background:rgba(255,255,255,.12)}
-@keyframes pop{from{opacity:0;transform:scale(.4) rotate(-8deg)}to{opacity:1;transform:none}}
-@keyframes rise{from{opacity:0;transform:translateY(.5em)}to{opacity:1;transform:none}}
-@keyframes drop{from{opacity:0;transform:translateY(-1.4em) rotate(-14deg)}to{opacity:1;transform:none}}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.92);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
 @keyframes fade{from{opacity:0}to{opacity:1}}
 @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
 body.intro-on{overflow:hidden}
