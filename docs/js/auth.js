@@ -1,6 +1,7 @@
 // Servicio de autenticación (Firebase Authentication). Las contraseñas nunca pasan por este código ni se guardan:
 // viajan cifradas (HTTPS) directo a Firebase, que las almacena con hash seguro.
 import { firebaseConfig, isConfigured } from './firebase-config.js';
+import { DEMO_MODE } from './config.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js';
 import {
   getAuth, onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut,
@@ -10,6 +11,13 @@ import {
 
 export { isConfigured };
 const auth = isConfigured ? getAuth(initializeApp(firebaseConfig)) : null;
+/** Modo demo: sin Firebase, las pantallas funcionan con una sesión de práctica guardada solo en esta pestaña (nunca se guarda ninguna contraseña). */
+export const demoActive = !auth && DEMO_MODE;
+export const canSubmit = isConfigured || demoActive;
+const DK = 'habita-demo';
+const dget = () => { try { return JSON.parse(sessionStorage.getItem(DK)); } catch (_) { return null; } };
+const dset = (v) => { try { v ? sessionStorage.setItem(DK, JSON.stringify(v)) : sessionStorage.removeItem(DK); } catch (_) {} };
+const dUser = () => { const d = dget(); if (!d) return null; return { isDemo: true, displayName: d.name, email: d.email, emailVerified: true, metadata: { creationTime: d.since, lastSignInTime: new Date().toISOString() } }; };
 if (auth) auth.languageCode = 'es';
 
 function need() {
@@ -19,12 +27,13 @@ function need() {
 
 /** Llama a cb(user|null) ahora y en cada cambio de sesión. Devuelve la función para dejar de escuchar. */
 export function watchUser(cb) {
-  if (!auth) { cb(null); return () => {}; }
+  if (!auth) { cb(demoActive ? dUser() : null); return () => {}; }
   return onAuthStateChanged(auth, cb);
 }
 export const currentUser = () => (auth ? auth.currentUser : null);
 
 export async function register({ name, email, password }) {
+  if (demoActive) { dset({ name, email, since: new Date().toISOString() }); return dUser(); }
   const a = need();
   await setPersistence(a, browserLocalPersistence);
   const cred = await createUserWithEmailAndPassword(a, email, password);
@@ -33,14 +42,16 @@ export async function register({ name, email, password }) {
   return cred.user;
 }
 export async function login({ email, password, remember }) {
+  if (demoActive) { const n = email.split('@')[0]; dset({ name: n.charAt(0).toUpperCase() + n.slice(1), email, since: new Date().toISOString() }); return dUser(); }
   const a = need();
   await setPersistence(a, remember ? browserLocalPersistence : browserSessionPersistence);
   return (await signInWithEmailAndPassword(a, email, password)).user;
 }
-export const logout = () => signOut(need());
-export const resetPassword = (email) => sendPasswordResetEmail(need(), email);
-export const resendVerification = () => sendEmailVerification(need().currentUser);
+export const logout = () => (demoActive ? Promise.resolve(dset(null)) : signOut(need()));
+export const resetPassword = (email) => (demoActive ? Promise.resolve() : sendPasswordResetEmail(need(), email));
+export const resendVerification = () => (demoActive ? Promise.resolve() : sendEmailVerification(need().currentUser));
 export async function updateName(name) {
+  if (demoActive) { const d = dget() || {}; dset({ ...d, name }); return dUser(); }
   const a = need();
   await updateProfile(a.currentUser, { displayName: name });
   await a.currentUser.reload();

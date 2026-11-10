@@ -1,6 +1,6 @@
 import { renderLayout, logo } from './ui.js';
 import { SITE } from './config.js';
-import { register, login, resetPassword, watchUser, friendlyError, isConfigured } from './auth.js';
+import { register, login, resetPassword, watchUser, friendlyError, isConfigured, demoActive, canSubmit } from './auth.js';
 
 renderLayout('');
 document.getElementById('sideLogo').innerHTML = logo({});
@@ -48,15 +48,16 @@ document.querySelectorAll('.eye').forEach((b) => {
 });
 
 if (!isConfigured) {
-  $('setupBanner').hidden = false;
-  document.querySelectorAll('form button[type=submit]').forEach((b) => (b.disabled = true));
+  const bn = $('setupBanner'); bn.hidden = false;
+  if (demoActive) bn.querySelector('.container').innerHTML = '<strong>Modo demo.</strong> Puedes crear una cuenta o entrar con cualquier correo para recorrer la página. No se guarda ninguna contraseña.';
+  else document.querySelectorAll('form button[type=submit]').forEach((b) => (b.disabled = true));
 }
 
 function mark(ids) { ids.forEach((id) => $(id).classList.add('invalid')); if (ids[0]) $(ids[0]).focus(); }
 function busy(form, on, label) {
   const b = form.querySelector('button[type=submit]');
   if (on) { b.dataset.t = b.textContent; b.textContent = label; } else if (b.dataset.t) b.textContent = b.dataset.t;
-  b.disabled = on || !isConfigured;
+  b.disabled = on || !canSubmit;
 }
 const clean = () => document.querySelectorAll('input.invalid').forEach((i) => i.classList.remove('invalid'));
 document.addEventListener('input', (e) => e.target.classList.remove('invalid'));
