@@ -1,4 +1,7 @@
 // Contenido editable del sitio. Cambia textos, imágenes y páginas sin tocar el resto del código.
+// Modo demo: permite entrar a las pantallas privadas sin iniciar sesión. Ponlo en false cuando Firebase esté listo.
+export const DEMO_MODE = true;
+
 export const SITE = {
   name: 'Habita',
   tagline: 'Encuentra el lugar donde empieza tu vida',

@@ -2,15 +2,11 @@
 import { SITE, NAV } from './config.js';
 import { watchUser, logout } from './auth.js';
 
-const keySVG = '<svg class="k" viewBox="0 0 130 270" aria-hidden="true"><g fill="#ff9100"><circle cx="65" cy="62" r="40" fill="none" stroke="#ff9100" stroke-width="40"/><rect x="48" y="104" width="34" height="166" rx="17"/><rect x="82" y="158" width="34" height="17" rx="3"/><rect x="82" y="198" width="26" height="17" rx="3"/></g></svg>';
-const hSVG = '<svg class="h" viewBox="0 0 250 260" aria-hidden="true"><g fill="#ff9100"><rect width="60" height="258"/><rect x="186" width="56" height="258"/><path d="M58 112L123 60L188 112V172L123 120L58 172Z"/><rect x="160" y="62" width="28" height="40"/><rect x="91" y="165" width="28" height="28" rx="2"/><rect x="123" y="165" width="28" height="28" rx="2"/><rect x="91" y="197" width="28" height="28" rx="2"/><rect x="123" y="197" width="28" height="28" rx="2"/></g></svg>';
 
-/** Logo "Habita": la H es una casa y la i es una llave. */
-export function logo({ dark = false, tag = 'span', href = '', letters = false } = {}) {
-  const l = (c, n) => `<span${letters ? ` class="l${n}"` : ''}>${c}</span>`;
-  const inner = `${hSVG}${l('a', 1)}${l('b', 2)}${keySVG}${l('t', 3)}${l('a', 4)}`;
-  const label = 'aria-label="Habita"';
-  return href ? `<a class="wm${dark ? ' dark' : ''}" href="${href}" ${label}>${inner}</a>` : `<${tag} class="wm${dark ? ' dark' : ''}" ${label} role="img">${inner}</${tag}>`;
+/** Logo "Habita" (imagen oficial). Fondo oscuro: letras blancas; fondo claro: letras verdes. */
+export function logo({ dark = false, tag = 'span', href = '' } = {}) {
+  const img = `<img src="img/${dark ? 'logo-light' : 'logo-dark'}.png" alt="Habita" draggable="false">`;
+  return href ? `<a class="wm" href="${href}" aria-label="Habita">${img}</a>` : `<${tag} class="wm">${img}</${tag}>`;
 }
 
 const icon = {

@@ -40,6 +40,7 @@ body.guarded{visibility:hidden}
 .wm .h{height:.74em;width:auto;margin-right:.04em}
 .wm .k{height:.98em;width:auto;margin:0 .02em;align-self:flex-end}
 .wm span{display:block;padding-bottom:.02em}
+.wm img{height:calc(var(--wm,28px)*1.2);width:auto;display:block;user-select:none}
 .wm.dark{color:var(--moss)}
 
 /* header */
@@ -67,7 +68,8 @@ body.guarded{visibility:hidden}
 .intro{position:fixed;inset:0;z-index:200;background:var(--moss);display:grid;place-items:center;transition:opacity .6s ease,visibility .6s}
 .intro.done{opacity:0;visibility:hidden}
 .intro-inner{display:grid;justify-items:center;gap:22px}
-.intro .wm{--wm:clamp(54px,13vw,128px)}
+.intro .wm{--wm:clamp(70px,16vw,150px)}
+.intro .wm img{animation:pop .8s cubic-bezier(.2,.9,.3,1.2) .15s both}
 .intro .wm .h{animation:pop .7s cubic-bezier(.2,.9,.3,1.2) .1s both}
 .intro .wm span{animation:rise .6s cubic-bezier(.2,.8,.2,1) both}
 .intro .wm span.l1{animation-delay:.45s}.intro .wm span.l2{animation-delay:.55s}.intro .wm span.l3{animation-delay:.8s}.intro .wm span.l4{animation-delay:.9s}
@@ -218,3 +220,4 @@ section{scroll-margin-top:var(--header-h)}
   .btn{padding:12px 20px}
 }
 @media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;animation-delay:0s!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.slide img{transform:none}}
+.site-header .wm{--wm:38px}

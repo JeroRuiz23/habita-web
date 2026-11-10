@@ -21,12 +21,13 @@ function paint(u) {
   $('verifyBox').hidden = !!u.emailVerified; $('nameIn').value = u.displayName || '';
 }
 paint(user);
+if (user.isDemo) say('ok', 'Estás en modo demo: puedes explorar todo sin iniciar sesión. Inicia sesión para guardar tus datos.');
 
 $('nameForm').addEventListener('submit', async (e) => {
   e.preventDefault();
   const name = $('nameIn').value.trim();
   if (name.length < 2) return say('error', 'Escribe tu nombre (mínimo 2 letras).');
-  try { const u = await updateName(name); paint(u); const n = document.querySelector('.avatar-btn .name'); if (n) n.textContent = (u.displayName || '').split(' ')[0]; say('ok', 'Nombre actualizado.'); }
+  try { if (user.isDemo) { user.displayName = name; paint(user); say('ok', 'Nombre actualizado (demo).'); return; } const u = await updateName(name); paint(u); const n = document.querySelector('.avatar-btn .name'); if (n) n.textContent = (u.displayName || '').split(' ')[0]; say('ok', 'Nombre actualizado.'); }
   catch (err) { say('error', friendlyError(err)); }
 });
 $('resendBtn').addEventListener('click', async () => {
