@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Mi perfil — Habita</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#394a3f">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="guarded">
+<main>
+  <section class="profile-hero"><div class="container">
+    <div class="avatar xl" id="pAvatar" aria-hidden="true"></div>
+    <div><h1 id="pName"></h1><p id="pEmail"></p></div>
+  </div></section>
+  <div class="container profile-body">
+    <div id="alert" role="status" aria-live="polite"></div>
+    <section class="panel"><h2>Tu cuenta</h2>
+      <dl class="info">
+        <div><dt>Nombre</dt><dd id="iName"></dd></div>
+        <div><dt>Correo</dt><dd id="iEmail"></dd></div>
+        <div><dt>Verificación del correo</dt><dd id="iVerif"></dd></div>
+        <div><dt>Miembro desde</dt><dd id="iSince"></dd></div>
+        <div><dt>Último ingreso</dt><dd id="iLast"></dd></div>
+      </dl>
+      <div id="verifyBox" style="margin-top:16px" hidden><div class="msg warn" style="margin:0 0 10px">Aún no verificas tu correo. Te enviamos un enlace al registrarte.</div><button class="btn btn-line" id="resendBtn" type="button">Reenviar correo de verificación</button></div>
+    </section>
+    <section class="panel"><h2>Editar nombre</h2>
+      <form class="inline-form" id="nameForm" novalidate>
+        <div class="field"><label for="nameIn">Nombre</label><input id="nameIn" type="text" autocomplete="name"></div>
+        <button class="btn btn-dark" type="submit">Guardar</button>
+      </form>
+    </section>
+    <section class="panel"><h2>Funciones de tu cuenta</h2>
+      <div class="feature-grid">
+        <a class="feature" href="index.html#servicios"><b>Mis favoritos</b><span>Guarda y compara las viviendas que te gustan.</span><small>Disponible para tu cuenta</small></a>
+        <a class="feature" href="index.html#servicios"><b>Metas de ahorro</b><span>Define cuánto necesitas y en cuánto tiempo.</span><small>Disponible para tu cuenta</small></a>
+        <a class="feature" href="index.html#servicios"><b>Publicar propiedad</b><span>Sube tu vivienda con la guía de fotos.</span><small>Disponible para tu cuenta</small></a>
+      </div>
+    </section>
+    <p style="margin-top:22px"><button class="btn btn-line" id="outBtn" type="button">Cerrar sesión</button></p>
+  </div>
+</main>
+<script type="module" src="js/profile.js"></script>
+</body>
+</html>

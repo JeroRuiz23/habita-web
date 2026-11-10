@@ -1,0 +1,9 @@
+{
+  "name": "capacitor-habita-map",
+  "version": "1.0.0",
+  "description": "Mapa nativo de Apple (MapKit) incrustado en Habita para iPhone",
+  "license": "UNLICENSED",
+  "files": ["ios/Sources", "Package.swift"],
+  "capacitor": { "ios": { "src": "ios" } },
+  "peerDependencies": { "@capacitor/core": ">=8.0.0" }
+}
