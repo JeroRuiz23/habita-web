@@ -83,8 +83,10 @@ button{cursor:pointer}
 .xrow>*{flex:none}
 .fpanel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .xmap{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--map-bg)}
-.sm{position:absolute;inset:0 0 var(--shv) 0;overflow:hidden}
-.sm>svg{position:absolute;inset:0;width:100%;height:100%}
+.sm{position:absolute;inset:0 0 var(--shv) 0;overflow:auto;scrollbar-width:none;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+.sm::-webkit-scrollbar{display:none}
+.sm-in{position:relative;width:calc(100% * var(--z,1));height:calc(100% * var(--z,1));transition:width .25s ease,height .25s ease}
+.sm-in>svg{position:absolute;inset:0;width:100%;height:100%}
 .nmload{position:absolute;inset:0 0 var(--shv) 0;display:grid;place-items:center;color:var(--muted);font-size:13px}
 .m-road{stroke:var(--map-road);fill:none;stroke-linecap:round}
 .m-green{fill:var(--map-green)}
@@ -696,6 +698,134 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .res{grid-template-columns:100px minmax(0,1fr)}
 
 }
+
+/* ---- v8: Explorar sin filtros duplicados, mapa con zoom, móvil espacioso ---- */
+.mysearch{display:flex;align-items:center;gap:12px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:10px 10px 10px 16px;max-width:780px;width:100%;margin:0 auto}
+.ms-t{margin:0;flex:1 1 220px;display:grid;gap:1px;min-width:0;font-size:14.5px}
+.ms-k{font-size:12px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.ms-b{flex:none;padding:10px 16px}
+.ms-b .ic{margin-right:-2px}
+.upd{display:flex;align-items:center;gap:10px;margin:0 16px 12px;padding:12px 16px;border-radius:14px;background:var(--moss);color:var(--white);font-weight:700;font-size:14.5px;animation:hup .3s ease both}
+#explore[data-map="off"] .upd{margin:0 var(--px) 12px}
+.spin{width:18px;height:18px;border-radius:50%;border:2.5px solid rgba(255,255,255,.35);border-top-color:var(--orange);animation:spin .8s linear infinite;flex:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.sheet.busy .grid{opacity:.35;filter:saturate(.6);transition:opacity .2s}
+#count.flash{animation:flash 1s ease}
+@keyframes flash{0%{color:var(--warn)}100%{color:inherit}}
+.mctl{position:absolute;z-index:6;right:12px;bottom:calc(var(--shv,0px) + 14px);display:grid;gap:6px}
+.mctl button{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--moss);display:grid;place-items:center;box-shadow:var(--shadow);transition:background .18s,transform .18s}
+.mctl button:hover:not([disabled]){background:var(--moss-100)}
+.mctl button:active:not([disabled]){transform:scale(.94)}
+.mctl button[disabled]{opacity:.4}
+.mctl button[aria-pressed="true"]{background:var(--moss);color:var(--white)}
+.conv-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.conv-t{margin:0;font-weight:700;font-size:15px;color:var(--ink)}
+.conv-p{margin:2px 0 0;font-family:var(--display);font-weight:800;font-size:19px}
+.conv-c{flex:none;display:grid;justify-items:center;background:var(--moss-100);color:var(--moss);border-radius:12px;padding:6px 10px;font-size:11.5px;font-weight:700}
+.conv-c b{font-size:20px;line-height:1.1}
+.conv-h{margin:6px 0 0;font-size:13px;font-weight:700;color:var(--muted)}
+.conv-a{display:flex;gap:8px;align-items:center;margin-top:4px}
+.fav2{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 12px;font-weight:700;color:var(--moss)}
+.fav2[aria-pressed="true"]{border-color:var(--orange);color:var(--warn)}
+.mapsel{position:absolute;z-index:5;left:16px;bottom:16px;width:min(380px,calc(100% - 90px));display:grid;gap:8px}
+@media (min-width:1000px){
+  #explore[data-big="1"]{grid-template-columns:0 minmax(0,1fr)}
+  #explore[data-big="1"] .xtools,#explore[data-big="1"] .sheet{display:none}
+}
+@media (max-width:999px){
+  #explore[data-map="on"] .sheet .grid,#explore[data-map="on"] .grab{display:none}
+  #explore[data-map="on"] .sh-list{overflow:visible!important}
+  #explore[data-big="1"] .xtools{display:none}
+  #explore[data-map="on"] .mysearch{display:none}
+  #explore[data-map="on"] #countSub{display:none}
+  #explore[data-map="on"] .sh-h{padding-bottom:10px;gap:10px}
+  #explore[data-map="on"] .sh-h h2{font-size:18px}
+}
+/* móvil: distribución propia, más aire y áreas táctiles de 44 px o más */
+@media (max-width:600px){
+  .wrap{padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+  .btn{min-height:46px;padding:12px 18px;font-size:15.5px;border-radius:14px}
+  .btn.sm2{min-height:42px}
+  .chip{min-height:42px;padding:9px 15px;font-size:15px}
+  .chip.xs{min-height:36px;padding:7px 12px;font-size:13.5px}
+  .sel{min-height:46px;padding:11px 12px;font-size:16px;border-radius:12px}
+  #explore[data-map="off"]{--px:20px}
+  #explore[data-map="off"] .xtools{padding:24px 20px 14px;gap:14px}
+  .xh-t{font-size:30px}
+  #explore[data-map="off"] .sbar{height:58px;border-radius:16px}
+  #explore[data-map="off"] .sbar input{font-size:16px}
+  .mysearch{padding:16px;gap:14px;border-radius:18px}
+  .ms-t{flex-basis:100%;font-size:16px}
+  .ms-b{width:100%;min-height:48px}
+  .xsel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;margin:0;padding:0}
+  .xsel>*:not(.sr){width:100%}
+  .xsel>span>select,.xsel .sel{width:100%}
+  .xsel #fBtn{justify-content:center}
+  .fpanel{gap:12px}
+  .aipanel{padding:16px;gap:10px;border-radius:18px}
+  .aipanel .tag{font-size:14.5px;padding:7px 12px}
+  .understood{gap:8px}
+  .sh-h{flex-wrap:wrap;gap:14px;padding:10px 20px 16px}
+  .sh-h>div:first-child{flex:1 1 100%}
+  .sh-h h2{font-size:21px;line-height:1.2}
+  .sh-h p{font-size:13.5px;-webkit-line-clamp:3}
+  .sh-act{width:100%;flex-wrap:nowrap}
+  .lm{flex:1;display:grid;grid-template-columns:1fr 1fr}
+  .lm button{min-height:44px;justify-content:center;font-size:15px}
+  #locBtn{width:48px;min-height:48px;justify-content:center}
+  .grid{grid-template-columns:minmax(0,1fr);gap:20px}
+  #explore[data-map="off"] .sh-list{padding:0 20px 120px}
+  .card{border-radius:20px}
+  .cb{padding:18px 18px 20px;gap:6px}
+  .cmpx{gap:6px;margin-bottom:12px;padding-bottom:14px}
+  .cmp-pct b{font-size:30px}
+  .card .cmp-list{font-size:14.5px;gap:5px}
+  .card .price{font-size:23px}
+  .loc,.spec{font-size:14.5px}
+  .c-foot{margin-top:14px}
+  .cmpbtn{min-height:42px;padding:8px 16px;font-size:14.5px}
+  .fav{width:46px;height:46px}
+  .mapctx{margin:0 20px 12px;gap:12px}
+  .conv{padding:16px;gap:8px;border-radius:18px}
+  .conv li{font-size:14px;padding:3px 0}
+  .conv-a .btn{flex:1}
+  .fav2{min-height:44px}
+  .mctl button{width:46px;height:46px}
+  .tray{left:12px;right:12px;width:auto;border-radius:18px;padding:10px 10px 10px 16px;justify-content:space-between}
+  .tray .btn{min-height:44px}
+  .tray-x{width:44px;height:44px}
+  :root{--navh:calc(70px + env(safe-area-inset-bottom,0px))}
+  .nav{padding-top:8px}
+  .nav button{font-size:12px;gap:4px;padding:8px 4px;min-height:52px}
+  .nav button .ic{width:22px;height:22px}
+  /* cuestionario a pantalla completa */
+  .scrim.qz{padding:0;align-items:stretch}
+  .qzp{max-width:none;max-height:none;min-height:100dvh;border-radius:0;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(28px + env(safe-area-inset-bottom,0px));gap:18px;align-content:start}
+  .qzp h3{font-size:27px;line-height:1.15}
+  .qgrid,.qgrid.c3,.qgrid.c4{gap:12px}
+  .qopt{min-height:100px;font-size:15.5px;border-radius:18px}
+  .qchips{gap:10px}
+  .qchips .chip,.qchips.big .chip{min-height:46px;padding:11px 16px;font-size:15.5px}
+  .qzp .navrow{margin-top:6px;flex-wrap:nowrap}
+  .qzp .navrow .btn{flex:1}
+  .qzp .navrow>span:empty{display:none}
+  .qzp.wait{min-height:100dvh;justify-content:stretch;text-align:left;justify-items:stretch}
+  .qzp.wait .qw-logo{justify-self:start}
+  /* Mi plan */
+  .mctabs{margin-left:-20px;margin-right:-20px;padding:2px 20px;border-radius:0;background:none;gap:8px}
+  .mctabs button{min-height:44px;padding:10px 16px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+  .mctabs button[aria-pressed="true"]{background:var(--moss);color:var(--white);border-color:var(--moss)}
+  .verdict{padding:20px;border-radius:20px}
+  .verdict .cta{display:grid;grid-template-columns:1fr;gap:10px}
+  /* detalle */
+  .modal{padding:0;background:var(--surface)}
+  .panel{border-radius:0;box-shadow:none;min-height:100dvh}
+  .xbtn{top:calc(12px + env(safe-area-inset-top,0px))}
+  .m-body{padding:22px 20px 32px;gap:20px}
+  .m-body .cta{display:grid;grid-template-columns:1fr;gap:10px}
+  .m-body .cta .btn{width:100%}
+  .xbtn{width:46px;height:46px}
+}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
 </style>
 
@@ -741,13 +871,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
       <p class="xh-s">Cuéntanos qué necesitas y Habita encontrará opciones para ti, también en otros portales.</p>
       <div class="aiex" id="aiEx"></div>
       <div class="aipanel" id="aiPanel" hidden aria-live="polite"></div>
-      <div class="xrow" id="xrow">
-        <div class="seg" role="group" aria-label="Operación">
-          <button data-act="op" data-v="venta" aria-pressed="true">Comprar</button>
-          <button data-act="op" data-v="arriendo" aria-pressed="false">Arrendar</button>
-        </div>
-        <span id="typeChips" class="chips" style="flex-wrap:nowrap" role="group" aria-label="Tipo de vivienda"></span>
-      </div>
+      <div class="mysearch" id="planLine"></div>
       <div class="xrow xsel">
         <label class="sr" for="fPrice">Precio máximo</label><select class="sel" id="fPrice"></select>
         <label class="sr" for="fCity">Zona</label><select class="sel" id="fCity"></select>
@@ -775,7 +899,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
         <div class="sh-act"><div class="seg lm" role="group" aria-label="Ver resultados como"><button type="button" data-act="lm" data-v="list" id="lmList" aria-pressed="true"><span id="lmLi"></span>Lista</button><button type="button" data-act="lm" data-v="map" id="lmMap" aria-pressed="false"><span id="mapIc"></span>Mapa</button></div><button class="btn alt sm2" data-act="locate" id="locBtn" aria-label="Cerca de mí"><span id="locIc"></span>Cerca de mí</button></div>
       </div>
       <div class="mapctx" id="mapCtx" hidden></div>
-      <div class="planline" id="planLine"></div>
       <div class="sh-list" id="shlist"><div class="grid" id="grid"></div></div>
     </div>
   </div>
@@ -802,12 +925,9 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   <div class="wrap page">
     <div class="page-h">
       <div>
-        <p class="kicker" style="color:var(--brand)">Mi plan</p>
-        <h2>Guarda, compara y decide.</h2>
-        <p>Aquí están tus viviendas guardadas, tus mejores opciones, la comparación y lo que nos dijiste que buscas.</p>
+        <h2>Guarda, compara y decide</h2>
       </div>
     </div>
-    <div id="mcProg"></div>
     <div class="seg mctabs" id="mcTabs" role="group" aria-label="Secciones de Mi plan"></div>
     <div id="mcBody"></div>
   </div>
@@ -839,6 +959,11 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 
 
 <script>
+/* Memoria: nada se guarda entre sesiones. Al recargar, Habita empieza como para un usuario nuevo;
+   mientras la página siga abierta, todo (respuestas, guardadas, comparación, metas) vive en memoria. */
+var MEM={_:{},getItem:function(k){return Object.prototype.hasOwnProperty.call(this._,k)?this._[k]:null},setItem:function(k,v){this._[k]=String(v)},removeItem:function(k){delete this._[k]}};
+try{['habita.fav','habita.cmp','habita.ext','habita.pref','habita.imp','habita.goals','habita.notes','habita.seeded','habita.theme','habita.accent'].forEach(function(k){localStorage.removeItem(k)})}catch(e){}
+
 (function(){
 'use strict';
 var $=function(s,r){return (r||document).querySelector(s)};
@@ -889,6 +1014,11 @@ Object.assign(IC,{
   chevl:'<path d="M15 5l-7 7 7 7"/>',
   chevr:'<path d="M9 5l7 7-7 7"/>',
   list:'<rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/>',
+  edit:'<path d="M4 20h4L19 9l-4-4L4 16v4z"/><path d="M13.5 6.5l4 4"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  minus:'<path d="M5 12h14"/>',
+  expand:'<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+  shrink:'<path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/>',
   arrow:'<path d="M5 12h14M13 6l6 6-6 6"/>',
   filter:'<path d="M4 7h10M18 7h2M4 17h2M10 17h10"/><circle cx="16" cy="7" r="2"/><circle cx="8" cy="17" r="2"/>',
   locate:'<circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="8"/><path d="M12 1.500v3M12 19.500v3M1.5 12h3M19.5 12h3"/>',
@@ -986,11 +1116,11 @@ var LEVELS={gris:{l:'Solo obra gris',c:0,d:'Estructura, muros y redes principale
 /* ---------- estado ---------- */
 var S={view:'explorar',op:'venta',city:'bog',type:'todos',max:0,beds:0,sort:'rel',q:'',onlyFav:false,fav:{},invSort:'yield',invSel:'p10',inv:{down:30,rate:12.5,years:15},Q:{},ai:null};
 OBRAS.forEach(function(o){S.Q[o.id]={a:o.areas[0],l:'medio'}});
-try{var raw=localStorage.getItem('habita.fav');if(raw)S.fav=JSON.parse(raw)||{}}catch(e){}
-function saveFav(){try{localStorage.setItem('habita.fav',JSON.stringify(S.fav))}catch(e){}}
-S.cmp={};try{S.cmp=JSON.parse(localStorage.getItem('habita.cmp')||'{}')||{}}catch(e){}
-function saveCmp(){try{localStorage.setItem('habita.cmp',JSON.stringify(S.cmp))}catch(e){}}
-try{JSON.parse(localStorage.getItem('habita.ext')||'[]').forEach(function(x){if(x&&x.ext&&x.id&&!P.some(function(p){return p.id===x.id}))P.push(x)})}catch(e){}
+try{var raw=MEM.getItem('habita.fav');if(raw)S.fav=JSON.parse(raw)||{}}catch(e){}
+function saveFav(){try{MEM.setItem('habita.fav',JSON.stringify(S.fav))}catch(e){}}
+S.cmp={};try{S.cmp=JSON.parse(MEM.getItem('habita.cmp')||'{}')||{}}catch(e){}
+function saveCmp(){try{MEM.setItem('habita.cmp',JSON.stringify(S.cmp))}catch(e){}}
+try{JSON.parse(MEM.getItem('habita.ext')||'[]').forEach(function(x){if(x&&x.ext&&x.id&&!P.some(function(p){return p.id===x.id}))P.push(x)})}catch(e){}
 
 /* ---------- datos derivados ---------- */
 var nearCache={};
@@ -1122,12 +1252,6 @@ function priceOptions(){
   opts.sort(function(a,b){return a[0]-b[0]});
   $('#fPrice').innerHTML=opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===S.max?' selected':'')+'>'+o[1]+'</option>'}).join('');
 }
-function renderChips(){
-  var list=[['todos','Todos']].concat(Object.keys(TLP).map(function(k){return [k,TLP[k]]}));
-  var h=(S.only?'<button class="chip" data-act="onlyclear" aria-pressed="true">Selección '+ic('x',13)+'</button>':'')+
-    list.map(function(o){return '<button class="chip" data-act="type" data-v="'+o[0]+'" aria-pressed="'+(S.type===o[0])+'">'+(o[0]==='todos'?'':ic(o[0],16))+o[1]+'</button>'}).join('');
-  $('#typeChips').innerHTML=h;
-}
 /* Zona: ciudad completa o un barrio; los filtros secundarios solo aparecen cuando aplican al tipo */
 function zoneOptions(){
   var h='';
@@ -1209,8 +1333,8 @@ var RENTR=[[0,1.5e6,'Hasta $1,5 M'],[1.5e6,2.5e6,'$1,5 – 2,5 M'],[2.5e6,4e6,'$
 var BUYR=[[0,300e6,'Hasta $300 M'],[300e6,500e6,'$300 – 500 M'],[500e6,800e6,'$500 – 800 M'],[800e6,1200e6,'$800 M – 1.200 M'],[1200e6,0,'Más de $1.200 M']];
 var PREF=null;
 function defPref(){return {done:false,types:[],tu:false,op:'ambas',rent:null,buy:null,city:S.city||'bog',where:'',zone:'',near:null,beds:0,imp:[]}}
-function loadPref(){try{var r=JSON.parse(localStorage.getItem('habita.pref')||'null');if(r&&typeof r==='object')PREF=Object.assign(defPref(),r)}catch(e){PREF=null}}
-function savePref(){try{localStorage.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
+function loadPref(){try{var r=JSON.parse(MEM.getItem('habita.pref')||'null');if(r&&typeof r==='object')PREF=Object.assign(defPref(),r)}catch(e){PREF=null}}
+function savePref(){try{MEM.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
 function hasPlan(){return !!(PREF&&PREF.done)}
 function crit(op){
   op=op||S.op;
@@ -1356,13 +1480,35 @@ function mapCtxHTML(){
   var h='<div class="mctx" role="group" aria-label="Lugares en el mapa">'+POIK.map(function(c){return '<button type="button" class="chip xs" data-act="poi" data-v="'+c+'" aria-pressed="'+!!S.poi[c]+'">'+ic(c,14)+POIL[c]+'</button>'}).join('')+'</div>';
   var p=S.sel&&P.filter(function(x){return x.id===S.sel})[0];
   if(p){
-    var n=nearOf(p),sc=envScore(p);
-    h+='<div class="conv"><p class="conv-h"><b>¿Qué tan conveniente es vivir aquí?</b><span>'+sc+'/100</span></p><p class="conv-t">'+esc(p.title)+'</p><ul>'+POIK.map(function(c){return '<li>'+ic(c,15)+'<span>'+esc(n[c].name)+'</span><b>'+walk(n[c].m)+' min</b></li>'}).join('')+'</ul><button type="button" class="btn sm2" data-act="open" data-id="'+p.id+'">Ver detalle</button></div>';
-  }else h+='<p class="conv-tip">Toca una vivienda en el mapa para ver qué tan conveniente es vivir allí.</p>';
+    var n=nearOf(p),r=compat(p,S.cr||crit()),f=fair(p);
+    h+='<div class="conv"><div class="conv-top"><div><p class="conv-t">'+esc(p.title)+'</p><p class="conv-p">'+priceHTML(p)+'</p>'+(f?'<p class="fair '+(f.good?'ok':'hi')+'">'+f.txt+'</p>':'')+'</div>'+(r?'<span class="conv-c"><b>'+r.pct+'%</b>compatible</span>':'')+'</div>'+
+      '<p class="conv-h">¿Qué tan conveniente es vivir aquí?</p><ul>'+POIK.map(function(c){return '<li>'+ic(c,15)+'<span>'+esc(n[c].name)+'</span><b>'+walk(n[c].m)+' min</b></li>'}).join('')+'</ul>'+
+      '<div class="conv-a"><button type="button" class="btn sm2" data-act="open" data-id="'+p.id+'">Ver detalle</button><button type="button" class="fav2" data-act="fav" data-id="'+p.id+'" aria-pressed="'+!!S.fav[p.id]+'">'+ic('heart',16)+(S.fav[p.id]?'Guardada':'Guardar')+'</button></div></div>';
+  }else h+='<p class="conv-tip">Toca un precio en el mapa para ver esa vivienda.</p>';
   return h;
 }
+S.zoom=1;S.mapBig=false;
+function mapCtl(){
+  return '<div class="mctl" role="group" aria-label="Controles del mapa"><button type="button" data-act="zoom" data-v="1" aria-label="Acercar"'+(S.zoom>=3?' disabled':'')+'>'+ic('plus',18)+'</button><button type="button" data-act="zoom" data-v="-1" aria-label="Alejar"'+(S.zoom<=1?' disabled':'')+'>'+ic('minus',18)+'</button><button type="button" data-act="mapbig" aria-pressed="'+S.mapBig+'" aria-label="'+(S.mapBig?'Reducir mapa':'Ampliar mapa')+'">'+ic(S.mapBig?'shrink':'expand',18)+'</button></div>';
+}
+/* centra el mapa en un punto (en %) despues de hacer zoom o elegir una vivienda */
+function mapCenter(x,y,smooth){
+  var sm=$('#sm');if(!sm)return;
+  var w=sm.scrollWidth,h=sm.scrollHeight;
+  try{sm.scrollTo({left:x/100*w-sm.clientWidth/2,top:y/100*h-sm.clientHeight/2,behavior:smooth?'smooth':'auto'})}catch(e){sm.scrollLeft=x/100*w-sm.clientWidth/2;sm.scrollTop=y/100*h-sm.clientHeight/2}
+}
+function mapZoom(d){
+  var sm=$('#sm'),cx=50,cy=50;
+  if(sm){cx=(sm.scrollLeft+sm.clientWidth/2)/sm.scrollWidth*100;cy=(sm.scrollTop+sm.clientHeight/2)/sm.scrollHeight*100}
+  var p=S.sel&&P.filter(function(x){return x.id===S.sel})[0];
+  S.zoom=clamp(S.zoom+d*0.75,1,3);
+  if(nmPlugin()){nmPins(false);return}
+  renderMap(false);
+  if(p&&d>0){cx=p.x;cy=py(p.y)}
+  mapCenter(cx,cy,false);
+}
 function mapHTML(items){
-  var s='<div class="sm" id="sm">'+mapBg(S.city);
+  var s='<div class="sm" id="sm"><div class="sm-in" style="--z:'+S.zoom+'">'+mapBg(S.city);
   Object.keys(Z).forEach(function(k){var z=Z[k];if(z.c===S.city)s+='<span class="zl" style="left:'+z.x+'%;top:'+py(z.y)+'%">'+esc(z.n)+'</span>'});
   items.forEach(function(p){
     var opp=p.op==='venta'&&inv(p).opp;
@@ -1370,7 +1516,7 @@ function mapHTML(items){
   });
   pois(S.city).forEach(function(o){if(S.poi[o.c])s+='<span class="poi p-'+o.c+'" style="left:'+o.x+'%;top:'+py(o.y)+'%" title="'+esc(o.n)+'">'+ic(o.c,13)+'<em>'+esc(o.n)+'</em></span>'});
   var m=meXY();if(m)s+='<span class="me" style="left:'+m[0]+'%;top:'+py(m[1])+'%" title="Tú estás aquí"></span>';
-  return s+'<span class="mnote">Mapa esquemático de '+CITY[S.city]+'</span></div>';
+  return s+'</div></div><span class="mnote">Mapa esquemático de '+CITY[S.city]+'</span>'+mapCtl()+(S.mapBig&&!phone()?'<div class="mapsel">'+mapCtxHTML()+'</div>':'');
 }
 function renderMap(fit){
   var slot=$('#mapslot');
@@ -1391,7 +1537,9 @@ function setSheetH(h){var ex=$('#explore');ex.style.setProperty('--sh',h+'px');e
 function sheetSet(st){
   var ex=$('#explore'),sh=$('#sheet');
   if(!S.mapOn||!phone()){ex.style.setProperty('--shv','0px');sh.dataset.st='full';nmSync();return}
-  st=st||S.sheet;S.sheet=st;sh.dataset.st=st;setSheetH(sheetPx(st));nmTrack(360);
+  sh.dataset.st='fit';
+  var need=$('.sh-h',sh).offsetHeight+$('#mapCtx').offsetHeight+22;
+  setSheetH(Math.min(need,Math.round((ex.clientHeight-$('#xtools').offsetHeight)*.72)));nmTrack(360);
 }
 var DRAG=null,LASTDRAG=0;
 function dragStart(e){
@@ -1420,25 +1568,26 @@ function sheetCycle(){
 }
 function selectPin(id,fromMap){
   if(String(id).indexOf('poi:')===0)return;
-  if(S.sel===id&&fromMap){openDetail(id);return}
+  if(S.sel===id&&fromMap&&!phone()){openDetail(id);return}
   S.sel=id;
   $$('.card.on').forEach(function(x){x.classList.remove('on')});
   var c=$('[data-card="'+id+'"]');
   if(c){c.classList.add('on');if(fromMap){if(phone()&&S.sheet==='peek')sheetSet('half');try{c.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(x){}}}
   $$('.pin.on').forEach(function(x){x.classList.remove('on')});
   var pn=$('.pin[data-id="'+id+'"]');if(pn)pn.classList.add('on');
-  var cx=$('#mapCtx');if(cx&&S.mapOn)cx.innerHTML=mapCtxHTML();
+  var cx=$('#mapCtx');if(cx&&S.mapOn){cx.innerHTML=mapCtxHTML();sheetSet()}
+  var pp=P.filter(function(x){return x.id===id})[0];if(pp&&S.mapOn&&S.zoom>1&&!nmPlugin())mapCenter(pp.x,py(pp.y),true);
   if(nmPlugin())nmPins(false);
 }
 function renderExplore(keep){
   var items=filtered();S.items=items;
   var ex=$('#explore');
-  ex.dataset.map=S.mapOn?'on':'off';
+  ex.dataset.map=S.mapOn?'on':'off';ex.dataset.big=S.mapOn&&S.mapBig?'1':'0';
   $('#xtools').dataset.c=(S.mapOn||S.aiText)?'1':'';
   $('#lmList').setAttribute('aria-pressed',String(!S.mapOn));$('#lmMap').setAttribute('aria-pressed',String(!!S.mapOn));
-  var n=items.length,nx=items.filter(function(p){return p.ext}).length,pers=S.cr&&S.cr.has;
-  $('#count').textContent=S.only?n+(n===1?' vivienda seleccionada':' viviendas seleccionadas'):S.aiText?n+(n===1?' vivienda que coincide contigo':' viviendas que coinciden contigo'):pers?n+(n===1?' opción para ti':' opciones para ti'):n+(n===1?' vivienda':' viviendas')+(S.op==='venta'?' en venta':' en arriendo');
-  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo guardadas':S.me?'Cerca de ti, en '+CITY[S.city]:S.aiText&&nx?(n-nx)+' en Habita · '+nx+' encontradas por la IA en otros portales':pers?'Elegidas según lo que nos dijiste · de la más a la menos compatible':CITY[S.city]+' · personaliza Habita para ver tu compatibilidad';
+  var n=items.length,nx=items.filter(function(p){return p.ext}).length,pers=hasPlan()||S.aiText||(S.cr&&S.cr.has);
+  $('#count').textContent=S.only?n+(n===1?' vivienda seleccionada':' viviendas seleccionadas'):n+' '+noun(n)+(pers?(n===1?' que coincide contigo':' que coinciden contigo'):(S.op==='venta'?' en venta':' en arriendo'));
+  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo guardadas':S.me?'Cerca de ti, en '+CITY[S.city]:S.aiText&&nx?(n-nx)+' en Habita · '+nx+' encontradas por la IA en otros portales':pers?'De la más a la menos compatible contigo · '+CITY[S.city]:CITY[S.city];
   $('#grid').innerHTML=items.length?items.map(card).join(''):'<div class="empty"><h3>No hay viviendas con esos filtros</h3><p>Quita el límite de precio, cambia el tipo de vivienda o prueba otra ciudad.</p><p style="margin-top:14px"><button class="btn" data-act="clear">Limpiar filtros</button></p></div>';
   $('#favN').textContent=Object.keys(S.fav).length;
   syncFilters();
@@ -1542,13 +1691,13 @@ function detail(p){
   h+='<div class="m-top"><div><p class="kicker" style="color:var(--brand)">'+TL[p.t]+' · '+(p.t==='obra'?'Entrega '+p.obra.deliv:p.op==='venta'?'En venta':'En arriendo')+'</p><h2>'+esc(p.title)+'</h2><p class="loc" style="margin-top:6px">'+z.n+', '+CITY[z.c]+' · Estrato '+p.est+'</p></div><p class="price">'+priceHTML(p)+'</p></div>';
   h+=specsHTML(p);
   h+='<div><p>'+esc(p.d)+'</p><ul class="near" style="margin-top:10px">'+p.tags.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>'+(p.src?'<p class="fine" style="margin-top:10px">Fuente: '+esc(p.src)+(p.url?' · <a href="'+esc(p.url)+'" target="_blank" rel="noopener" data-map="1" style="color:var(--brand)">Ver anuncio original</a>':'')+'</p>':'')+'</div>';
-  if(r)h+='<section class="m-sec why-sec"><h3>¿Por qué te la recomendamos?</h3><p class="cmp-line big"><b>'+r.pct+'%</b> compatible contigo</p><ul class="cmp-list open">'+whyList(r,6,4)+'</ul></section>';
+  if(r)h+='<section class="m-sec why-sec"><h3>¿Por qué te la recomendamos?</h3><ul class="cmp-list open">'+whyList(r,6,4)+'</ul></section>';
   else h+='<section class="m-sec why-sec"><h3>¿Es para ti?</h3><p style="color:var(--muted)">Responde 6 preguntas rápidas y te mostramos qué tan compatible es cada vivienda con lo que buscas.</p><div class="cta" style="margin-top:10px"><button class="btn sm2" data-act="qzopen">Personalizar Habita</button></div></section>';
   h+=fairHTML(p);
   if(p.ext)h+='<section class="m-sec extbox"><h3>'+ic('asistente',18)+' Encontrada por la IA de Habita</h3><p>No está publicada en Habita. La encontramos en <b>'+esc(p.ext.portal)+'</b> y revisamos que cumple lo que buscas.</p><dl class="facts"><div><dt>Portal</dt><dd>'+esc(p.ext.portal)+'</dd></div><div><dt>Publicada</dt><dd>'+esc(p.ext.ago)+'</dd></div><div><dt>Anunciante</dt><dd>'+esc(p.ext.who)+'</dd></div><div><dt>Código del anuncio</dt><dd>'+esc(p.ext.code)+'</dd></div></dl><p class="fine" style="margin:8px 0 0">Antes de pagar o firmar, verifica la vivienda en persona y confirma la identidad del anunciante.</p></section>';
   if(p.t==='habitacion')h+=roomHTML(p);
   if(p.t==='obra'&&!p.ext)h+=obraBody(p.obra);
-  h+='<section class="m-sec"><h3>Qué hay cerca</h3><div class="scoreRow">'+ring(sc)+'<div><b>'+sc+'/100</b><span>'+scoreWord(sc)+'</span></div></div><ul class="envlist">';
+  h+='<section class="m-sec"><h3>Qué hay cerca</h3><ul class="envlist">';
   Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).slice(0,6).forEach(function(c){h+='<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie · '+N0.format(n[c].m)+' m</span></div></li>'});
   h+='</ul></section>';
   if(p.t!=='obra')h+=costsHTML(p);
@@ -1647,7 +1796,7 @@ function parseNum(s){
 }
 function parsePrompt(text){
   var t=norm(text),it={op:null,budget:null,beds:null,types:[],city:null,zones:[],needs:[],pets:false,park:false,quiet:false,furn:false,view:false,invest:false,obra:false,student:false,uni:null,near:false,people:0},m;
-  if(/arrend|alquil|rentar|mensual|al mes|por mes/.test(t))it.op='arriendo';
+  if(/arrend|arriend|alquil|rentar|mensual|al mes|por mes/.test(t))it.op='arriendo';
   if(/compr|venta|adquirir|invert|inversion|rentabil/.test(t))it.op='venta';
   m=t.match(/(\d+(?:[.,]\d+)*)\s*mil millones/);
   if(m)it.budget=parseNum(m[1])*1e9;
@@ -1682,7 +1831,9 @@ function parsePrompt(text){
   it.view=/vista|cerros|panoram/.test(t);
   it.invest=/invert|inversion|rentabil|valoriz|retorno|ganancia|renta/.test(t);
   it.obra=/obra gris|en gris|obra negra|construir|acabados|preventa|sobre planos/.test(t);
+  if(!it.types.length&&/\bhabitacion(es)?\b/.test(t)&&!/\b(\d+|dos|tres|cuatro)\s+habitacion/.test(t))it.types.push('habitacion');
   if(it.types.indexOf('habitacion')>-1&&it.beds===1)it.beds=null;
+  if(it.types.indexOf('habitacion')>-1&&!it.op)it.op='arriendo';
   it.near=/cerca de mi|cerca de donde|mi ubicacion|a mi alrededor|por aqui|cerca de aqui|alrededor de mi/.test(t);
   if(it.invest&&!it.op)it.op='venta';
   if(!it.op&&it.budget)it.op=it.budget<20e6?'arriendo':'venta';
@@ -1750,7 +1901,7 @@ function applyIntent(it,text){
 var PORTALS=[['Finca Raíz','fincaraiz.com.co'],['Metrocuadrado','metrocuadrado.com'],['Facebook Marketplace','facebook.com/marketplace'],['Ciencuadras','ciencuadras.com'],['Properati','properati.com.co']];
 var AGO=['hoy','ayer','hace 2 días','hace 3 días','hace 5 días','hace 1 semana'];
 var WHO=['Dueño directo','Inmobiliaria','Particular','Administrador del edificio'];
-function saveExt(){try{localStorage.setItem('habita.ext',JSON.stringify(P.filter(function(p){return p.ext&&(S.fav[p.id]||S.cmp[p.id])})))}catch(e){}}
+function saveExt(){try{MEM.setItem('habita.ext',JSON.stringify(P.filter(function(p){return p.ext&&(S.fav[p.id]||S.cmp[p.id])})))}catch(e){}}
 function extFind(text){
   P=P.filter(function(p){return !p.ext||S.fav[p.id]||S.cmp[p.id]});
   var seed=hash(norm(text)+S.city+S.op),R=function(k){return rnd(seed+':'+k)};
@@ -1808,7 +1959,7 @@ function clearSearch(){
   syncUI();
 }
 function syncUI(){
-  setOpButtons(S.op);priceOptions();renderChips();syncFilters();renderExplore();renderAIPanel();renderPlanLine();
+  priceOptions();syncFilters();renderExplore();renderAIPanel();renderPlanLine();
 }
 function mny(v){return money(v).replace('$ ','$')}
 var NEEDE={transporte:'🚇',supermercado:'🛒',parque:'🌳',universidad:'🎓',salud:'🏥',gimnasio:'🏋️',restaurantes:'🍽️',colegio:'🏫'};
@@ -1908,13 +2059,14 @@ function impHTML(p){
 }
 
 function renderEx(){$('#aiEx').innerHTML=EXAMPLES.map(function(e,i){return '<button type="button" class="exb" data-act="ex" data-i="'+i+'">'+esc(e)+'</button>'}).join('')}
-function savedImports(){try{return JSON.parse(localStorage.getItem('habita.imp')||'[]').filter(function(p){return TL[p.t]&&Z[p.z]})}catch(e){return []}}
-function saveImports(){try{localStorage.setItem('habita.imp',JSON.stringify(P.filter(function(p){return p.src}).slice(0,30)))}catch(e){}}
+function savedImports(){try{return JSON.parse(MEM.getItem('habita.imp')||'[]').filter(function(p){return TL[p.t]&&Z[p.z]})}catch(e){return []}}
+function saveImports(){try{MEM.setItem('habita.imp',JSON.stringify(P.filter(function(p){return p.src}).slice(0,30)))}catch(e){}}
 /* ---------- cuestionario inicial (editable desde Mi plan) ---------- */
 var QN=6;
 function openQuiz(edit){
   var a=hasPlan()?JSON.parse(JSON.stringify(PREF)):defPref();
   a.city=a.city||S.city;
+  if(!hasPlan()&&S.aiText){a.types=S.type!=='todos'?[S.type]:S.typeSet.slice();a.op=S.op;a.city=S.city}
   S.qz={i:0,edit:!!edit,a:a,t:0};
   $('#quiz').hidden=false;document.body.style.overflow='hidden';nmSync();
   renderQuiz();
@@ -1942,7 +2094,7 @@ function renderWait(){
   $('#qzp').className='qzp wait';
   $('#qzp').innerHTML='<div class="qw-logo">'+logo(56)+'</div><h3>Ya entendimos lo que buscas.</h3><p class="qz-sub" style="margin:0">Con esto elegimos tus opciones y calculamos qué tan compatible es cada vivienda contigo.</p>'+
     '<dl class="planlist qw-sum">'+rows.map(function(r,k){return '<div style="--d:'+(0.15+k*0.12).toFixed(2)+'s"><dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl>'+
-    '<div class="navrow"><button type="button" class="btn alt" data-act="qback">Cambiar algo</button><button type="button" class="btn" data-act="qdone">'+(S.qz.edit?'Guardar':'Ver mis opciones')+'</button></div>';
+    '<div class="navrow"><button type="button" class="btn alt" data-act="qback">Cambiar algo</button><button type="button" class="btn" data-act="qdone">'+(S.qz.edit?'Actualizar mi búsqueda':'Ir a Explorar')+'</button></div>';
   if(S.qz.t){clearTimeout(S.qz.t);S.qz.t=0}
 }
 function renderQuiz(){
@@ -2012,11 +2164,11 @@ function qFinish(){
   if(a.where==='near'&&!a.near)a.where='';
   PREF=a;savePref();
   closeQuiz();
-  applyPref();
-  if(S.qz.edit)toast('Plan actualizado');else setView('explorar');
+  setView('explorar');
+  updating('Actualizando tu búsqueda…',function(){applyPref()});
 }
 function qSkip(){
-  if(!hasPlan()){PREF=Object.assign(defPref(),{done:false,skipped:true});try{localStorage.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
+  if(!hasPlan()){PREF=Object.assign(defPref(),{done:false,skipped:true});try{MEM.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
   var fromHome=S.view==='home'&&S.qz&&!S.qz.edit;
   closeQuiz();
   if(fromHome)setView('explorar');
@@ -2041,16 +2193,16 @@ function applyPref(){
   setView('explorar');
   syncUI();
 }
+/* Tu búsqueda: lo que dijiste en el cuestionario (o lo que entendió la IA) y un solo botón para cambiarlo */
 function renderPlanLine(){
   var el=$('#planLine');if(!el)return;
-  if(hasPlan()){
-    var pf=PREF,parts=[];
-    parts.push(pf.types.length?pf.types.map(function(k){return TL[k]}).join(' / '):'Cualquier vivienda');
-    parts.push(pf.op==='arriendo'?'Arrendar':pf.op==='venta'?'Comprar':'Arrendar o comprar');
-    el.innerHTML='<span>'+ic('user',15)+'<b>Personalizado con tus respuestas:</b> '+esc(parts.join(' · '))+'</span><button type="button" data-act="qzopen">Editar</button>';
-  }else{
-    el.innerHTML='<span>'+ic('user',15)+'Personaliza Habita y ve tu compatibilidad</span><button type="button" data-act="qzopen">Responder (1 min)</button>';
-  }
+  var parts=[];
+  parts.push(S.type!=='todos'?TL[S.type]:S.typeSet.length?S.typeSet.map(function(k){return TL[k]}).join(' o '):'Cualquier vivienda');
+  parts.push(S.op==='venta'?'Comprar':'Arrendar');
+  parts.push(CITY[S.city]);
+  var sel=S.only?'<button type="button" class="chip xs" data-act="onlyclear" aria-pressed="true">Selección '+ic('x',13)+'</button>':'';
+  if(hasPlan()||S.aiText)el.innerHTML='<p class="ms-t"><span class="ms-k">Tu búsqueda</span><b>'+esc(parts.join(' · '))+'</b></p>'+sel+'<button type="button" class="btn alt ms-b" data-act="qzopen">'+ic('edit',15)+'Editar búsqueda</button>';
+  else el.innerHTML='<p class="ms-t"><span class="ms-k">Personaliza tus resultados</span><b>Responde 6 preguntas y te mostramos lo que encaja contigo</b></p>'+sel+'<button type="button" class="btn ms-b" data-act="qzopen">Empezar</button>';
 }
 
 /* ---------- vistas y navegacion ---------- */
@@ -2059,7 +2211,6 @@ var ALLV=['home','explorar','micasa','publicar','inversion'];
 function renderNav(){
   $('#nav').innerHTML=VIEWS.map(function(v){return '<button data-act="view" data-v="'+v[0]+'"'+(S.view===v[0]?' aria-current="page"':'')+'>'+ic(v[0],20)+'<span>'+v[1]+'</span></button>'}).join('');
 }
-function setOpButtons(op){$$('[data-act=op]').forEach(function(x){x.setAttribute('aria-pressed',String(x.dataset.v===op))})}
 function setView(v,noScroll){
   S.view=v;document.body.dataset.view=v;
   ALLV.forEach(function(x){$('#v-'+x).hidden=x!==v});
@@ -2086,7 +2237,7 @@ var CAR={i:0,t:0,ms:5200,after:11000,hover:false,built:false};
 var REDUCE=!!(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches);
 function renderHome(){
   var plan=hasPlan();
-  $('#hmGo').textContent=plan?'Ver mis opciones':'Empezar';
+  $('#hmGo').textContent=plan?'Ir a Explorar':'Empezar';
   $('#hmEdit').hidden=!plan;
   var h=$('#v-home');h.classList.remove('enter');void h.offsetWidth;h.classList.add('enter');
 }
@@ -2364,21 +2515,13 @@ document.addEventListener('input',function(e){
 /* ---------- mi casa: guardadas y metas de ahorro ---------- */
 IC.micasa=IC.heart;
 S.goals=[];S.notes={};S.mc='guardadas';S.goalSel=null;S.newGoal=false;S.ngSrc='free';S.ngName='';S.ngPrice='';
-function saveGoals(){try{localStorage.setItem('habita.goals',JSON.stringify(S.goals))}catch(e){}}
-function saveNotes(){try{localStorage.setItem('habita.notes',JSON.stringify(S.notes))}catch(e){}}
+function saveGoals(){try{MEM.setItem('habita.goals',JSON.stringify(S.goals))}catch(e){}}
+function saveNotes(){try{MEM.setItem('habita.notes',JSON.stringify(S.notes))}catch(e){}}
 (function loadMC(){
-  var seeded=false;
   try{
-    seeded=!!localStorage.getItem('habita.seeded');
-    var g=localStorage.getItem('habita.goals');if(g)S.goals=JSON.parse(g)||[];
-    var n=localStorage.getItem('habita.notes');if(n)S.notes=JSON.parse(n)||{};
+    var g=MEM.getItem('habita.goals');if(g)S.goals=JSON.parse(g)||[];
+    var n=MEM.getItem('habita.notes');if(n)S.notes=JSON.parse(n)||{};
   }catch(e){}
-  if(!seeded){
-    if(!Object.keys(S.fav).length)S.fav={p10:1,p5:1,p9:1,p2:1};
-    if(!S.goals.length)S.goals=[{id:'gex',ex:true,houseId:'p10',name:'Apartamento en Chapinero Alto con vista a los cerros',kind:'venta',price:720e6,down:30,saved:18e6,monthly:4e6,rate:8,log:[]}];
-    try{localStorage.setItem('habita.seeded','1')}catch(e){}
-    saveFav();saveGoals();
-  }
   S.goalSel=S.goals.length?S.goals[0].id:null;
 })();
 function curGoal(){return S.goals.filter(function(g){return g.id===S.goalSel})[0]||null}
@@ -2450,28 +2593,36 @@ function toggleCmp(id){
   else S.cmp[id]=1;
   saveCmp();saveExt();
 }
+var NOUN={apto:['apartamento','apartamentos'],casa:['casa','casas'],habitacion:['habitación','habitaciones'],apartaestudio:['apartaestudio','apartaestudios'],obra:['proyecto en obra gris','proyectos en obra gris']};
+function noun(n){
+  var ts=S.type!=='todos'?[S.type]:S.typeSet;
+  if(!ts.length)return n===1?'vivienda':'viviendas';
+  var w=ts.map(function(t){return NOUN[t][n===1?0:1]});
+  return w.length>1?w.slice(0,-1).join(', ')+' y '+w[w.length-1]:w[0];
+}
+/* muestra que las respuestas cambian los resultados */
+function updating(msg,fn){
+  var sh=$('#sheet'),u=$('#upd');
+  if(!u){u=document.createElement('div');u.id='upd';u.className='upd';u.setAttribute('role','status');sh.insertBefore(u,sh.firstChild.nextSibling)}
+  u.innerHTML='<span class="spin" aria-hidden="true"></span>'+esc(msg||'Actualizando tu búsqueda…');u.hidden=false;sh.classList.add('busy');
+  setTimeout(function(){if(fn)fn();u.hidden=true;sh.classList.remove('busy');var c=$('#count');c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')},REDUCE?150:750);
+}
 function renderTray(){
   var t=$('#tray'),ids=cmpIds();
-  if(!ids.length||(S.view!=='explorar')){t.hidden=true;return}
+  if(!ids.length||S.view!=='explorar'||(S.mapOn&&phone())){t.hidden=true;return}
   t.hidden=false;
   t.innerHTML='<span><b>'+ids.length+' de 3</b> para comparar</span><button type="button" class="btn sm2" data-act="gocmp"'+(ids.length<2?' disabled':'')+'>'+(ids.length<2?'Elige otra':'Comparar ahora')+'</button><button type="button" class="tray-x" data-act="cmpclear" aria-label="Vaciar comparación">'+ic('x',16)+'</button>';
 }
 function renderMiCasa(){
   var nf=P.filter(function(p){return S.fav[p.id]}).length;
-  if(['guardadas','comparar','plan','metas'].indexOf(S.mc)<0)S.mc='guardadas';
+  if(['guardadas','comparar','metas'].indexOf(S.mc)<0)S.mc='guardadas';
   var nc=cmpIds().length;
-  $('#mcTabs').innerHTML='<button data-act="mtab" data-v="guardadas" aria-pressed="'+(S.mc==='guardadas')+'">Guardadas ('+nf+')</button><button data-act="mtab" data-v="comparar" aria-pressed="'+(S.mc==='comparar')+'">Comparar ('+nc+')</button><button data-act="mtab" data-v="plan" aria-pressed="'+(S.mc==='plan')+'">Mis preferencias</button><button data-act="mtab" data-v="metas" aria-pressed="'+(S.mc==='metas')+'">Metas de ahorro ('+S.goals.length+')</button>';
-  $('#mcProg').innerHTML=progHTML(nf,nc);
-  $('#mcBody').innerHTML=S.mc==='guardadas'?boardHTML():S.mc==='comparar'?compareHTML():S.mc==='plan'?planHTML():goalsHTML();
+  $('#mcTabs').innerHTML='<button data-act="mtab" data-v="guardadas" aria-pressed="'+(S.mc==='guardadas')+'">Guardadas ('+nf+')</button><button data-act="mtab" data-v="comparar" aria-pressed="'+(S.mc==='comparar')+'">Comparar ('+nc+')</button><button data-act="mtab" data-v="metas" aria-pressed="'+(S.mc==='metas')+'">Metas de ahorro ('+S.goals.length+')</button>';
+  $('#mcBody').innerHTML=S.mc==='guardadas'?boardHTML():S.mc==='comparar'?compareHTML():goalsHTML();
   $('#favN').textContent=Object.keys(S.fav).length;
   if(S.mc==='metas'&&!S.newGoal&&curGoal())fillGoal(true);
 }
-/* progreso: te conocemos, guardas, comparas, decides */
-function progHTML(nf,nc){
-  var st=[[hasPlan(),'Te conocemos','plan',hasPlan()?'Preferencias listas':'Responde 6 preguntas'],[nf>0,'Guardas','guardadas',nf?nf+(nf===1?' guardada':' guardadas'):'Toca el corazón'],[nc>=2,'Comparas','comparar',nc>=2?nc+' en comparación':'Elige 2 o 3'],[S.decided?true:false,'Decides','comparar',S.decided?'Ya elegiste':'Mira la recomendación']];
-  return '<ol class="prog">'+st.map(function(x,i){return '<li class="'+(x[0]?'done':'')+'"><button type="button" data-act="mtab" data-v="'+x[2]+'"><b>'+(x[0]?ic('check',14):i+1)+'</b><span>'+x[1]+'<small>'+x[3]+'</small></span></button></li>'}).join('')+'</ol>';
-}
-/* mi plan: resumen del cuestionario */
+/* resumen de las respuestas del cuestionario */
 function budgetTxt(b,rent){
   if(!b)return null;
   var list=rent?RENTR:BUYR;
@@ -2491,10 +2642,6 @@ function planRows(pf){
   rows.push(['Habitaciones',pf.beds?pf.beds+(pf.beds===4?' o más':''):'Me da igual']);
   rows.push(['Es importante',pf.imp.length?pf.imp.map(function(k){return IMPS.filter(function(x){return x[0]===k})[0][1]}).join(', '):'Sin preferencias']);
   return rows;
-}
-function planHTML(){
-  if(!hasPlan())return '<div class="empty"><h3>Aún no tienes un plan</h3><p>Responde 6 preguntas rápidas y Habita te muestra primero lo que mejor encaja contigo.</p><p style="margin-top:14px"><button class="btn" data-act="qzopen">Crear mi plan</button></p></div>';
-  return '<div class="stepcard" style="max-width:680px"><h3 style="font-size:24px">Lo que me dijiste que buscas</h3><dl class="planlist">'+planRows().map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+esc(r[1])+'</dd></div>'}).join('')+'</dl><div class="cta"><button class="btn" data-act="qzopen">Editar mi plan</button><button class="btn alt" data-act="plansee">Ver viviendas para mí</button><button class="chip" data-act="qzreset">Borrar mi plan</button></div><p class="fine" style="margin:0">Tu plan se guarda en este dispositivo y se usa para calcular qué tan compatible es cada vivienda contigo.</p></div>';
 }
 /* mis opciones */
 function budgetState(p){
@@ -2545,7 +2692,7 @@ function compareHTML(){
     ['Habitaciones',function(x){return x.p.t==='habitacion'?null:x.p.beds},function(v){return v},'max'],
     ['Baños',function(x){return x.p.t==='habitacion'?null:x.p.baths},function(v){return v},'max'],
     ['Área',function(x){return x.p.t==='habitacion'?null:x.p.area},function(v){return v+' m²'},'max'],
-    ['Qué hay cerca',function(x){return envScore(x.p)},function(v){return v+'/100'},'max']
+    ['Transporte a pie',function(x){return walk(nearOf(x.p).transporte.m)},function(v){return v+' min'},'min']
   ];
   h+='<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>'+info.map(function(x){return '<th'+(x===best?' class="win"':'')+'>'+(x===best?'<span class="winb">Te conviene más</span>':'')+'<button type="button" data-act="open" data-id="'+x.p.id+'">'+esc(x.p.title)+'</button><small>'+TL[x.p.t]+(x.p.ext?' · '+esc(x.p.ext.portal):'')+'</small></th>'}).join('')+'</tr></thead><tbody>';
   rows.forEach(function(r){
@@ -2685,16 +2832,15 @@ document.addEventListener('click',function(e){
   else if(a==='carprev')carShow(CAR.i-1,true);
   else if(a==='carnext')carShow(CAR.i+1,true);
   else if(a==='cargo')carShow(+v,true);
-  else if(a==='op'){S.op=v;S.max=0;S.only=null;syncUI()}
-  else if(a==='type'){
-    S.type=v;S.typeSet=[];S.only=null;
-    if(v==='habitacion'&&S.op==='venta')S.op='arriendo';
-    if(v==='obra')S.op='venta';
-    syncUI();
-  }
   else if(a==='fpanel'){var fp=$('#fpanel');fp.hidden=!fp.hidden;b.setAttribute('aria-expanded',String(!fp.hidden));sheetSet()}
   else if(a==='sheetcycle')sheetCycle();
-  else if(a==='lm'){S.mapOn=v==='map';renderExplore();if(S.mapOn)window.scrollTo(0,0)}
+  else if(a==='lm'){
+    S.mapOn=v==='map';if(!S.mapOn){S.mapBig=false;S.zoom=1}
+    if(S.mapOn&&!S.sel&&S.items&&S.items[0])S.sel=S.items[0].id;
+    renderExplore();if(S.mapOn)window.scrollTo(0,0);
+  }
+  else if(a==='zoom')mapZoom(+v);
+  else if(a==='mapbig'){S.mapBig=!S.mapBig;renderExplore(true);if(nmPlugin())nmSync();else{var sp=S.sel&&P.filter(function(x){return x.id===S.sel})[0];if(sp&&S.zoom>1)mapCenter(sp.x,py(sp.y),false)}}
   else if(a==='locate'){S.mapOn=true;locateStart(true);renderExplore()}
   else if(a==='pin')selectPin(id,true);
   else if(a==='onlyclear'){S.only=null;syncUI()}
@@ -2723,13 +2869,11 @@ document.addEventListener('click',function(e){
   else if(a==='aiclear'){$('#q').value='';S.mapOn=false;clearSearch()}
   else if(a==='ftog'){if(S.f[v])delete S.f[v];else S.f[v]=true;syncUI()}
   else if(a==='qzopen'){if(!$('#modal').hidden)closeDetail();openQuiz(hasPlan())}
-  else if(a==='qzreset'){PREF=defPref();try{localStorage.removeItem('habita.pref')}catch(x){}renderMiCasa();renderPlanLine();syncUI();toast('Plan borrado')}
   else if(a==='qpick')qPick(b.dataset.k,b.dataset.v);
   else if(a==='qdone')qFinish();
   else if(a==='qnext'){if(S.qz.i<QN-1){S.qz.i++;renderQuiz()}else if(S.qz.edit)qFinish();else{S.qz.i=QN;renderQuiz()}}
   else if(a==='qback'){S.qz.i=Math.max(0,S.qz.i-1);renderQuiz()}
   else if(a==='qskip')qSkip();
-  else if(a==='plansee'){applyPref()}
   else if(a==='savedmap'){var sv=P.filter(function(p){return S.fav[p.id]}).map(function(p){return p.id});if(sv.length)showOnMap(sv,null)}
   else if(a==='locmap'){var sv2=P.filter(function(p){return S.fav[p.id]}).map(function(p){return p.id});showOnMap(sv2,id)}
   else if(a==='impadd'){

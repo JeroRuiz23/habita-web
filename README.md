@@ -103,3 +103,13 @@ Facebook Marketplace no ofrece conexión pública: Habi lee el anuncio que el us
 - **Mi plan** (antes Mi casa): progreso, guardadas y mejores opciones, comparar, mis preferencias y metas.
 - **IA en otros portales:** cada búsqueda con IA agrega 2 o 3 viviendas encontradas en Finca Raíz, Metrocuadrado, Ciencuadras, Properati o Facebook Marketplace (generadas a partir de los criterios entendidos, con portal, enlace y código del anuncio). Si se guardan o comparan, se conservan.
 - 16 apartamentos nuevos en Bogotá, Medellín y Cali.
+
+## Más simple y pensado para móvil (v8)
+
+- **Explorar** ya no tiene Comprar/Arrendar ni Tipo: eso sale del cuestionario. “Tu búsqueda” resume las respuestas y **Editar búsqueda** abre el mismo cuestionario con ellas. Al cambiarlas aparece “Actualizando tu búsqueda…” y el título responde (“8 apartamentos que coinciden contigo”).
+- La búsqueda con IA entiende también frases cortas (“habitación”, “arriendo”).
+- **Compatibilidad:** un solo indicador (el % de las tarjetas). El detalle conserva “¿Por qué te la recomendamos?” sin repetir el número y sin puntajes /100.
+- **Mi plan:** título “Guarda, compara y decide”; pestañas Guardadas, Comparar y Metas de ahorro.
+- **Mapa:** acercar/alejar y ampliar. En el celular, el modo Mapa muestra una sola tarjeta con la vivienda elegida.
+- **Memoria:** nada se guarda entre sesiones; recargar la página empieza de cero. Dentro de la sesión se conservan respuestas, guardadas, comparación y metas. No hay guardados de ejemplo.
+- **Móvil:** márgenes de 20 px, botones y campos de 44–48 px, filtros en cuadrícula, tarjetas a todo el ancho, cuestionario y detalle a pantalla completa, barra inferior más alta.
