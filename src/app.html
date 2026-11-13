@@ -78,10 +78,6 @@ button{cursor:pointer}
 .sbar input:focus-visible{outline:none}
 .sbar input::placeholder{color:var(--muted)}
 .sbar .iconbtn{width:34px;height:34px;border:0;background:var(--surface)}
-.xrow{display:flex;gap:8px;align-items:center;overflow-x:auto;scrollbar-width:none;margin:0 -16px;padding:1px 16px}
-.xrow::-webkit-scrollbar{display:none}
-.xrow>*{flex:none}
-.fpanel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
 .xmap{position:relative;flex:1;min-height:0;overflow:hidden;background:var(--map-bg)}
 .sm{position:absolute;inset:0 0 var(--shv) 0;overflow:auto;scrollbar-width:none;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
 .sm::-webkit-scrollbar{display:none}
@@ -93,7 +89,6 @@ button{cursor:pointer}
 .m-water{stroke:var(--water);fill:none;stroke-linecap:round}
 .m-grid{stroke:var(--map-road);fill:none;opacity:.5}
 .zl{position:absolute;transform:translate(-50%,-50%);font-size:11px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;color:var(--muted);opacity:.8;pointer-events:none;white-space:nowrap}
-.mnote{position:absolute;left:10px;top:10px;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:3px 9px;font-size:12px;color:var(--muted)}
 .me{position:absolute;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:50%;background:var(--orange);border:3px solid #fff;box-shadow:0 0 0 6px rgba(255,145,0,.28)}
 .pin{position:absolute;transform:translate(-50%,-100%);border:0;background:none;padding:0 0 7px;z-index:2}
 .pin span{display:block;background:var(--surface);color:var(--ink);border:1.5px solid var(--brand);border-radius:999px;padding:3px 9px;font-weight:700;font-size:12.5px;font-variant-numeric:tabular-nums;box-shadow:0 2px 6px rgba(0,0,0,.22);white-space:nowrap}
@@ -105,13 +100,10 @@ button{cursor:pointer}
 .pin.on::after{background:var(--brand)}
 .sheet{position:absolute;left:0;right:0;bottom:0;height:var(--sh);background:var(--bg);border-radius:22px 22px 0 0;box-shadow:0 -8px 28px rgba(8,14,28,.2);display:flex;flex-direction:column;z-index:4;transition:height .3s cubic-bezier(.2,.8,.2,1)}
 .sheet.drag{transition:none}
-.grab{padding:10px 0 4px;touch-action:none;cursor:grab;display:grid;place-items:center;background:none;border:0;width:100%}
-.grab i{width:42px;height:5px;border-radius:9px;background:var(--line);display:block}
 .sh-h{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:2px max(16px,env(safe-area-inset-left,0px)) 10px;touch-action:none}
 .sh-h h2{font-size:19px;letter-spacing:-.02em}
 .sh-h p{font-size:13px;color:var(--muted);margin-top:1px}
 .sh-list{flex:1;min-height:0;overflow-y:auto;padding:0 max(16px,env(safe-area-inset-left,0px)) 24px;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}
-.sheet[data-st="peek"] .sh-list{overflow:hidden}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:12px;padding:11px 18px;font-weight:700;background:var(--cta);color:var(--cta-ink);text-decoration:none;transition:background .18s,box-shadow .18s,transform .18s}
 .btn:hover{background:var(--cta-hover);box-shadow:0 8px 18px rgba(255,145,0,.28)}
 .btn:active{transform:scale(.97)}
@@ -392,14 +384,8 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .aipanel .tag button:hover{background:var(--brand);color:var(--brand-ink)}
 .aipanel .tag:not(:has(button)){padding-right:10px}
 .aipanel .imp{background:var(--surface);border-radius:12px;padding:10px 12px}
-.xsel .sel{padding:7px 6px 7px 10px;font-size:13.5px;font-weight:600;border-radius:999px}
-.xsel .chip{padding:7px 13px}
 .cnt{background:var(--brand);color:var(--brand-ink);border-radius:99px;font-size:11px;min-width:18px;height:18px;display:inline-grid;place-items:center;padding:0 5px}
 .chip[aria-pressed="true"] .cnt,.chip[aria-expanded="true"] .cnt{background:var(--brand-ink);color:var(--brand)}
-.fpanel .fp-t,.fpanel .fp-s{grid-column:1/-1}
-.planline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 16px 8px;padding:7px 12px;background:var(--surface-2);border-radius:12px;font-size:13px}
-.planline span{display:inline-flex;align-items:center;gap:6px;min-width:0}
-.planline button{border:0;background:none;color:var(--brand);font-weight:700;font-size:13px;white-space:nowrap;padding:0}
 .cmp-line{margin:0;font-size:13.5px;color:var(--muted);display:flex;align-items:baseline;gap:6px}
 .cmp-line b{font-family:var(--display);font-size:18px;color:var(--brand)}
 .cmp-line.big{font-size:16px}.cmp-line.big b{font-size:34px}
@@ -464,7 +450,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .xh-s{text-align:center;color:var(--muted);font-size:14px;margin:0}
 .sbar>span:first-child{color:var(--brand);display:inline-grid}
 .xtools[data-c="1"] .xh-top,.xtools[data-c="1"] .xh-s{display:none}
-.sh-act{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
 .understood{list-style:none;padding:0}
 .aipanel .tag{gap:5px}
 .aipanel .tag>.ic{color:var(--brand)}
@@ -477,9 +462,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 #explore[data-map="off"] .xmap{display:none}
 #explore[data-map="off"] .xtools{background:var(--bg);border:0;padding:22px var(--px) 12px}
 #explore[data-map="off"] .sheet{position:static;height:auto;border-radius:0;box-shadow:none;border:0;transition:none;background:none}
-#explore[data-map="off"] .grab{display:none}
 #explore[data-map="off"] .sh-h{padding:6px var(--px) 10px}
-#explore[data-map="off"] .planline{margin:0 var(--px) 10px}
 #explore[data-map="off"] .sh-list{overflow:visible!important;padding:0 var(--px) 40px}
 #explore[data-map="off"] .sbar{height:58px;border-radius:18px;background:var(--surface);box-shadow:0 0 0 1.5px var(--line),var(--shadow);max-width:780px;width:100%;margin:0 auto}
 #explore[data-map="off"] .sbar:focus-within{box-shadow:0 0 0 2px var(--brand),var(--shadow)}
@@ -489,9 +472,8 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 #explore[data-map="off"] .aiex{flex-wrap:wrap;justify-content:center;overflow:visible;margin:0 auto;padding:0;max-width:900px}
 #explore[data-map="off"] .exb{max-width:100%;white-space:normal;text-align:left;border-radius:14px}
 #explore[data-map="off"] .aipanel{max-width:780px;width:100%;margin:0 auto}
-#explore[data-map="off"] .xrow{margin:0;padding:1px 0;justify-content:flex-start}
 #explore[data-map="off"] .grid{grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px}
-@media (min-width:1000px){#explore[data-map="off"] .sheet{border-right:0}#explore[data-map="off"] .xrow{justify-content:center;flex-wrap:wrap;overflow:visible}}
+@media (min-width:1000px){#explore[data-map="off"] .sheet{border-right:0}}
 /* bienvenida y espera del cuestionario */
 .qzp.wait{text-align:center;justify-items:center;gap:14px;padding:30px 22px;max-width:520px}
 .qw-logo{animation:hpulse 1.3s ease-in-out infinite}
@@ -501,8 +483,8 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .qw-l li .ic{color:var(--good)}
 .qz-sum{display:flex;gap:6px;flex-wrap:wrap;margin:-6px 0 0}
 .qz-sum span{display:inline-flex;gap:4px;align-items:center;background:var(--brand-soft);color:var(--brand);border-radius:999px;padding:3px 10px;font-size:12.5px;font-weight:600}
-@media (max-width:700px){#explore[data-map="off"] .aiex{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -16px;padding:2px 16px}#explore[data-map="off"] .exb{flex:none;white-space:nowrap;max-width:none;border-radius:999px}.sh-h>div:first-child{min-width:0;flex:1}.sh-act{flex-wrap:nowrap;flex:none}.sh-act .btn{white-space:nowrap}}
-@media (max-width:560px){#locBtn{font-size:0;gap:0;padding:8px 10px}#explore[data-map="off"] .sbar{height:54px}}
+@media (max-width:700px){#explore[data-map="off"] .aiex{flex-wrap:nowrap;justify-content:flex-start;overflow-x:auto;margin:0 -16px;padding:2px 16px}#explore[data-map="off"] .exb{flex:none;white-space:nowrap;max-width:none;border-radius:999px}.sh-h>div:first-child{min-width:0;flex:1}}
+@media (max-width:560px){#explore[data-map="off"] .sbar{height:54px}}
 
 /* ---- intro del logo ---- */
 @keyframes lgIn{from{opacity:0;transform:translateY(14px) scale(.92);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
@@ -566,7 +548,7 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .card .price{font-size:20px}
 .fair{margin:1px 0 0;font-size:12.5px;font-weight:700}
 .fair.ok{color:var(--moss)}.fair.hi{color:var(--warn)}
-.fair.ok::before{content:"↓ "}.fair.hi::before{content:"↑ "}
+
 .extsrc{display:flex;align-items:center;gap:5px;margin:6px 0 0;font-size:12.5px;font-weight:600;color:var(--warn)}
 .c-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;margin-top:12px}
 .cmpbtn{display:inline-flex;align-items:center;gap:5px;border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:6px 12px;font-weight:700;font-size:13px;color:var(--moss);transition:border-color .18s,background .18s,transform .18s}
@@ -580,27 +562,13 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .ai-web{display:flex;gap:7px;align-items:flex-start;margin:8px 0 0;padding:8px 10px;border-radius:10px;background:color-mix(in srgb,var(--orange) 12%,var(--white));font-size:13px;color:var(--ink)}
 .ai-web .ic{color:var(--warn);flex:none;margin-top:1px}
 .tag .te{font-size:14px;line-height:1}
-.lm{padding:3px}.lm button{padding:6px 12px;font-size:13.5px}
-.lm button[aria-pressed="true"]{background:var(--moss);color:var(--white);box-shadow:none}
-.mapctx{margin:0 16px 10px;display:grid;gap:8px;flex:none}
-#explore[data-map="off"] .mapctx{margin:0 var(--px) 10px}
-.mctx{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:1px}
-.mctx::-webkit-scrollbar{display:none}
 .chip.xs{padding:5px 10px;font-size:12.5px;gap:5px}
-.conv{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px;display:grid;gap:6px;box-shadow:var(--shadow)}
-.conv-h{margin:0;display:flex;justify-content:space-between;gap:8px;font-size:14px}
-.conv-h span{font-weight:800;color:var(--moss)}
-.conv-t{margin:0;font-size:13px;color:var(--muted)}
-.conv ul{list-style:none;margin:0;padding:0;display:grid;gap:4px}
-.conv li{display:grid;grid-template-columns:18px 1fr auto;gap:8px;align-items:center;font-size:13px}
-.conv li .ic{color:var(--moss)}
-.conv li span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.conv .btn{justify-self:start}
-.conv-tip{margin:0;font-size:12.5px;color:var(--muted)}
 .poi{position:absolute;z-index:1;transform:translate(-50%,-50%);display:flex;align-items:center;gap:4px;background:var(--white);color:var(--moss);border-radius:999px;padding:3px;box-shadow:0 1px 4px rgba(34,46,39,.25);font-size:11px;font-weight:600;pointer-events:auto}
 .poi em{font-style:normal;max-width:0;overflow:hidden;white-space:nowrap;transition:max-width .25s,padding .25s}
 .poi:hover{z-index:4}.poi:hover em{max-width:160px;padding-right:6px}
-.poi.p-universidad{background:var(--moss);color:var(--white)}
+.poi{opacity:.92;border:1px solid var(--line)}
+.poi.p-universidad{color:var(--moss)}
+.poi.p-supermercado{color:#3d6f8a}.poi.p-parque{color:#3f7a4a}.poi.p-salud{color:#b4442f}
 .poi.p-transporte{color:var(--warn)}
 .tray{position:fixed;z-index:45;left:0;right:0;margin-inline:auto;width:max-content;bottom:calc(16px + var(--navh));display:flex;align-items:center;gap:12px;background:var(--moss);color:var(--white);border-radius:999px;padding:8px 8px 8px 18px;box-shadow:0 12px 30px rgba(34,46,39,.35);animation:hup .35s ease both;max-width:calc(100% - 24px)}
 .tray span{font-size:14px;white-space:nowrap}
@@ -647,7 +615,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .qz-why .ic{flex:none;margin-top:1px}
 .qw-sum{text-align:left;width:100%}
 .qw-sum>div{opacity:0;animation:hup .45s var(--d) forwards}
-@media (max-width:999px){#explore[data-map="on"] .aipanel,#explore[data-map="on"] .xrow,#explore[data-map="on"] .aiex{display:none!important}}
 @media (max-width:560px){.sh-h h2{font-size:17px;line-height:1.2}.sh-h p{font-size:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.tray{padding-left:14px;gap:8px}.tray span{font-size:13px}}
 @media (max-width:760px){.prog{grid-template-columns:repeat(2,minmax(0,1fr))}.tray{border-radius:16px;bottom:calc(10px + var(--navh))}.fair-row{grid-template-columns:1fr}}
 @media (min-width:1000px){
@@ -655,7 +622,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .xtools{grid-area:tools;border-right:1px solid var(--line)}
   .xmap{grid-area:map}
   .sheet{grid-area:sheet;position:static;height:auto;border-radius:0;box-shadow:none;border-right:1px solid var(--line);transition:none}
-  .grab{display:none}
   .sh-h{padding-top:12px}
   .sm,.nmload{bottom:0}
   .sh-list{overflow-y:auto!important}
@@ -686,7 +652,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .icard{grid-template-columns:110px minmax(0,1fr)}
   .m-art{aspect-ratio:16/8}
   .m-body{padding:18px 16px 24px}
-  .fpanel{grid-template-columns:minmax(0,1fr)}
   .bar{gap:8px}
 }
 @media (min-width:760px){
@@ -718,28 +683,128 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
 .mctl button:active:not([disabled]){transform:scale(.94)}
 .mctl button[disabled]{opacity:.4}
 .mctl button[aria-pressed="true"]{background:var(--moss);color:var(--white)}
-.conv-top{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
-.conv-t{margin:0;font-weight:700;font-size:15px;color:var(--ink)}
-.conv-p{margin:2px 0 0;font-family:var(--display);font-weight:800;font-size:19px}
-.conv-c{flex:none;display:grid;justify-items:center;background:var(--moss-100);color:var(--moss);border-radius:12px;padding:6px 10px;font-size:11.5px;font-weight:700}
-.conv-c b{font-size:20px;line-height:1.1}
-.conv-h{margin:6px 0 0;font-size:13px;font-weight:700;color:var(--muted)}
-.conv-a{display:flex;gap:8px;align-items:center;margin-top:4px}
 .fav2{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);background:var(--surface);border-radius:12px;padding:8px 12px;font-weight:700;color:var(--moss)}
 .fav2[aria-pressed="true"]{border-color:var(--orange);color:var(--warn)}
-.mapsel{position:absolute;z-index:5;left:16px;bottom:16px;width:min(380px,calc(100% - 90px));display:grid;gap:8px}
 @media (min-width:1000px){
   #explore[data-big="1"]{grid-template-columns:0 minmax(0,1fr)}
   #explore[data-big="1"] .xtools,#explore[data-big="1"] .sheet{display:none}
 }
-@media (max-width:999px){
-  #explore[data-map="on"] .sheet .grid,#explore[data-map="on"] .grab{display:none}
-  #explore[data-map="on"] .sh-list{overflow:visible!important}
-  #explore[data-big="1"] .xtools{display:none}
-  #explore[data-map="on"] .mysearch{display:none}
-  #explore[data-map="on"] #countSub{display:none}
-  #explore[data-map="on"] .sh-h{padding-bottom:10px;gap:10px}
+/* ---- v9: Lista | Mapa grandes, mapa con protagonismo, tarjetas con datos útiles ---- */
+.sh-h{flex-wrap:wrap}
+.sh-c{min-width:0;flex:1 1 260px}
+.lm{padding:4px;border-radius:14px;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--line);flex:none}
+.lm button{min-height:46px;padding:0 22px;font-size:16px;font-weight:700;border-radius:11px;gap:8px;color:var(--ink);justify-content:center}
+.lm button:hover{color:var(--moss)}
+.lm button[aria-pressed="true"]{background:var(--moss);color:var(--white);box-shadow:none}
+.sh-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:0 16px 14px}
+#explore[data-map="off"] .sh-tools{padding:0 var(--px) 16px}
+.sh-tools .sel{font-weight:600;border-radius:12px;min-height:42px}
+@media (max-width:600px){.sh-tools{flex-wrap:nowrap}.sh-tools .sel{flex:1;min-width:0}#locBtn{flex:none;width:48px;padding:0}#locBtn .lb{display:none}}
+.c-t{font-size:15px;font-weight:700;line-height:1.3;margin-top:4px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .loc{display:flex;gap:4px;align-items:center}
+.card .loc .ic{color:var(--moss)}
+.facts2{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.facts2 li{background:var(--surface-2);border-radius:8px;padding:3px 8px;font-size:12.5px;font-weight:600;color:var(--ink)}
+.facts2 li.est{background:var(--moss-100);color:var(--moss);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--moss) 25%,transparent)}
+.more-r{display:flex;justify-content:center;padding:20px 0 4px}
+.more-r:empty{display:none}
+.promos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:22px}
+.promo{border:1.5px dashed color-mix(in srgb,var(--orange) 55%,var(--line));background:color-mix(in srgb,var(--orange) 5%,var(--white));border-radius:16px;padding:16px 18px;display:grid;gap:6px;align-content:start}
+.promo h3{font-size:18px}
+.promo p{font-size:14px;color:var(--ink)}
+.promo .cta{margin-top:4px}
+.pr-k{font-size:11.5px!important;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--warn)!important}
+.pr-f{font-size:12px!important;color:var(--muted)!important}
+.ms-chips{list-style:none;margin:6px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.ms-chips li{background:var(--moss-100);color:var(--moss);border-radius:999px;padding:4px 11px;font-size:13.5px;font-weight:700}
+.ms-note{margin:6px 0 0;font-size:12.5px;color:var(--warn);font-weight:600}
+.ai-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:4px}
+/* mapa */
+.zl{opacity:.55}
+.sm{cursor:grab}.sm.dragging{cursor:grabbing}
+.pin.cl{transform:translate(-50%,-50%);padding:0}
+.pin.cl span{width:38px;height:38px;padding:0;display:grid;place-items:center;border-radius:50%;background:var(--moss);color:var(--white);border:3px solid var(--white);font-size:14px;font-weight:800;box-shadow:0 0 0 5px rgba(57,74,63,.22),0 2px 6px rgba(0,0,0,.25)}
+.pin.cl:hover span{background:var(--moss-900)}
+.pin.cl::after{display:none}
+.pin.ext span{border-style:dashed;border-color:var(--orange)}
+.mpoi{position:absolute;z-index:6;left:12px;right:70px;top:12px;display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding:2px}
+.mpoi::-webkit-scrollbar{display:none}
+.mpoi .chip{box-shadow:var(--shadow);flex:none}
+.mlist{flex:1;min-height:0;overflow-y:auto;padding:2px 16px 16px;display:grid;align-content:start;gap:6px;overscroll-behavior:contain}
+.mrow{display:flex;align-items:center;gap:10px;width:100%;text-align:left;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;transition:border-color .15s,box-shadow .15s}
+.mrow:hover{border-color:var(--moss)}
+.mrow.on{border-color:var(--moss);box-shadow:0 0 0 2px var(--moss)}
+.mr-t{flex:1;min-width:0;display:grid}
+.mr-t b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mr-t span{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mr-p{flex:none;display:grid;justify-items:end;font-family:var(--display);font-weight:800;font-size:16px;font-variant-numeric:tabular-nums;line-height:1.2}
+.mr-p small{font-family:var(--body);font-weight:600;font-size:11.5px;color:var(--muted)}
+.mr-p i{font-style:normal;font-family:var(--body);font-size:11.5px;font-weight:700;color:var(--moss);background:var(--moss-100);border-radius:999px;padding:1px 7px;margin-top:2px}
+.mstrip{position:absolute;z-index:7}
+.mcard{display:grid;grid-template-columns:120px minmax(0,1fr);background:var(--surface);border-radius:16px;overflow:hidden;box-shadow:var(--lift);border:1px solid var(--line)}
+.mc-art{position:relative;background:var(--surface-2);min-height:100%}
+.mc-art>svg,.mc-art>img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.mc-b{padding:12px 14px;display:grid;gap:2px;min-width:0}
+.mc-p{font-family:var(--display);font-weight:800;font-size:19px;font-variant-numeric:tabular-nums}
+.mc-p small{font-family:var(--body);font-size:12px;font-weight:600;color:var(--muted)}
+.mc-t{font-size:14px;font-weight:700;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.mc-s{font-size:12.5px;color:var(--muted)}
+.mc-a{display:flex;align-items:center;gap:8px;margin-top:6px;flex-wrap:wrap}
+.mc-c{font-size:12.5px;font-weight:700;color:var(--moss);margin-right:auto}
+.mc-c b{font-size:16px}
+.fav3{width:40px;height:40px;border-radius:12px;border:1.5px solid var(--line);background:var(--surface);color:var(--moss);display:grid;place-items:center}
+.fav3[aria-pressed="true"]{color:var(--orange);border-color:var(--orange)}
+.fav3[aria-pressed="true"] svg{fill:currentColor}
+.mc-x{position:absolute;right:8px;top:8px;width:30px;height:30px;border-radius:50%;border:0;background:var(--surface-2);color:var(--ink);display:grid;place-items:center}
+.conv-tip{margin:0;font-size:13px;color:var(--muted)}
+/* detalle: estrato, mini mapa y lugares con nombre */
+.specs .est{background:var(--moss-100);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--moss) 25%,transparent)}
+.specs .est b{color:var(--moss)}
+.estb{color:var(--moss);background:var(--moss-100);border-radius:999px;padding:1px 9px;font-weight:700}
+.mmap{position:relative;height:280px;border-radius:16px;overflow:hidden;background:var(--map-bg);border:1px solid var(--line)}
+.mm-in{position:absolute}
+.mm-in>svg{position:absolute;inset:0;width:100%;height:100%}
+.mmap .zl{font-size:12px;opacity:.7}
+.poi.open em{max-width:200px;padding-right:7px}
+.mm-pin{position:absolute;z-index:4;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:var(--orange);color:var(--moss-900);display:grid;place-items:center;border:3px solid var(--white);box-shadow:0 4px 12px rgba(0,0,0,.3)}
+.mm-r{position:absolute;z-index:3;width:150px;height:150px;margin:-75px 0 0 -75px;border-radius:50%;background:rgba(255,145,0,.13);border:2px dashed rgba(255,145,0,.55)}
+.mm-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;margin-top:10px}
+.mm-cap{display:flex;gap:8px;align-items:flex-start;font-size:14px;color:var(--muted);flex:1 1 320px;margin:0}
+.mm-cap .ic{color:var(--orange);margin-top:2px}
+.mm-cap b{color:var(--ink)}
+.envlist .ek{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--moss)}
+.m-body>.promo{margin:0}
+@media (max-width:600px){.mmap{height:230px}.mm-foot .btn{width:100%}}
+@media (min-width:1000px){
+  #explore[data-map="on"]{grid-template-columns:minmax(330px,380px) minmax(0,1fr);grid-template-rows:minmax(0,1fr);grid-template-areas:"sheet map"}
+  #explore[data-map="on"][data-big="1"]{grid-template-columns:0 minmax(0,1fr)}
+  #explore[data-map="on"] .xtools,#explore[data-map="on"] .sh-tools,#explore[data-map="on"] .sh-list{display:none}
+  #explore[data-map="on"] .sheet{grid-area:sheet;min-height:0}
+  #explore[data-map="on"] .sh-h{padding:14px 16px 12px}
   #explore[data-map="on"] .sh-h h2{font-size:18px}
+  #explore[data-map="on"] .lm{flex:1 1 100%;display:grid;grid-template-columns:1fr 1fr}
+  .mstrip{grid-area:map;left:16px;bottom:16px;width:min(440px,calc(100% - 96px))}
+}
+@media (max-width:999px){
+  #explore[data-map="on"] .xtools,#explore[data-map="on"] .sh-tools,#explore[data-map="on"] .sh-list,#explore[data-map="on"] .mlist,#explore[data-map="on"] #countSub{display:none}
+  #explore[data-map="on"] .sheet{position:relative;order:-1;height:auto;border-radius:0;box-shadow:0 1px 0 var(--line);background:var(--surface);z-index:8;flex:none;transition:none}
+  #explore[data-map="on"] .sh-h{padding:10px 16px;gap:10px;flex-wrap:nowrap}
+  #explore[data-map="on"] .sh-h h2{font-size:16px;line-height:1.25}
+  #explore[data-map="on"] .sh-c{flex:1 1 auto}
+  #explore[data-map="on"] .lm button{padding:0 14px}
+  .mbig{display:none!important}
+  .mpoi{right:12px;top:10px}
+  .mctl{top:56px;bottom:auto}
+  .mstrip{left:0;right:0;bottom:10px;display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 16px;scrollbar-width:none;overscroll-behavior-x:contain}
+  .mstrip::-webkit-scrollbar{display:none}
+  .mstrip .mcard{flex:0 0 min(86%,380px);scroll-snap-align:center;grid-template-columns:92px minmax(0,1fr)}
+  .mstrip .mc-b{padding:10px 12px;gap:1px}
+  .mstrip .mc-p{font-size:17px}
+  .mstrip .mc-t{-webkit-line-clamp:1;font-size:13.5px}
+  .mstrip .mc-a{margin-top:4px}
+  .mstrip .mc-a .btn{min-height:40px;padding:8px 14px}
+  .mstrip .fav3{width:40px;height:40px}
+  .mstrip .mcard.on{box-shadow:0 0 0 2.5px var(--moss),var(--lift)}
 }
 /* móvil: distribución propia, más aire y áreas táctiles de 44 px o más */
 @media (max-width:600px){
@@ -757,11 +822,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .mysearch{padding:16px;gap:14px;border-radius:18px}
   .ms-t{flex-basis:100%;font-size:16px}
   .ms-b{width:100%;min-height:48px}
-  .xsel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;overflow:visible;margin:0;padding:0}
-  .xsel>*:not(.sr){width:100%}
-  .xsel>span>select,.xsel .sel{width:100%}
-  .xsel #fBtn{justify-content:center}
-  .fpanel{gap:12px}
   .aipanel{padding:16px;gap:10px;border-radius:18px}
   .aipanel .tag{font-size:14.5px;padding:7px 12px}
   .understood{gap:8px}
@@ -769,10 +829,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .sh-h>div:first-child{flex:1 1 100%}
   .sh-h h2{font-size:21px;line-height:1.2}
   .sh-h p{font-size:13.5px;-webkit-line-clamp:3}
-  .sh-act{width:100%;flex-wrap:nowrap}
-  .lm{flex:1;display:grid;grid-template-columns:1fr 1fr}
-  .lm button{min-height:44px;justify-content:center;font-size:15px}
-  #locBtn{width:48px;min-height:48px;justify-content:center}
   .grid{grid-template-columns:minmax(0,1fr);gap:20px}
   #explore[data-map="off"] .sh-list{padding:0 20px 120px}
   .card{border-radius:20px}
@@ -785,10 +841,6 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .c-foot{margin-top:14px}
   .cmpbtn{min-height:42px;padding:8px 16px;font-size:14.5px}
   .fav{width:46px;height:46px}
-  .mapctx{margin:0 20px 12px;gap:12px}
-  .conv{padding:16px;gap:8px;border-radius:18px}
-  .conv li{font-size:14px;padding:3px 0}
-  .conv-a .btn{flex:1}
   .fav2{min-height:44px}
   .mctl button{width:46px;height:46px}
   .tray{left:12px;right:12px;width:auto;border-radius:18px;padding:10px 10px 10px 16px;justify-content:space-between}
@@ -826,6 +878,70 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   .m-body .cta .btn{width:100%}
   .xbtn{width:46px;height:46px}
 }
+/* ---- v9: Comparar, Meta de ahorro, Perfil y Membresía ---- */
+.ctl small.hint{font-size:12.5px;font-weight:500;color:var(--muted);line-height:1.35;margin-top:-2px}
+.crows{margin:0;display:grid;gap:0}
+.crow{display:flex;justify-content:space-between;align-items:center;gap:14px;padding:10px 0;border-bottom:1px solid var(--line)}
+.crow:last-child{border-bottom:0}
+.crow dt{display:grid;gap:1px;min-width:0}
+.crow dt b{font-size:14.5px}
+.crow dt small{font-size:12.5px;color:var(--muted)}
+.crow dd{margin:0;font-family:var(--display);font-weight:800;font-size:17px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.crow.tot{background:var(--moss-100);border-radius:12px;padding:10px 12px;border:0;margin:4px 0}
+.crow.tot dd{color:var(--moss);font-size:19px}
+.crow.warn dd{color:var(--warn)}
+.ceq{margin:0;font-size:13px;color:var(--muted);background:var(--surface-2);border-radius:10px;padding:8px 12px;font-variant-numeric:tabular-nums}
+.pick{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;margin-bottom:16px}
+.pick-h{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:10px}
+.pick-h h3{font-size:19px}
+.pick-n{font-size:13.5px;color:var(--muted)}.pick-n b{color:var(--moss)}
+.pick-l{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:8px}
+.pk{display:flex;align-items:center;gap:10px;text-align:left;background:var(--surface-2);border:1.5px solid transparent;border-radius:12px;padding:10px 12px;min-height:56px;transition:border-color .15s,background .15s}
+.pk:hover{border-color:var(--moss)}
+.pk[aria-pressed="true"]{background:var(--moss-100);border-color:var(--moss)}
+.pk[data-full]{opacity:.55}
+.pk-c{width:24px;height:24px;border-radius:7px;border:2px solid var(--line);background:var(--surface);display:grid;place-items:center;flex:none;color:var(--white)}
+.pk[aria-pressed="true"] .pk-c{background:var(--moss);border-color:var(--moss)}
+.pk-t{display:grid;min-width:0}
+.pk-t b{font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pk-t span{font-size:12.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.plan-note{display:flex;flex-wrap:wrap;align-items:center;gap:10px;background:color-mix(in srgb,var(--orange) 10%,var(--white));border:1px solid color-mix(in srgb,var(--orange) 40%,var(--line));border-radius:14px;padding:10px 14px;margin:0 0 16px;font-size:14px}
+.plan-note .ic{color:var(--warn)}.plan-note span{flex:1 1 240px}
+.pf{display:grid;gap:22px;max-width:980px}
+.auth{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px;display:grid;gap:16px;max-width:560px}
+.authtab{justify-self:start}
+.authtab button{min-height:42px;padding:0 18px}
+.au-err{margin:0;color:var(--warn);font-weight:700;font-size:14px}
+.pcard{display:flex;flex-wrap:wrap;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:18px 20px}
+.pav{width:60px;height:60px;border-radius:50%;background:var(--moss);color:var(--white);display:grid;place-items:center;font-family:var(--display);font-weight:800;font-size:26px;flex:none}
+.pc-b{flex:1 1 200px;min-width:0;display:grid;gap:2px}
+.pc-b h3{font-size:22px}.pc-b p{color:var(--muted);font-size:14px;overflow-wrap:anywhere}
+.pc-plan{background:var(--orange);color:var(--moss-900);border-radius:999px;padding:5px 12px;font-weight:800;font-size:13px}
+.pstats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.pstats button{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:14px;text-align:left;display:grid;gap:2px}
+.pstats button:hover{border-color:var(--moss)}
+.pstats b{font-family:var(--display);font-size:26px;color:var(--moss)}
+.pstats b small{font-size:15px;color:var(--muted)}
+.pstats span{font-size:13.5px;color:var(--muted);font-weight:600}
+.mship{display:grid;gap:14px;scroll-margin-top:80px}
+.mship-h h3{font-size:24px}.mship-h p{color:var(--muted);margin-top:4px}
+.plans{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.plan{background:var(--surface);border:1.5px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:8px}
+.plan.on{border-color:var(--moss);box-shadow:0 0 0 2px var(--moss)}
+.plan.pick{border-color:var(--orange);box-shadow:0 0 0 2px var(--orange)}
+.pl-k{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.plan.on .pl-k{color:var(--moss)}
+.plan h4{margin:0;font-family:var(--display);font-size:24px}
+.pl-p{font-family:var(--display);font-weight:800;font-size:18px;color:var(--moss)}
+.plan ul{list-style:none;margin:4px 0 8px;padding:0;display:grid;gap:6px;font-size:14px;flex:1}
+.plan li{display:flex;gap:7px}.plan li::before{content:"✓";color:var(--moss);font-weight:800}
+.pl-on{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:44px;border-radius:12px;background:var(--moss);color:var(--white);font-weight:700}
+.plan .btn{width:100%}
+.pl-diff{background:color-mix(in srgb,var(--orange) 8%,var(--white));border:1.5px solid color-mix(in srgb,var(--orange) 45%,var(--line));border-radius:16px;padding:16px 18px;display:grid;gap:10px}
+.pl-diff h4{margin:0;font-family:var(--display);font-size:18px}
+.pl-diff ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:14px}
+@media (max-width:760px){.plans{grid-template-columns:minmax(0,1fr)}.pstats b{font-size:22px}}
+@media (min-width:1000px){.nav button{padding:8px 12px}}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;animation:none!important}}
 </style>
 
@@ -872,34 +988,20 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
       <div class="aiex" id="aiEx"></div>
       <div class="aipanel" id="aiPanel" hidden aria-live="polite"></div>
       <div class="mysearch" id="planLine"></div>
-      <div class="xrow xsel">
-        <label class="sr" for="fPrice">Precio máximo</label><select class="sel" id="fPrice"></select>
-        <label class="sr" for="fCity">Zona</label><select class="sel" id="fCity"></select>
-        <span id="fBedsW"><label class="sr" for="fBeds">Habitaciones</label><select class="sel" id="fBeds"><option value="0">Hab.</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option><option value="4">4 o más</option></select></span>
-        <button type="button" class="chip" data-act="fpanel" id="fBtn" aria-expanded="false"><span id="fIc"></span>Más filtros<b id="fCnt" class="cnt" hidden></b></button>
-      </div>
-      <div class="fpanel" id="fpanel" hidden>
-        <span class="fx" data-for="nohab"><label class="sr" for="fArea">Área mínima</label><select class="sel" id="fArea"><option value="0">Área</option><option value="30">30 m² o más</option><option value="50">50 m² o más</option><option value="80">80 m² o más</option><option value="120">120 m² o más</option></select></span>
-        <span class="fx" data-for="nohab"><label class="sr" for="fBaths">Baños</label><select class="sel" id="fBaths"><option value="0">Baños</option><option value="1">1 o más</option><option value="2">2 o más</option><option value="3">3 o más</option></select></span>
-        <span class="fx" data-for="hab"><label class="sr" for="fPeople">Personas</label><select class="sel" id="fPeople"><option value="0">Personas</option><option value="1">Para 1</option><option value="2">Para 2</option><option value="3">Para 3</option><option value="4">Para 4 o más</option></select></span>
-        <div class="chips fp-t" role="group" aria-label="Características">
-          <button type="button" class="chip fx" data-for="rent" data-act="ftog" data-v="furn" aria-pressed="false">Amoblado</button>
-          <button type="button" class="chip" data-act="ftog" data-v="pets" aria-pressed="false">Acepta mascotas</button>
-          <button type="button" class="chip fx" data-for="rent" data-act="ftog" data-v="inc" aria-pressed="false">Servicios incluidos</button>
-          <button type="button" class="chip fx" data-for="nohab" data-act="ftog" data-v="park" aria-pressed="false">Parqueadero</button>
-        </div>
-        <label class="sr" for="fSort">Ordenar</label><select class="sel fp-s" id="fSort"><option value="rel">Ordenar: mejor para ti</option><option value="near">Más cerca de mí</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="ar">Mayor área</option></select>
-      </div>
     </div>
     <div class="xmap" id="mapslot"></div>
-    <div class="sheet" id="sheet" data-st="half">
-      <button class="grab" id="grab" data-act="sheetcycle" aria-label="Subir o bajar la lista"><i></i></button>
+    <div class="mstrip" id="mstrip" hidden></div>
+    <div class="sheet" id="sheet">
       <div class="sh-h" id="shh">
-        <div><h2 id="count">Viviendas</h2><p id="countSub"></p></div>
-        <div class="sh-act"><div class="seg lm" role="group" aria-label="Ver resultados como"><button type="button" data-act="lm" data-v="list" id="lmList" aria-pressed="true"><span id="lmLi"></span>Lista</button><button type="button" data-act="lm" data-v="map" id="lmMap" aria-pressed="false"><span id="mapIc"></span>Mapa</button></div><button class="btn alt sm2" data-act="locate" id="locBtn" aria-label="Cerca de mí"><span id="locIc"></span>Cerca de mí</button></div>
+        <div class="sh-c"><h2 id="count">Viviendas</h2><p id="countSub"></p></div>
+        <div class="seg lm" role="group" aria-label="Ver resultados como"><button type="button" data-act="lm" data-v="list" id="lmList" aria-pressed="true"><span id="lmLi"></span>Lista</button><button type="button" data-act="lm" data-v="map" id="lmMap" aria-pressed="false"><span id="mapIc"></span>Mapa</button></div>
       </div>
-      <div class="mapctx" id="mapCtx" hidden></div>
-      <div class="sh-list" id="shlist"><div class="grid" id="grid"></div></div>
+      <div class="sh-tools" id="shTools">
+        <label class="sr" for="fSort">Ordenar resultados</label><select class="sel" id="fSort"><option value="rel">Ordenar: mejor para ti</option><option value="near">Más cerca de mí</option><option value="pa">Precio: menor a mayor</option><option value="pd">Precio: mayor a menor</option><option value="ar">Mayor área</option></select>
+        <button class="btn alt sm2" data-act="locate" id="locBtn" aria-label="Ordenar por cercanía a mí"><span id="locIc"></span><span class="lb">Cerca de mí</span></button>
+      </div>
+      <div class="mlist" id="mlist" hidden></div>
+      <div class="sh-list" id="shlist"><div class="grid" id="grid"></div><div class="more-r" id="moreR"></div><div id="promo"></div></div>
     </div>
   </div>
 </section>
@@ -933,6 +1035,12 @@ table.cmp{border-collapse:collapse;width:100%;min-width:520px}
   </div>
 </section>
 <canvas id="cf" hidden aria-hidden="true"></canvas>
+<section id="v-perfil" class="view" hidden>
+  <div class="wrap page">
+    <div class="page-h"><div><h2>Tu perfil</h2><p>Tu cuenta y tu membresía en Habita.</p></div></div>
+    <div id="pfBody" class="pf"></div>
+  </div>
+</section>
 <section id="v-publicar" class="view" hidden>
   <div class="wrap page">
     <div class="page-h">
@@ -982,6 +1090,8 @@ function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
 function norm(s){return String(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
 function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
 function walk(m){return Math.max(1,Math.round(m/80))}
+/* distancia legible: a pie si es cerca, en km si toca ir en transporte */
+function walkTxt(m){return m<=2500?walk(m)+' min a pie':N1.format(m/1000)+' km'}
 
 /* ---------- iconos ---------- */
 var IC={
@@ -1035,26 +1145,31 @@ var CITY={bog:'Bogotá',med:'Medellín',cal:'Cali'};
 var TL={apto:'Apartamento',casa:'Casa',apartaestudio:'Apartaestudio',habitacion:'Habitación',obra:'Obra gris'};
 var TLP={apto:'Apartamentos',casa:'Casas',apartaestudio:'Apartaestudios',habitacion:'Habitaciones',obra:'Obra gris'};
 
-/* m2: precio promedio por m2 de la zona en millones de COP (ejemplo) */
+/* Zonas. m2: precio promedio por m² en millones de COP; e: estrato típico; b: barrios para los títulos.
+   o: lugares cercanos con nombre y distancia aproximada en metros (para "Qué hay cerca", el mapa y la compatibilidad). */
 var Z={
- usaquen:{c:'bog',n:'Usaquén',x:62,y:12,m2:9.5,dens:1,kw:['usaquen'],o:{transporte:['TM Pepe Sierra',700],parque:['Parque de Usaquén',350],universidad:['Universidad El Bosque',1700],salud:['Fundación Santa Fe',2100],restaurantes:['Plaza de Usaquén',400]}},
- chico:{c:'bog',n:'Chicó',x:60,y:27,m2:12.5,dens:.9,kw:['chico','zona t','la 93'],o:{transporte:['TM Calle 100',650],parque:['Parque de la 93',500],universidad:['Pontificia U. Javeriana',3200],salud:['Clínica del Country',900],restaurantes:['Zona T y Parque de la 93',600]}},
- chapinero:{c:'bog',n:'Chapinero',x:56,y:38,m2:10,dens:.8,kw:['chapinero','javeriana','zona g'],o:{transporte:['TM Calle 63',500],parque:['Parque de los Hippies',450],universidad:['Pontificia U. Javeriana',550],salud:['Hospital San Ignacio',800],restaurantes:['Zona G',700]}},
- teusaquillo:{c:'bog',n:'Teusaquillo',x:44,y:45,m2:7.2,dens:.9,kw:['teusaquillo','nacional','palermo','la soledad'],o:{transporte:['TM Calle 45',600],parque:['Parque Simón Bolívar',1100],universidad:['Universidad Nacional',900],salud:['Clínica Palermo',1000],restaurantes:['Zona gastronómica La Soledad',500]}},
- salitre:{c:'bog',n:'Salitre',x:34,y:48,m2:6.5,dens:1,kw:['salitre','maloka'],o:{transporte:['TM Av. El Dorado',600],parque:['Parque Simón Bolívar',900],universidad:['Universidad Nacional',3000],restaurantes:['C.C. Gran Estación',900]}},
- candelaria:{c:'bog',n:'La Candelaria',x:59,y:58,m2:7,dens:.8,kw:['candelaria','centro','uniandes','andes','rosario','las aguas','externado','los andes'],o:{transporte:['TM Las Aguas',350],parque:['Parque de los Periodistas',300],universidad:['Universidad de los Andes',350],salud:['Hospital San José',1100],restaurantes:['Chorro de Quevedo',450]}},
- cedritos:{c:'bog',n:'Cedritos',x:67,y:19,m2:6.8,dens:1,kw:['cedritos'],o:{transporte:['TM Calle 142',900],parque:['Parque de Cedritos',400]}},
- suba:{c:'bog',n:'Suba',x:32,y:12,m2:5.5,dens:1.3,kw:['suba'],o:{transporte:['TM Av. Suba',1000],parque:['Humedal La Conejera',900]}},
- fontibon:{c:'bog',n:'Fontibón',x:22,y:51,m2:5.2,dens:1.1,kw:['fontibon'],o:{transporte:['TM Fontibón',800],parque:['Parque de Fontibón',600]}},
- kennedy:{c:'bog',n:'Kennedy',x:24,y:67,m2:3.8,dens:1,kw:['kennedy'],o:{transporte:['TM Portal Américas',900],parque:['Parque Metropolitano Timiza',1000],restaurantes:['C.C. Plaza de las Américas',1000]}},
- poblado:{c:'med',n:'El Poblado',x:62,y:60,m2:11,dens:.9,kw:['poblado','provenza','lleras','eafit'],o:{transporte:['Metro El Poblado',600],parque:['Parque Lleras',500],universidad:['Universidad EAFIT',2200],salud:['Clínica Las Vegas',1200],restaurantes:['Provenza',550]}},
- laureles:{c:'med',n:'Laureles',x:38,y:47,m2:7.5,dens:.8,kw:['laureles','estadio','upb','bolivariana'],o:{transporte:['Metro Estadio',600],parque:['Primer Parque de Laureles',350],universidad:['U. Pontificia Bolivariana',1300],salud:['Clínica Las Américas',1500],restaurantes:['La 70',500]}},
- envigado:{c:'med',n:'Envigado',x:60,y:86,m2:8,dens:1,kw:['envigado'],o:{transporte:['Metro Envigado',900],parque:['Parque Principal de Envigado',500],universidad:['Universidad EIA',3500]}},
- cjardin:{c:'cal',n:'Ciudad Jardín',x:42,y:80,m2:7,dens:1.1,kw:['ciudad jardin','pance','icesi'],o:{universidad:['Universidad Icesi',2200],salud:['Clínica Valle del Lili',2500],restaurantes:['C.C. Jardín Plaza',1400]}},
- sanfernando:{c:'cal',n:'San Fernando',x:36,y:50,m2:5.5,dens:.9,kw:['san fernando','univalle'],o:{restaurantes:['Zona gastronómica San Fernando',500],transporte:['Estación MIO',600]}}
+ usaquen:{c:'bog',n:'Usaquén',x:62,y:12,m2:9.5,e:5,dens:1,b:['Santa Bárbara','Usaquén','Santa Ana','La Carolina'],kw:['usaquen','santa barbara'],o:{transporte:['TM Calle 127',900],supermercado:['Carulla Santa Bárbara',450],parque:['Parque de Usaquén',350],universidad:['Universidad El Bosque',1700],salud:['Fundación Santa Fe de Bogotá',650],gimnasio:['Bodytech Santa Bárbara',700],restaurantes:['Plaza de Usaquén',400],colegio:['Colegio San Carlos',1500]}},
+ chico:{c:'bog',n:'Chicó',x:60,y:27,m2:12.5,e:6,dens:.9,b:['Chicó Navarra','Chicó Reservado','El Nogal','Chicó Norte'],kw:['chico','zona t','la 93','el nogal'],o:{transporte:['TM Calle 100',650],supermercado:['Carulla Calle 93',400],parque:['Parque de la 93',500],universidad:['Universidad Sergio Arboleda',1400],salud:['Clínica del Country',900],gimnasio:['Bodytech Chicó',500],restaurantes:['Zona T y Parque de la 93',600],colegio:['Gimnasio Moderno',1300]}},
+ chapinero:{c:'bog',n:'Chapinero',x:56,y:38,m2:10,e:4,dens:.8,b:['Chapinero Alto','Chapinero Central','Quinta Camacho','Marly'],kw:['chapinero','javeriana','zona g','quinta camacho'],o:{transporte:['TM Calle 63',500],supermercado:['Carulla Chapinero',450],parque:['Parque de los Hippies',450],universidad:['Pontificia U. Javeriana',550],salud:['Hospital San Ignacio',800],gimnasio:['Bodytech Chapinero',500],restaurantes:['Zona G',700],colegio:['Colegio San Bartolomé La Merced',1500]}},
+ teusaquillo:{c:'bog',n:'Teusaquillo',x:44,y:45,m2:7.2,e:4,dens:.9,b:['Palermo','La Soledad','Galerías','Park Way'],kw:['teusaquillo','nacional','palermo','la soledad','galerias','park way'],o:{transporte:['TM Calle 45',600],supermercado:['Carulla Galerías',600],parque:['Park Way',400],universidad:['Universidad Nacional',900],salud:['Clínica Palermo',1000],gimnasio:['Smart Fit Galerías',700],restaurantes:['Zona gastronómica La Soledad',500],colegio:['Colegio Externado Camilo Torres',1100]}},
+ salitre:{c:'bog',n:'Salitre',x:34,y:48,m2:6.5,e:4,dens:1,b:['Ciudad Salitre','Salitre Greco','La Esmeralda'],kw:['salitre','maloka','la esmeralda'],o:{transporte:['TM Av. Rojas',700],supermercado:['Éxito Salitre Plaza',700],parque:['Parque Simón Bolívar',900],universidad:['Universidad Nacional',2600],salud:['Hospital Universitario Méderi',2400],gimnasio:['Bodytech Salitre Plaza',700],restaurantes:['C.C. Gran Estación',900],colegio:['Colegio de Ciudad Salitre',800]}},
+ candelaria:{c:'bog',n:'La Candelaria',x:59,y:58,m2:7,e:3,dens:.8,b:['Las Aguas','La Concordia','Egipto','Centro Histórico'],kw:['candelaria','centro','uniandes','andes','rosario','las aguas','externado','los andes'],o:{transporte:['TM Las Aguas',350],supermercado:['D1 Las Aguas',300],parque:['Parque de los Periodistas',300],universidad:['Universidad de los Andes',350],salud:['Hospital de San José',1100],gimnasio:['Smart Fit Av. Jiménez',600],restaurantes:['Chorro de Quevedo',450],colegio:['Colegio Mayor de San Bartolomé',800]}},
+ cedritos:{c:'bog',n:'Cedritos',x:67,y:19,m2:6.8,e:4,dens:1,b:['Cedritos','Cedro Golf','Lisboa','Mazurén'],kw:['cedritos','mazuren'],o:{transporte:['TM Calle 142',900],supermercado:['Carulla Cedritos',400],parque:['Parque de Cedritos',400],universidad:['Universidad El Bosque',2600],salud:['Clínica Reina Sofía',1500],gimnasio:['Smart Fit Cedritos',500],restaurantes:['Restaurantes de la Calle 140',500],colegio:['Colegio Agustiniano Norte',1200]}},
+ suba:{c:'bog',n:'Suba',x:32,y:12,m2:5.5,e:3,dens:1.3,b:['Suba Pinar','Niza','Colina Campestre','Suba Centro'],kw:['suba','niza','colina'],o:{transporte:['TM Suba Calle 116',1000],supermercado:['Éxito Suba',700],parque:['Humedal La Conejera',900],universidad:['Universidad U.D.C.A',3500],salud:['Hospital de Suba',1200],gimnasio:['Smart Fit Plaza Imperial',900],restaurantes:['C.C. Plaza Imperial',900],colegio:['Colegio Gerardo Paredes',800]}},
+ fontibon:{c:'bog',n:'Fontibón',x:22,y:51,m2:5.2,e:3,dens:1.1,b:['Fontibón Centro','Modelia','Hayuelos','Capellanía'],kw:['fontibon','modelia','hayuelos'],o:{transporte:['TM Modelia',800],supermercado:['D1 Fontibón',300],parque:['Parque Atahualpa',800],universidad:['Universidad Nacional',6500],salud:['Hospital de Fontibón',900],gimnasio:['Smart Fit Hayuelos',1500],restaurantes:['C.C. Hayuelos',1500],colegio:['Colegio Integrado de Fontibón',700]}},
+ kennedy:{c:'bog',n:'Kennedy',x:24,y:67,m2:3.8,e:3,dens:1,b:['Kennedy Central','Castilla','Timiza','Patio Bonito'],kw:['kennedy','castilla','timiza'],o:{transporte:['TM Portal Américas',900],supermercado:['Éxito Américas',900],parque:['Parque Metropolitano Timiza',1000],universidad:['Universidad Nacional',7500],salud:['Hospital Occidente de Kennedy',800],gimnasio:['Smart Fit Plaza de las Américas',1000],restaurantes:['C.C. Plaza de las Américas',1000],colegio:['Colegio INEM de Kennedy',900]}},
+ poblado:{c:'med',n:'El Poblado',x:62,y:60,m2:11,e:6,dens:.9,b:['Provenza','Manila','Castropol','Los Balsos'],kw:['poblado','provenza','lleras','eafit','manila'],o:{transporte:['Metro El Poblado',600],supermercado:['Carulla Oviedo',700],parque:['Parque Lleras',500],universidad:['Universidad EAFIT',2200],salud:['Clínica Las Vegas',1200],gimnasio:['Bodytech El Poblado',500],restaurantes:['Provenza',550],colegio:['Colegio Marymount',2400]}},
+ laureles:{c:'med',n:'Laureles',x:38,y:47,m2:7.5,e:5,dens:.8,b:['Laureles','Estadio','Conquistadores','La Castellana'],kw:['laureles','estadio','upb','bolivariana','conquistadores'],o:{transporte:['Metro Estadio',600],supermercado:['Éxito Laureles',500],parque:['Primer Parque de Laureles',350],universidad:['U. Pontificia Bolivariana',1300],salud:['Clínica Las Américas',1500],gimnasio:['Smart Fit Laureles',600],restaurantes:['La 70',500],colegio:['Colegio de la UPB',1300]}},
+ envigado:{c:'med',n:'Envigado',x:60,y:86,m2:8,e:4,dens:1,b:['Envigado Centro','Zúñiga','La Magnolia','El Portal'],kw:['envigado','zuniga'],o:{transporte:['Metro Envigado',900],supermercado:['Éxito Envigado',600],parque:['Parque Principal de Envigado',500],universidad:['Universidad EIA',3500],salud:['Hospital Manuel Uribe Ángel',1400],gimnasio:['Bodytech Envigado',800],restaurantes:['Zona Rosa de Envigado',700],colegio:['The Columbus School',2500]}},
+ belen:{c:'med',n:'Belén',x:34,y:63,m2:5.8,e:4,dens:1.1,b:['Belén','Los Alpes','La Mota','Rosales'],kw:['belen','los alpes','la mota','udem'],o:{transporte:['Metroplús Los Alpes',800],supermercado:['Éxito Los Molinos',700],parque:['Parque de Belén',450],universidad:['Universidad de Medellín',1600],salud:['Unidad Hospitalaria de Belén',900],gimnasio:['Smart Fit Los Molinos',700],restaurantes:['C.C. Los Molinos',700],colegio:['Institución Educativa de Belén',600]}},
+ centromed:{c:'med',n:'Centro',x:53,y:37,m2:4.6,e:3,dens:.9,b:['Prado','Boston','La Candelaria','San Benito'],kw:['centro de medellin','parque berrio','prado','boston','udea'],o:{transporte:['Metro Parque Berrío',400],supermercado:['Éxito Colombia',800],parque:['Parque Bolívar',450],universidad:['Universidad de Antioquia',1800],salud:['Hospital San Vicente Fundación',1900],gimnasio:['Smart Fit Centro',600],restaurantes:['Plaza Botero',450],colegio:['Colegio San Ignacio',900]}},
+ sabaneta:{c:'med',n:'Sabaneta',x:52,y:94,m2:6.2,e:4,dens:1.1,b:['Sabaneta Centro','Aves María','La Doctora','Mayorca'],kw:['sabaneta','mayorca','aves maria'],o:{transporte:['Metro Sabaneta',900],supermercado:['Éxito Mayorca',700],parque:['Parque Principal de Sabaneta',600],universidad:['Universidad EIA',4200],salud:['Hospital Venancio Díaz',1000],gimnasio:['Bodytech Mayorca',700],restaurantes:['Parque de Sabaneta',600],colegio:['I.E. Rafael J. Mejía',700]}},
+ cjardin:{c:'cal',n:'Ciudad Jardín',x:42,y:80,m2:7,e:5,dens:1.1,b:['Ciudad Jardín','Pance','Valle del Lili','Cañasgordas'],kw:['ciudad jardin','pance','icesi','valle del lili'],o:{transporte:['Estación MIO Universidades',1600],supermercado:['Éxito Jardín Plaza',1300],parque:['Ecoparque Río Pance',1800],universidad:['Universidad Icesi',2200],salud:['Fundación Valle del Lili',2500],gimnasio:['Bodytech Jardín Plaza',1300],restaurantes:['C.C. Jardín Plaza',1400],colegio:['Colegio Bolívar',2000]}},
+ sanfernando:{c:'cal',n:'San Fernando',x:36,y:50,m2:5.5,e:4,dens:.9,b:['San Fernando','El Templete','Miraflores','Champagnat'],kw:['san fernando','univalle','parque del perro'],o:{transporte:['Estación MIO Estadio',600],supermercado:['Olímpica San Fernando',400],parque:['Parque del Perro',500],universidad:['Universidad del Valle (San Fernando)',500],salud:['Hospital Universitario del Valle',900],gimnasio:['Smart Fit San Fernando',700],restaurantes:['Zona gastronómica del Parque del Perro',500],colegio:['Colegio Santa Librada',1800]}},
+ granada:{c:'cal',n:'Granada',x:48,y:28,m2:6.6,e:5,dens:.9,b:['Granada','El Peñón','Centenario','Juanambú'],kw:['granada','el penon','centenario','chipichape'],o:{transporte:['Estación MIO Versalles',700],supermercado:['Olímpica Granada',500],parque:['Bulevar del Río',900],universidad:['Universidad Libre (Centenario)',1200],salud:['Clínica de Occidente',900],gimnasio:['Bodytech Chipichape',1500],restaurantes:['Zona gastronómica de Granada',300],colegio:['Liceo Benalcázar',1300]}},
+ caney:{c:'cal',n:'El Caney',x:66,y:85,m2:3.9,e:3,dens:1.1,b:['El Caney','Ciudad Córdoba','Los Robles','El Lido'],kw:['caney','el caney','ciudad cordoba'],o:{transporte:['Estación MIO Caney',700],supermercado:['Olímpica El Caney',500],parque:['Parque El Caney',400],universidad:['Universidad del Valle (Meléndez)',3200],salud:['Clínica Farallones',2400],gimnasio:['Smart Fit Caney',900],restaurantes:['C.C. Cosmocentro',2600],colegio:['Colegio Parroquial El Caney',700]}},
+ ingenio:{c:'cal',n:'El Ingenio',x:56,y:69,m2:5.9,e:4,dens:1,b:['El Ingenio','Capri','Mayapán','Las Vegas'],kw:['ingenio','el ingenio','unicentro cali','capri'],o:{transporte:['Estación MIO Pasoancho',800],supermercado:['Éxito Unicentro',700],parque:['Parque El Ingenio',300],universidad:['Universidad del Valle (Meléndez)',2000],salud:['Fundación Valle del Lili',3000],gimnasio:['Smart Fit Unicentro',800],restaurantes:['C.C. Unicentro Cali',700],colegio:['Colegio Bilingüe Diana Oese',1200]}}
 };
-/* supermercados por zona (para Qué hay cerca y el mapa) */
-(function(){var SUP=['Carulla','Éxito','Jumbo','D1','Ara','Olímpica'];Object.keys(Z).forEach(function(k,i){if(!Z[k].o.supermercado)Z[k].o.supermercado=[SUP[i%SUP.length]+' '+Z[k].n,300+(i*137)%400]})})();
 var CITYKW={bog:['bogota'],med:['medellin','antioquia'],cal:['cali','valle del cauca']};
 
 var P=[
@@ -1100,16 +1215,81 @@ var P=[
  {id:'p40',z:'cjardin',t:'apto',op:'arriendo',title:'Apartamento amplio en Ciudad Jardín',price:3.2e6,area:85,beds:3,baths:2,park:2,est:5,x:41,y:81,tags:['mascotas','seguridad','zonas comunes'],d:'Tres alcobas, cuarto de servicio y dos parqueaderos. Conjunto con piscina.'},
  {id:'p41',z:'fontibon',t:'apto',op:'arriendo',title:'Apartamento cerca al aeropuerto en Fontibón',price:1.9e6,area:56,beds:2,baths:1,park:1,est:3,x:23,y:52,tags:['zonas comunes','seguridad'],d:'Conjunto nuevo con ascensor y salón social. Fácil salida a la Av. El Dorado.'}
 ];
+/* Más viviendas para la demo: cada zona recibe opciones de arriendo y de venta con tipos, tamaños,
+   precios, parqueaderos y estratos distintos, calculados con los datos de la zona (precio por m², estrato,
+   lugares cercanos). Así las búsquedas normales siempre encuentran opciones. */
+(function genListings(){
+  var n=0;
+  var ADJ={apto:['luminoso','remodelado','con balcón','para estrenar','con vista abierta','en conjunto cerrado','amplio','esquinero','con terraza','cerca al transporte'],
+    casa:['con jardín','esquinera','remodelada','con terraza','en conjunto cerrado','de dos pisos','con patio'],
+    apartaestudio:['moderno','con balcón','para estrenar','cerca al transporte','con buena luz','en piso alto'],
+    habitacion:['con escritorio','luminosa','tranquila','en casa compartida','con closet amplio']};
+  var FEAT={apto:['Cocina integral abierta y zona de ropas independiente.','Pisos en madera laminada y ventanales amplios.','Edificio con ascensor, portería 24 horas y salón comunal.','Conjunto con zonas verdes, parque infantil y cancha.','Balcón con buena luz en la mañana.','Remodelado hace poco: baños y cocina nuevos.','Estudio pequeño que sirve como oficina en casa.','Depósito independiente y bicicletero.'],
+    casa:['Patio interior y terraza en el segundo piso.','Sala con chimenea y comedor independiente.','Jardín propio y zona de BBQ.','Estudio en el primer piso y alcoba principal con vestier.'],
+    apartaestudio:['Cocineta equipada y escritorio junto a la ventana.','Edificio con recepción, lavandería y coworking.','Espacio abierto con buena ventilación y closet amplio.']};
+  var RULES=['No fumar','Visitas hasta las 10 p. m.','Contrato mínimo de 6 meses','Se aceptan mascotas pequeñas','Solo estudiantes','Silencio después de las 10 p. m.'];
+  var SUB={usaquen:1,cedritos:1,suba:1,fontibon:1,kennedy:1,envigado:1,sabaneta:1,belen:1,laureles:1,cjardin:1,ingenio:1,caney:1};
+  var CEN={chapinero:1,candelaria:1,teusaquillo:1,chico:1,salitre:1,poblado:1,laureles:1,centromed:1,sanfernando:1,granada:1};
+  function pick(a,r){return a[Math.floor(r*a.length)%a.length]}
+  function pl(v,s,p){return v+' '+(v===1?s:p)}
+  function make(k,t,op,beds,i){
+    var z=Z[k],id='g'+(++n),r=function(s){return rnd(id+k+s)},area,baths,park=0,tags=[],p={};
+    if(t==='apto'){area=Math.round(beds*21+20+r('a')*24);baths=beds>=3?2+(r('b')>.65?1:0):beds===2?(r('b')>.45?2:1):1;park=r('k')<(z.m2>=7?.8:.5)?(beds>=3&&r('k2')>.5?2:1):0}
+    else if(t==='casa'){
+      if(beds<=2){area=Math.round(58+r('a')*34);baths=1+(r('b')>.6?1:0);park=r('k')>.45?1:0}
+      else if(z.m2<7){area=Math.round(80+beds*10+r('a')*40);baths=2;park=r('k')>.35?1:0}
+      else{area=Math.round(110+beds*22+r('a')*70);baths=Math.max(2,beds-1+(r('b')>.5?1:0));park=1+(r('k')>.5?1:0)}
+    }
+    else if(t==='apartaestudio'){beds=1;area=Math.round(27+r('a')*20);baths=1;park=r('k')>.6?1:0}
+    else{area=Math.round(11+r('a')*9);p.room=r('rm')>.7?'compartida':'privada';beds=p.room==='compartida'?2:1;p.bath=r('bt')>.55?'privado':'compartido';baths=p.bath==='privado'?1:0;p.inc=r('i')>.35?1:0;p.furn=r('f')>.25?1:0;p.rules=[pick(RULES,r('r1')),pick(RULES,r('r2')+.5)].filter(function(x,j,a){return a.indexOf(x)===j})}
+    var est=clamp(z.e+(r('e')<.2?-1:r('e')>.85?1:0),1,6);
+    var furn=t==='habitacion'?p.furn:(op==='arriendo'&&r('fu')<(t==='apartaestudio'?.5:.12));
+    if(furn)tags.push('amoblado');
+    if(p.inc)tags.push('servicios incluidos');
+    if(t==='habitacion'||furn)tags.push('wifi');
+    if(r('m')>.5)tags.push('mascotas');
+    if(r('s')>.45)tags.push('seguridad');
+    if(t==='apto'&&r('zc')>.4)tags.push('zonas comunes');
+    if(SUB[k]&&r('q')>.4)tags.push('tranquilo');
+    if(t==='apto'&&r('v')>.75)tags.push('vista');
+    if(t!=='habitacion'&&r('gy')>.82)tags.push('gimnasio');
+    if(t==='casa')tags.push('patio');
+    if(z.o.universidad[1]<=1300)tags.push('cerca a universidad');
+    var f=0.84+r('p')*0.3,price;
+    if(t==='habitacion')price=Math.round(z.m2*0.16e6*(p.bath==='privado'?1.15:1)*(p.inc?1.08:1)*(p.room==='compartida'?.72:1)*f/1e4)*1e4;
+    else if(op==='venta'){price=z.m2*1e6*area*(t==='casa'?.92:1)*f*(1+(est-z.e)*.06);price=Math.round(price/5e6)*5e6}
+    else price=Math.round(z.m2*1e6*.0058*area*(t==='apartaestudio'?1.15:1)*(furn?1.1:1)*f/5e4)*5e4;
+    var bar=z.b[(n+i)%z.b.length],adj=pick(ADJ[t],r('t'));
+    var title=t==='habitacion'?'Habitación '+p.room+' '+adj+' en '+bar:TL[t]+' '+adj+' en '+bar;
+    var tr=z.o.transporte,un=z.o.universidad,d;
+    if(t==='habitacion')d='Habitación '+p.room+' con baño '+p.bath+'. '+(p.inc?'Servicios y wifi incluidos. ':'Los servicios se pagan aparte. ')+(p.furn?'Viene amoblada. ':'Sin amoblar: puedes traer tus muebles. ')+'A '+walk(un[1])+' min a pie de '+un[0]+'.';
+    else d=pl(beds,'alcoba','alcobas')+', '+pl(baths,'baño','baños')+' y '+area+' m². '+pick(FEAT[t]||FEAT.apto,r('d'))+' '+(park?'Incluye '+pl(park,'parqueadero','parqueaderos')+'.':'No tiene parqueadero.')+' A '+walk(tr[1])+' min a pie de '+tr[0]+'.';
+    var o=Object.assign(p,{id:id,z:k,t:t,op:op,title:title,price:price,area:area,beds:beds,baths:baths,park:park,est:est,x:+clamp(z.x+(r('x')-.5)*10,4,96).toFixed(1),y:+clamp(z.y+(r('y')-.5)*10,4,96).toFixed(1),tags:tags,d:d});
+    if(op==='venta'){o.rent=Math.round(price*(.0042+r('y2')*.0014)/1e4)*1e4;o.g=+(4+r('g')*3).toFixed(1)}
+    P.push(o);
+  }
+  Object.keys(Z).forEach(function(k){
+    var z=Z[k],h=hash(k),plan=[['apto','arriendo',1+h%2],['apto','arriendo',3],['apartaestudio','arriendo',1],['habitacion','arriendo',1],SUB[k]?['casa','arriendo',3]:['apto','arriendo',2],['apto','venta',2],['apto','venta',h%3?3:1]];
+    if(SUB[k]||z.m2>=9)plan.push(['casa','venta',3+h%2]);
+    if(CEN[k])plan.push(['apartaestudio','venta',1]);
+    if(z.m2<7){plan.push(['apto','arriendo',2]);plan.push(['casa','arriendo',2]);plan.push(['casa','venta',2])}
+    plan.forEach(function(q,i){make(k,q[0],q[1],q[2],i)});
+  });
+})();
 
 var OBRAS=[
  {id:'o1',name:'Torre Aurora',z:'chapinero',city:'bog',builder:'Constructora Andina (ejemplo)',pm2:7.9e6,areas:[62,78,95],progress:64,deliv:'dic. 2027',sep:5e6,ini:30,cuotas:18,roi:'6,2%',desc:'Torre de 22 pisos con coworking, terraza y parqueadero para visitantes.'},
  {id:'o2',name:'Bosque de Cedros',z:'usaquen',city:'bog',builder:'Grupo Colina (ejemplo)',pm2:6.4e6,areas:[120,150],progress:38,deliv:'jun. 2028',sep:8e6,ini:30,cuotas:24,roi:'5,4%',desc:'Casas de dos niveles en conjunto cerrado, con lote de jardín y vista a los cerros.'},
  {id:'o3',name:'Alameda Laureles',z:'laureles',city:'med',builder:'Habitat Paisa (ejemplo)',pm2:5.6e6,areas:[54,70],progress:81,deliv:'mar. 2027',sep:4e6,ini:30,cuotas:12,roi:'6,8%',desc:'Edificio de apartamentos a dos cuadras del Metro, con zona de coworking y bicicletero.'},
- {id:'o4',name:'Reserva del Río',z:'cjardin',city:'cal',builder:'Valle Construye (ejemplo)',pm2:4.9e6,areas:[66,84,102],progress:22,deliv:'nov. 2028',sep:5e6,ini:20,cuotas:30,roi:'5,9%',desc:'Proyecto con piscina, zonas verdes y senderos, cerca de universidades y clínicas.'}
+ {id:'o4',name:'Reserva del Río',z:'cjardin',city:'cal',builder:'Valle Construye (ejemplo)',pm2:4.9e6,areas:[66,84,102],progress:22,deliv:'nov. 2028',sep:5e6,ini:20,cuotas:30,roi:'5,9%',desc:'Proyecto con piscina, zonas verdes y senderos, cerca de universidades y clínicas.'},
+ {id:'o5',name:'Mirador de Cedritos',z:'cedritos',city:'bog',builder:'Constructora Sabana (ejemplo)',pm2:5.9e6,areas:[48,63,80],progress:55,deliv:'ago. 2027',sep:4e6,ini:30,cuotas:20,roi:'6,0%',desc:'Torre de 15 pisos con gimnasio, terraza BBQ y parqueadero cubierto, cerca de la Calle 140.'},
+ {id:'o6',name:'Parques de Kennedy',z:'kennedy',city:'bog',builder:'Vivienda Para Todos (ejemplo)',pm2:3.3e6,areas:[42,54],progress:47,deliv:'feb. 2028',sep:2e6,ini:20,cuotas:24,roi:'6,6%',desc:'Vivienda de interés social con ascensor, salón comunal y parque infantil, cerca del Portal Américas.'},
+ {id:'o7',name:'Altos de Belén',z:'belen',city:'med',builder:'Montaña Urbana (ejemplo)',pm2:5.1e6,areas:[58,72],progress:33,deliv:'oct. 2028',sep:3e6,ini:30,cuotas:26,roi:'6,1%',desc:'Apartamentos con balcón y vista al valle, a pocas cuadras de la Universidad de Medellín.'},
+ {id:'o8',name:'Torres de Granada',z:'granada',city:'cal',builder:'Pacífico Habitat (ejemplo)',pm2:5.8e6,areas:[60,78],progress:68,deliv:'jul. 2027',sep:4e6,ini:30,cuotas:15,roi:'6,3%',desc:'Edificio de 12 pisos en la zona gastronómica de Granada, con piscina en la terraza.'}
 ];
 OBRAS.forEach(function(o){
   var z=Z[o.z],a0=o.areas[0];
-  P.push({id:o.id,obra:o,t:'obra',op:'venta',z:o.z,title:o.name,price:o.pm2*a0,area:a0,beds:a0>100?3:2,baths:2,park:1,est:5,x:z.x+3,y:z.y+4,g:parseFloat(o.roi.replace(',','.')),tags:['obra gris','entrega '+o.deliv,'zonas comunes'],d:o.desc});
+  P.push({id:o.id,obra:o,t:'obra',op:'venta',z:o.z,title:o.name,price:o.pm2*a0,area:a0,beds:a0>100?3:a0<50?1:2,baths:a0<50?1:2,park:1,est:z.e,x:z.x+3,y:z.y+4,g:parseFloat(o.roi.replace(',','.')),tags:['obra gris','entrega '+o.deliv,'zonas comunes'],d:o.desc});
 });
 var LEVELS={gris:{l:'Solo obra gris',c:0,d:'Estructura, muros y redes principales. Sin pisos, enchapes, pintura ni carpintería.'},basico:{l:'Acabado básico',c:850e3,d:'Pisos en cerámica, pintura, enchape de baños y puertas sencillas.'},medio:{l:'Acabado medio',c:1.5e6,d:'Piso laminado o porcelanato, cocina integral, closets y griferías de gama media.'},premium:{l:'Acabado premium',c:2.7e6,d:'Porcelanato grande, carpintería a medida, domótica básica y grifería de diseño.'}};
 
@@ -1151,7 +1331,7 @@ function fair(p){
   else avg=z.m2*1e6*0.0058*p.area*(p.t==='apartaestudio'?1.15:1)*(furn?1.1:1);
   var u=p.op==='venta'?1e6:1e4;avg=Math.round(avg/u)*u;
   var d=p.price/avg-1,k=Math.round(Math.abs(d)*100);
-  return {avg:avg,diff:d,good:d<=0.03,txt:k<3?'En el promedio de la zona':k+'% '+(d<0?'por debajo':'por encima')+' del promedio de la zona'};
+  return {avg:avg,diff:d,good:d<=0.03,ar:k<3?'≈ ':d<0?'↓ ':'↑ ',txt:k<3?'En el promedio de la zona':k+'% '+(d<0?'por debajo':'por encima')+' del promedio de la zona'};
 }
 function fairHTML(p){
   var f=fair(p);if(!f)return '';
@@ -1235,51 +1415,16 @@ function mapBg(city){
   return '<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">'+g+'</svg>';
 }
 /* ---------- estado extra ---------- */
-S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.minArea=0;S.baths=0;S.aiText='';S.quiet=false;S.cr=null;S.ainotes=[];S.helpMsg='';S.qz=null;
+S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.minArea=0;S.areaR=null;S.relaxed=[];S.baths=0;S.aiText='';S.quiet=false;S.cr=null;S.ainotes=[];S.helpMsg='';S.qz=null;
 S.mapOn=false;
-S.me=null;S.sel=null;S.only=null;S.sheet='half';S.sortUser=false;S.items=[];
+S.me=null;S.sel=null;S.only=null;S.sortUser=false;S.items=[];
 var CITYC={bog:[4.65,-74.08],med:[6.24,-75.58],cal:[3.42,-76.53]};
 function hav(a,b,c,d){var R=6371,t=Math.PI/180,dl=(c-a)*t,dn=(d-b)*t,x=Math.sin(dl/2)*Math.sin(dl/2)+Math.cos(a*t)*Math.cos(c*t)*Math.sin(dn/2)*Math.sin(dn/2);return 2*R*Math.asin(Math.sqrt(x))}
 function distKm(p){if(!S.me)return null;var c=coords(p);return hav(S.me.lat,S.me.lng,c[0],c[1])}
 function distTxt(k){return k<1?N0.format(Math.max(1,Math.round(k*10))*100)+' m':N1.format(k)+' km'}
 function noop(){}
 
-/* ---------- filtros de exploracion ---------- */
-function priceOptions(){
-  var arr=S.op==='venta';
-  var opts=arr?[[0,'Precio'],[300e6,'Hasta $300 M'],[500e6,'Hasta $500 M'],[800e6,'Hasta $800 M'],[1200e6,'Hasta $1.200 M']]:[[0,'Precio'],[1.5e6,'Hasta $1,5 M/mes'],[2.5e6,'Hasta $2,5 M/mes'],[4e6,'Hasta $4 M/mes']];
-  if(S.max&&!opts.some(function(o){return o[0]===S.max}))opts.push([S.max,'Hasta '+(arr?'$'+N0.format(S.max/1e6)+' M':'$'+N1.format(S.max/1e6)+' M/mes')]);
-  opts.sort(function(a,b){return a[0]-b[0]});
-  $('#fPrice').innerHTML=opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===S.max?' selected':'')+'>'+o[1]+'</option>'}).join('');
-}
-/* Zona: ciudad completa o un barrio; los filtros secundarios solo aparecen cuando aplican al tipo */
-function zoneOptions(){
-  var h='';
-  Object.keys(CITY).forEach(function(c){
-    h+='<optgroup label="'+CITY[c]+'"><option value="c:'+c+'">Todo '+CITY[c]+'</option>'+Object.keys(Z).filter(function(k){return Z[k].c===c}).map(function(k){return '<option value="z:'+k+'">'+Z[k].n+'</option>'}).join('')+'</optgroup>';
-  });
-  $('#fCity').innerHTML=h;
-}
-function filterCtx(){
-  var ts=S.type!=='todos'?[S.type]:S.typeSet.length?S.typeSet:[];
-  var onlyHab=ts.length&&ts.every(function(t){return t==='habitacion'}),anyHab=!ts.length||ts.indexOf('habitacion')>-1||ts.indexOf('apartaestudio')>-1;
-  return {nohab:!onlyHab,hab:anyHab&&S.op==='arriendo',rent:S.op==='arriendo'};
-}
-function syncFilters(){
-  if(!$('#fCity').options.length)zoneOptions();
-  $('#fCity').value=S.zones.length===1?'z:'+S.zones[0]:'c:'+S.city;
-  var fc=filterCtx();
-  $('#fBedsW').hidden=!fc.nohab;
-  $$('.fx').forEach(function(x){x.hidden=!fc[x.dataset.for]});
-  $('#fBeds').value=String(S.beds||0);
-  $('#fArea').value=String(S.minArea||0);
-  $('#fBaths').value=String(S.baths||0);
-  $('#fPeople').value=String(S.people||0);
-  $('#fSort').value=S.sort;
-  $$('[data-act=ftog]').forEach(function(b){b.setAttribute('aria-pressed',String(!!S.f[b.dataset.v]))});
-  var n=(S.minArea?1:0)+(S.baths?1:0)+(S.people?1:0)+Object.keys(S.f).filter(function(k){return S.f[k]}).length;
-  var c=$('#fCnt');c.textContent=n;c.hidden=!n;
-}
+/* ---------- resultados de Explorar ---------- */
 function zoneKm(p,z){var c=coords(p),k=ZC[z];return hav(c[0],c[1],k[0],k[1])}
 function filtered(){
   var q=norm(S.q).trim();
@@ -1292,6 +1437,7 @@ function filtered(){
     if(S.max&&p.price>S.max)return false;
     if(S.beds&&p.t!=='habitacion'&&p.beds<S.beds)return false;
     if(S.minArea&&p.t!=='habitacion'&&p.area<S.minArea)return false;
+    if(S.areaR&&p.t!=='habitacion'&&(p.area<S.areaR[0]*.9||(S.areaR[1]&&p.area>S.areaR[1]*1.15)))return false;
     if(S.baths&&p.t!=='habitacion'&&p.baths<S.baths)return false;
     if(S.people&&capOf(p)<S.people)return false;
     if(S.zones.length&&S.zones.indexOf(p.z)<0)return false;
@@ -1306,7 +1452,7 @@ function filtered(){
   });
   S.cr=crit();
   if(S.sort==='rel'&&S.cr.has){
-    var sc={};out.forEach(function(p){sc[p.id]=compat(p,S.cr).pct});
+    var sc={};out.forEach(function(p){var r=compat(p,S.cr);sc[p.id]=r?r.pct:0});
     out.sort(function(a,b){return sc[b.id]-sc[a.id]});
   }
   if(S.sort==='pa')out.sort(function(a,b){return a.price-b.price});
@@ -1317,7 +1463,7 @@ function filtered(){
 }
 function badgeFor(p){
   if(p.t==='obra')return '<span class="badge sun">Entrega '+p.obra.deliv+'</span>';
-  if(p.ext)return '<span class="badge ia">'+ic('asistente',12)+'Encontrada por IA</span>';
+  if(p.ext)return '<span class="badge ia">'+ic('asistente',12)+esc(p.ext.portal)+' · demo</span>';
   if(p.src)return '<span class="badge">Importado</span>';
   if(p.t==='habitacion')return '<span class="badge">'+(p.room==='compartida'?'Compartida':'Privada')+'</span>';
   if(p.tags.indexOf('servicios incluidos')>-1)return '<span class="badge">Servicios incluidos</span>';
@@ -1326,24 +1472,29 @@ function badgeFor(p){
   return '';
 }
 /* ---------- personalizacion: cuestionario, plan y compatibilidad ---------- */
-var UNIS=[['andes','Universidad de los Andes','candelaria',/\b(los andes|uniandes|andes)\b/],['javeriana','Universidad Javeriana','chapinero',/javeriana/],['nacional','Universidad Nacional','teusaquillo',/universidad nacional|\bnacional\b|\bunal\b/],['rosario','Universidad del Rosario','candelaria',/rosario/],['eafit','EAFIT','poblado',/eafit/],['upb','UPB','laureles',/\bupb\b|bolivariana/],['icesi','Universidad Icesi','cjardin',/icesi/],['univalle','Univalle','sanfernando',/univalle/]];
-var UNIKW=/uniandes|andes|rosario|externado|javeriana|nacional|eafit|upb|bolivariana|icesi|univalle/;
-var IMPS=[['transporte','Transporte cerca'],['universidad','Universidad cerca'],['mascotas','Acepta mascotas'],['amoblado','Amoblado'],['seguridad','Seguridad'],['servicios','Servicios incluidos'],['comercial','Zona comercial'],['parque','Parques'],['gimnasio','Gimnasio'],['salud','Salud cerca'],['colegio','Colegios'],['tranquilo','Tranquilidad']];
+var UNIS=[['andes','Universidad de los Andes','candelaria',/\b(los andes|uniandes|andes)\b/],['javeriana','Universidad Javeriana','chapinero',/javeriana/],['nacional','Universidad Nacional','teusaquillo',/universidad nacional|\bnacional\b|\bunal\b/],['rosario','Universidad del Rosario','candelaria',/rosario/],['eafit','EAFIT','poblado',/eafit/],['upb','UPB','laureles',/\bupb\b|bolivariana/],['udem','Universidad de Medellín','belen',/universidad de medellin|\budem\b/],['udea','Universidad de Antioquia','centromed',/universidad de antioquia|\budea\b/],['icesi','Universidad Icesi','cjardin',/icesi/],['univalle','Univalle','sanfernando',/univalle|universidad del valle/]];
+var UNIKW=/uniandes|andes|rosario|externado|javeriana|nacional|eafit|upb|bolivariana|udem|udea|icesi|univalle/;
+/* "Universidad cerca" ya se pregunta en "¿Dónde?" y "Seguridad" no ayuda a diferenciar: no están aquí */
+var IMPS=[['transporte','Transporte cerca'],['mascotas','Acepta mascotas'],['amoblado','Amoblado'],['servicios','Servicios incluidos'],['comercial','Zona comercial'],['parque','Parques'],['gimnasio','Gimnasio'],['salud','Salud cerca'],['colegio','Colegios'],['tranquilo','Tranquilidad']];
+var AREAR=[[0,50,'Menos de 50 m²'],[50,80,'50 – 80 m²'],[80,120,'80 – 120 m²'],[120,0,'Más de 120 m²']];
+function areaTxt(a){if(!a)return '';for(var i=0;i<AREAR.length;i++){if(AREAR[i][0]===a[0]&&AREAR[i][1]===a[1])return AREAR[i][2]}return a[1]?(a[0]?a[0]+' – '+a[1]+' m²':'Hasta '+a[1]+' m²'):'Desde '+a[0]+' m²'}
+function sameR(a,r){return !!(a&&a[0]===r[0]&&a[1]===r[1])}
 var RENTR=[[0,1.5e6,'Hasta $1,5 M'],[1.5e6,2.5e6,'$1,5 – 2,5 M'],[2.5e6,4e6,'$2,5 – 4 M'],[4e6,0,'Más de $4 M']];
 var BUYR=[[0,300e6,'Hasta $300 M'],[300e6,500e6,'$300 – 500 M'],[500e6,800e6,'$500 – 800 M'],[800e6,1200e6,'$800 M – 1.200 M'],[1200e6,0,'Más de $1.200 M']];
 var PREF=null;
-function defPref(){return {done:false,types:[],tu:false,op:'ambas',rent:null,buy:null,city:S.city||'bog',where:'',zone:'',near:null,beds:0,imp:[]}}
+function defPref(){return {done:false,types:[],tu:false,op:'ambas',rent:null,buy:null,city:S.city||'bog',where:'',zone:'',near:null,beds:0,area:null,park:null,imp:[]}}
 function loadPref(){try{var r=JSON.parse(MEM.getItem('habita.pref')||'null');if(r&&typeof r==='object')PREF=Object.assign(defPref(),r)}catch(e){PREF=null}}
 function savePref(){try{MEM.setItem('habita.pref',JSON.stringify(PREF))}catch(e){}}
 function hasPlan(){return !!(PREF&&PREF.done)}
 function crit(op){
   op=op||S.op;
-  var c={op:op,types:[],budget:0,beds:0,zones:[],near:null,needs:[],pets:false,furn:false,inc:false,quiet:false,safe:false,people:0,park:false,has:false};
+  var c={op:op,types:[],budget:0,beds:0,area:null,zones:[],near:null,needs:[],pets:false,furn:false,inc:false,quiet:false,safe:false,people:0,park:false,has:false};
   function need(k){if(c.needs.indexOf(k)<0)c.needs.push(k)}
   if(hasPlan()){
     c.types=PREF.types.slice();
     var b=op==='arriendo'?PREF.rent:PREF.buy;c.budget=(b&&b[1])||0;
     c.beds=PREF.beds||0;
+    c.area=PREF.area||null;c.park=PREF.park===true;
     if(PREF.where==='zona'&&PREF.zone)c.zones=[PREF.zone];
     if(PREF.where==='near'&&PREF.near)c.near=PREF.near;
     PREF.imp.forEach(function(k){
@@ -1357,6 +1508,7 @@ function crit(op){
     if(S.type!=='todos')c.types=[S.type];else if(S.typeSet.length)c.types=S.typeSet.slice();
     if(S.max)c.budget=S.max;
     if(S.beds)c.beds=S.beds;
+    if(S.areaR)c.area=S.areaR;
     if(S.zones.length)c.zones=S.zones.slice();
     if(S.nearZone)c.near={z:S.nearZone,n:S.nearName};
     S.needs.forEach(need);
@@ -1364,7 +1516,7 @@ function crit(op){
     if(S.people)c.people=S.people;
     if(S.quiet)c.quiet=true;
   }
-  var groups=[c.types.length,c.budget,c.beds,c.zones.length||c.near,c.needs.length,c.pets||c.furn||c.inc||c.quiet||c.safe||c.park,c.people].filter(Boolean).length;
+  var groups=[c.types.length,c.budget,c.beds,c.area,c.zones.length||c.near,c.needs.length,c.pets||c.furn||c.inc||c.quiet||c.safe||c.park,c.people].filter(Boolean).length;
   c.has=hasPlan()?groups>0:groups>=2;
   return c;
 }
@@ -1375,19 +1527,20 @@ function compat(p,c){
   function add(w,e,pro,con){W+=w;E+=w*e;if(e>=.75&&pro)pros.push([w*e,pro]);else if(e<.6&&con)cons.push([w*(1-e),con])}
   var has=function(t){return p.tags.indexOf(t)>-1};
   if(c.budget){var r=p.price/c.budget;add(22,r<=1?1:r<=1.1?.6:r<=1.25?.25:0,'Dentro de tu presupuesto','Supera tu presupuesto en '+Math.round((r-1)*100)+'%')}
-  if(c.types.length){var ok=c.types.indexOf(p.t)>-1;add(14,ok?1:0,'Es el tipo de vivienda que buscas','Es '+TL[p.t].toLowerCase()+', no lo que buscas')}
+  if(c.types.length){var ok=c.types.indexOf(p.t)>-1;add(14,ok?1:0,null,'Es '+TL[p.t].toLowerCase()+', no lo que buscas')}
   if(c.beds&&p.t!=='habitacion'){add(10,p.beds>=c.beds?1:p.beds===c.beds-1?.4:0,'Tiene las '+c.beds+(c.beds===1?' habitación':' habitaciones')+' que necesitas','Tiene '+p.beds+(p.beds===1?' habitación':' habitaciones')+' y necesitas '+c.beds)}
+  if(c.area&&p.t!=='habitacion'){var lo=c.area[0],hi=c.area[1]||1e9,inA=p.area>=lo&&p.area<=hi;add(10,inA?1:(p.area>=lo*.85&&p.area<=hi*1.15)?.5:0,'Tiene '+p.area+' m², el tamaño que buscas','Tiene '+p.area+' m² (buscas '+areaTxt(c.area).toLowerCase()+')')}
   if(c.people){var cp=capOf(p);add(8,cp>=c.people?1:0,'Cabe para '+c.people+(c.people===1?' persona':' personas'),'Está pensada para '+cp+(cp===1?' persona':' personas'))}
   if(c.near){var km=zoneKm(p,c.near.z);add(18,km<=1.5?1:km<=3?.75:km<=6?.35:0,'A '+distTxt(km)+' de '+c.near.n,'Queda a '+distTxt(km)+' de '+c.near.n)}
   if(c.zones.length){var inz=c.zones.indexOf(p.z)>-1;add(14,inz?1:.2,'Está en '+Z[p.z].n,'Está fuera de tu zona ('+Z[p.z].n+')')}
   var nw=Math.min(8,24/Math.max(1,c.needs.length));
-  c.needs.forEach(function(k){var m=n[k].m;add(nw,clamp(1-(m-300)/1500,0,1),CATS[k]+' a '+walk(m)+' min a pie',CATS[k]+' lejos ('+walk(m)+' min a pie)')});
+  c.needs.forEach(function(k){var m=n[k].m;add(nw,clamp(1-(m-300)/1500,0,1),CATS[k]+': '+n[k].name+' a '+walkTxt(m),CATS[k]+' lejos ('+walkTxt(m)+')')});
   if(c.pets)add(12,has('mascotas')?1:0,'Acepta mascotas','No indica que acepte mascotas');
   if(c.furn)add(8,(has('amoblado')||p.furn)?1:0,'Viene amoblado','Sin amoblar');
   if(c.inc)add(8,(has('servicios incluidos')||p.inc)?1:0,'Servicios incluidos','Servicios aparte');
   if(c.safe)add(6,has('seguridad')?1:.3,'Cuenta con seguridad','No indica vigilancia');
   if(c.quiet)add(6,has('tranquilo')?1:.4,'Zona tranquila',null);
-  if(c.park)add(5,p.park?1:0,'Incluye parqueadero','No tiene parqueadero');
+  if(c.park&&p.t!=='habitacion')add(10,p.park?1:0,'Tiene parqueadero privado','No tiene parqueadero privado');
   if(!W)return null;
   pros.sort(function(a,b){return b[0]-a[0]});cons.sort(function(a,b){return b[0]-a[0]});
   return {pct:clamp(Math.round(E/W*100),35,99),pros:pros.map(function(x){return x[1]}),cons:cons.map(function(x){return x[1]})};
@@ -1398,7 +1551,14 @@ function whyList(r,nPro,nCon){
 function compatCard(p){
   var r=compat(p,S.cr||crit());
   if(!r)return '';
-  return '<div class="cmpx"><p class="cmp-pct"><b>'+r.pct+'%</b> compatible</p><i class="cmp-bar" aria-hidden="true"><b style="width:'+r.pct+'%"></b></i><p class="why-h">¿Por qué te la recomendamos?</p><ul class="cmp-list">'+whyList(r,3,1)+'</ul></div>';
+  return '<div class="cmpx"><p class="cmp-pct"><b>'+r.pct+'%</b> compatible</p><i class="cmp-bar" aria-hidden="true"><b style="width:'+r.pct+'%"></b></i><p class="why-h">¿Por qué te la recomendamos?</p><ul class="cmp-list">'+whyList(r,2,1)+'</ul></div>';
+}
+/* datos que ayudan a decidir, siempre visibles: m², habitaciones, baños, parqueadero y estrato */
+function factChips(p){
+  var f=[];
+  if(p.t==='habitacion'){f.push(p.room==='compartida'?'Compartida':'Privada');f.push('Baño '+(p.bath==='privado'?'privado':'compartido'));f.push(p.inc?'Servicios incluidos':'Servicios aparte')}
+  else{f.push((p.t==='obra'?'Desde ':'')+p.area+' m²');f.push(p.beds+' hab');f.push(p.baths+(p.baths===1?' baño':' baños'));f.push(p.park?(p.park===1?'1 parqueadero':p.park+' parqueaderos'):'Sin parqueadero')}
+  return '<ul class="facts2">'+f.map(function(x){return '<li>'+x+'</li>'}).join('')+'<li class="est">Estrato '+p.est+'</li></ul>';
 }
 function nearTxt(p){
   if(S.nearZone){return ' · a '+distTxt(zoneKm(p,S.nearZone))+' de '+S.nearName}
@@ -1408,11 +1568,19 @@ function card(p){
   var fav=!!S.fav[p.id],c=!!S.cmp[p.id],f=fair(p);
   return '<article class="card'+(S.sel===p.id?' on':'')+(p.ext?' ext':'')+'" data-act="open" data-id="'+p.id+'" data-card="'+p.id+'"><div class="art">'+art(p)+badgeFor(p)+
     '<button class="fav" data-act="fav" data-id="'+p.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de guardadas':'Guardar')+'">'+ic('heart',18)+'</button></div>'+
-    '<div class="cb">'+compatCard(p)+'<p class="price">'+priceHTML(p)+'</p>'+(f?'<p class="fair '+(f.good?'ok':'hi')+'">'+f.txt+'</p>':'')+
-    '<p class="loc">'+esc(Z[p.z].n)+', '+CITY[Z[p.z].c]+nearTxt(p)+'</p><p class="spec">'+specLine(p)+'</p>'+
-    (p.ext?'<p class="extsrc">'+ic('asistente',13)+'Encontrada por la IA en '+esc(p.ext.portal)+' · '+esc(p.ext.ago)+'</p>':'')+
+    '<div class="cb">'+compatCard(p)+'<p class="price">'+priceHTML(p)+'</p>'+(f?'<p class="fair '+(f.good?'ok':'hi')+'">'+f.ar+f.txt+'</p>':'')+
+    '<h3 class="c-t">'+esc(p.title)+'</h3><p class="loc">'+ic('pin',14)+esc(Z[p.z].n)+', '+CITY[Z[p.z].c]+nearTxt(p)+'</p>'+factChips(p)+
+    (p.ext?'<p class="extsrc">'+ic('asistente',13)+'De otra fuente: '+esc(p.ext.portal)+' · datos de demostración</p>':'')+
     '<div class="c-foot"><button type="button" class="cmpbtn" data-act="ccmp" data-id="'+p.id+'" aria-pressed="'+c+'">'+(c?ic('check',14)+'En comparación':'+ Comparar')+'</button>'+
-    (p.ext?'<a class="extl" href="'+esc(p.ext.url)+'" target="_blank" rel="noopener" data-map="1" data-act="extlink">Ver en '+esc(p.ext.portal)+' ↗</a>':'')+'</div></div></article>';
+    (p.ext?'<a class="extl" href="'+esc(p.ext.url)+'" target="_blank" rel="noopener" data-map="1" data-act="extlink">Buscar en '+esc(p.ext.portal)+' ↗</a>':'')+'</div></div></article>';
+}
+/* espacios para el modelo de negocio: se marcan como promocionales y de demostración */
+function promoHTML(){
+  var venta=S.op==='venta',obra=S.type==='obra'||S.typeSet.indexOf('obra')>-1,h='';
+  if(obra)h+='<aside class="promo"><p class="pr-k">Contenido promocional · demo</p><h3>Proyecto destacado: Constructora Horizonte</h3><p>Así se vería un proyecto patrocinado en Habita: aparece primero, con avance de obra, precios por m² y un asesor para cotizar.</p><p class="pr-f">Constructora ficticia, solo para mostrar cómo funcionaría la publicidad de proyectos.</p></aside>';
+  if(venta)h+='<aside class="promo"><p class="pr-k">Contenido promocional · demo</p><h3>Beneficios de financiación de vivienda</h3><p>Accede a condiciones preferenciales y beneficios exclusivos para financiar tu vivienda.</p><div class="cta"><button type="button" class="btn alt sm2" data-act="view" data-v="inversion">Simular mi crédito</button></div><p class="pr-f">Espacio para entidades financieras. Es un ejemplo: Habita todavía no tiene alianzas con bancos.</p></aside>';
+  else h+='<aside class="promo"><p class="pr-k">Contenido promocional · demo</p><h3>Arrienda sin codeudor</h3><p>Pólizas y garantías de arrendamiento para entrar más rápido a tu nuevo hogar.</p><p class="pr-f">Espacio para aseguradoras e inmobiliarias. Es un ejemplo: no es una oferta real.</p></aside>';
+  return '<div class="promos">'+h+'</div>';
 }
 
 /* ---------- mapa: esquematico (web/Android) y nativo (iPhone) ---------- */
@@ -1438,7 +1606,7 @@ function nmTrack(ms){var t0=performance.now();(function f(t){nmApply();if(t-t0<m
 function nmApply(){
   var nm=nmPlugin();if(!nm)return;
   var slot=$('#mapslot'),r=slot.getBoundingClientRect(),bottom=r.bottom;
-  if(phone())bottom=Math.min(bottom,$('#sheet').getBoundingClientRect().top);
+  var st=$('#mstrip');if(phone()&&!st.hidden)bottom=Math.min(bottom,st.getBoundingClientRect().top);
   var h=bottom-r.top;
   if(!nmWanted()||h<80||r.width<10){if(NMSHOWN){NMSHOWN=false;nm.hide().catch(noop)}return}
   NMSHOWN=true;
@@ -1476,127 +1644,182 @@ function pois(city){
 }
 S.poi={universidad:1,transporte:1};
 function poiCoords(o){var c=ZC[o.z],z=Z[o.z];return [+(c[0]-(o.y-z.y)*0.0007).toFixed(5),+(c[1]+(o.x-z.x)*0.0007).toFixed(5)]}
-function mapCtxHTML(){
-  var h='<div class="mctx" role="group" aria-label="Lugares en el mapa">'+POIK.map(function(c){return '<button type="button" class="chip xs" data-act="poi" data-v="'+c+'" aria-pressed="'+!!S.poi[c]+'">'+ic(c,14)+POIL[c]+'</button>'}).join('')+'</div>';
-  var p=S.sel&&P.filter(function(x){return x.id===S.sel})[0];
-  if(p){
-    var n=nearOf(p),r=compat(p,S.cr||crit()),f=fair(p);
-    h+='<div class="conv"><div class="conv-top"><div><p class="conv-t">'+esc(p.title)+'</p><p class="conv-p">'+priceHTML(p)+'</p>'+(f?'<p class="fair '+(f.good?'ok':'hi')+'">'+f.txt+'</p>':'')+'</div>'+(r?'<span class="conv-c"><b>'+r.pct+'%</b>compatible</span>':'')+'</div>'+
-      '<p class="conv-h">¿Qué tan conveniente es vivir aquí?</p><ul>'+POIK.map(function(c){return '<li>'+ic(c,15)+'<span>'+esc(n[c].name)+'</span><b>'+walk(n[c].m)+' min</b></li>'}).join('')+'</ul>'+
-      '<div class="conv-a"><button type="button" class="btn sm2" data-act="open" data-id="'+p.id+'">Ver detalle</button><button type="button" class="fav2" data-act="fav" data-id="'+p.id+'" aria-pressed="'+!!S.fav[p.id]+'">'+ic('heart',16)+(S.fav[p.id]?'Guardada':'Guardar')+'</button></div></div>';
-  }else h+='<p class="conv-tip">Toca un precio en el mapa para ver esa vivienda.</p>';
-  return h;
+/* ---------- modo Mapa: lista compacta, tarjeta de la vivienda elegida y marcadores sin superponerse ----------
+   Lista = explorar viviendas (tarjetas completas). Mapa = entender dónde están: el mapa ocupa casi todo,
+   a la izquierda (escritorio) solo una lista corta para identificar y elegir, y abajo la tarjeta de la elegida.
+   En el teléfono, abajo va una tira deslizable de tarjetas pequeñas sincronizada con los marcadores. */
+function shortSpec(p){
+  if(p.t==='habitacion')return (p.room==='compartida'?'Compartida':'Privada')+' · baño '+(p.bath==='privado'?'privado':'compartido');
+  if(p.t==='obra')return 'Desde '+p.area+' m²';
+  return p.beds+' hab · '+p.area+' m²'+(p.park?' · parq.':'');
+}
+function mpoiHTML(){
+  return '<div class="mpoi" role="group" aria-label="Mostrar lugares en el mapa">'+POIK.map(function(c){return '<button type="button" class="chip xs" data-act="poi" data-v="'+c+'" aria-pressed="'+!!S.poi[c]+'">'+ic(c,14)+POIL[c]+'</button>'}).join('')+'</div>';
+}
+function mrowHTML(p){
+  var r=compat(p,S.cr||crit());
+  return '<button type="button" class="mrow'+(S.sel===p.id?' on':'')+'" data-act="mrow" data-id="'+p.id+'" data-row="'+p.id+'"><span class="mr-t"><b>'+esc(p.title)+'</b><span>'+esc(Z[p.z].n)+' · '+shortSpec(p)+'</span></span><span class="mr-p">'+pinPrice(p)+(p.op==='arriendo'?'<small>/mes</small>':'')+(r?'<i>'+r.pct+'%</i>':'')+'</span></button>';
+}
+function mcardHTML(p){
+  var r=compat(p,S.cr||crit()),fav=!!S.fav[p.id];
+  return '<article class="mcard'+(S.sel===p.id?' on':'')+'" data-mc="'+p.id+'"><div class="mc-art">'+art(p)+'</div><div class="mc-b"><p class="mc-p">'+priceHTML(p)+'</p><p class="mc-t">'+esc(p.title)+'</p><p class="mc-s">'+esc(Z[p.z].n)+' · '+shortSpec(p)+' · E'+p.est+'</p>'+
+    '<div class="mc-a">'+(r?'<span class="mc-c"><b>'+r.pct+'%</b> compatible</span>':'')+'<button type="button" class="btn sm2" data-act="open" data-id="'+p.id+'">Ver detalle</button><button type="button" class="fav3" data-act="fav" data-id="'+p.id+'" aria-pressed="'+fav+'" aria-label="'+(fav?'Quitar de guardadas':'Guardar')+'">'+ic('heart',18)+'</button></div></div></article>';
 }
 S.zoom=1;S.mapBig=false;
+var ZOOMS=[1,1.6,2.5,4];
 function mapCtl(){
-  return '<div class="mctl" role="group" aria-label="Controles del mapa"><button type="button" data-act="zoom" data-v="1" aria-label="Acercar"'+(S.zoom>=3?' disabled':'')+'>'+ic('plus',18)+'</button><button type="button" data-act="zoom" data-v="-1" aria-label="Alejar"'+(S.zoom<=1?' disabled':'')+'>'+ic('minus',18)+'</button><button type="button" data-act="mapbig" aria-pressed="'+S.mapBig+'" aria-label="'+(S.mapBig?'Reducir mapa':'Ampliar mapa')+'">'+ic(S.mapBig?'shrink':'expand',18)+'</button></div>';
+  var mx=ZOOMS[ZOOMS.length-1];
+  return '<div class="mctl" role="group" aria-label="Controles del mapa"><button type="button" data-act="zoom" data-v="1" aria-label="Acercar"'+(S.zoom>=mx?' disabled':'')+'>'+ic('plus',20)+'</button><button type="button" data-act="zoom" data-v="-1" aria-label="Alejar"'+(S.zoom<=1?' disabled':'')+'>'+ic('minus',20)+'</button><button type="button" class="mbig" data-act="mapbig" aria-pressed="'+S.mapBig+'" aria-label="'+(S.mapBig?'Reducir mapa':'Ampliar mapa')+'">'+ic(S.mapBig?'shrink':'expand',20)+'</button></div>';
 }
-/* centra el mapa en un punto (en %) despues de hacer zoom o elegir una vivienda */
+/* centra el mapa en un punto (en % del mapa) */
 function mapCenter(x,y,smooth){
   var sm=$('#sm');if(!sm)return;
-  var w=sm.scrollWidth,h=sm.scrollHeight;
-  try{sm.scrollTo({left:x/100*w-sm.clientWidth/2,top:y/100*h-sm.clientHeight/2,behavior:smooth?'smooth':'auto'})}catch(e){sm.scrollLeft=x/100*w-sm.clientWidth/2;sm.scrollTop=y/100*h-sm.clientHeight/2}
+  var w=sm.scrollWidth,h=sm.scrollHeight,l=x/100*w-sm.clientWidth/2,t=y/100*h-sm.clientHeight/2;
+  try{sm.scrollTo({left:l,top:t,behavior:smooth?'smooth':'auto'})}catch(e){sm.scrollLeft=l;sm.scrollTop=t}
 }
-function mapZoom(d){
-  var sm=$('#sm'),cx=50,cy=50;
-  if(sm){cx=(sm.scrollLeft+sm.clientWidth/2)/sm.scrollWidth*100;cy=(sm.scrollTop+sm.clientHeight/2)/sm.scrollHeight*100}
-  var p=S.sel&&P.filter(function(x){return x.id===S.sel})[0];
-  S.zoom=clamp(S.zoom+d*0.75,1,3);
+function mapZoom(d,cx,cy){
+  var sm=$('#sm'),i=ZOOMS.indexOf(S.zoom);if(i<0)i=0;
+  var ni=clamp(i+d,0,ZOOMS.length-1);if(ni===i)return;
+  if(cx===undefined){
+    var p=S.sel&&P.filter(function(x){return x.id===S.sel})[0];
+    if(p&&d>0){cx=p.x;cy=+py(p.y)}
+    else if(sm){cx=(sm.scrollLeft+sm.clientWidth/2)/sm.scrollWidth*100;cy=(sm.scrollTop+sm.clientHeight/2)/sm.scrollHeight*100}
+    else{cx=50;cy=50}
+  }
+  S.zoom=ZOOMS[ni];
   if(nmPlugin()){nmPins(false);return}
-  renderMap(false);
-  if(p&&d>0){cx=p.x;cy=py(p.y)}
-  mapCenter(cx,cy,false);
+  renderMap(true);mapCenter(cx,cy,false);
+}
+/* agrupa los marcadores que quedarían encima unos de otros; al acercar el mapa se separan */
+function pinLayout(items){
+  var slot=$('#mapslot'),W=Math.max(300,slot.clientWidth)*S.zoom,H=Math.max(200,slot.clientHeight-(parseFloat(getComputedStyle($('#explore')).getPropertyValue('--shv'))||0))*S.zoom;
+  var cr=S.cr||crit(),sc={};items.forEach(function(p){var r=cr.has?compat(p,cr):null;sc[p.id]=r?r.pct:0});
+  var pts=items.map(function(p){return {p:p,x:p.x/100*W,y:+py(p.y)/100*H}}).sort(function(a,b){return sc[b.p.id]-sc[a.p.id]});
+  var sel=null,rest=[],out=[],BW=64,BH=30;
+  pts.forEach(function(t){if(t.p.id===S.sel)sel=t;else rest.push(t)});
+  if(S.zoom<ZOOMS[ZOOMS.length-1]){
+    /* une grupos mientras sus etiquetas se toquen (precio ≈ 60 px de ancho, grupo ≈ 40 px) */
+    var cl=rest.map(function(t){return {x:t.x,y:t.y,m:[t]}}),sz=function(c){return c.m.length>1?[42,40]:[BW,BH]},moved=true,guard=0;
+    while(moved&&guard++<12){
+      moved=false;
+      for(var i=0;i<cl.length;i++)for(var j=i+1;j<cl.length;j++){
+        var a=sz(cl[i]),b=sz(cl[j]);
+        if(Math.abs(cl[i].x-cl[j].x)<(a[0]+b[0])/2+4&&Math.abs(cl[i].y-cl[j].y)<(a[1]+b[1])/2+2){
+          var m=cl[i].m.concat(cl[j].m),sx=0,sy=0;m.forEach(function(t){sx+=t.x;sy+=t.y});
+          cl[i]={x:sx/m.length,y:sy/m.length,m:m};cl.splice(j,1);j--;moved=true;
+        }
+      }
+    }
+    cl.forEach(function(c){
+      if(c.m.length===1)out.push({p:c.m[0].p,x:c.x/W*100,y:c.y/H*100});
+      else out.push({cl:c.m.map(function(t){return t.p}),x:c.x/W*100,y:c.y/H*100});
+    });
+  }else{
+    /* al máximo acercamiento ya no se agrupan: se reparten para que ninguno tape a otro */
+    var placed=sel?[{x:sel.x,y:sel.y}]:[],OFF=[0,-1,1,-2,2,-3,3,-4,4];
+    rest.forEach(function(t){
+      var y=t.y;
+      for(var k=0;k<OFF.length;k++){y=t.y+OFF[k]*BH;if(!placed.some(function(q){return Math.abs(q.x-t.x)<BW&&Math.abs(q.y-y)<BH}))break}
+      placed.push({x:t.x,y:y});out.push({p:t.p,x:t.x/W*100,y:clamp(y/H*100,2,98)});
+    });
+  }
+  if(sel)out.push({p:sel.p,x:sel.x/W*100,y:sel.y/H*100,on:true});
+  return out;
 }
 function mapHTML(items){
   var s='<div class="sm" id="sm"><div class="sm-in" style="--z:'+S.zoom+'">'+mapBg(S.city);
   Object.keys(Z).forEach(function(k){var z=Z[k];if(z.c===S.city)s+='<span class="zl" style="left:'+z.x+'%;top:'+py(z.y)+'%">'+esc(z.n)+'</span>'});
-  items.forEach(function(p){
-    var opp=p.op==='venta'&&inv(p).opp;
-    s+='<button class="pin'+(opp?' opp':'')+(S.sel===p.id?' on':'')+'" data-act="pin" data-id="'+p.id+'" style="left:'+p.x+'%;top:'+py(p.y)+'%" aria-label="'+esc(p.title)+', '+pinPrice(p)+'"><span>'+pinPrice(p)+'</span></button>';
-  });
   pois(S.city).forEach(function(o){if(S.poi[o.c])s+='<span class="poi p-'+o.c+'" style="left:'+o.x+'%;top:'+py(o.y)+'%" title="'+esc(o.n)+'">'+ic(o.c,13)+'<em>'+esc(o.n)+'</em></span>'});
+  pinLayout(items).forEach(function(q){
+    if(q.cl){
+      var lo=Math.min.apply(null,q.cl.map(function(p){return p.price}));
+      var lbl=q.cl.length+' viviendas aquí, desde '+pinPrice({price:lo,op:q.cl[0].op})+'. Toca para acercar';
+      s+='<button class="pin cl" data-act="cluster" data-x="'+q.x.toFixed(2)+'" data-y="'+q.y.toFixed(2)+'" style="left:'+q.x.toFixed(2)+'%;top:'+q.y.toFixed(2)+'%" title="'+lbl+'" aria-label="'+lbl+'"><span>'+q.cl.length+'</span></button>';
+      return;
+    }
+    var p=q.p,opp=p.op==='venta'&&inv(p).opp;
+    s+='<button class="pin'+(opp?' opp':'')+(q.on?' on':'')+(p.ext?' ext':'')+'" data-act="pin" data-id="'+p.id+'" style="left:'+q.x.toFixed(2)+'%;top:'+q.y.toFixed(2)+'%" aria-label="'+esc(p.title)+', '+pinPrice(p)+'"><span>'+pinPrice(p)+'</span></button>';
+  });
   var m=meXY();if(m)s+='<span class="me" style="left:'+m[0]+'%;top:'+py(m[1])+'%" title="Tú estás aquí"></span>';
-  return s+'</div></div><span class="mnote">Mapa esquemático de '+CITY[S.city]+'</span>'+mapCtl()+(S.mapBig&&!phone()?'<div class="mapsel">'+mapCtxHTML()+'</div>':'');
+  return s+'</div></div>'+mpoiHTML()+mapCtl();
 }
 function renderMap(fit){
   var slot=$('#mapslot');
   if(nmPlugin()){
-    if(!slot.querySelector('.nmload'))slot.innerHTML='<div class="nmload">Cargando el mapa de Apple…</div>';
-    nmPins(fit);
-  }else slot.innerHTML=mapHTML(S.items);
+    if(!slot.querySelector('.nmload'))slot.innerHTML='<div class="nmload">Cargando el mapa de Apple…</div>'+mpoiHTML();
+    nmPins(fit);return;
+  }
+  var sm=$('#sm'),sl=sm?sm.scrollLeft:0,st=sm?sm.scrollTop:0;
+  slot.innerHTML=mapHTML(S.items);
+  if(!fit&&sm){var n=$('#sm');n.scrollLeft=sl;n.scrollTop=st}
 }
-
-/* ---------- hoja deslizable ---------- */
-function sheetPx(st){
-  var ex=$('#explore'),hm=ex.clientHeight-$('#xtools').offsetHeight;
-  if(st==='peek')return Math.min(150,Math.round(hm*.3));
-  if(st==='half')return Math.round(hm*.46);
-  return hm;
+/* deja libre la franja inferior del mapa que tapa la tira de tarjetas (teléfono) */
+function layoutMap(){
+  var ex=$('#explore'),st=$('#mstrip'),h=0;
+  if(S.mapOn&&phone()&&!st.hidden)h=st.offsetHeight+8;
+  ex.style.setProperty('--shv',h+'px');nmSync();
 }
-function setSheetH(h){var ex=$('#explore');ex.style.setProperty('--sh',h+'px');ex.style.setProperty('--shv',h+'px');nmSync()}
-function sheetSet(st){
-  var ex=$('#explore'),sh=$('#sheet');
-  if(!S.mapOn||!phone()){ex.style.setProperty('--shv','0px');sh.dataset.st='full';nmSync();return}
-  sh.dataset.st='fit';
-  var need=$('.sh-h',sh).offsetHeight+$('#mapCtx').offsetHeight+22;
-  setSheetH(Math.min(need,Math.round((ex.clientHeight-$('#xtools').offsetHeight)*.72)));nmTrack(360);
+function renderStrip(){
+  var st=$('#mstrip');
+  if(!S.mapOn||!S.items.length){st.hidden=true;st.innerHTML='';return}
+  if(phone())st.innerHTML=S.items.map(mcardHTML).join('');
+  else{var p=S.sel&&S.items.filter(function(x){return x.id===S.sel})[0];st.innerHTML=p?mcardHTML(p)+'<button type="button" class="mc-x" data-act="unsel" aria-label="Cerrar">'+ic('x',16)+'</button>':''}
+  st.hidden=!st.innerHTML;
 }
-var DRAG=null,LASTDRAG=0;
-function dragStart(e){
-  var bt=e.target.closest('[data-act]');
-  if(!phone()||!S.mapOn||(bt&&bt.id!=='grab'))return;
-  DRAG={y:e.clientY,h:$('#sheet').offsetHeight,moved:false};
-  $('#sheet').classList.add('drag');
-  try{e.currentTarget.setPointerCapture(e.pointerId)}catch(x){}
+var STRIPLOCK=0,STRIPT=0;
+function stripScrolled(){
+  clearTimeout(STRIPT);
+  STRIPT=setTimeout(function(){
+    if(Date.now()<STRIPLOCK||!phone()||!S.mapOn)return;
+    var st=$('#mstrip'),r=st.getBoundingClientRect(),cx=r.left+r.width/2,best=null,bd=1e9;
+    $$('.mcard',st).forEach(function(c){var b=c.getBoundingClientRect(),d=Math.abs(b.left+b.width/2-cx);if(d<bd){bd=d;best=c}});
+    if(best&&best.dataset.mc!==S.sel)selectPin(best.dataset.mc,false,true);
+  },140);
 }
-function dragMove(e){
-  if(!DRAG)return;
-  var dy=e.clientY-DRAG.y;if(Math.abs(dy)>4)DRAG.moved=true;
-  setSheetH(clamp(DRAG.h-dy,100,sheetPx('full')));
-}
-function dragEnd(){
-  if(!DRAG)return;
-  var sh=$('#sheet'),h=sh.offsetHeight,moved=DRAG.moved;DRAG=null;sh.classList.remove('drag');
-  if(!moved)return;
-  LASTDRAG=Date.now();
-  var best='half',bd=1e9;['peek','half','full'].forEach(function(k){var d=Math.abs(sheetPx(k)-h);if(d<bd){bd=d;best=k}});
-  sheetSet(best);
-}
-function sheetCycle(){
-  if(Date.now()-LASTDRAG<350)return;
-  sheetSet(S.sheet==='peek'?'half':S.sheet==='half'?'full':'peek');
-}
-function selectPin(id,fromMap){
+function selectPin(id,fromMap,fromStrip){
   if(String(id).indexOf('poi:')===0)return;
   if(S.sel===id&&fromMap&&!phone()){openDetail(id);return}
   S.sel=id;
-  $$('.card.on').forEach(function(x){x.classList.remove('on')});
-  var c=$('[data-card="'+id+'"]');
-  if(c){c.classList.add('on');if(fromMap){if(phone()&&S.sheet==='peek')sheetSet('half');try{c.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(x){}}}
-  $$('.pin.on').forEach(function(x){x.classList.remove('on')});
-  var pn=$('.pin[data-id="'+id+'"]');if(pn)pn.classList.add('on');
-  var cx=$('#mapCtx');if(cx&&S.mapOn){cx.innerHTML=mapCtxHTML();sheetSet()}
-  var pp=P.filter(function(x){return x.id===id})[0];if(pp&&S.mapOn&&S.zoom>1&&!nmPlugin())mapCenter(pp.x,py(pp.y),true);
-  if(nmPlugin())nmPins(false);
+  $$('.card.on,.mrow.on,.mcard.on').forEach(function(x){x.classList.remove('on')});
+  var c=$('[data-card="'+id+'"]');if(c)c.classList.add('on');
+  var row=$('[data-row="'+id+'"]');if(row){row.classList.add('on');if(fromMap)try{row.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(x){}}
+  var pp=P.filter(function(x){return x.id===id})[0];
+  if(S.mapOn){
+    if(nmPlugin())nmPins(false);else renderMap(false);
+    if(phone()){
+      var mc=$('[data-mc="'+id+'"]');if(mc)mc.classList.add('on');
+      if(!fromStrip&&mc){STRIPLOCK=Date.now()+700;try{mc.scrollIntoView({inline:'center',block:'nearest',behavior:'smooth'})}catch(x){}}
+    }else{renderStrip();layoutMap()}
+    if(pp&&!fromMap&&!nmPlugin())mapCenter(pp.x,+py(pp.y),true);
+  }
 }
+var PAGE=24;S.shown=PAGE;
 function renderExplore(keep){
   var items=filtered();S.items=items;
   var ex=$('#explore');
   ex.dataset.map=S.mapOn?'on':'off';ex.dataset.big=S.mapOn&&S.mapBig?'1':'0';
-  $('#xtools').dataset.c=(S.mapOn||S.aiText)?'1':'';
+  $('#xtools').dataset.c=S.aiText?'1':'';
   $('#lmList').setAttribute('aria-pressed',String(!S.mapOn));$('#lmMap').setAttribute('aria-pressed',String(!!S.mapOn));
   var n=items.length,nx=items.filter(function(p){return p.ext}).length,pers=hasPlan()||S.aiText||(S.cr&&S.cr.has);
-  $('#count').textContent=S.only?n+(n===1?' vivienda seleccionada':' viviendas seleccionadas'):n+' '+noun(n)+(pers?(n===1?' que coincide contigo':' que coinciden contigo'):(S.op==='venta'?' en venta':' en arriendo'));
-  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo guardadas':S.me?'Cerca de ti, en '+CITY[S.city]:S.aiText&&nx?(n-nx)+' en Habita · '+nx+' encontradas por la IA en otros portales':pers?'De la más a la menos compatible contigo · '+CITY[S.city]:CITY[S.city];
-  $('#grid').innerHTML=items.length?items.map(card).join(''):'<div class="empty"><h3>No hay viviendas con esos filtros</h3><p>Quita el límite de precio, cambia el tipo de vivienda o prueba otra ciudad.</p><p style="margin-top:14px"><button class="btn" data-act="clear">Limpiar filtros</button></p></div>';
+  $('#count').textContent=S.mapOn&&phone()&&!S.only?n+' '+noun(n):S.only?n+(n===1?' vivienda seleccionada':' viviendas seleccionadas'):n+' '+noun(n)+(pers?(n===1?' que coincide contigo':' que coinciden contigo'):(S.op==='venta'?' en venta':' en arriendo'));
+  $('#countSub').textContent=S.only?'Tu selección':S.onlyFav?'Solo guardadas':S.mapOn?'Toca un precio para ver la vivienda':S.me&&S.sort==='near'?'Cerca de ti, en '+CITY[S.city]:S.aiText&&nx?(n-nx)+' en Habita y '+nx+' de otras fuentes, ordenadas por compatibilidad':pers?'De la más a la menos compatible contigo · '+CITY[S.city]:CITY[S.city];
+  if(!keep)S.shown=PAGE;
+  $('#grid').innerHTML=items.length?items.slice(0,S.shown).map(card).join(''):'<div class="empty"><h3>No hay viviendas con todo esto</h3><p>Amplía un poco tu búsqueda: el presupuesto, la zona o el tamaño.</p><div class="cta" style="justify-content:center;margin-top:14px"><button class="btn" data-act="qzopen">Editar búsqueda</button><button class="btn alt" data-act="clear">Ver todas</button></div></div>';
+  var rest=items.length-S.shown;
+  $('#moreR').innerHTML=rest>0?'<button type="button" class="btn alt" data-act="more">Mostrar más viviendas ('+rest+')</button>':'';
+  $('#promo').innerHTML=items.length?promoHTML():'';
   $('#favN').textContent=Object.keys(S.fav).length;
-  syncFilters();
+  $('#fSort').value=S.sort;
   if(S.sel&&!items.some(function(p){return p.id===S.sel}))S.sel=null;
+  $('#mlist').hidden=!S.mapOn;
+  if(S.mapOn){
+    if(!S.sel&&phone()&&items[0])S.sel=items[0].id;
+    $('#mlist').innerHTML=items.length?items.map(mrowHTML).join(''):'<p class="conv-tip">No hay viviendas para mostrar en el mapa.</p>';
+  }
+  renderStrip();
+  layoutMap();
   if(S.mapOn)renderMap(!keep);
-  var cx=$('#mapCtx');cx.hidden=!S.mapOn;if(S.mapOn)cx.innerHTML=mapCtxHTML();
   renderTray();
-  sheetSet();
-  nmSync();
 }
 
 /* ---------- ubicacion ---------- */
@@ -1617,7 +1840,7 @@ function locateStart(manual){
     Object.keys(CITYC).forEach(function(k){var d=hav(c.latitude,c.longitude,CITYC[k][0],CITYC[k][1]);if(d<bd){bd=d;best=k}});
     if(bd>80){if(manual)toast('Por ahora Habita funciona en Bogotá, Medellín y Cali');return}
     S.me={lat:c.latitude,lng:c.longitude};S.city=best;
-    if(!S.sortUser&&!(S.cr&&S.cr.has)){S.sort='near';$('#fSort').value='near'}
+    if(manual||(!S.sortUser&&!(S.cr&&S.cr.has))){S.sort='near';$('#fSort').value='near'}
     var nm=nmPlugin();if(nm&&nm.setUserLocation)nm.setUserLocation({enabled:true}).catch(noop);
     renderExplore();
     if(manual)toast('Mostrando viviendas cerca de ti');
@@ -1641,10 +1864,20 @@ function ring(v){
 }
 function scoreWord(v){return v>=80?'Muy completo: casi todo queda a pocos minutos a pie.':v>=60?'Buen entorno: lo esencial queda cerca.':'Entorno más tranquilo: algunos servicios requieren transporte.'}
 function specsHTML(p){
-  function sp(l,v){return '<div><span>'+l+'</span><b>'+v+'</b></div>'}
-  if(p.t==='habitacion')return '<div class="specs">'+sp('Tipo',p.room==='compartida'?'Compartida':'Privada')+sp('Baño',p.bath==='privado'?'Privado':'Compartido')+sp('Servicios',p.inc?'Incluidos':'Aparte')+sp('Amoblada',p.furn?'Sí':'No')+'</div>';
-  if(p.t==='obra')return '<div class="specs">'+sp('Desde',p.area+' m²')+sp('Entrega',p.obra.deliv)+sp('Avance',p.obra.progress+'%')+sp('Por m² en gris',N1.format(p.obra.pm2/1e6)+' M')+'</div>';
-  return '<div class="specs">'+sp('Área',p.area+' m²')+sp('Habitaciones',p.beds)+sp('Baños',p.baths)+sp('Parqueadero',p.park?p.park:'No')+'</div>';
+  function sp(l,v,c){return '<div'+(c?' class="'+c+'"':'')+'><span>'+l+'</span><b>'+v+'</b></div>'}
+  var est=sp('Estrato',p.est,'est');
+  if(p.t==='habitacion')return '<div class="specs">'+sp('Tipo',p.room==='compartida'?'Compartida':'Privada')+sp('Baño',p.bath==='privado'?'Privado':'Compartido')+sp('Servicios',p.inc?'Incluidos':'Aparte')+sp('Amoblada',p.furn?'Sí':'No')+est+'</div>';
+  if(p.t==='obra')return '<div class="specs">'+sp('Desde',p.area+' m²')+sp('Entrega',p.obra.deliv)+sp('Avance',p.obra.progress+'%')+sp('Por m² en gris',N1.format(p.obra.pm2/1e6)+' M')+est+'</div>';
+  return '<div class="specs">'+sp('Área',p.area+' m²')+sp('Habitaciones',p.beds)+sp('Baños',p.baths)+sp('Parqueadero',p.park?p.park:'No')+est+'</div>';
+}
+/* mini mapa del detalle: la zona alrededor de la vivienda, con su marcador y los lugares de referencia */
+function miniMap(p){
+  var c=Z[p.z].c,X=p.x,Y=+py(p.y),K=4,l=clamp(50-K*X,-(K-1)*100,0),t=clamp(50-K*Y,-(K-1)*100,0);
+  var s='<div class="mmap" role="img" aria-label="Ubicación aproximada de la vivienda en '+esc(Z[p.z].n)+'"><div class="mm-in" style="width:'+K*100+'%;height:'+K*100+'%;left:'+l.toFixed(2)+'%;top:'+t.toFixed(2)+'%">'+mapBg(c);
+  Object.keys(Z).forEach(function(k){if(Z[k].c===c)s+='<span class="zl" style="left:'+Z[k].x+'%;top:'+py(Z[k].y)+'%">'+esc(Z[k].n)+'</span>'});
+  pois(c).forEach(function(o){if(Math.abs(o.x-X)<7&&Math.abs(+py(o.y)-Y)<3.5)return;s+='<span class="poi open p-'+o.c+'" style="left:'+o.x+'%;top:'+py(o.y)+'%">'+ic(o.c,13)+'<em>'+esc(o.n)+'</em></span>'});
+  s+='<span class="mm-r" style="left:'+X+'%;top:'+Y+'%"></span><span class="mm-pin" style="left:'+X+'%;top:'+Y+'%">'+ic('casa',18)+'</span>';
+  return s+'</div></div>';
 }
 function roomHTML(p){
   return '<section class="m-sec"><h3>Sobre la habitación</h3><dl class="facts"><div><dt>Tipo</dt><dd>'+(p.room==='compartida'?'Compartida (para '+p.beds+')':'Privada')+'</dd></div><div><dt>Baño</dt><dd>'+(p.bath==='privado'?'Privado':'Compartido')+'</dd></div><div><dt>Servicios</dt><dd>'+(p.inc?'Incluidos':'No incluidos')+'</dd></div><div><dt>Amoblada</dt><dd>'+(p.furn?'Sí':'No')+'</dd></div></dl>'+
@@ -1655,14 +1888,15 @@ function costsHTML(p){
   var h='';
   if(p.op==='arriendo'){
     h+=f('Arriendo mensual',money(p.price));
-    h+=f('Para entrar (depósito + primer mes)',money(p.price*2));
+    h+=f('Para entrar (depósito de 1 canon + primer mes)',money(p.price*RENT_ENTRY));
     if(p.t!=='habitacion')h+=f('Precio por m²',money(p.price/p.area));
     else h+=f('Servicios',p.inc?'Incluidos':'Se pagan aparte');
   }else{
     var iv=inv(p);
     h+=f('Precio',money(p.price));
     h+=f('Precio por m²',money(iv.m2));
-    h+=f('Cuota inicial (30%)',money(p.price*.3));
+    h+=f('Cuota inicial (30% del precio)',money(p.price*.3));
+    h+=f('Valor a financiar (70%)',money(p.price*.7));
   }
   return '<section class="m-sec"><h3>Costos básicos</h3><dl class="facts">'+h+'</dl></section>';
 }
@@ -1686,24 +1920,25 @@ function financeHTML(p){
   return '<h4 class="sec-h">Análisis financiero</h4><div class="invbox"><div class="mets"><div class="met"><b class="good">'+pct(iv.yld)+'</b><span>Rentabilidad bruta anual</span></div><div class="met"><b>'+pct(p.g)+'</b><span>Valorización anual estimada</span></div><div class="met"><b>'+N1.format(iv.m2/1e6)+' M/m²</b><span>Precio por m²</span></div><div class="met"><b class="'+(iv.diff<=0?'good':'warn')+'">'+(iv.diff>0?'+':'')+N0.format(iv.diff*100)+'%</b><span>Frente al promedio de la zona ('+N1.format(z.m2)+' M/m²)</span></div></div><div class="cta"><button class="btn sm2" data-act="simulate" data-id="'+p.id+'">Abrir simulador de crédito</button></div></div>';
 }
 function detail(p){
-  var z=Z[p.z],n=nearOf(p),sc=envScore(p),fav=!!S.fav[p.id],r=compat(p,crit(p.op));
+  var z=Z[p.z],n=nearOf(p),fav=!!S.fav[p.id],r=compat(p,crit(p.op)),ll=coords(p);
   var h='<button class="xbtn" data-act="close" aria-label="Cerrar">'+ic('x',20)+'</button><div class="m-art">'+art(p)+'</div><div class="m-body">';
-  h+='<div class="m-top"><div><p class="kicker" style="color:var(--brand)">'+TL[p.t]+' · '+(p.t==='obra'?'Entrega '+p.obra.deliv:p.op==='venta'?'En venta':'En arriendo')+'</p><h2>'+esc(p.title)+'</h2><p class="loc" style="margin-top:6px">'+z.n+', '+CITY[z.c]+' · Estrato '+p.est+'</p></div><p class="price">'+priceHTML(p)+'</p></div>';
+  h+='<div class="m-top"><div><p class="kicker" style="color:var(--brand)">'+TL[p.t]+' · '+(p.t==='obra'?'Entrega '+p.obra.deliv:p.op==='venta'?'En venta':'En arriendo')+'</p><h2>'+esc(p.title)+'</h2><p class="loc" style="margin-top:6px">'+z.n+', '+CITY[z.c]+' · <b class="estb">Estrato '+p.est+'</b></p></div><p class="price">'+priceHTML(p)+'</p></div>';
   h+=specsHTML(p);
   h+='<div><p>'+esc(p.d)+'</p><ul class="near" style="margin-top:10px">'+p.tags.map(function(t){return '<li>'+t+'</li>'}).join('')+'</ul>'+(p.src?'<p class="fine" style="margin-top:10px">Fuente: '+esc(p.src)+(p.url?' · <a href="'+esc(p.url)+'" target="_blank" rel="noopener" data-map="1" style="color:var(--brand)">Ver anuncio original</a>':'')+'</p>':'')+'</div>';
+  h+='<section class="m-sec"><h3>Ubicación</h3>'+miniMap(p)+'<div class="mm-foot"><p class="mm-cap">'+ic('pin',16)+'<span><b>'+esc(z.n)+', '+CITY[z.c]+'</b> · Estrato '+p.est+' · A '+walkTxt(n.transporte.m)+' de '+esc(n.transporte.name)+'. Ubicación aproximada: la dirección exacta se comparte al agendar la visita.</span></p>'+mapBtn(ll[0],ll[1],p.title)+'</div></section>';
   if(r)h+='<section class="m-sec why-sec"><h3>¿Por qué te la recomendamos?</h3><ul class="cmp-list open">'+whyList(r,6,4)+'</ul></section>';
   else h+='<section class="m-sec why-sec"><h3>¿Es para ti?</h3><p style="color:var(--muted)">Responde 6 preguntas rápidas y te mostramos qué tan compatible es cada vivienda con lo que buscas.</p><div class="cta" style="margin-top:10px"><button class="btn sm2" data-act="qzopen">Personalizar Habita</button></div></section>';
   h+=fairHTML(p);
-  if(p.ext)h+='<section class="m-sec extbox"><h3>'+ic('asistente',18)+' Encontrada por la IA de Habita</h3><p>No está publicada en Habita. La encontramos en <b>'+esc(p.ext.portal)+'</b> y revisamos que cumple lo que buscas.</p><dl class="facts"><div><dt>Portal</dt><dd>'+esc(p.ext.portal)+'</dd></div><div><dt>Publicada</dt><dd>'+esc(p.ext.ago)+'</dd></div><div><dt>Anunciante</dt><dd>'+esc(p.ext.who)+'</dd></div><div><dt>Código del anuncio</dt><dd>'+esc(p.ext.code)+'</dd></div></dl><p class="fine" style="margin:8px 0 0">Antes de pagar o firmar, verifica la vivienda en persona y confirma la identidad del anunciante.</p></section>';
+  if(p.ext)h+='<section class="m-sec extbox"><h3>'+ic('asistente',18)+' Vivienda de otra fuente</h3><p>No está publicada en Habita: la IA la tomó de <b>'+esc(p.ext.portal)+'</b> y la convirtió en una ficha con la misma información que las de Habita, para que puedas compararla.</p><dl class="facts"><div><dt>Fuente</dt><dd>'+esc(p.ext.portal)+'</dd></div><div><dt>Publicada</dt><dd>'+esc(p.ext.ago)+'</dd></div><div><dt>Anunciante</dt><dd>'+esc(p.ext.who)+'</dd></div><div><dt>Enlace original</dt><dd>Al conectar la fuente</dd></div></dl><p class="fine" style="margin:8px 0 0"><b>Datos de demostración.</b> Así se verán los anuncios de otros portales cuando Habita se conecte a ellos. Antes de pagar o firmar, verifica la vivienda en persona.</p></section>';
   if(p.t==='habitacion')h+=roomHTML(p);
   if(p.t==='obra'&&!p.ext)h+=obraBody(p.obra);
   h+='<section class="m-sec"><h3>Qué hay cerca</h3><ul class="envlist">';
-  Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).slice(0,6).forEach(function(c){h+='<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie · '+N0.format(n[c].m)+' m</span></div></li>'});
-  h+='</ul></section>';
+  Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).forEach(function(c){h+='<li>'+ic(c,22)+'<div><span class="ek">'+CATS[c]+'</span><b>'+esc(n[c].name)+'</b><span>'+walkTxt(n[c].m)+(n[c].m<=2500?' · '+N0.format(n[c].m)+' m':'')+'</span></div></li>'});
+  h+='</ul><p class="fine" style="margin-top:8px">Lugares y distancias aproximados, medidos desde la zona de la vivienda.</p></section>';
   if(p.t!=='obra')h+=costsHTML(p);
-  var fin=financeHTML(p);
-  h+='<details class="more"><summary>Más información</summary><div class="more-b"><h4 class="sec-h">Mapa de comodidades</h4><div class="env"><div>'+radial(p)+'</div><ul class="envlist" style="grid-template-columns:minmax(0,1fr)">'+Object.keys(CATS).sort(function(a,b){return n[a].m-n[b].m}).map(function(c){return '<li>'+ic(c,22)+'<div><b>'+esc(n[c].name)+'</b><span>'+CATS[c]+' · '+walk(n[c].m)+' min a pie</span></div></li>'}).join('')+'</ul></div>'+fin+'</div></details>';
-  h+='<div class="cta">'+(p.ext?'<a class="btn" href="'+esc(p.ext.url)+'" target="_blank" rel="noopener" data-map="1">Ver publicación en '+esc(p.ext.portal)+' ↗</a>':'<button class="btn" data-act="visit" data-id="'+p.id+'">Agendar visita</button>')+'<button class="btn alt" data-act="ccmp" data-id="'+p.id+'" data-keep="1">'+(S.cmp[p.id]?'Quitar de comparar':'Comparar')+'</button><button class="btn alt" data-act="fav" data-id="'+p.id+'" data-keep="1">'+(fav?'Quitar de guardadas':'Guardar')+'</button><button class="btn alt" data-act="mgoal" data-id="'+p.id+'">Crear meta de ahorro</button>'+mapBtn(coords(p)[0],coords(p)[1],p.title)+'</div><p class="fine" style="margin:0">Ubicación aproximada: '+coords(p)[0]+', '+coords(p)[1]+'. La dirección exacta se comparte al agendar la visita.</p></div>';
+  h+='<details class="more"><summary>Más información</summary><div class="more-b"><h4 class="sec-h">Mapa de comodidades</h4><div class="env"><div>'+radial(p)+'</div><p class="fine" style="margin:0">Cada punto es un lugar de “Qué hay cerca”. Los anillos marcan 500 m, 1 km y 2 km desde la vivienda.</p></div>'+financeHTML(p)+'</div></details>';
+  if(p.op==='venta')h+='<aside class="promo"><p class="pr-k">Contenido promocional · demo</p><h3>Beneficios de financiación de vivienda</h3><p>Accede a condiciones preferenciales y beneficios exclusivos para financiar tu vivienda.</p><p class="pr-f">Espacio para entidades financieras. Es un ejemplo: Habita todavía no tiene alianzas con bancos.</p></aside>';
+  h+='<div class="cta">'+(p.ext?'<a class="btn" href="'+esc(p.ext.url)+'" target="_blank" rel="noopener" data-map="1">Buscar similares en '+esc(p.ext.portal)+' ↗</a>':'<button class="btn" data-act="visit" data-id="'+p.id+'">Agendar visita</button>')+'<button class="btn alt" data-act="ccmp" data-id="'+p.id+'" data-keep="1">'+(S.cmp[p.id]?'Quitar de comparar':'Comparar')+'</button><button class="btn alt" data-act="fav" data-id="'+p.id+'" data-keep="1">'+(fav?'Quitar de guardadas':'Guardar')+'</button><button class="btn alt" data-act="mgoal" data-id="'+p.id+'">Crear meta de ahorro</button></div></div>';
   return h;
 }
 var lastFocus=null;
@@ -1826,6 +2061,8 @@ function parsePrompt(text){
   Object.keys(needs).forEach(function(c){if(needs[c].test(t))it.needs.push(c)});
   it.pets=/perro|gato|mascota/.test(t);
   it.park=/parqueadero|garaje|carro|vehiculo|camioneta/.test(t);
+  m=t.match(/(\d{2,3})\s*(?:m2|m²|mts2|mts|metros cuadrados|metros)\b/);
+  if(m){var ar=parseInt(m[1],10);it.area=/(mas de|minimo|al menos|mayor a)\s*\d/.test(t)?[ar,0]:/(menos de|maximo|hasta)\s*\d{2,3}\s*(m2|m²|mts|metros)/.test(t)?[0,ar]:[Math.round(ar*.85),Math.round(ar*1.2)]}
   it.quiet=/tranquil|silencio|calma|calmado/.test(t);
   it.furn=/amoblad|equipad/.test(t);
   it.view=/vista|cerros|panoram/.test(t);
@@ -1881,13 +2118,13 @@ function applyIntent(it,text){
   S.quiet=it.quiet;
   S.f={pets:it.pets,furn:it.furn,inc:/servicios incluidos|todo incluido/.test(t),park:it.park};
   Object.keys(S.f).forEach(function(k){if(!S.f[k])delete S.f[k]});
-  S.minArea=0;S.baths=0;S.sort='rel';
+  S.minArea=0;S.areaR=it.area||null;S.baths=0;S.sort='rel';
   if(/barat|economic|accesible|bajo presupuesto|poco presupuesto/.test(t)&&!S.max){
     S.max=S.op==='arriendo'?(it.types.length&&it.types.every(function(x){return x==='habitacion'})?1.4e6:it.types.indexOf('habitacion')>-1?2.2e6:3e6):400e6;
     notes.push('Interpreté “barato” como un presupuesto de hasta '+money(S.max)+(S.op==='arriendo'?' al mes':'')+'. Puedes cambiarlo arriba.');
   }
-  var understood=it.op||it.types.length||it.budget||it.beds||it.people||it.city||zones.length||uni||it.needs.length||it.pets||it.furn||S.f.inc||it.park||it.quiet;
-  if(!understood){S.q=text;notes.push('No reconocí criterios concretos; busqué esas palabras en los títulos.')}else S.mapOn=!phone();
+  var understood=it.op||it.types.length||it.budget||it.beds||it.area||it.people||it.city||zones.length||uni||it.needs.length||it.pets||it.furn||S.f.inc||it.park||it.quiet;
+  if(!understood){S.q=text;notes.push('No reconocí criterios concretos; busqué esas palabras en los títulos.')}
   var own=filtered().length;
   var found=understood?extFind(text):[];
   if(understood&&found.length)S.extN=found.length;else S.extN=0;
@@ -1895,49 +2132,86 @@ function applyIntent(it,text){
   S.ainotes=notes;
 }
 
-/* ---------- la IA busca tambien en otros portales ----------
-   Cada busqueda con IA arma 2 o 3 hallazgos de portales externos que cumplen los criterios
-   que Habita entendio. Se muestran junto a los resultados propios y se marcan con su portal. */
-var PORTALS=[['Finca Raíz','fincaraiz.com.co'],['Metrocuadrado','metrocuadrado.com'],['Facebook Marketplace','facebook.com/marketplace'],['Ciencuadras','ciencuadras.com'],['Properati','properati.com.co']];
+/* ---------- la IA también trae viviendas de otras fuentes ----------
+   Arquitectura: cada fuente es un adaptador con la misma forma.
+     search(criterios) -> lista de anuncios crudos de esa fuente
+     normalize(anuncio crudo) -> vivienda de Habita (mismos campos que las propias: precio, zona, área,
+       habitaciones, baños, parqueadero, estrato, características, fuente y enlace)
+   Las viviendas normalizadas se mezclan con las de Habita y se ordenan por compatibilidad.
+   En este MVP todas las fuentes están en modo 'demo': generan anuncios de ejemplo marcados como
+   demostración. Para conectar una fuente real basta con que search() consulte un servidor propio
+   (API o feed autorizado del portal) y devuelva sus anuncios; normalize() no cambia.
+   La app nunca hace scraping de sitios que no lo permiten. */
+var SOURCES=[
+ {id:'fincaraiz',name:'Finca Raíz',domain:'fincaraiz.com.co',mode:'demo'},
+ {id:'metrocuadrado',name:'Metrocuadrado',domain:'metrocuadrado.com',mode:'demo'},
+ {id:'ciencuadras',name:'Ciencuadras',domain:'ciencuadras.com',mode:'demo'},
+ {id:'properati',name:'Properati',domain:'properati.com.co',mode:'demo'},
+ {id:'marketplace',name:'Facebook Marketplace',domain:'facebook.com/marketplace',mode:'demo'}
+];
 var AGO=['hoy','ayer','hace 2 días','hace 3 días','hace 5 días','hace 1 semana'];
 var WHO=['Dueño directo','Inmobiliaria','Particular','Administrador del edificio'];
 function saveExt(){try{MEM.setItem('habita.ext',JSON.stringify(P.filter(function(p){return p.ext&&(S.fav[p.id]||S.cmp[p.id])})))}catch(e){}}
+/* criterios que la IA entendió, en el formato que reciben las fuentes */
+function extCriteria(text){
+  return {text:text,op:S.op,city:S.city,types:S.type!=='todos'?[S.type]:S.typeSet.slice(),max:S.max,beds:S.beds,people:S.people,area:S.areaR||(S.minArea?[S.minArea,0]:null),
+    zones:S.zones.length?S.zones.slice():S.nearZone?[S.nearZone]:[],near:S.nearZone,park:!!S.f.park,pets:!!S.f.pets,furn:!!S.f.furn,inc:!!S.f.inc};
+}
+/* fuente de demostración: arma anuncios crudos coherentes con los criterios */
+function demoSearch(src,c,seed,count){
+  var R=function(k){return rnd(seed+':'+src.id+':'+k)},out=[];
+  var types=c.types.length?c.types:(c.op==='venta'?['apto','casa','apto']:['apto','apartaestudio','apto']);
+  var zs=c.zones.length?c.zones.slice():Object.keys(Z).filter(function(k){return Z[k].c===c.city});
+  if(c.near&&c.zones.length===1)Object.keys(Z).forEach(function(k){if(k!==c.near&&Z[k].c===c.city&&hav(ZC[k][0],ZC[k][1],ZC[c.near][0],ZC[c.near][1])<3.2)zs.push(k)});
+  for(var i=0;i<count;i++){
+    var t=types[Math.floor(R('t'+i)*types.length)],z=zs[Math.floor(R('z'+i)*zs.length)];
+    if(t==='obra'&&c.op!=='venta')t='apto';
+    if(t==='habitacion'&&c.op==='venta')t='apto';
+    var beds=t==='habitacion'?Math.max(1,c.people||1):t==='apartaestudio'?1:Math.max(c.beds||0,t==='casa'?3:(R('b'+i)>.5?2:3),c.people?Math.ceil(c.people/2):0);
+    var area=t==='habitacion'?12+Math.round(R('a'+i)*6):t==='apartaestudio'?28+Math.round(R('a'+i)*12):t==='casa'?120+Math.round(R('a'+i)*80):beds*20+16+Math.round(R('a'+i)*14);
+    if(c.area&&t!=='habitacion'){var lo=c.area[0],hi=c.area[1]||Math.max(lo*1.6,lo+40);area=Math.round(lo+(hi-lo)*(.15+R('aa'+i)*.7))}
+    out.push({ref:String(100000+Math.floor(R('c'+i)*900000)),zone:z,kind:t,op:c.op,m2:area,rooms:beds,
+      bathrooms:t==='habitacion'?(R('h'+i)>.6?1:0):t==='apartaestudio'?1:Math.max(1,beds>=3?2:(R('h'+i)>.5?2:1)),
+      parking:c.park||(t!=='habitacion'&&R('k'+i)>.55)?1:0,furnished:c.furn||(t==='habitacion'&&R('f'+i)>.3),utilities:c.inc||(t==='habitacion'&&R('i'+i)>.4),
+      pets:c.pets||R('m'+i)>.6,published:AGO[Math.floor(R('g'+i)*AGO.length)],advertiser:WHO[Math.floor(R('w'+i)*WHO.length)],r:R('p'+i),r2:R('q'+i),r3:R('x'+i),r4:R('y'+i),i:i});
+  }
+  return out;
+}
+/* convierte un anuncio crudo en una vivienda de Habita */
+function normalizeExt(src,a,c){
+  var zz=Z[a.zone],t=a.kind,p={id:'x'+src.id.slice(0,3)+a.ref,z:a.zone,t:t,op:a.op,area:a.m2,beds:a.rooms,baths:a.bathrooms,park:a.parking,est:clamp(zz.e+(a.r3>.8?1:a.r3<.15?-1:0),1,6),
+    x:clamp(zz.x+(a.r3-.5)*12,4,96),y:clamp(zz.y+(a.r4-.5)*12,4,96),tags:[],price:0};
+  if(t==='habitacion'){p.room=a.rooms>1?'compartida':'privada';p.bath=a.bathrooms?'privado':'compartido';p.inc=a.utilities?1:0;p.furn=a.furnished?1:0;p.rules=['Contrato mínimo de 6 meses',a.r>.5?'No fumar':'Visitas hasta las 10 p. m.'];p.tags.push('wifi')}
+  if(a.furnished){p.tags.push('amoblado');p.furn=1}
+  if(a.utilities){p.tags.push('servicios incluidos');p.inc=1}
+  if(a.pets)p.tags.push('mascotas');
+  if(c.near||zz.o.universidad[1]<1200)p.tags.push('cerca a universidad');
+  p.tags.push(['seguridad','zonas comunes','tranquilo','vista'][a.i%4]);
+  if(t==='obra'){p.obra={id:p.id,deliv:(2027+a.i%2)+(a.i%2?' (1.er semestre)':' (2.º semestre)'),progress:20+Math.round(a.r2*40),pm2:zz.m2*0.82e6,roi:'6%',builder:src.name,areas:[a.m2,a.m2+12],ini:30,cuotas:24,sep:5e6};S.Q[p.id]={a:a.m2,l:'medio'}}
+  var avg=fair(Object.assign({},p,{price:1})),base=avg?avg.avg:zz.m2*0.85e6*a.m2,price=base*(0.84+a.r*0.22);
+  if(c.max)price=Math.min(price,c.max*(0.8+a.r2*0.17));
+  var u=a.op==='venta'?1e6:1e4;p.price=Math.max(u,Math.round(price/u)*u);
+  if(a.op==='venta'){p.rent=Math.round(p.price*0.0048/1e4)*1e4;p.g=+(4.5+a.r2*2).toFixed(1)}
+  var adj=['con balcón','recién remodelado','cerca al transporte','en conjunto cerrado','de dueño directo','con buena luz'][(a.i+src.id.length)%6];
+  if(t==='habitacion'||t==='casa'||t==='obra')adj=adj.replace('remodelado','remodelada');
+  p.title=TL[t]+' '+adj+' en '+zz.b[a.i%zz.b.length];
+  var q=TL[t]+' '+(a.op==='venta'?'en venta':'en arriendo')+' '+zz.n+' '+CITY[zz.c];
+  p.ext={src:src.id,portal:src.name,mode:src.mode,url:'https://www.google.com/search?q='+encodeURIComponent('site:'+src.domain+' '+q),ago:a.published,who:a.advertiser,code:a.ref};
+  p.d=(t==='habitacion'?'Habitación '+(p.room==='compartida'?'compartida':'privada')+' con baño '+(p.bath==='privado'?'privado':'compartido')+'. ':p.beds+(p.beds===1?' alcoba':' alcobas')+', '+p.baths+(p.baths===1?' baño':' baños')+(p.park?', parqueadero':'')+' y '+p.area+' m². ')+'Anuncio de '+src.name+' ('+a.published+', '+a.advertiser.toLowerCase()+'). Ejemplo de demostración.';
+  return p;
+}
 function extFind(text){
   P=P.filter(function(p){return !p.ext||S.fav[p.id]||S.cmp[p.id]});
-  var seed=hash(norm(text)+S.city+S.op),R=function(k){return rnd(seed+':'+k)};
-  var types=S.type!=='todos'?[S.type]:S.typeSet.length?S.typeSet.slice():(S.op==='venta'?['apto','casa','apto']:['apto','apartaestudio','apto']);
-  var zs=S.zones.length?S.zones.slice():S.nearZone?[S.nearZone]:Object.keys(Z).filter(function(k){return Z[k].c===S.city});
-  if(S.nearZone&&!S.zones.length)Object.keys(Z).forEach(function(k){if(k!==S.nearZone&&Z[k].c===S.city&&hav(ZC[k][0],ZC[k][1],ZC[S.nearZone][0],ZC[S.nearZone][1])<3.2)zs.push(k)});
-  var n=2+(seed%2),out=[];
+  var c=extCriteria(text),seed=hash(norm(text)+S.city+S.op),out=[],used={};
+  var n=3+(seed%2);
   for(var i=0;i<n;i++){
-    var t=types[(seed+i)%types.length],z=zs[((seed>>>4)+i)%zs.length],zz=Z[z],po=PORTALS[(seed+i*3)%PORTALS.length];
-    if(t==='obra'&&S.op!=='venta')t='apto';
-    var beds=t==='habitacion'?Math.max(1,S.people||1):t==='apartaestudio'?1:Math.max(S.beds||0,t==='casa'?3:(R('b'+i)>.5?2:3),S.people?Math.ceil(S.people/2):0);
-    var area=t==='habitacion'?12+Math.round(R('a'+i)*6):t==='apartaestudio'?28+Math.round(R('a'+i)*12):t==='casa'?120+Math.round(R('a'+i)*80):Math.max(S.minArea||0,beds*20+16+Math.round(R('a'+i)*14));
-    var baths=t==='habitacion'?(R('h'+i)>.6?1:0):t==='apartaestudio'?1:Math.max(S.baths||0,beds>=3?2:(R('h'+i)>.5?2:1));
-    var p={id:'x'+(seed+i*7919).toString(36),z:z,t:t,op:S.op,area:area,beds:beds,baths:baths,park:S.f.park||(t!=='habitacion'&&R('k'+i)>.55)?1:0,est:Math.max(2,Math.min(6,Math.round(zz.m2/2))),
-      x:clamp(zz.x+[-6,6,-1][i%3]+(R('x'+i)-.5)*2,4,96),y:clamp(zz.y+[5,-4,9][i%3]+(R('y'+i)-.5)*2,4,96),tags:[],price:0};
-    if(t==='habitacion'){p.room=beds>1?'compartida':'privada';p.bath=baths?'privado':'compartido';p.inc=S.f.inc||R('i'+i)>.4?1:0;p.furn=S.f.furn||R('f'+i)>.3?1:0;p.rules=['Contrato mínimo de 6 meses',R('r'+i)>.5?'No fumar':'Visitas hasta las 10 p. m.'];if(p.inc)p.tags.push('servicios incluidos');if(p.furn)p.tags.push('amoblado');p.tags.push('wifi')}
-    if(S.f.furn&&p.tags.indexOf('amoblado')<0){p.tags.push('amoblado');p.furn=1}
-    if(S.f.inc&&p.tags.indexOf('servicios incluidos')<0){p.tags.push('servicios incluidos');p.inc=1}
-    if(S.f.pets||R('m'+i)>.6)p.tags.push('mascotas');
-    if(S.nearZone||Z[z].o.universidad&&Z[z].o.universidad[1]<1000)p.tags.push('cerca a universidad');
-    p.tags.push(['seguridad','zonas comunes','tranquilo','vista'][(seed+i)%4]);
-    if(t==='obra'){p.obra={id:p.id,deliv:(2027+i%2)+'-'+(i%2?'I':'II'),progress:20+Math.round(R('o'+i)*40),pm2:zz.m2*0.82e6,roi:'11%',builder:po[0],areas:[area,area+12],ini:30,cuotas:24,sep:5e6};S.Q[p.id]={a:area,l:'medio'}}
-    var avg=fair(Object.assign({},p,{price:1}));
-    var base=avg?avg.avg:zz.m2*0.85e6*area;
-    var price=base*(0.84+R('p'+i)*0.22);
-    if(S.max)price=Math.min(price,S.max*(0.8+R('q'+i)*0.17));
-    var u=S.op==='venta'?1e6:1e4;p.price=Math.max(u,Math.round(price/u)*u);
-    if(S.op==='venta'){p.rent=Math.round(p.price*0.0048/1e4)*1e4;p.g=+(4.5+R('g'+i)*2).toFixed(1)}
-    var adj=['con balcón','recién remodelado','cerca al transporte','en conjunto cerrado','de dueño directo','con buena luz'][(seed+i*5)%6];
-    if(t==='habitacion'||t==='casa'||t==='obra')adj=adj.replace('remodelado','remodelada');
-    p.title=TL[t]+' '+adj+' en '+zz.n;
-    var code=String(100000+(seed+i*104729)%900000);
-    p.ext={portal:po[0],url:po[1].indexOf('facebook')===0?'https://www.facebook.com/marketplace/item/'+code+'48213':'https://www.'+po[1]+'/'+norm(TL[t]).replace(/\s+/g,'-')+'-'+(S.op==='venta'?'en-venta':'en-arriendo')+'/'+norm(CITY[zz.c]).replace(/\s+/g,'-')+'/'+norm(zz.n).replace(/\s+/g,'-')+'/'+code,ago:AGO[(seed+i)%AGO.length],who:WHO[(seed+i*2)%WHO.length],code:code};
-    p.d=(t==='habitacion'?'Habitación '+(p.room==='compartida'?'compartida':'privada')+' con baño '+(p.bath==='privado'?'privado':'compartido')+'. ':beds+(beds===1?' alcoba':' alcobas')+', '+baths+(baths===1?' baño':' baños')+' y '+area+' m². ')+'Publicada en '+po[0]+' '+p.ext.ago+' por '+p.ext.who.toLowerCase()+'.';
-    out.push(p);
+    var src=SOURCES[(seed+i*2)%SOURCES.length];used[src.name]=1;
+    var raw=src.mode==='demo'?demoSearch(src,c,seed+i*7919,1):[];
+    var a=raw[0];if(!a)continue;a.i=i;
+    var p=normalizeExt(src,a,c);
+    if(!P.some(function(x){return x.id===p.id})&&!out.some(function(x){return x.id===p.id}))out.push(p);
   }
+  S.extSrc=Object.keys(used).join(', ');
   out.forEach(function(x){P.push(x)});
   return out;
 }
@@ -1951,15 +2225,14 @@ function smartSearch(text){
   }
   S.helpMsg='';
   if(hasUrl||looksLikeListing(text)){S.aiText=text;S.imp=parseListing(text);S.ainotes=[];renderAIPanel();return}
-  applyIntent(parsePrompt(text),text);
-  syncUI();
+  updating('Buscando en Habita y en otras fuentes…',function(){applyIntent(parsePrompt(text),text);syncUI()});
 }
 function clearSearch(){
-  S.aiText='';S.extN=0;S.q='';S.imp=null;S.helpMsg='';S.ainotes=[];S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.quiet=false;S.minArea=0;S.baths=0;S.max=0;S.beds=0;S.type='todos';
+  S.aiText='';S.extN=0;S.q='';S.imp=null;S.helpMsg='';S.ainotes=[];S.typeSet=[];S.zones=[];S.nearZone=null;S.nearName='';S.needs=[];S.f={};S.people=0;S.quiet=false;S.minArea=0;S.areaR=null;S.relaxed=[];S.baths=0;S.max=0;S.beds=0;S.type='todos';
   syncUI();
 }
 function syncUI(){
-  priceOptions();syncFilters();renderExplore();renderAIPanel();renderPlanLine();
+  renderExplore();renderAIPanel();renderPlanLine();
 }
 function mny(v){return money(v).replace('$ ','$')}
 var NEEDE={transporte:'🚇',supermercado:'🛒',parque:'🌳',universidad:'🎓',salud:'🏥',gimnasio:'🏋️',restaurantes:'🍽️',colegio:'🏫'};
@@ -1969,6 +2242,7 @@ function activeTags(){
   var t=[];
   if(S.type!=='todos')t.push([TL[S.type],'type',0,TYPEE[S.type]]);else if(S.typeSet.length)t.push([S.typeSet.map(function(k){return TL[k]}).join(' o '),'type',0,TYPEE[S.typeSet[0]]]);
   if(S.beds)t.push([S.beds+(S.beds===1?' habitación':' habitaciones')+(S.beds>1?' o más':''),'beds',0,'🛏']);
+  if(S.areaR)t.push([areaTxt(S.areaR),'area',0,'📐']);
   if(S.people)t.push(['Para '+S.people+(S.people===1?' persona':' personas'),'people',0,'👥']);
   if(S.nearZone)t.push(['Cerca de '+shortPlace(S.nearName),'near',0,'📍']);
   if(S.zones.length)t.push([S.zones.map(function(z){return Z[z].n}).join(', '),'zones',0,'📍']);
@@ -1993,8 +2267,8 @@ function renderAIPanel(){
     var n=S.items?S.items.length:0;
     h='<p class="ai-h">'+ic('asistente',15)+'<b>Esto entendí</b><span class="ai-n">'+(n?n+(n===1?' opción para ti':' opciones para ti'):'Sin resultados')+'</span><button type="button" class="ai-x" data-act="aiclear">Borrar búsqueda</button></p><ul class="understood">'+activeTags().map(function(x){return '<li class="tag'+(x[2]?' soft':'')+'">'+(x[3]?'<span class="te" aria-hidden="true">'+x[3]+'</span>':'')+esc(x[0])+(x[1]?'<button type="button" data-act="untag" data-k="'+x[1]+'" aria-label="Quitar: '+esc(x[0])+'">'+ic('x',12)+'</button>':'')+'</li>'}).join('')+'</ul>';
     (S.ainotes||[]).forEach(function(x){h+='<p class="fine" style="margin:4px 0 0">'+esc(x)+'</p>'});
-    if(S.extN)h+='<p class="ai-web">'+ic('asistente',14)+'<span>También busqué en Finca Raíz, Metrocuadrado, Ciencuadras y Facebook Marketplace: <b>'+S.extN+(S.extN===1?' opción que no está':' opciones que no están')+' en Habita</b>.</span></p>';
-    h+='<p class="ai-hint">¿Algo no es correcto? Quítalo con la ×.</p>';
+    if(S.extN)h+='<p class="ai-web">'+ic('asistente',14)+'<span>Sumé a tus resultados <b>'+S.extN+(S.extN===1?' vivienda':' viviendas')+' de otras fuentes</b> ('+esc(S.extSrc||'')+'), con precio, área y ubicación, ordenadas junto a las de Habita. Son datos de demostración y se marcan con «demo».</span></p>';
+    h+='<div class="ai-foot"><p class="ai-hint">¿Algo no es correcto? Quítalo con la × o edita tu búsqueda.</p><button type="button" class="btn alt sm2" data-act="qzopen">'+ic('edit',15)+'Editar búsqueda</button></div>';
   }
   el.innerHTML=h;
 }
@@ -2002,6 +2276,7 @@ function untag(k){
   if(k==='type'){S.type='todos';S.typeSet=[]}
   else if(k==='max')S.max=0;
   else if(k==='beds')S.beds=0;
+  else if(k==='area')S.areaR=null;
   else if(k==='people')S.people=0;
   else if(k==='near'){S.nearZone=null;S.nearName=''}
   else if(k==='zones')S.zones=[];
@@ -2066,7 +2341,21 @@ var QN=6;
 function openQuiz(edit){
   var a=hasPlan()?JSON.parse(JSON.stringify(PREF)):defPref();
   a.city=a.city||S.city;
-  if(!hasPlan()&&S.aiText){a.types=S.type!=='todos'?[S.type]:S.typeSet.slice();a.op=S.op;a.city=S.city}
+  /* si la búsqueda actual vino de la IA, el cuestionario abre con lo que la IA entendió */
+  if(S.aiText){
+    var rent=S.op==='arriendo',L=rent?RENTR:BUYR,bud=null;
+    if(S.max)for(var j=0;j<L.length;j++){if(L[j][1]&&L[j][1]>=S.max){bud=L[j].slice(0,2);break}}
+    a.types=S.type!=='todos'?[S.type]:S.typeSet.slice();a.op=S.op;a.city=S.city;
+    if(rent)a.rent=bud;else a.buy=bud;
+    a.beds=S.beds||0;a.area=S.areaR||null;if(S.f.park)a.park=true;
+    var u=UNIS.filter(function(x){return x[1]===S.nearName})[0];
+    if(S.nearZone){a.where='near';a.near=u?{id:u[0],z:u[2],n:u[1]}:{id:'z'+S.nearZone,z:S.nearZone,n:Z[S.nearZone].n}}
+    else if(S.zones.length===1){a.where='zona';a.zone=S.zones[0]}
+    var im=a.imp.slice();
+    S.needs.forEach(function(k){var m={transporte:'transporte',parque:'parque',gimnasio:'gimnasio',salud:'salud',colegio:'colegio',restaurantes:'comercial',supermercado:'comercial'}[k];if(m&&im.indexOf(m)<0)im.push(m)});
+    if(S.f.pets&&im.indexOf('mascotas')<0)im.push('mascotas');if(S.f.furn&&im.indexOf('amoblado')<0)im.push('amoblado');if(S.f.inc&&im.indexOf('servicios')<0)im.push('servicios');
+    a.imp=im;
+  }
   S.qz={i:0,edit:!!edit,a:a,t:0};
   $('#quiz').hidden=false;document.body.style.overflow='hidden';nmSync();
   renderQuiz();
@@ -2115,8 +2404,8 @@ function renderQuiz(){
     h+='<h3>¿Qué quieres hacer?</h3><div class="qgrid c3">'+qOpt('op','arriendo','Arrendar',a.op==='arriendo')+qOpt('op','venta','Comprar',a.op==='venta')+qOpt('op','ambas','Ambas / todavía no sé',a.op==='ambas')+'</div>';
   }else if(i===2){
     h+='<h3>¿Cuál es tu presupuesto aproximado?</h3><p class="qz-sub">Elige un rango. Solo lo usamos para ordenar lo que ves.</p>';
-    if(a.op!=='venta'){h+='<h4 class="qz-h">Arriendo al mes</h4><div class="qchips">'+RENTR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="rent" data-v="'+j+'" aria-pressed="'+!!(a.rent&&a.rent[0]===r[0]&&a.rent[1]===r[1])+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="rent" data-v="x" aria-pressed="'+(a.rent===null?'false':'false')+'">Sin límite</button></div>'}
-    if(a.op!=='arriendo'){h+='<h4 class="qz-h">Compra</h4><div class="qchips">'+BUYR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="buy" data-v="'+j+'" aria-pressed="'+!!(a.buy&&a.buy[0]===r[0]&&a.buy[1]===r[1])+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="buy" data-v="x" aria-pressed="false">Sin límite</button></div>'}
+    if(a.op!=='venta'){h+='<h4 class="qz-h">Arriendo al mes</h4><div class="qchips">'+RENTR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="rent" data-v="'+j+'" aria-pressed="'+sameR(a.rent,r)+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="rent" data-v="x" aria-pressed="'+sameR(a.rent,[0,0])+'">Sin límite</button></div>'}
+    if(a.op!=='arriendo'){h+='<h4 class="qz-h">Compra</h4><div class="qchips">'+BUYR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="buy" data-v="'+j+'" aria-pressed="'+sameR(a.buy,r)+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="buy" data-v="x" aria-pressed="'+sameR(a.buy,[0,0])+'">Sin límite</button></div>'}
   }else if(i===3){
     h+='<h3>¿Dónde te gustaría vivir?</h3><h4 class="qz-h">Ciudad</h4><div class="qchips">'+Object.keys(CITY).map(function(c){return '<button type="button" class="chip" data-act="qpick" data-k="city" data-v="'+c+'" aria-pressed="'+(a.city===c)+'">'+CITY[c]+'</button>'}).join('')+'</div>';
     h+='<h4 class="qz-h">¿Algo más específico?</h4><div class="qgrid c3">'+qOpt('where','',   'Toda la ciudad',!a.where)+qOpt('where','zona','Una zona o barrio',a.where==='zona')+qOpt('where','near','Cerca de universidad o trabajo',a.where==='near')+'</div>';
@@ -2127,7 +2416,14 @@ function renderQuiz(){
       h+='<p class="qz-sub" style="margin-top:12px">O la zona de tu trabajo</p><div class="qchips">'+zs.map(function(k){return '<button type="button" class="chip" data-act="qpick" data-k="nearz" data-v="'+k+'" aria-pressed="'+!!(a.near&&a.near.id==='z'+k)+'">'+Z[k].n+'</button>'}).join('')+'</div>';
     }
   }else if(i===4){
-    h+='<h3>¿Cuántas habitaciones necesitas?</h3><div class="qgrid c4">'+[1,2,3,4].map(function(n){return qOpt('beds',n,n===4?'4 o más':String(n),a.beds===n)}).join('')+'</div><div class="qchips" style="margin-top:10px">'+'<button type="button" class="chip" data-act="qpick" data-k="beds" data-v="0" aria-pressed="'+(!a.beds)+'">Me da igual</button></div><p class="qz-sub" style="margin-top:10px">Si buscas una habitación, esto no aplica.</p>';
+    var onlyRoom=a.types.length&&a.types.every(function(t){return t==='habitacion'});
+    h+='<h3>¿Cuánto espacio necesitas?</h3>';
+    if(onlyRoom)h+='<p class="qz-sub">Buscas una habitación: el número de habitaciones, el área y el parqueadero no aplican. Puedes seguir.</p>';
+    else{
+      h+='<h4 class="qz-h">Habitaciones</h4><div class="qgrid c4">'+[1,2,3,4].map(function(n){return qOpt('beds',n,n===4?'4 o más':String(n),a.beds===n)}).join('')+'</div><div class="qchips"><button type="button" class="chip" data-act="qpick" data-k="beds" data-v="0" aria-pressed="'+(!a.beds)+'">Me da igual</button></div>';
+      h+='<h4 class="qz-h">Tamaño (área)</h4><div class="qchips">'+AREAR.map(function(r,j){return '<button type="button" class="chip" data-act="qpick" data-k="area" data-v="'+j+'" aria-pressed="'+sameR(a.area,r)+'">'+r[2]+'</button>'}).join('')+'<button type="button" class="chip" data-act="qpick" data-k="area" data-v="x" aria-pressed="'+(!a.area)+'">Me da igual</button></div>';
+      h+='<h4 class="qz-h">¿Necesitas parqueadero privado?</h4><div class="qchips"><button type="button" class="chip" data-act="qpick" data-k="park" data-v="1" aria-pressed="'+(a.park===true)+'">Sí, lo necesito</button><button type="button" class="chip" data-act="qpick" data-k="park" data-v="0" aria-pressed="'+(a.park===false)+'">No es necesario</button></div>';
+    }
   }else{
     h+='<h3>¿Qué cosas son importantes para ti?</h3><p class="qz-sub">Elige las que quieras. Con esto calculamos qué tan compatible es cada vivienda.</p><div class="qchips big">'+IMPS.map(function(x){return '<button type="button" class="chip" data-act="qpick" data-k="imp" data-v="'+x[0]+'" aria-pressed="'+(a.imp.indexOf(x[0])>-1)+'">'+x[1]+'</button>'}).join('')+'</div>';
   }
@@ -2153,6 +2449,8 @@ function qPick(k,v){
   else if(k==='near'){var u=UNIS.filter(function(x){return x[0]===v})[0];a.near={id:u[0],z:u[2],n:u[1]}}
   else if(k==='nearz'){a.near={id:'z'+v,z:v,n:Z[v].n}}
   else if(k==='beds')a.beds=+v;
+  else if(k==='area')a.area=v==='x'?null:AREAR[+v].slice(0,2);
+  else if(k==='park')a.park=v==='1';
   else if(k==='imp'){var m=a.imp.indexOf(v);if(m>-1)a.imp.splice(m,1);else a.imp.push(v)}
   renderQuiz();
 }
@@ -2184,40 +2482,148 @@ function applyPref(){
   var okOp=function(op){return P.some(function(p){return p.op===op&&Z[p.z].c===S.city&&(S.type==='todos'?(!S.typeSet.length||S.typeSet.indexOf(p.t)>-1):p.t===S.type)})};
   if(!okOp(S.op)&&okOp(S.op==='venta'?'arriendo':'venta'))S.op=S.op==='venta'?'arriendo':'venta';
   var b=S.op==='arriendo'?pf.rent:pf.buy;S.max=(b&&b[1])||0;
-  S.beds=pf.types.length&&pf.types.every(function(t){return t==='habitacion'})?0:(pf.beds||0);
+  var room=pf.types.length&&pf.types.every(function(t){return t==='habitacion'});
+  S.beds=room?0:(pf.beds||0);
+  S.areaR=room?null:(pf.area||null);
+  if(pf.park===true&&!room)S.f.park=true;
   if(pf.where==='zona'&&pf.zone)S.zones=[pf.zone];
   if(pf.where==='near'&&pf.near){S.nearZone=pf.near.z;S.nearName=pf.near.n}
-  var steps=[function(){if(S.zones.length){S.zones=[]}},function(){if(S.beds)S.beds=0},function(){if(S.max)S.max=Math.round(S.max*1.25)}];
-  for(var k=0;k<steps.length&&!filtered().length;k++)steps[k]();
+  /* si nada coincide, se amplía la búsqueda paso a paso y se le cuenta al usuario qué se flexibilizó */
+  var steps=[[function(){return S.zones.length},function(){S.zones=[]},'la zona'],[function(){return S.areaR},function(){S.areaR=null},'el tamaño'],[function(){return S.beds},function(){S.beds=0},'las habitaciones'],[function(){return S.f.park},function(){delete S.f.park},'el parqueadero'],[function(){return S.max},function(){S.max=Math.round(S.max*1.25)},'el presupuesto (+25%)']];
+  S.relaxed=[];
+  for(var k=0;k<steps.length&&!filtered().length;k++){if(steps[k][0]()){steps[k][1]();S.relaxed.push(steps[k][2])}}
+  for(var q=0;q<3&&S.max&&!filtered().length;q++){S.max=Math.round(S.max*1.25);if(S.relaxed.indexOf('el presupuesto (+25%)')<0)S.relaxed.push('el presupuesto (+25%)')}
+  S.relaxed=S.relaxed.map(function(x){return x==='el presupuesto (+25%)'&&S.max?'el presupuesto (hasta '+mny(S.max)+')':x});
   S.sort='rel';S.sortUser=false;S.mapOn=false;
   setView('explorar');
   syncUI();
 }
-/* Tu búsqueda: lo que dijiste en el cuestionario (o lo que entendió la IA) y un solo botón para cambiarlo */
+/* Tu búsqueda: las preferencias elegidas, visibles como etiquetas, y un solo botón para cambiarlas (abre el mismo cuestionario) */
+function searchChips(){
+  var c=[],rent=S.op==='arriendo';
+  c.push(S.type!=='todos'?TL[S.type]:S.typeSet.length?S.typeSet.map(function(k){return TL[k]}).join(' o '):'Cualquier vivienda');
+  c.push(rent?'En arriendo':'En venta');
+  if(S.max)c.push('Hasta '+mny(S.max)+(rent?' al mes':''));
+  else if(hasPlan()&&sameR(rent?PREF.rent:PREF.buy,[0,0]))c.push('Sin límite de precio');
+  if(S.beds)c.push(S.beds+(S.beds===1?' habitación':' habitaciones')+(S.beds>1?' o más':''));
+  if(S.areaR)c.push(areaTxt(S.areaR));
+  if(S.f.park)c.push('Parqueadero');
+  if(S.nearZone)c.push('Cerca de '+shortPlace(S.nearName));else if(S.zones.length)c.push(S.zones.map(function(z){return Z[z].n}).join(', '));
+  c.push(CITY[S.city]);
+  if(S.f.pets)c.push('Acepta mascotas');if(S.f.furn)c.push('Amoblado');if(S.f.inc)c.push('Servicios incluidos');
+  if(hasPlan())PREF.imp.forEach(function(k){var x=IMPS.filter(function(y){return y[0]===k})[0];if(x&&['mascotas','amoblado','servicios'].indexOf(k)<0)c.push(x[1])});
+  return c;
+}
 function renderPlanLine(){
   var el=$('#planLine');if(!el)return;
-  var parts=[];
-  parts.push(S.type!=='todos'?TL[S.type]:S.typeSet.length?S.typeSet.map(function(k){return TL[k]}).join(' o '):'Cualquier vivienda');
-  parts.push(S.op==='venta'?'Comprar':'Arrendar');
-  parts.push(CITY[S.city]);
   var sel=S.only?'<button type="button" class="chip xs" data-act="onlyclear" aria-pressed="true">Selección '+ic('x',13)+'</button>':'';
-  if(hasPlan()||S.aiText)el.innerHTML='<p class="ms-t"><span class="ms-k">Tu búsqueda</span><b>'+esc(parts.join(' · '))+'</b></p>'+sel+'<button type="button" class="btn alt ms-b" data-act="qzopen">'+ic('edit',15)+'Editar búsqueda</button>';
+  el.hidden=!!S.aiText&&!S.only;
+  if(S.aiText)el.innerHTML=sel;
+  else if(hasPlan())el.innerHTML='<div class="ms-t"><span class="ms-k">Tu búsqueda</span><ul class="ms-chips">'+searchChips().map(function(x){return '<li>'+esc(x)+'</li>'}).join('')+'</ul>'+(S.relaxed&&S.relaxed.length?'<p class="ms-note">No había opciones con todo lo que elegiste: ampliamos '+esc(S.relaxed.join(', '))+'.</p>':'')+'</div>'+sel+'<button type="button" class="btn alt ms-b" data-act="qzopen">'+ic('edit',16)+'Editar búsqueda</button>';
   else el.innerHTML='<p class="ms-t"><span class="ms-k">Personaliza tus resultados</span><b>Responde 6 preguntas y te mostramos lo que encaja contigo</b></p>'+sel+'<button type="button" class="btn ms-b" data-act="qzopen">Empezar</button>';
 }
 
+/* ---------- perfil: cuenta sencilla y membresía ----------
+   Para la feria no se piden datos reales ni se cobra nada: la cuenta y el plan viven en la memoria
+   de esta sesión, igual que las guardadas y las metas. */
+var PLANS=[
+ {id:'basico',n:'Básico',price:'Gratis',for:'Para buscar y decidir',inc:['Búsqueda con IA y cuestionario','Hasta 5 viviendas guardadas','3 comparaciones al día','1 búsqueda guardada','Meta de ahorro']},
+ {id:'plus',n:'Plus',price:'$14.900 / mes',for:'Para comparar a fondo',inc:['Todo lo de Básico','Viviendas guardadas sin límite','Comparaciones sin límite','Hasta 10 búsquedas guardadas','Análisis financiero avanzado: simulador de crédito y rentabilidad']},
+ {id:'business',n:'Business',price:'$89.900 / mes',for:'Para publicar viviendas',inc:['Todo lo de Plus','Publica hasta 20 viviendas','Publicaciones destacadas en Explorar','Estadísticas de visitas a tus anuncios','Perfil de anunciante verificado']}
+];
+var LIMITS={basico:{fav:5,cmp:3,searches:1},plus:{fav:0,cmp:0,searches:10},business:{fav:0,cmp:0,searches:10}};
+S.user=null;S.accounts={};S.pf={mode:'signup',pick:null};
+function planOf(){return S.user?S.user.plan:'basico'}
+function planName(id){return PLANS.filter(function(x){return x.id===id})[0].n}
+function ageOf(d){var b=new Date(d+'T00:00:00');if(isNaN(b))return null;var n=new Date(),a=n.getFullYear()-b.getFullYear();if(n.getMonth()<b.getMonth()||(n.getMonth()===b.getMonth()&&n.getDate()<b.getDate()))a--;return a}
+function birthTxt(d){var b=new Date(d+'T00:00:00');return isNaN(b)?d:b.toLocaleDateString('es-CO',{day:'numeric',month:'long',year:'numeric'})}
+/* qué cambia al pasar de un plan a otro */
+function planDiff(from,to){
+  var A=LIMITS[from],B=LIMITS[to],o=[],lim=function(v,u){return v?'hasta '+v+' '+u:'sin límite'};
+  if(A.fav!==B.fav)o.push('Viviendas guardadas: '+lim(A.fav,'')+' → '+lim(B.fav,''));
+  if(A.cmp!==B.cmp)o.push('Comparaciones al día: '+lim(A.cmp,'')+' → '+lim(B.cmp,''));
+  if(A.searches!==B.searches)o.push('Búsquedas guardadas: '+A.searches+' → '+B.searches);
+  var ord=['basico','plus','business'],up=ord.indexOf(to)>ord.indexOf(from);
+  if(to==='business')o.push('Puedes publicar hasta 20 viviendas y destacarlas en Explorar');
+  if(from==='business')o.push('Ya no podrás destacar publicaciones ni ver sus estadísticas');
+  if(to!=='basico'&&from==='basico')o.push('Se activa el análisis financiero avanzado');
+  if(to==='basico'&&from!=='basico')o.push('El análisis financiero vuelve a la versión básica');
+  return {up:up,items:o.map(function(t){return t.replace(/ +/g,' ').replace(' → ',' → ')})};
+}
+function plansHTML(){
+  var cur=planOf(),pick=S.pf.pick;
+  var h='<section class="mship" id="mship"><div class="mship-h"><h3>Membresía</h3><p>'+(S.user?'Tu plan actual es <b>'+planName(cur)+'</b>.':'Crea tu cuenta para elegir un plan. Empiezas en Básico.')+' Es una demostración: no se hace ningún cobro.</p></div><div class="plans">';
+  PLANS.forEach(function(pl){
+    var on=pl.id===cur,sel=pl.id===pick;
+    h+='<article class="plan'+(on?' on':'')+(sel?' pick':'')+'"><p class="pl-k">'+(on?'Tu plan actual':pl.for)+'</p><h4>'+pl.n+'</h4><p class="pl-p">'+pl.price+'</p><ul>'+pl.inc.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>'+
+      (on?'<span class="pl-on">'+ic('check',16)+'Seleccionado</span>':'<button type="button" class="btn'+(sel?'':' alt')+'" data-act="plpick" data-v="'+pl.id+'">Elegir '+pl.n+'</button>')+'</article>';
+  });
+  h+='</div>';
+  if(pick&&pick!==cur){
+    var d=planDiff(cur,pick);
+    h+='<div class="pl-diff" role="status"><h4>Si cambias a '+planName(pick)+'</h4><ul>'+d.items.map(function(t){return '<li>'+esc(t)+'</li>'}).join('')+'</ul>'+
+      (S.user?'<div class="cta"><button type="button" class="btn" data-act="plset" data-v="'+pick+'">Cambiar a '+planName(pick)+'</button><button type="button" class="btn alt" data-act="plpick" data-v="">Cancelar</button></div><p class="fine" style="margin:0">Demo: el cambio es inmediato y sin pago.</p>':'<p class="fine" style="margin:0">Primero crea tu cuenta (arriba) y luego confirma el cambio.</p>')+'</div>';
+  }
+  return h+'</section>';
+}
+function authHTML(){
+  var su=S.pf.mode==='signup';
+  var h='<section class="auth"><div class="seg authtab" role="group" aria-label="Cuenta"><button type="button" data-act="pfmode" data-v="signup" aria-pressed="'+su+'">Crear cuenta</button><button type="button" data-act="pfmode" data-v="login" aria-pressed="'+!su+'">Iniciar sesión</button></div>';
+  h+='<form class="frm" id="authForm" novalidate>';
+  if(su)h+='<label for="au_name" class="full">Nombre<input class="inp" id="au_name" autocomplete="name" placeholder="Tu nombre"></label>';
+  h+='<label for="au_mail" class="full">Correo<input class="inp" id="au_mail" type="email" autocomplete="email" placeholder="tu@correo.com"></label>';
+  if(su)h+='<label for="au_birth">Fecha de nacimiento<input class="inp" id="au_birth" type="date" max="'+new Date().toISOString().slice(0,10)+'"></label>';
+  h+='<label for="au_pass"'+(su?'':' class="full"')+'>Contraseña<input class="inp" id="au_pass" type="password" autocomplete="'+(su?'new-password':'current-password')+'" placeholder="Mínimo 4 caracteres"></label>';
+  h+='<p class="au-err full" id="auErr" role="alert" hidden></p><div class="full cta"><button type="submit" class="btn">'+(su?'Crear mi cuenta':'Entrar')+'</button></div></form>';
+  return h+'<p class="fine" style="margin:0">Demo para la feria: puedes usar datos de prueba. Tu cuenta vive solo en esta sesión y se borra al cerrar o recargar la página.</p></section>';
+}
+function renderPerfil(){
+  var u=S.user,h='';
+  if(u){
+    var nf=Object.keys(S.fav).length,lim=LIMITS[u.plan].fav;
+    h+='<section class="pcard"><span class="pav" aria-hidden="true">'+esc(u.name.trim().charAt(0).toUpperCase()||'H')+'</span><div class="pc-b"><h3>'+esc(u.name)+'</h3><p>'+esc(u.mail)+'</p><p>Nació el '+esc(birthTxt(u.birth))+'</p></div><span class="pc-plan">Plan '+planName(u.plan)+'</span><button type="button" class="btn alt sm2" data-act="logout">Cerrar sesión</button></section>';
+    h+='<section class="pstats"><button type="button" data-act="mtabgo" data-v="guardadas"><b>'+nf+(lim?'<small> / '+lim+'</small>':'')+'</b><span>Guardadas</span></button><button type="button" data-act="mtabgo" data-v="comparar"><b>'+cmpIds().length+'</b><span>En comparación</span></button><button type="button" data-act="mtabgo" data-v="metas"><b>'+S.goals.length+'</b><span>Metas de ahorro</span></button></section>';
+  }else h+=authHTML();
+  h+=plansHTML();
+  $('#pfBody').innerHTML=h;
+}
+function submitAuth(){
+  var v=function(id){var e=$('#'+id);return e?e.value.trim():''},su=S.pf.mode==='signup';
+  var mail=v('au_mail').toLowerCase(),pass=$('#au_pass')?$('#au_pass').value:'',err='';
+  if(su){
+    var name=v('au_name'),birth=v('au_birth'),age=birth?ageOf(birth):null;
+    if(!name)err='Escribe tu nombre.';
+    else if(!/^\S+@\S+\.\S+$/.test(mail))err='Escribe un correo con el formato nombre@correo.com (puede ser de prueba).';
+    else if(!birth||age===null)err='Elige tu fecha de nacimiento.';
+    else if(age<14||age>110)err='Revisa la fecha de nacimiento.';
+    else if(pass.length<4)err='La contraseña debe tener al menos 4 caracteres.';
+    else if(S.accounts[mail])err='Ya existe una cuenta con ese correo en esta sesión. Inicia sesión.';
+    if(!err){S.accounts[mail]={name:name,mail:mail,birth:birth,pass:pass,plan:'basico'};S.user=S.accounts[mail];toast('¡Bienvenido a Habita, '+name.split(' ')[0]+'!')}
+  }else{
+    var a=S.accounts[mail];
+    if(!a||a.pass!==pass)err='Correo o contraseña incorrectos.';
+    else{S.user=a;toast('Hola de nuevo, '+a.name.split(' ')[0])}
+  }
+  if(err){var e=$('#auErr');e.textContent=err;e.hidden=false;var f=$('#au_'+(su&&!v('au_name')?'name':'mail'));if(f)f.focus();return}
+  renderPerfil();renderNav();
+}
+
 /* ---------- vistas y navegacion ---------- */
-var VIEWS=[['explorar','Explorar'],['micasa','Mi plan'],['publicar','Publicar']];
-var ALLV=['home','explorar','micasa','publicar','inversion'];
+var VIEWS=[['explorar','Explorar'],['micasa','Mi plan'],['publicar','Publicar'],['perfil','Perfil']];
+var ALLV=['home','explorar','micasa','publicar','inversion','perfil'];
 function renderNav(){
   $('#nav').innerHTML=VIEWS.map(function(v){return '<button data-act="view" data-v="'+v[0]+'"'+(S.view===v[0]?' aria-current="page"':'')+'>'+ic(v[0],20)+'<span>'+v[1]+'</span></button>'}).join('');
 }
 function setView(v,noScroll){
+  /* al volver a Explorar desde otra sección siempre se empieza en Lista */
+  if(v==='explorar'&&S.view!=='explorar'){S.mapOn=false;S.mapBig=false;S.zoom=1}
   S.view=v;document.body.dataset.view=v;
   ALLV.forEach(function(x){$('#v-'+x).hidden=x!==v});
   renderNav();
   if(v==='inversion'){renderInvSort();renderInvList();renderSim()}
   if(v==='publicar')renderPub();
   if(v==='micasa')renderMiCasa();
+  if(v==='perfil')renderPerfil();
   if(v==='explorar')renderExplore(true);
   if(v==='home'){renderHome();carStart()}else carStop();
   renderTray();
@@ -2277,7 +2683,7 @@ function goHome(){
   setView('home');
 }
 /* ---------- plataforma y mapas del sistema ---------- */
-var ZC={usaquen:[4.695,-74.031],chico:[4.668,-74.050],chapinero:[4.648,-74.062],teusaquillo:[4.640,-74.080],salitre:[4.655,-74.105],candelaria:[4.597,-74.073],cedritos:[4.725,-74.035],suba:[4.742,-74.083],fontibon:[4.670,-74.143],kennedy:[4.627,-74.153],poblado:[6.209,-75.570],laureles:[6.247,-75.590],envigado:[6.171,-75.591],cjardin:[3.372,-76.540],sanfernando:[3.435,-76.543]};
+var ZC={usaquen:[4.695,-74.031],chico:[4.668,-74.050],chapinero:[4.648,-74.062],teusaquillo:[4.640,-74.080],salitre:[4.655,-74.105],candelaria:[4.597,-74.073],cedritos:[4.725,-74.035],suba:[4.742,-74.083],fontibon:[4.670,-74.143],kennedy:[4.627,-74.153],poblado:[6.209,-75.570],laureles:[6.247,-75.590],envigado:[6.171,-75.591],belen:[6.231,-75.603],centromed:[6.247,-75.567],sabaneta:[6.151,-75.616],cjardin:[3.372,-76.540],sanfernando:[3.435,-76.543],granada:[3.461,-76.533],ingenio:[3.383,-76.527],caney:[3.392,-76.508]};
 function coords(p){
   if(p.lat)return [p.lat,p.lng];
   var c=ZC[p.z],z=Z[p.z];
@@ -2513,7 +2919,7 @@ document.addEventListener('input',function(e){
 });
 
 /* ---------- mi casa: guardadas y metas de ahorro ---------- */
-IC.micasa=IC.heart;
+IC.micasa=IC.heart;IC.perfil=IC.user;
 S.goals=[];S.notes={};S.mc='guardadas';S.goalSel=null;S.newGoal=false;S.ngSrc='free';S.ngName='';S.ngPrice='';
 function saveGoals(){try{MEM.setItem('habita.goals',JSON.stringify(S.goals))}catch(e){}}
 function saveNotes(){try{MEM.setItem('habita.notes',JSON.stringify(S.notes))}catch(e){}}
@@ -2526,7 +2932,10 @@ function saveNotes(){try{MEM.setItem('habita.notes',JSON.stringify(S.notes))}cat
 })();
 function curGoal(){return S.goals.filter(function(g){return g.id===S.goalSel})[0]||null}
 function goalForHouse(id){return S.goals.filter(function(g){return g.houseId===id})[0]||null}
-function goalTarget(g){return g.kind==='arriendo'?g.price*3:g.price*g.down/100+g.price*0.035}
+/* Meta de ahorro. Compra: cuota inicial (down % del precio) + gastos de escritura y registro (≈3,5 %).
+   Arriendo: para entrar se pagan un depósito de 1 canon y el primer mes (2 cánones), igual que en "Costos básicos". */
+var DEED=0.035,RENT_ENTRY=2;
+function goalTarget(g){return g.kind==='arriendo'?g.price*RENT_ENTRY:g.price*g.down/100+g.price*DEED}
 function projection(g,extra){
   var T=goalTarget(g),i=Math.pow(1+g.rate/100,1/12)-1,s=g.saved,m=0,pts=[s],mo=g.monthly+(extra||0);
   while(s<T&&m<480){s=s*(1+i)+mo;m++;pts.push(s)}
@@ -2603,7 +3012,7 @@ function noun(n){
 /* muestra que las respuestas cambian los resultados */
 function updating(msg,fn){
   var sh=$('#sheet'),u=$('#upd');
-  if(!u){u=document.createElement('div');u.id='upd';u.className='upd';u.setAttribute('role','status');sh.insertBefore(u,sh.firstChild.nextSibling)}
+  if(!u){u=document.createElement('div');u.id='upd';u.className='upd';u.setAttribute('role','status');sh.insertBefore(u,$('#shTools'))}
   u.innerHTML='<span class="spin" aria-hidden="true"></span>'+esc(msg||'Actualizando tu búsqueda…');u.hidden=false;sh.classList.add('busy');
   setTimeout(function(){if(fn)fn();u.hidden=true;sh.classList.remove('busy');var c=$('#count');c.classList.remove('flash');void c.offsetWidth;c.classList.add('flash')},REDUCE?150:750);
 }
@@ -2625,6 +3034,7 @@ function renderMiCasa(){
 /* resumen de las respuestas del cuestionario */
 function budgetTxt(b,rent){
   if(!b)return null;
+  if(b[0]===0&&b[1]===0)return (rent?'Arriendo':'Compra')+': sin límite';
   var list=rent?RENTR:BUYR;
   for(var i=0;i<list.length;i++){if(list[i][0]===b[0]&&list[i][1]===b[1])return list[i][2]+(rent?' al mes':'')}
   return null;
@@ -2639,8 +3049,13 @@ function planRows(pf){
   rows.push(['Presupuesto',bud.join(' · ')]);
   var wh=CITY[pf.city]+(pf.where==='zona'&&pf.zone?' · '+Z[pf.zone].n:pf.where==='near'&&pf.near?' · cerca de '+pf.near.n:'');
   rows.push(['Dónde',wh]);
-  rows.push(['Habitaciones',pf.beds?pf.beds+(pf.beds===4?' o más':''):'Me da igual']);
-  rows.push(['Es importante',pf.imp.length?pf.imp.map(function(k){return IMPS.filter(function(x){return x[0]===k})[0][1]}).join(', '):'Sin preferencias']);
+  if(!(pf.types.length&&pf.types.every(function(t){return t==='habitacion'}))){
+    rows.push(['Habitaciones',pf.beds?pf.beds+(pf.beds===4?' o más':''):'Me da igual']);
+    rows.push(['Tamaño',pf.area?areaTxt(pf.area):'Me da igual']);
+    rows.push(['Parqueadero',pf.park?'Sí, privado':'No es necesario']);
+  }
+  var imps=pf.imp.map(function(k){var x=IMPS.filter(function(y){return y[0]===k})[0];return x?x[1]:null}).filter(Boolean);
+  rows.push(['Es importante',imps.length?imps.join(', '):'Sin preferencias']);
   return rows;
 }
 /* mis opciones */
@@ -2653,17 +3068,18 @@ function showOnMap(ids,selId){
   var f=P.filter(function(p){return p.id===(selId||ids[0])})[0];if(!f)return;
   var same=P.filter(function(p){return ids.indexOf(p.id)>-1&&p.op===f.op&&Z[p.z].c===Z[f.z].c}).map(function(p){return p.id});
   clearSearch();
-  S.only=same;S.city=Z[f.z].c;S.op=f.op;S.sel=selId||null;S.mapOn=true;
-  setView('explorar');syncUI();
+  S.only=same;S.city=Z[f.z].c;S.op=f.op;S.sel=selId||null;
+  setView('explorar');S.mapOn=true;syncUI();
   if(selId)selectPin(selId,false);
 }
 function boardHTML(){
   var fl=P.filter(function(p){return S.fav[p.id]});
   if(!fl.length)return '<div class="empty"><h3>Todavía no guardas ninguna vivienda</h3><p>Toca el corazón en cualquier vivienda y aparecerá aquí para que la compares, revises tu presupuesto y veas cuál encaja mejor contigo.</p><p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Explorar viviendas</button></p></div>';
   var info=fl.map(function(p){return {p:p,r:compat(p,crit(p.op)),b:budgetState(p)}});
-  var h='';
+  var h='',lim=LIMITS[planOf()].fav;
+  if(lim&&fl.length>lim)h+='<p class="plan-note">'+ic('asistente',16)+'<span>Tienes '+fl.length+' guardadas. El plan Básico incluye '+lim+'; en esta demo no te bloqueamos. Con Plus guardas sin límite.</span><button type="button" class="btn alt sm2" data-act="seeplans">Ver planes</button></p>';
   var ranked=info.slice().sort(function(a,b){return (b.r?b.r.pct:0)-(a.r?a.r.pct:0)});
-  h+='<section class="rank"><div class="rank-h"><h3>Tus mejores opciones</h3><div class="cta"><button class="btn sm2" data-act="savedmap">'+ic('map',16)+'Ver en el mapa</button>'+(hasPlan()?'':'<button class="btn alt sm2" data-act="qzopen">Personalizar</button>')+'</div></div>';
+  h+='<section class="rank"><div class="rank-h"><h3>Tus mejores opciones</h3><div class="cta">'+(fl.length>=2?'<button class="btn sm2" data-act="mtab" data-v="comparar">Comparar guardadas</button>':'')+'<button class="btn alt sm2" data-act="savedmap">'+ic('map',16)+'Ver en el mapa</button>'+(hasPlan()?'':'<button class="btn alt sm2" data-act="qzopen">Personalizar</button>')+'</div></div>';
   h+=hasPlan()||ranked.some(function(x){return x.r})?'<ol class="rank-l">'+ranked.map(function(x,i){return '<li><button data-act="open" data-id="'+x.p.id+'"><span class="rn">'+(i+1)+'</span><span class="rt"><b>'+esc(x.p.title)+'</b><span>'+priceHTML(x.p).replace(/<[^>]+>/g,'')+(x.b?' · '+(x.b.ok?'<i class="good">'+x.b.t+'</i>':'<i class="warn">'+x.b.t+'</i>'):'')+'</span></span><span class="rp">'+(x.r?x.r.pct+'%':'—')+'</span></button></li>'}).join('')+'</ol>':'<p style="color:var(--muted);margin:0">Responde el cuestionario para ordenar tus opciones por compatibilidad.</p>';
   h+='</section>';
   h+='<div class="board">'+info.map(function(x){
@@ -2673,39 +3089,54 @@ function boardHTML(){
       '<label class="sr" for="nt_'+p.id+'">Nota sobre '+esc(p.title)+'</label><textarea id="nt_'+p.id+'" placeholder="Anota lo que te gustó o lo que preguntarías en la visita">'+esc(S.notes[p.id]||'')+'</textarea>'+
       '<div class="frow"><button class="chip" data-act="mcmp" data-id="'+p.id+'" aria-pressed="'+c+'">Comparar</button><button class="chip" data-act="locmap" data-id="'+p.id+'">Ver ubicación</button><button class="chip" data-act="mgoal" data-id="'+p.id+'">'+(g?'Ver mi meta':'Meta de ahorro')+'</button><button class="chip" data-act="mrm" data-id="'+p.id+'" aria-label="Quitar de guardadas">Quitar</button></div></div></article>';
   }).join('')+'</div>';
-  if(cmpIds().length)h+='<p class="fine" style="margin-top:18px"><button type="button" class="btn sm2" data-act="mtab" data-v="comparar">Ver comparación ('+cmpIds().length+')</button></p>';
   return h;
 }
+/* Comparar: arriba, tus guardadas para elegir 2 o 3 sin volver a Explorar; abajo, la comparación */
+function pickHTML(){
+  var pool=P.filter(function(p){return S.fav[p.id]||S.cmp[p.id]}),ids=cmpIds();
+  if(!pool.length)return '';
+  return '<section class="pick"><div class="pick-h"><h3>Elige 2 o 3 de tus guardadas</h3><span class="pick-n"><b>'+ids.length+'</b> de 3 seleccionadas</span></div><div class="pick-l">'+pool.map(function(p){
+    var on=!!S.cmp[p.id],r=compat(p,crit(p.op));
+    return '<button type="button" class="pk" data-act="mcmp" data-id="'+p.id+'" aria-pressed="'+on+'"'+(!on&&ids.length>=3?' data-full="1"':'')+'><span class="pk-c" aria-hidden="true">'+(on?ic('check',16):'')+'</span><span class="pk-t"><b>'+esc(p.title)+'</b><span>'+pinPrice(p)+(p.op==='arriendo'?'/mes':'')+' · '+esc(Z[p.z].n)+' · '+shortSpec(p)+(r?' · '+r.pct+'%':'')+'</span></span></button>';
+  }).join('')+'</div></section>';
+}
 function compareHTML(){
-  var ids=cmpIds(),sel=P.filter(function(p){return ids.indexOf(p.id)>-1});
-  if(sel.length<2)return '<div class="empty"><h3>Elige 2 o 3 viviendas para comparar</h3><p>Toca “+ Comparar” en cualquier vivienda de Explorar o de tus guardadas. Te decimos cuál te conviene más y por qué.</p><p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Ir a Explorar</button></p>'+(sel.length?'<p class="fine">Ya elegiste: '+esc(sel[0].title)+'</p>':'')+'</div>';
+  var ids=cmpIds(),sel=P.filter(function(p){return ids.indexOf(p.id)>-1}),nf=P.filter(function(p){return S.fav[p.id]}).length;
+  var pk=pickHTML();
+  if(!pk)return '<div class="empty"><h3>Guarda viviendas para compararlas</h3><p>En Explorar toca el corazón de las que te gusten. Aquí podrás elegir 2 o 3 de ellas y ver en qué se diferencian.</p><p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Ir a Explorar</button></p></div>';
+  if(sel.length<2)return pk+'<div class="empty"><h3>'+(nf<2&&!sel.length?'Guarda al menos 2 viviendas':'Elige '+(sel.length?'una más':'2 o 3')+' para comparar')+'</h3><p>'+(nf<2?'Solo tienes '+nf+' guardada. Guarda otra en Explorar y vuelve aquí.':'Toca las viviendas de arriba. Te mostramos en qué se diferencian y cuál te conviene más.')+'</p>'+(nf<2?'<p style="margin-top:14px"><button class="btn" data-act="view" data-v="explorar">Ir a Explorar</button></p>':'')+'</div>';
   var info=sel.map(function(p){var r=compat(p,crit(p.op)),f=fair(p);return {p:p,r:r,f:f,sc:(r?r.pct:60)+(f?clamp(-f.diff*40,-10,10):0)+envScore(p)*0.08}});
   var best=info.slice().sort(function(a,b){return b.sc-a.sc})[0];
-  var why=[];if(best.r)why.push(best.r.pct+'% compatible contigo');if(best.f)why.push(best.f.txt.toLowerCase());if(best.r&&best.r.pros[0])why.push(best.r.pros[0].toLowerCase());
-  var h='<section class="verdict"><p class="kicker">¿Cuál de estas opciones me conviene más?</p><h3>'+esc(best.p.title)+'</h3><p>Es la que mejor encaja: '+esc(why.join(', '))+'.</p><div class="cta"><button class="btn" data-act="open" data-id="'+best.p.id+'">Ver esta vivienda</button><button class="btn alt" data-act="decide" data-id="'+best.p.id+'">'+(S.decided===best.p.id?ic('check',16)+'Es mi elección':'Elegir esta')+'</button></div></section>';
+  var why=[];if(best.r)why.push(best.r.pct+'% compatible contigo');if(best.f)why.push(best.f.txt.toLowerCase());if(best.r&&best.r.pros[0])why.push(best.r.pros[0].charAt(0).toLowerCase()+best.r.pros[0].slice(1));
+  var h=pk+'<section class="verdict"><p class="kicker">¿Cuál de estas opciones me conviene más?</p><h3>'+esc(best.p.title)+'</h3><p>Es la que mejor encaja: '+esc(why.join(', '))+'.</p><div class="cta"><button class="btn" data-act="open" data-id="'+best.p.id+'">Ver esta vivienda</button><button class="btn alt" data-act="decide" data-id="'+best.p.id+'">'+(S.decided===best.p.id?ic('check',16)+'Es mi elección':'Elegir esta')+'</button></div></section>';
+  var allRoom=info.every(function(x){return x.p.t==='habitacion'});
   var rows=[
     ['Compatibilidad',function(x){return x.r?x.r.pct:null},function(v){return '<b class="big">'+v+'%</b>'},'max'],
     ['Precio',function(x){return x.p.price},function(v,x){return money(v)+(x.p.op==='arriendo'?' /mes':'')},'min'],
-    ['Frente al promedio de la zona',function(x){return x.f?x.f.diff:null},function(v,x){return x.f.txt.replace(' del promedio de la zona','')},'min'],
+    ['Frente al promedio de la zona',function(x){return x.f?x.f.diff:null},function(v,x){return x.f.ar+x.f.txt.replace(' del promedio de la zona','')},'min'],
     ['Frente a tu presupuesto',function(x){var b=crit(x.p.op).budget;return b?x.p.price/b:null},function(v){return v<=1?'Dentro':'+'+Math.round((v-1)*100)+'%'},'min'],
-    ['Ubicación',function(x){var c=crit(x.p.op);return c.near?zoneKm(x.p,c.near.z):null},function(v,x){var c=crit(x.p.op);return Z[x.p.z].n+'<small>a '+distTxt(v)+' de '+esc(shortPlace(c.near.n))+'</small>'},'min'],
+    ['Ubicación',function(x){var c=crit(x.p.op);return c.near?zoneKm(x.p,c.near.z):0},function(v,x){var c=crit(x.p.op);return Z[x.p.z].n+', '+CITY[Z[x.p.z].c]+(c.near?'<small>a '+distTxt(v)+' de '+esc(shortPlace(c.near.n))+'</small>':'')},'min'],
+    ['Transporte',function(x){return nearOf(x.p).transporte.m},function(v,x){return walkTxt(v)+'<small>'+esc(nearOf(x.p).transporte.name)+'</small>'},'min'],
+    ['Área',function(x){return x.p.t==='habitacion'?null:x.p.area},function(v){return v+' m²'},'max'],
     ['Habitaciones',function(x){return x.p.t==='habitacion'?null:x.p.beds},function(v){return v},'max'],
     ['Baños',function(x){return x.p.t==='habitacion'?null:x.p.baths},function(v){return v},'max'],
-    ['Área',function(x){return x.p.t==='habitacion'?null:x.p.area},function(v){return v+' m²'},'max'],
-    ['Transporte a pie',function(x){return walk(nearOf(x.p).transporte.m)},function(v){return v+' min'},'min']
+    ['Parqueadero',function(x){return x.p.t==='habitacion'?null:x.p.park},function(v){return v?v+(v===1?' parqueadero':' parqueaderos'):'No tiene'},'max'],
+    ['Estrato',function(x){return x.p.est},function(v){return 'Estrato '+v},null]
   ];
-  h+='<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>'+info.map(function(x){return '<th'+(x===best?' class="win"':'')+'>'+(x===best?'<span class="winb">Te conviene más</span>':'')+'<button type="button" data-act="open" data-id="'+x.p.id+'">'+esc(x.p.title)+'</button><small>'+TL[x.p.t]+(x.p.ext?' · '+esc(x.p.ext.portal):'')+'</small></th>'}).join('')+'</tr></thead><tbody>';
+  h+='<div class="cmpwrap"><table class="cmp"><thead><tr><th></th>'+info.map(function(x){return '<th'+(x===best?' class="win"':'')+'>'+(x===best?'<span class="winb">Te conviene más</span>':'')+'<button type="button" data-act="open" data-id="'+x.p.id+'">'+esc(x.p.title)+'</button><small>'+TL[x.p.t]+(x.p.ext?' · '+esc(x.p.ext.portal)+' (demo)':'')+'</small></th>'}).join('')+'</tr></thead><tbody>';
   rows.forEach(function(r){
-    var vals=info.map(function(x){return r[1](x)}),nums=vals.filter(function(v){return v!==null}),bv=nums.length>1?(r[3]==='min'?Math.min.apply(null,nums):Math.max.apply(null,nums)):null;
+    var vals=info.map(function(x){return r[1](x)}),nums=vals.filter(function(v){return v!==null}),bv=r[3]&&nums.length>1?(r[3]==='min'?Math.min.apply(null,nums):Math.max.apply(null,nums)):null;
     if(!nums.length)return;
     h+='<tr><th scope="row">'+r[0]+'</th>'+info.map(function(x,i){var v=vals[i];return '<td class="'+(bv!==null&&v===bv&&nums.some(function(n){return n!==bv})?'best':'')+'">'+(v===null?'—':r[2](v,x))+'</td>'}).join('')+'</tr>';
   });
-  if(info.every(function(x){return x.p.t==='habitacion'}))h+='<tr><th scope="row">Baño</th>'+info.map(function(x){return '<td>'+(x.p.bath==='privado'?'Privado':'Compartido')+'</td>'}).join('')+'</tr>';
-  h+='<tr><th scope="row">Características</th>'+info.map(function(x){return '<td><small>'+esc(x.p.tags.slice(0,5).join(' · '))+'</small></td>'}).join('')+'</tr>';
-  h+='<tr><th scope="row">Ventajas</th>'+info.map(function(x){return '<td><ul class="cmp-list">'+(x.r?x.r.pros.slice(0,3).map(function(t){return '<li>'+esc(t)+'</li>'}).join(''):'<li>'+esc(x.f?x.f.txt:'—')+'</li>')+'</ul></td>'}).join('')+'</tr>';
+  if(allRoom){
+    h+='<tr><th scope="row">Baño</th>'+info.map(function(x){return '<td>'+(x.p.bath==='privado'?'Privado':'Compartido')+'</td>'}).join('')+'</tr>';
+    h+='<tr><th scope="row">Servicios</th>'+info.map(function(x){return '<td>'+(x.p.inc?'Incluidos':'Aparte')+'</td>'}).join('')+'</tr>';
+  }
+  h+='<tr><th scope="row">Características</th>'+info.map(function(x){return '<td><small>'+esc(x.p.tags.slice(0,6).join(' · '))+'</small></td>'}).join('')+'</tr>';
+  h+='<tr><th scope="row">Ventajas</th>'+info.map(function(x){return '<td><ul class="cmp-list">'+(x.r&&x.r.pros.length?x.r.pros.slice(0,3).map(function(t){return '<li>'+esc(t)+'</li>'}).join(''):'<li>'+esc(x.f?x.f.txt:'—')+'</li>')+'</ul></td>'}).join('')+'</tr>';
   h+='<tr><th scope="row">Desventajas</th>'+info.map(function(x){return '<td><ul class="cmp-list">'+(x.r&&x.r.cons.length?x.r.cons.slice(0,2).map(function(t){return '<li class="no">'+esc(t)+'</li>'}).join(''):'<li>Ninguna importante</li>')+'</ul></td>'}).join('')+'</tr>';
-  h+='<tr><th scope="row"></th>'+info.map(function(x){return '<td><button type="button" class="chip xs" data-act="ccmp" data-id="'+x.p.id+'">Quitar</button></td>'}).join('')+'</tr>';
-  return h+'</tbody></table></div><p class="fine">En verde, el mejor valor de cada fila.</p>';
+  return h+'</tbody></table></div><p class="fine">En verde, el mejor valor de cada fila. Toca una vivienda arriba para quitarla o cambiarla.</p>';
 }
 /* metas */
 function houseSVG(on){
@@ -2732,10 +3163,10 @@ function goalsHTML(){
     '<div class="cta" style="justify-content:center">'+(z?'<button class="btn alt" data-act="open" data-id="'+z.id+'">Ver la casa</button>':'')+'<button class="chip" data-act="gdel" data-id="'+g.id+'">Eliminar meta</button></div></div>'+
     '<div style="display:grid;gap:16px;min-width:0">'+
     '<div class="stepcard" style="gap:6px"><h3 style="font-size:22px">Ajusta tu plan</h3><div class="ctl">'+
-    (g.kind==='venta'?'<label for="gs_down"><span>Cuota inicial<output id="o_down"></output></span><input id="gs_down" type="range" min="10" max="70" step="5" value="'+g.down+'"></label>':'')+
-    '<label for="gs_saved">Lo que ya tengo ahorrado (pesos)<input class="inp" id="gs_saved" inputmode="numeric" value="'+g.saved+'"></label>'+
-    '<label for="gs_monthly"><span>Puedo ahorrar cada mes<output id="o_monthly"></output></span><input id="gs_monthly" type="range" min="0" max="10000000" step="50000" value="'+g.monthly+'"></label>'+
-    '<label for="gs_rate"><span>Rentabilidad de mi ahorro (E.A.)<output id="o_rate"></output></span><input id="gs_rate" type="range" min="0" max="14" step="0.5" value="'+g.rate+'"></label></div></div>'+
+    (g.kind==='venta'?'<label for="gs_down"><span>Cuota inicial<output id="o_down"></output></span><small class="hint">Porcentaje del precio que aportas al comprar. Lo usual en Colombia es 30 %; el resto lo financia el banco.</small><input id="gs_down" type="range" min="10" max="70" step="5" value="'+g.down+'"></label>':'')+
+    '<label for="gs_saved"><span>Ahorro actual</span><small class="hint">Dinero que ya tienes disponible para esta meta, en pesos.</small><input class="inp" id="gs_saved" inputmode="numeric" value="'+g.saved+'"></label>'+
+    '<label for="gs_monthly"><span>Capacidad de ahorro mensual<output id="o_monthly"></output></span><small class="hint">Cantidad que puedes ahorrar cada mes.</small><input id="gs_monthly" type="range" min="0" max="10000000" step="50000" value="'+g.monthly+'"></label>'+
+    '<label for="gs_rate"><span>Rentabilidad de tu ahorro<output id="o_rate"></output></span><small class="hint">Lo que te paga al año la cuenta o CDT donde ahorras (efectivo anual).</small><input id="gs_rate" type="range" min="0" max="14" step="0.5" value="'+g.rate+'"></label></div></div>'+
     '<div id="goalOut" style="display:grid;gap:16px;min-width:0"></div>'+
     '<div class="stepcard" style="gap:12px"><h3 style="font-size:22px">Registrar ahorro</h3><div class="quick">'+[100000,500000,1000000,2000000].map(function(v){return '<button class="chip" data-act="gquick" data-v="'+v+'">+ '+money(v)+'</button>'}).join('')+'</div><div class="addrow"><label class="sr" for="ga_amt">Monto ahorrado</label><input class="inp" id="ga_amt" inputmode="numeric" placeholder="Otro monto en pesos"><button class="btn" data-act="gadd">Registrar</button></div><ul class="log" id="goalLog"></ul></div>'+
     '</div></div>';
@@ -2773,16 +3204,36 @@ function fillGoal(first){
   if(pj.months===null)h+='<div class="result"><span>Con este ritmo de ahorro</span><b>Todavía no llegas</b><span>Sube lo que ahorras cada mes o prueba con una casa más económica.</span></div>';
   else if(pj.months===0)h+='<div class="result"><span>Tu ahorro ya cubre la meta</span><b>¡Listo para dar el paso!</b><span>Puedes empezar a agendar visitas.</span></div>';
   else h+='<div class="result"><span>Ahorrando '+money(g.monthly)+' al mes, llegas en</span><b>'+ymText(pj.months)+'</b><span>Aproximadamente en '+whenText(pj.months)+'</span></div>';
-  var brk=g.kind==='venta'?'<div class="kpi"><span>Cuota inicial ('+g.down+'%)</span><b>'+money(g.price*g.down/100)+'</b></div><div class="kpi"><span>Gastos de escrituración (≈3,5%)</span><b>'+money(g.price*0.035)+'</b></div>':'<div class="kpi"><span>Depósito y primer mes (3 cánones)</span><b>'+money(g.price*3)+'</b></div><div class="kpi"><span>Canon mensual</span><b>'+money(g.price)+'</b></div>';
-  h+='<div class="tiles4">'+brk+'<div class="kpi"><span>Meta total</span><b>'+money(T)+'</b></div><div class="kpi"><span>Te falta</span><b>'+money(Math.max(0,T-g.saved))+'</b></div></div>';
+  /* tus números: cada dato con lo que significa; todos salen del mismo precio y cuadran entre sí */
+  function row(l,e,v,c){return '<div class="crow'+(c?' '+c:'')+'"><dt><b>'+l+'</b><small>'+e+'</small></dt><dd>'+v+'</dd></div>'}
+  var rows='',left=Math.max(0,T-g.saved);
+  if(g.kind==='venta'){
+    var down=g.price*g.down/100,deed=g.price*DEED,fin=g.price-down;
+    rows+=row('Precio de la vivienda','Valor total del inmueble',money(g.price));
+    rows+=row('Cuota inicial — '+g.down+' %','Porcentaje del precio que debes aportar al comprar',money(down));
+    rows+=row('Gastos de escritura y registro — '+N1.format(DEED*100)+' %','Notaría, registro e impuestos al firmar (aproximado)',money(deed));
+    rows+=row('Meta de ahorro','Cuota inicial + gastos de escritura',money(T),'tot');
+    rows+=row('Ahorro actual','Dinero que ya tienes disponible',money(g.saved));
+    rows+=row('Te falta','Meta de ahorro − ahorro actual',money(left),'warn');
+    rows+=row('Capacidad de ahorro mensual','Cantidad que puedes ahorrar cada mes',money(g.monthly));
+    rows+=row('Valor a financiar','Parte del precio que cubriría el crédito: precio − cuota inicial',money(fin));
+    h+='<div class="stepcard calc" style="gap:10px"><h3 style="font-size:20px">Tus números</h3><dl class="crows">'+rows+'</dl><p class="ceq">'+money(g.price)+' = '+money(down)+' de cuota inicial + '+money(fin)+' financiados</p></div>';
+  }else{
+    rows+=row('Canon mensual','Lo que pagas de arriendo cada mes',money(g.price));
+    rows+=row('Para entrar','Depósito de 1 canon + primer mes',money(T),'tot');
+    rows+=row('Ahorro actual','Dinero que ya tienes disponible',money(g.saved));
+    rows+=row('Te falta','Lo que necesitas para entrar − ahorro actual',money(left),'warn');
+    rows+=row('Capacidad de ahorro mensual','Cantidad que puedes ahorrar cada mes',money(g.monthly));
+    h+='<div class="stepcard calc" style="gap:10px"><h3 style="font-size:20px">Tus números</h3><dl class="crows">'+rows+'</dl></div>';
+  }
   if(pj.months!==null&&pj.months>0){
     var p2=projection(g,500000);
     if(p2.months!==null&&p2.months<pj.months)h+='<p class="tip"><b>Un empujón:</b> si ahorras '+money(500000)+' más al mes, llegas '+ymText(pj.months-p2.months)+' antes.</p>';
   }
   h+='<div class="stepcard" style="gap:8px"><h3 style="font-size:20px">Tu camino a la meta</h3><div class="chart">'+goalChart(g,pj)+'<div class="legend"><span><i style="background:var(--brand)"></i>Tu ahorro proyectado</span><span><i style="background:var(--sun)"></i>Meta</span></div></div><p class="fine" style="margin:0">Incluye la rentabilidad que indicaste. Es una proyección ilustrativa.</p></div>';
   if(g.kind==='venta'){
-    var L=g.price*(1-g.down/100),a=annuity(L,12.5,15);
-    h+='<p class="tip">Después de tu cuota inicial, el crédito sería de '+money(L)+'. A 15 años y 12,5% E.A. la cuota mensual estimada es de <b>'+money(a.pay)+'</b>.</p>';
+    var L=g.price*(1-g.down/100),an=annuity(L,12.5,15);
+    h+='<p class="tip">Si financias '+money(L)+' (el valor a financiar) a 15 años con una tasa de 12,5 % efectivo anual, la cuota mensual estimada del crédito sería de <b>'+money(an.pay)+'</b>.</p>';
   }
   if(pj.months===null||pj.months>60){
     var alts=P.filter(function(x){return S.fav[x.id]&&x.op==='venta'&&x.id!==g.houseId}).map(function(x){var q=projection({kind:'venta',price:x.price,down:g.down,saved:g.saved,monthly:g.monthly,rate:g.rate});return {p:x,m:q.months}}).filter(function(o){return o.m!==null&&(pj.months===null||o.m<pj.months)}).sort(function(a,b){return a.m-b.m}).slice(0,2);
@@ -2832,17 +3283,18 @@ document.addEventListener('click',function(e){
   else if(a==='carprev')carShow(CAR.i-1,true);
   else if(a==='carnext')carShow(CAR.i+1,true);
   else if(a==='cargo')carShow(+v,true);
-  else if(a==='fpanel'){var fp=$('#fpanel');fp.hidden=!fp.hidden;b.setAttribute('aria-expanded',String(!fp.hidden));sheetSet()}
-  else if(a==='sheetcycle')sheetCycle();
   else if(a==='lm'){
-    S.mapOn=v==='map';if(!S.mapOn){S.mapBig=false;S.zoom=1}
-    if(S.mapOn&&!S.sel&&S.items&&S.items[0])S.sel=S.items[0].id;
-    renderExplore();if(S.mapOn)window.scrollTo(0,0);
+    var was=S.mapOn;S.mapOn=v==='map';if(!S.mapOn){S.mapBig=false;S.zoom=1}
+    if(was!==S.mapOn){renderExplore(true);window.scrollTo(0,0)}
   }
   else if(a==='zoom')mapZoom(+v);
-  else if(a==='mapbig'){S.mapBig=!S.mapBig;renderExplore(true);if(nmPlugin())nmSync();else{var sp=S.sel&&P.filter(function(x){return x.id===S.sel})[0];if(sp&&S.zoom>1)mapCenter(sp.x,py(sp.y),false)}}
-  else if(a==='locate'){S.mapOn=true;locateStart(true);renderExplore()}
+  else if(a==='mapbig'){S.mapBig=!S.mapBig;renderExplore(true);if(nmPlugin())nmSync();else{var sp=S.sel&&P.filter(function(x){return x.id===S.sel})[0];if(sp&&S.zoom>1)mapCenter(sp.x,+py(sp.y),false)}}
+  else if(a==='locate')locateStart(true);
   else if(a==='pin')selectPin(id,true);
+  else if(a==='mrow')selectPin(id,false);
+  else if(a==='cluster')mapZoom(1,+b.dataset.x,+b.dataset.y);
+  else if(a==='unsel'){S.sel=null;$$('.mrow.on').forEach(function(x){x.classList.remove('on')});renderStrip();layoutMap();renderMap(false)}
+  else if(a==='more'){S.shown+=PAGE;renderExplore(true)}
   else if(a==='onlyclear'){S.only=null;syncUI()}
   else if(a==='favfilter'){S.mc='guardadas';setView('micasa')}
   else if(a==='fav'){
@@ -2866,8 +3318,7 @@ document.addEventListener('click',function(e){
   else if(a==='quote'){toast('Solicitud enviada. Un asesor de la constructora te contactará.')}
   else if(a==='ex'){var ex=EXAMPLES[parseInt(b.dataset.i,10)];$('#q').value=ex;smartSearch(ex)}
   else if(a==='untag')untag(b.dataset.k);
-  else if(a==='aiclear'){$('#q').value='';S.mapOn=false;clearSearch()}
-  else if(a==='ftog'){if(S.f[v])delete S.f[v];else S.f[v]=true;syncUI()}
+  else if(a==='aiclear'){$('#q').value='';clearSearch()}
   else if(a==='qzopen'){if(!$('#modal').hidden)closeDetail();openQuiz(hasPlan())}
   else if(a==='qpick')qPick(b.dataset.k,b.dataset.v);
   else if(a==='qdone')qFinish();
@@ -2882,7 +3333,7 @@ document.addEventListener('click',function(e){
       delete q._approx;P.unshift(q);saveImports();
       var qi=q.id,qo=q.op,qc=Z[q.z].c;
       clearSearch();$('#q').value='';
-      S.city=qc;S.op=qo;S.sel=qi;S.mapOn=true;
+      S.city=qc;S.op=qo;S.sel=qi;
       setView('explorar');syncUI();toast('Anuncio agregado a Explorar');
     }
   }
@@ -2893,7 +3344,14 @@ document.addEventListener('click',function(e){
   else if(a==='prm'){photosOf(id).splice(parseInt(b.dataset.i,10),1);renderPub()}
   else if(a==='plocate')locate();
   else if(a==='ppublish')publishListing();
-  else if(a==='mtab'){S.mc=v;S.newGoal=false;renderMiCasa()}
+  else if(a==='mtab'){
+    S.mc=v;S.newGoal=false;
+    if(v==='comparar'&&!cmpIds().length){
+      var sv=P.filter(function(p){return S.fav[p.id]}).map(function(p){var r=compat(p,crit(p.op));return {id:p.id,k:r?r.pct:0}}).sort(function(x,y){return y.k-x.k}).slice(0,3);
+      if(sv.length>=2){sv.forEach(function(x){S.cmp[x.id]=1});saveCmp()}
+    }
+    renderMiCasa();
+  }
   else if(a==='mrm'){delete S.fav[id];saveFav();saveExt();renderMiCasa();toast('Quitada de guardadas')}
   else if(a==='mcmp'){toggleCmp(id);renderMiCasa()}
   else if(a==='ccmp'){
@@ -2917,6 +3375,12 @@ document.addEventListener('click',function(e){
   else if(a==='gdel'){S.goals=S.goals.filter(function(x){return x.id!==id});S.goalSel=S.goals.length?S.goals[0].id:null;saveGoals();renderMiCasa();toast('Meta eliminada')}
   else if(a==='gadd'){var amt=parseInt(String($('#ga_amt').value).replace(/\D/g,''),10);if(!amt){toast('Escribe cuánto ahorraste');$('#ga_amt').focus()}else addSaving(amt)}
   else if(a==='gquick')addSaving(parseInt(v,10));
+  else if(a==='pfmode'){S.pf.mode=v;renderPerfil()}
+  else if(a==='plpick'){S.pf.pick=v||null;renderPerfil();if(v){var dd=$('.pl-diff');if(dd)try{dd.scrollIntoView({block:'nearest',behavior:'smooth'})}catch(x){}}}
+  else if(a==='plset'){if(S.user){S.user.plan=v;S.pf.pick=null;renderPerfil();confetti(false);toast('Listo: ahora tienes el plan '+planName(v))}}
+  else if(a==='logout'){S.user=null;S.pf={mode:'login',pick:null};renderPerfil();toast('Cerraste sesión')}
+  else if(a==='mtabgo'){S.mc=v;S.newGoal=false;setView('micasa')}
+  else if(a==='seeplans'){setView('perfil');setTimeout(function(){var m=$('#mship');if(m)try{m.scrollIntoView({block:'start',behavior:'smooth'})}catch(x){}},80)}
 });
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){if(!$('#quiz').hidden)qSkip();else if(!$('#modal').hidden)closeDetail()}
@@ -2927,18 +3391,8 @@ document.addEventListener('mouseover',function(e){
   if(c){var pin=$('.pin[data-id="'+c.dataset.card+'"]');if(pin)pin.classList.add('on')}
 });
 $('#searchForm').addEventListener('submit',function(e){e.preventDefault();smartSearch($('#q').value);$('#q').blur()});
-$('#q').addEventListener('input',function(){if(!this.value&&S.aiText){S.mapOn=false;clearSearch()}});
-$('#fCity').addEventListener('change',function(){
-  var v=this.value.split(':');
-  S.city=v[0]==='z'?Z[v[1]].c:v[1];S.only=null;S.sel=null;S.zones=v[0]==='z'?[v[1]]:[];S.nearZone=null;S.nearName='';
-  if(S.me&&hav(S.me.lat,S.me.lng,CITYC[S.city][0],CITYC[S.city][1])>80){S.me=null;if(S.sort==='near'){S.sort='rel';$('#fSort').value='rel'}}
-  syncUI();
-});
-$('#fPrice').addEventListener('change',function(){S.max=parseFloat(this.value);syncUI()});
-$('#fBeds').addEventListener('change',function(){S.beds=parseInt(this.value,10);syncUI()});
-$('#fArea').addEventListener('change',function(){S.minArea=parseInt(this.value,10);syncUI()});
-$('#fBaths').addEventListener('change',function(){S.baths=parseInt(this.value,10);syncUI()});
-$('#fPeople').addEventListener('change',function(){S.people=parseInt(this.value,10);syncUI()});
+document.addEventListener('submit',function(e){if(e.target.id==='authForm'){e.preventDefault();submitAuth()}});
+$('#q').addEventListener('input',function(){if(!this.value&&S.aiText)clearSearch()});
 $('#fSort').addEventListener('change',function(){S.sort=this.value;S.sortUser=true;if(S.sort==='near'&&!S.me)locateStart(true);renderExplore(true)});
 $('#sim').addEventListener('input',function(e){
   var id=e.target.id;
@@ -2948,19 +3402,33 @@ $('#sim').addEventListener('input',function(e){
   else return;
   fillSim();
 });
-['grab','shh'].forEach(function(k){
-  var el=document.getElementById(k);
-  el.addEventListener('pointerdown',dragStart);el.addEventListener('pointermove',dragMove);
-  el.addEventListener('pointerup',dragEnd);el.addEventListener('pointercancel',dragEnd);
-});
 window.addEventListener('hashchange',function(){var h=location.hash.replace('#','');if(h&&h!==S.view&&$('#v-'+h))setView(h,true)});
-window.addEventListener('resize',function(){if(S.view==='explorar')sheetSet();nmSync()});
+window.addEventListener('resize',function(){if(S.view==='explorar'&&S.mapOn){clearTimeout(RZT);RZT=setTimeout(function(){renderStrip();layoutMap();renderMap(false)},150)}nmSync()});
+var RZT=0;
+$('#mstrip').addEventListener('scroll',stripScrolled,{passive:true});
+/* mapa: arrastrar con el mouse para moverse, doble clic o pellizco del trackpad para acercar */
+var PAN=null,PANMOVED=0;
+document.addEventListener('pointerdown',function(e){
+  var sm=e.target.closest&&e.target.closest('#sm');
+  if(!sm||e.pointerType!=='mouse'||e.button!==0||e.target.closest('button'))return;
+  PAN={sm:sm,x:e.clientX,y:e.clientY,l:sm.scrollLeft,t:sm.scrollTop,m:false};
+});
+document.addEventListener('pointermove',function(e){
+  if(!PAN)return;var dx=e.clientX-PAN.x,dy=e.clientY-PAN.y;
+  if(!PAN.m&&Math.abs(dx)+Math.abs(dy)>4){PAN.m=true;PAN.sm.classList.add('dragging')}
+  if(PAN.m){PAN.sm.scrollLeft=PAN.l-dx;PAN.sm.scrollTop=PAN.t-dy}
+});
+document.addEventListener('pointerup',function(){if(!PAN)return;if(PAN.m){PAN.sm.classList.remove('dragging');PANMOVED=Date.now()}PAN=null});
+document.addEventListener('click',function(e){if(Date.now()-PANMOVED<60&&e.target.closest&&e.target.closest('#sm')){e.stopPropagation();e.preventDefault()}},true);
+function smPoint(e){var sm=$('#sm'),r=sm.getBoundingClientRect();return [(sm.scrollLeft+e.clientX-r.left)/sm.scrollWidth*100,(sm.scrollTop+e.clientY-r.top)/sm.scrollHeight*100]}
+document.addEventListener('dblclick',function(e){if(!e.target.closest||!e.target.closest('#sm')||e.target.closest('button'))return;var q=smPoint(e);mapZoom(1,q[0],q[1])});
+document.addEventListener('wheel',function(e){if(!e.ctrlKey||!e.target.closest||!e.target.closest('#sm'))return;e.preventDefault();var q=smPoint(e);mapZoom(e.deltaY<0?1:-1,q[0],q[1])},{passive:false});
 window.addEventListener('scroll',nmSync,{passive:true});
 if(window.ResizeObserver){var ro=new ResizeObserver(function(){nmSync()});ro.observe($('#mapslot'));ro.observe($('#sheet'))}
 
 /* ---------- arranque ---------- */
 $('#favIc').innerHTML=ic('heart',18);$('#hmIc').innerHTML=ic('asistente',14);
-$('#sIc').innerHTML=ic('asistente',20);$('#aiBIc').innerHTML=ic('asistente',14);$('#mapIc').innerHTML=ic('map',15);$('#lmLi').innerHTML=ic('list',15);$('#fIc').innerHTML=ic('filter',18);$('#locIc').innerHTML=ic('locate',16);
+$('#sIc').innerHTML=ic('asistente',20);$('#aiBIc').innerHTML=ic('asistente',14);$('#mapIc').innerHTML=ic('map',19);$('#lmLi').innerHTML=ic('list',19);$('#locIc').innerHTML=ic('locate',16);
 savedImports().forEach(function(p){if(!P.some(function(x){return x.id===p.id}))P.push(p)});
 applyStatusBar();
 loadPref();
@@ -2969,6 +3437,8 @@ renderEx();syncUI();
   var PH=['Quiero una habitación cerca de Los Andes por menos de $1.200.000','apartamento de 2 habitaciones cerca de la universidad, hasta 2 millones','casa para comprar en Bogotá con 3 habitaciones y parque cerca','obra gris para comprar en Medellín'],k=0,q=$('#q');
   setInterval(function(){if(q.value||document.activeElement===q)return;k=(k+1)%PH.length;q.placeholder='Ej: '+PH[k]},4200);
 })();
+/* pruebas automáticas: solo con ?debug en la dirección */
+if(/[?&]debug\b/.test(location.search))window.__h={P:function(){return P},S:S,filtered:filtered,PREF:function(){return PREF},setPref:function(x){PREF=x},applyPref:applyPref,crit:crit};
 /* al abrir: primero el logo, luego el Home */
 setView('home',true);
 (function(){var it=$('#intro');if(!it)return;setTimeout(function(){if(it.parentNode)it.parentNode.removeChild(it)},REDUCE?250:1500)})();
